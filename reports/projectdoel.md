@@ -1,22 +1,43 @@
 # Projectdoelen - MDE
 
-*gebruik dit markdown bestand om je project te beschrijven en je geplande features aan te duiden.*
+The goal of FarmHands mobile app is to connect consumers with local farmers, encouraging sustainable, seasonal and community-based consumption.
+Through an easy-to-use mobile applicaton, users can view nearby farms, see what they have on offer and support local agriculture.
+Farmers can easily update and manage their inventory, effectively showcasing the fruits of their labor and reaching local buyers.
 
 ## Beschrijving
 
-Beschrijf het doel en werking van je app.
-Denk na over volgende zaken:
-- wat is het doel van je app?
-- welk probleem lost je app op?
-- wie zal je app gebruiken?
-- hoe zal jouw app gebruikt worden?
-- ...
+### Goal
+
+- (Re)Connect communities with local farmers for farm-fresh products
+- Encourage local consumption, reducing our carbon footprint
+- Promote healty, seasonal eating
+
+### Who is it for?
+
+- Consumers willing to go out of their way to consume locally and get the freshest seasonal products
+- Farmers who wish to connect with their local community to sell their products but also educate people on what they do
+
+### For consumers
+
+- Explore nearby farms and products via the search function or in the map view
+- Save favorite farms or products for easy access and receive notifications
+- Adjust settings for notification, dietary preferences and your user account
+- View farm details to see what they currently have on offer, learn their story and get directions.
+- View product details to see an image and description of the product 
+- Discover recipe ideas based on your preferences
+
+### For farmers
+
+- Set up account so people can find you and tell them your story
+- Create inventory for consumers to easily see what you have available
+- Add images using you phone's built-in camera or choose from your photo gallery to give a clear view of your product
+- Stay updated by easily updating and removing products as needed
 
 ## Online strategie
 
 Kruis je online **strategie** aan:
 
-- [ ] Online CRUD operaties met een Backend Service
+- [X] Online CRUD operaties met een Backend Service
 - [ ] Online Fetch, Offline CRUD
 - [ ] Offline CRUD, Online Push
 - [ ] Online CRUD operaties met eigen REST API
@@ -27,12 +48,16 @@ Kruis je online **strategie** aan:
 
 Kruis je geplande **mobile features** aan:
 
-- [ ] Platformintegraties
+- [X] Platformintegraties
       noteer welke:
+
+      - Camera
+      - File system (photo gallery)
+      - Location
       
-- [ ] Push notifications
+- [X] Push notifications
 - [ ] 2D Graphics
-- [ ] Authentication en Authorization
+- [X] Authentication en Authorization
 - [ ] Native Communication
 - [ ] Native Speech to Text
 - [ ] Cross-platform Native Plugin
@@ -40,6 +65,6 @@ Kruis je geplande **mobile features** aan:
 
 ## Wireframes
 
-Plaats hier de wireframes die je uploadde naar `/reports/wireframes` (gebruik relatieve verwijzingen).
+![FarmHands Wireframes](./wireframes/fh-wireframes.png)
 
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Mde.Project.Mobile.AppShellUser"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:userpages="clr-namespace:Mde.Project.Mobile.Pages.UserPages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Mde.Project.Mobile">
+
+    <TabBar>
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate userpages:UserHomePage}"
+            Route="userhome" />
+
+        <ShellContent
+            Title="Map"
+            ContentTemplate="{DataTemplate userpages:UserMapViewPage}"
+            Route="usermap" />
+
+        <ShellContent
+            Title="Favorites"
+            ContentTemplate="{DataTemplate userpages:UserFavoritesPage}"
+            Route="userfavorites" />
+
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate userpages:UserSettingsPage}"
+            Route="usersettings" />
+    </TabBar>
+
+</Shell>

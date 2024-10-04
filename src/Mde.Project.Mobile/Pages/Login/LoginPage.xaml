@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mde.Project.Mobile.Pages.Login.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to FarmHands"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Button Text="Sign in"/>
+        <!--Check credentials and role to route to UserHome or FarmerDashboard-->
+
+        <Label 
+            Text="No account yet?"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Button Text="Register"/>
+        <!--Route to RegisterPage-->
+    </VerticalStackLayout>
+</ContentPage>

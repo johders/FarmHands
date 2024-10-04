@@ -5,8 +5,19 @@
              Title="LoginPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Welcome to FarmHands"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button Text="Sign in"/>
+        <!--Check credentials and role to route to UserHome or FarmerDashboard-->
+
+        <Label 
+            Text="No account yet?"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Button Text="Register"/>
+        <!--Route to RegisterPage-->
     </VerticalStackLayout>
 </ContentPage>

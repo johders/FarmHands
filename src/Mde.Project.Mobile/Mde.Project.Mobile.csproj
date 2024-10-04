@@ -63,6 +63,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AppShellUser.xaml.cs">
+	    <DependentUpon>AppShellUser.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="AppShellFarmer.xaml.cs">
+	    <DependentUpon>AppShellFarmer.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AppShellFarmer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Farmer\FarmerDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

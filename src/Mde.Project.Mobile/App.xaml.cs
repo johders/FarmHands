@@ -1,4 +1,6 @@
-﻿namespace Mde.Project.Mobile
+﻿using Mde.Project.Mobile.Pages.UserPages;
+
+namespace Mde.Project.Mobile
 {
     public partial class App : Application
     {
@@ -6,7 +8,17 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
-        }
+            string role = "farmer";
+			//string role = "user";
+
+			if (role == "farmer")
+            {
+                MainPage = new AppShellFarmer();
+			}
+            else
+            {
+			    MainPage = new AppShellUser();
+            }
+		}
     }
 }

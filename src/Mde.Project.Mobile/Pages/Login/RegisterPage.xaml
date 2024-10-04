@@ -2,11 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mde.Project.Mobile.Pages.Login.RegisterPage"
-             Title="RegisterPage">
+             Title="Login page">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Register"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button Text="Register"/> 
+        <!--Register as new user depending on role selected and reroute to sign in page-->
+
     </VerticalStackLayout>
 </ContentPage>

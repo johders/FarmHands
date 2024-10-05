@@ -57,6 +57,17 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 - [ ] Cross-platform Native Plugin
 - [ ] Other: 
 
+## Extra feature ideas
+
+- AI recipe idea generation or integration with known recipe app. Ideas are based on product, cuisine and dietary preferences set by user.
+- Sharing options for farms, products and recipes.
+- User reviews and ratings to establish trust and provide farmers with constructive feedback.
+- Sustainability insights showing the consumer's environmental impact buying the selected item locally vs. at the supermarket.
+- Badges for farms that follow sustainable practices (e.g. bio, organic, regenerative farming).
+- Subscription and pre-ordering for pickup options.
+- Educational section to learn about seasonal eating, including content outlining the health and environmental benefits.
+- Farm tours and workshops where users can sign up to visit the farms and learn about the practives or even participate in workshops. 
+
 ## Wireframes
 
 ![FarmHands Wireframes](./wireframes/fh-wireframes.png)

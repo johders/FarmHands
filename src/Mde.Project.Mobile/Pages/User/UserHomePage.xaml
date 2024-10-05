@@ -19,7 +19,7 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:ProductViewModel">
-                    <Border WidthRequest="150" HeightRequest="150" Padding="15">
+                    <Frame WidthRequest="150" HeightRequest="150" Padding="15">
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}"
                                FontSize="18"
@@ -32,7 +32,7 @@
                                HeightRequest="50"
                                Aspect="AspectFill"/>
                         </VerticalStackLayout>
-                    </Border>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
@@ -45,7 +45,7 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:ProductViewModel">
-                    <Border WidthRequest="150" HeightRequest="150" Padding="15">
+                    <Frame WidthRequest="150" HeightRequest="150" Padding="15">
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}"
                                FontSize="18"
@@ -58,7 +58,7 @@
                                HeightRequest="50"
                                Aspect="AspectFill"/>
                         </VerticalStackLayout>
-                    </Border>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

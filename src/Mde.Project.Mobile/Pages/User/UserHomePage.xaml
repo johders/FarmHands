@@ -9,18 +9,46 @@
     <VerticalStackLayout Spacing="10" Margin="8">
 
         <SearchBar Placeholder="Search by farm, product, location,.."
-                   Keyboard="Default"/>
+                   Keyboard="Default"
+                   Margin="5,15,30,15"/>
 
-        <Label Text="Farms near me"/>
+        <Label Text="Farms near me"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="#4E342E"
+               Margin="0,20,0,5"/>
 
-        <CollectionView ItemsSource="{Binding Products}">
+        <CollectionView ItemsSource="{Binding Products}" Margin="0,0,0,60">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:ProductViewModel">
-                    <Frame WidthRequest="150" HeightRequest="150" Padding="15">
-                        <VerticalStackLayout>
+                    <Frame WidthRequest="200" 
+                           HeightRequest="200" 
+                           Padding="0"
+                           BackgroundColor="#C7D3A8"
+                           BorderColor="#A3B18A">
+
+                        <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                            <Image Source="{Binding ImageUrl}"
+                                   Aspect="AspectFill"/>
+                            <VerticalStackLayout Grid.Row="1" Padding="5">
+                                <Label Text="{Binding Name}"
+                                   TextColor="#4E342E"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Start"/>
+                                <Label Text="{Binding Description}"
+                                   TextColor="#4E342E"
+                                   FontSize="14"
+                                   HorizontalTextAlignment="Start"
+                                   LineBreakMode="TailTruncation"/>
+                                
+                            </VerticalStackLayout>
+                        </Grid>
+                        
+                        <!--<VerticalStackLayout>
                             <Label Text="{Binding Name}"
                                FontSize="18"
                                HorizontalTextAlignment="Start"/>
@@ -31,7 +59,7 @@
                                WidthRequest="50"
                                HeightRequest="50"
                                Aspect="AspectFill"/>
-                        </VerticalStackLayout>
+                        </VerticalStackLayout>-->
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -59,7 +59,7 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 
 ## Extra feature ideas
 
-- AI recipe idea generation or integration with known recipe app. Ideas are based on product, cuisine and dietary preferences set by user.
+- Recipe idea generation via API or integration with known recipe app. Ideas are based on product, cuisine and dietary preferences set by user.
 - Sharing options for farms, products and recipes.
 - User reviews and ratings to establish trust and provide farmers with constructive feedback.
 - Sustainability insights showing the consumer's environmental impact buying the selected item locally vs. at the supermarket.

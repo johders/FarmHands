@@ -63,6 +63,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Mde.Project.Core\Mde.Project.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="AppShellUser.xaml.cs">
 	    <DependentUpon>AppShellUser.xaml</DependentUpon>
 	  </Compile>

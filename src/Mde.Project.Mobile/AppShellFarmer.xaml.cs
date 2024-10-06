@@ -1,8 +1,8 @@
 ﻿namespace Mde.Project.Mobile
 {
-    public partial class AppShell : Shell
+    public partial class AppShellFarmer : Shell
     {
-        public AppShell()
+        public AppShellFarmer()
         {
             InitializeComponent();
         }

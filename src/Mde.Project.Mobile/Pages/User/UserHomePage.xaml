@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mde.Project.Mobile.Pages.UserPages.UserHomePage"
+             Title="Home">
+
+    <VerticalStackLayout>
+        <SearchBar Placeholder="Search by farm, product, location,.."
+                   Keyboard="Default"/>
+
+        <Label 
+        Text="Farms near me"
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" />
+
+        <ScrollView>
+            <HorizontalStackLayout  Spacing="10" Margin="15">
+                <BoxView WidthRequest="150"
+ HeightRequest="150"
+ Color="Brown"/>
+                <BoxView WidthRequest="150"
+ HeightRequest="150"
+ Color="Brown"/>
+                <BoxView WidthRequest="150"
+ HeightRequest="150"
+ Color="Brown"/>
+                <BoxView WidthRequest="150"
+ HeightRequest="150"
+ Color="Brown"/>
+                <BoxView WidthRequest="150"
+ HeightRequest="150"
+ Color="Brown"/>
+                <BoxView WidthRequest="150"
+ HeightRequest="150"
+ Color="Brown"/>
+            </HorizontalStackLayout>
+
+        </ScrollView>
+
+        
+
+
+        <Label 
+        Text="Currently in season"
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" />
+
+        <HorizontalStackLayout Spacing="10" Margin="15">
+            <BoxView WidthRequest="150"
+                 HeightRequest="150"
+                 Color="Green"/>
+            <BoxView WidthRequest="150"
+                 HeightRequest="150"
+                 Color="Green"/>
+            <BoxView WidthRequest="150"
+                 HeightRequest="150"
+                 Color="Green"/>
+            <BoxView WidthRequest="150"
+                 HeightRequest="150"
+                 Color="Green"/>
+            <BoxView WidthRequest="150"
+                 HeightRequest="150"
+                 Color="Green"/>
+            <BoxView WidthRequest="150"
+                 HeightRequest="150"
+                 Color="Green"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

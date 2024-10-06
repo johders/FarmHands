@@ -2,7 +2,7 @@
 
 The goal of FarmHands mobile app is to connect consumers with local farmers, encouraging sustainable, seasonal and community-based consumption.
 Through an easy-to-use mobile applicaton, users can view nearby farms, see what they have on offer and support local agriculture.
-Farmers can easily update and manage their inventory, effectively showcasing the fruits of their labor and reaching local buyers.
+Farmers can easily update and manage their inventory, effectively showcasing the fruits (and vegetables) of their labor and reaching local buyers.
 
 ## Description
 
@@ -15,13 +15,13 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 ### Who is it for?
 
 - Consumers willing to go out of their way to consume locally and get the freshest seasonal products.
-- Farmers who wish to connect with their local community to sell their products but also educate people on what they do.
+- Farmers who wish to connect with their local community to sell their products as well as educate people on what they do.
 
 ### For consumers
 
 - Explore nearby farms and products via the search function or in the map view.
 - Save favorite farms or products for easy access and receive notifications.
-- Adjust settings for notification, dietary preferences and your user account.
+- Adjust settings for notifications, dietary preferences and your account.
 - View farm details to see what they currently have on offer, learn their story and get directions.
 - View product details to see an image and description of the product.
 - Discover recipe ideas based on your preferences.
@@ -30,7 +30,7 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 
 - Set up account so people can find you and tell them your story.
 - Create inventory for consumers to easily see what you have available.
-- Add images using you phone's built-in camera or choose from your photo gallery to give a clear view of your product.
+- Add images using your phone's built-in camera or choose from your photo gallery to give a clear view of your products.
 - Stay updated by easily updating and removing products as needed.
 
 ## Online strategy
@@ -43,7 +43,7 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 
 ## Mobile features
 
-- [X] Platformintegrations
+- [X] Platform integrations
 
       - Camera
       - File system (photo gallery)
@@ -66,7 +66,7 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 - Badges for farms that follow sustainable practices (e.g. bio, organic, regenerative farming).
 - Subscription and pre-ordering for pickup options.
 - Educational section to learn about seasonal eating, including content outlining the health and environmental benefits.
-- Farm tours and workshops where users can sign up to visit the farms and learn about the practives or even participate in workshops. 
+- Farm tours and workshops where users can sign up to visit the farms and learn about the practices or even participate in workshops. 
 
 ## Wireframes
 

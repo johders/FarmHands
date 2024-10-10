@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerSettingsPage"
-             Title="Settings">
+             x:Class="Mde.Project.Mobile.Pages.User.UserFavoriteProductsPage"
+             Title="Favorite products">
     <VerticalStackLayout>
         <Label 
-            Text="Set you settings and stuff"
+            Text="My list of fave products"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>

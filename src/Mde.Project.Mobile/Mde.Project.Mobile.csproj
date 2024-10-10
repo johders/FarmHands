@@ -107,7 +107,10 @@
 	  <MauiXaml Update="Pages\User\UserFarmDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\User\UserFavoritesPage.xaml">
+	  <MauiXaml Update="Pages\User\UserFavoriteFarmsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\User\UserFavoriteProductsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\User\UserHomePage.xaml">

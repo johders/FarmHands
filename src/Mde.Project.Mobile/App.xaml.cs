@@ -1,6 +1,4 @@
-﻿using Mde.Project.Mobile.Pages.UserPages;
-
-namespace Mde.Project.Mobile
+﻿namespace Mde.Project.Mobile
 {
     public partial class App : Application
     {
@@ -8,8 +6,8 @@ namespace Mde.Project.Mobile
         {
             InitializeComponent();
 
-            //string role = "farmer";
-			string role = "user";
+            string role = "farmer";
+			//string role = "user";
 
 			if (role == "farmer")
             {

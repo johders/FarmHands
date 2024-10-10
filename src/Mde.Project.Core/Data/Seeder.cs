@@ -6,9 +6,9 @@ namespace Mde.Project.Core.Data
 {
 	public static class Seeder
 	{
-		public static ObservableCollection<Product> SeedProducts()
+		public static IEnumerable<Product> SeedProducts()
 		{
-			ObservableCollection<Product> products = new ObservableCollection<Product>
+			IEnumerable<Product> products = new List<Product>
 				{
 					new Product(Guid.Parse("ed424125-427c-4959-bcf8-4dd73b2691e1"), "Apples", "Freshly picked, juicy apples.", Unit.Kilogram, 3.99m, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1jkLfZNwVPgxhe8FlmI3gZo6GIYhkzOiftg&s"),
 					new Product(Guid.Parse("406af47f-1bef-4b6d-86d1-c55cfefdc85d"), "Carrots", "Organic carrots, straight from the farm.", Unit.Kilogram, 1.89m, "https://ucarecdn.com/459eb7be-115a-4d85-b1d8-deaabc94c643/-/format/auto/-/preview/3000x3000/-/quality/lighter/"),
@@ -33,7 +33,31 @@ namespace Mde.Project.Core.Data
 				};
 
 			return products;
+		}
 
+		public static IEnumerable<Farm> SeedFarms()
+		{
+			IEnumerable<Farm> farms = new List<Farm>
+			{
+				new Farm(Guid.Parse("a83588f4-6607-465a-ad5c-de9dd9d9b39e"), "Green Valley Orchards", "Nestled in the hills, this family-owned orchard specializes in organic apples, pears, and seasonal berries, grown with sustainable farming practices.", 51.2564, 3.0432, new List<Product>(), "https://statbel.fgov.be/sites/default/files/styles/news_full/public/images/landbouw/8.2%20Biologische%20landbouw/AdobeStock_200879536.jpeg?itok=9JTAiqrQ"),
+				new Farm(Guid.Parse("38c44d86-0ea1-43fa-a110-fe898cb06390"), "Sunny Acres Farm", "Known for its sprawling sunflower fields and fresh vegetables, this farm offers a delightful experience with pick-your-own options.", 51.2593, 3.0481, new List<Product>(), "https://www.nationsencyclopedia.com/photos/belgium-agriculture-1547.jpg"),
+				new Farm(Guid.Parse("b81fde22-a9c4-4356-bef8-363b6562c579"), "Riverside Pastures", "Situated along the riverbank, Riverside Pastures is famous for its pasture-raised eggs, dairy products, and heritage breed livestock.", 51.2666, 3.0395, new List<Product>(), "https://www.theclimakers.org/wp/wp-content/uploads/2021/11/Boerenbond-Belgian-Farmers-Union.png"),
+				new Farm(Guid.Parse("025716cb-a545-4dfd-a721-cae04daa6b8d"), "Maple Leaf Gardens", "A picturesque farm with an array of maple trees, offering fresh produce and locally produced maple syrup straight from the source.", 51.2670, 3.0569, new List<Product>(), "https://www.shutterstock.com/image-photo/dark-clouds-over-field-young-600nw-2179706511.jpg"),
+				new Farm(Guid.Parse("09354ca2-7d09-49fc-8281-6ae9f61a7680"), "Harvest Moon Homestead", "This small yet abundant farm is dedicated to cultivating heirloom tomatoes, peppers, and herbs with an emphasis on organic and permaculture techniques.", 51.2752, 3.0497, new List<Product>(), "https://growingformarket.com/custom/2022%20Issues/may%202022/cas/web%204%20CSA%20members%20Klara%20and%20Marijke%20harvesting.jpg"),
+				new Farm(Guid.Parse("2724591e-efed-4cb4-8cb5-0c38311b3954"), "Breezy Hill Farm", "With a focus on sustainable grains and legumes, Breezy Hill Farm is a local favorite for artisanal bread flour and fresh beans.", 51.2557, 3.0604, new List<Product>(), "https://lh-images.us-east-1.linodeobjects.com/4005.jpg"),
+				new Farm(Guid.Parse("d24b62ee-0cb9-4932-ac3d-71e0779251bf"), "Lavender Lane", "A serene haven with rows of aromatic lavender, this farm also produces lavender-infused honey, soaps, and teas for a unique farm experience.", 51.2473, 3.0270, new List<Product>(), "https://diplomatie.belgium.be/sites/default/files/styles/fluid_image/public/2022-04/shutterstock_436506028.jpg?itok=0vXbgD-t"),
+
+				//new Farm(Guid.Parse("29fa465d-8653-48f8-9060-93061134d688"), "Farm 8", "A local farm offering fresh produce.", 51.2221, 0.3149, new List<Product>()),
+				//new Farm(Guid.Parse("7c41c7a3-4542-4de6-88bf-cf574e824b2f"), "Farm 9", "A local farm offering fresh produce.", 51.3245, -4.5705, new List<Product>()),
+				//new Farm(Guid.Parse("0f26b5b6-d65d-46b2-876a-407cebfbf0b8"), "Farm 10", "A local farm offering fresh produce.", 51.3260, 3.4212, new List<Product>()),
+				//new Farm(Guid.Parse("925c4d5d-493a-4112-bcab-96587bf8125e"), "Farm 11", "A local farm offering fresh produce.", 51.2017, 11.6482, new List<Product>()),
+				//new Farm(Guid.Parse("1cbe667f-ff40-4ff9-9c02-2619f9475417"), "Farm 12", "A local farm offering fresh produce.", 51.3575, 0.3322, new List<Product>()),
+				//new Farm(Guid.Parse("cb04903e-d5d4-4eac-8996-f32c942801f9"), "Farm 13", "A local farm offering fresh produce.", 51.2114, -1.0887, new List<Product>()),
+				//new Farm(Guid.Parse("7794f0c6-d708-411d-a31e-62630f7712ce"), "Farm 14", "A local farm offering fresh produce.", 51.2253, 5.6703, new List<Product>()),
+				//new Farm(Guid.Parse("e05f92ad-11b8-42ae-87cb-0f98edeee4ec"), "Farm 15", "A local farm offering fresh produce.", 51.2120, 12.2946, new List<Product>())
+			};
+
+			return farms;
 		}
 	}
 

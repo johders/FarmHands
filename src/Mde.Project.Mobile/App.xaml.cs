@@ -6,8 +6,8 @@
         {
             InitializeComponent();
 
-            string role = "farmer";
-			//string role = "user";
+            //string role = "farmer";
+			string role = "user";
 
 			if (role == "farmer")
             {

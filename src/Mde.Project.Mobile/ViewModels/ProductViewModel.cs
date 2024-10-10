@@ -9,7 +9,7 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		public ProductViewModel()
 		{
-			Products = Seeder.SeedProducts();
+			//Products = Seeder.SeedProducts();
 		}
 
 		public ObservableCollection<Product> Products { get; set; }

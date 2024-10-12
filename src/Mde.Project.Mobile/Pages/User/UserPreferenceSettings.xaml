@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             x:Class="Mde.Project.Mobile.Pages.User.UserPreferenceSettings"
+             Title="UserPreferenceSettings">
+    <VerticalStackLayout Margin="8,20" Spacing="20">
+        <VerticalStackLayout>
+            <FlexLayout Direction="Row"
+                            JustifyContent="SpaceBetween">
+                <Label Text="Search distance" Style="{StaticResource SmallLabel}"/>
+                <Label x:Name="lblDistance"/>
+            </FlexLayout>
+
+            <Slider ThumbColor="{StaticResource DarkOlive}"
+                    Maximum="100"
+                    Minimum="1"
+                    MinimumTrackColor="{StaticResource DarkOlive}"
+                    MaximumTrackColor="{StaticResource PaleOlive}"
+                    Margin="8"
+                    ValueChanged="Slider_ValueChanged"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="Dietary Preferences"
+               Style="{StaticResource SmallLabel}"/>
+            <CollectionView ItemsSource="{Binding DietaryOptions}" Margin="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:DietaryOption">
+                        <VerticalStackLayout>
+                            <FlexLayout Direction="Row"
+                            JustifyContent="SpaceBetween">
+                                <Label Text="{Binding Name}"
+                                   VerticalOptions="Center"/>
+                                <Switch Style="{StaticResource FarmSwitch}"
+                                    IsToggled="{Binding IsSelected}"/>
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="My favorite cuisines"
+                   Style="{StaticResource SmallLabel}"/>
+
+            <Picker ItemsSource="{Binding CuisineOptions}" 
+                    ItemDisplayBinding="{Binding Name}"
+                    Title="Add from this list">
+            </Picker>
+
+            <CollectionView ItemsSource="{Binding CuisineOptions}" 
+                            Margin="10">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" 
+                                     Span="3"
+                                     VerticalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding FlagImageUrl}"
+                                   WidthRequest="80"
+                                   HeightRequest="45"
+                                   Aspect="AspectFill"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+        <Button Text="Save"
+                CornerRadius="50"
+                WidthRequest="100"
+                BackgroundColor="{StaticResource DarkOlive}"
+                TextColor="{StaticResource WhiteSmoke}">
+            <Button.Shadow>
+                <Shadow Brush="{StaticResource DarkBrown}"
+                Offset="10,10"
+                Radius="50"
+                Opacity=".8"/>
+            </Button.Shadow>
+        </Button>
+
+    </VerticalStackLayout>
+</ContentPage>

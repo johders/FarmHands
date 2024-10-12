@@ -7,12 +7,12 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Mde.Project.Mobile"
     Shell.NavBarIsVisible="False"
-    Shell.BackgroundColor="#EDE9D7"
-    Shell.TabBarBackgroundColor="#A3B18A"
-    Shell.TabBarUnselectedColor="#3E4E2D"
-    Shell.TabBarForegroundColor="#F4F4F2"
+    Shell.BackgroundColor="{StaticResource LightBeige}"
+    Shell.TabBarBackgroundColor="{StaticResource PaleOlive}"
+    Shell.TabBarUnselectedColor="{StaticResource DarkOlive}"
+    Shell.TabBarForegroundColor="{StaticResource WhiteSmoke}"
   
-    Shell.TabBarTitleColor="#F4F4F2">
+    Shell.TabBarTitleColor="{StaticResource WhiteSmoke}">
 
     <TabBar>
         <ShellContent
@@ -39,13 +39,24 @@
                     ContentTemplate="{DataTemplate userpages:UserFavoriteFarmsPage}"
                     Route="userfavoritefarms" />
         </Tab>
-        
 
-        <ShellContent
+        <Tab Title="Settings"
+             Icon="settings.png">
+            <ShellContent
+            Title="Preferences"
+            ContentTemplate="{DataTemplate userpages:UserPreferenceSettings}"
+            Route="userpreferencesettings" />
+
+            <ShellContent
+            Title="Account"
+            ContentTemplate="{DataTemplate userpages:UserAccountSettings}"
+            Route="useraccountsettings" />
+        </Tab>
+        <!--<ShellContent
             Title="Settings"
             Icon="settings.png"
             ContentTemplate="{DataTemplate userpages:UserSettingsPage}"
-            Route="usersettings" />
+            Route="usersettings" />-->
     </TabBar>
 
 </Shell>

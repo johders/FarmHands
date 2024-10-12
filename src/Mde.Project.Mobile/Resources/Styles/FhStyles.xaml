@@ -31,4 +31,9 @@
         <Setter Property="StrokeShape" Value="{RoundRectangle CornerRadius=15}"/>
     </Style>
 
+    <Style x:Key="FarmSwitch" TargetType="Switch">
+        <Setter Property="OnColor" Value="Green"/>
+        <Setter Property="ThumbColor" Value="{StaticResource DarkOlive}"/>
+    </Style>
+
 </ResourceDictionary>

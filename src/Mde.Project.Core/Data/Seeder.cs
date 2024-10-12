@@ -59,6 +59,34 @@ namespace Mde.Project.Core.Data
 
 			return farms;
 		}
+
+		public static IEnumerable<DietaryOption> SeedDietaryOptions()
+		{
+			IEnumerable<DietaryOption> options = new List<DietaryOption>
+			{
+				new DietaryOption(1, "Vegetarian", true),
+				new DietaryOption(2, "Vegan", false),
+				new DietaryOption(3, "Halal", false),
+				new DietaryOption(4, "Gluten Free", true),
+				new DietaryOption(5, "Diary free", false),
+			};
+
+			return options;
+		}
+
+		public static IEnumerable<CuisineOption> SeedCuisineOptions()
+		{
+			IEnumerable<CuisineOption> options = new List<CuisineOption>
+			{
+				new CuisineOption(1, "Mexican", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/640px-Flag_of_Mexico.svg.png"),
+				new CuisineOption(2, "Indian", "https://thumbs.dreamstime.com/b/india-paper-flag-patriotic-background-national-138241478.jpg"),
+				new CuisineOption(3, "Japanese", "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png"),
+				new CuisineOption(4, "Italian", "https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg"),
+				new CuisineOption(5, "Thai", "https://cdn.britannica.com/38/4038-050-BDDBA6AB/Flag-Thailand.jpg"),
+			};
+
+			return options;
+		}
 	}
 
 		

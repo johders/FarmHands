@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"  
              x:Class="Mde.Project.Mobile.Pages.User.UserFavoriteProductsPage"
              Title="Favorite products">
-    <VerticalStackLayout>
-        <Label 
-            Text="My list of fave products"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Margin="8">
+            <CollectionView ItemsSource="{Binding Products}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <VerticalStackLayout>
+                            <Border Padding="5"
+                            StrokeShape="{RoundRectangle CornerRadius=5}"
+                            BackgroundColor="{StaticResource PaleOlive}">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <VerticalStackLayout Spacing="5" Padding="8">
+                                        <Label Text="{Binding Name}"
+                               Style="{StaticResource SmallLabel}"/>
+                                        <Label Text="{Binding Description}"
+                                           Style="{StaticResource LabelText}"
+                                           LineBreakMode="WordWrap"/>
+                                    </VerticalStackLayout>
+                                    <Border  Grid.Column="1"
+                                         WidthRequest="120"
+                                         HeightRequest="70"
+                                         StrokeShape="{RoundRectangle CornerRadius=8}">
+                                        <Image
+                                   Source="{Binding ImageUrl}"
+                                   Aspect="AspectFill"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"           
              x:Class="Mde.Project.Mobile.Pages.User.UserHomePage"
-                          Title="Home"
+             Title="Home"
              HideSoftInputOnTapped="True">
 
     <VerticalStackLayout Spacing="10" Margin="8">
@@ -20,32 +21,16 @@
                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:ProductViewModel">
-                    <Border WidthRequest="200" 
-                           HeightRequest="200" 
-                           Padding="0"
-                           BackgroundColor="{StaticResource PaleOlive}"
-                           Stroke="{StaticResource Sage}"
-                           StrokeThickness="3">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-
+                <DataTemplate x:DataType="models:Farm">
+                    <Border Style="{StaticResource TileBorder}">
                         <Grid RowDefinitions="4*, 1.5*" Margin="0">
                             <Image Source="{Binding ImageUrl}"
                                    Aspect="AspectFill"/>
                             <VerticalStackLayout Grid.Row="1" Padding="5">
                                 <Label Text="{Binding Name}"
-                                   TextColor="{StaticResource DarkBrown}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   HorizontalTextAlignment="Start"/>
+                                       Style="{StaticResource SmallLabel}"/>
                                 <Label Text="{Binding Description}"
-                                   TextColor="{StaticResource DarkBrown}"
-                                   FontSize="14"
-                                   HorizontalTextAlignment="Start"
-                                   LineBreakMode="TailTruncation"/>
-
+                                       Style="{StaticResource LabelText}"/>
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
@@ -61,32 +46,16 @@
                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:ProductViewModel">
-                    <Border WidthRequest="200" 
-                           HeightRequest="200" 
-                           Padding="0"
-                           BackgroundColor="{StaticResource PaleOlive}"
-                           Stroke="{StaticResource Sage}"
-                           StrokeThickness="3">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-
+                <DataTemplate x:DataType="models:Product">
+                    <Border Style="{StaticResource TileBorder}">
                         <Grid RowDefinitions="4*, 1.5*" Margin="0">
                             <Image Source="{Binding ImageUrl}"
                                    Aspect="AspectFill"/>
                             <VerticalStackLayout Grid.Row="1" Padding="5">
                                 <Label Text="{Binding Name}"
-                                   TextColor="{StaticResource DarkBrown}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   HorizontalTextAlignment="Start"/>
+                                       Style="{StaticResource SmallLabel}"/>
                                 <Label Text="{Binding Description}"
-                                   TextColor="{StaticResource DarkBrown}"
-                                   FontSize="14"
-                                   HorizontalTextAlignment="Start"
-                                   LineBreakMode="TailTruncation"/>
-
+                                       Style="{StaticResource LabelText}"/>
                             </VerticalStackLayout>
                         </Grid>
                     </Border>

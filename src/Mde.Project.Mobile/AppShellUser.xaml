@@ -29,34 +29,30 @@
 
         <Tab Title="Favorites"
              Icon="favorites.png">
-                <ShellContent
-                    Title="Products"
-                    ContentTemplate="{DataTemplate userpages:UserFavoriteProductsPage}"
-                    Route="userfavoriteproducts" />
+            <ShellContent
+                Title="Products"
+                ContentTemplate="{DataTemplate userpages:UserFavoriteProductsPage}"
+                Route="userfavoriteproducts" />
 
-                <ShellContent
-                    Title="Farms"
-                    ContentTemplate="{DataTemplate userpages:UserFavoriteFarmsPage}"
-                    Route="userfavoritefarms" />
+            <ShellContent
+                Title="Farms"
+                ContentTemplate="{DataTemplate userpages:UserFavoriteFarmsPage}"
+                Route="userfavoritefarms" />
         </Tab>
 
         <Tab Title="Settings"
              Icon="settings.png">
             <ShellContent
-            Title="Preferences"
-            ContentTemplate="{DataTemplate userpages:UserPreferenceSettings}"
-            Route="userpreferencesettings" />
+                Title="Preferences"
+                ContentTemplate="{DataTemplate userpages:UserPreferenceSettings}"
+                Route="userpreferencesettings" />
 
             <ShellContent
-            Title="Account"
-            ContentTemplate="{DataTemplate userpages:UserAccountSettings}"
-            Route="useraccountsettings" />
+                Title="Account"
+                ContentTemplate="{DataTemplate userpages:UserAccountSettings}"
+                Route="useraccountsettings" />
         </Tab>
-        <!--<ShellContent
-            Title="Settings"
-            Icon="settings.png"
-            ContentTemplate="{DataTemplate userpages:UserSettingsPage}"
-            Route="usersettings" />-->
+
     </TabBar>
 
 </Shell>

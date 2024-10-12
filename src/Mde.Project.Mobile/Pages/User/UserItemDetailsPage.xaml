@@ -3,10 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mde.Project.Mobile.Pages.User.UserItemDetailsPage"
              Title="Item details">
-    <VerticalStackLayout>
-        <Label 
-            Text="Here's your product detail view"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Spacing="20" Margin="8">
+        <FlexLayout JustifyContent="SpaceBetween"
+                    AlignItems="Center"
+                    Margin="0,20">
+            <Label 
+            Text="{Binding SelectedProduct.Name}"
+            Style="{StaticResource LargeLabel}"
+                   Margin="0"/>
+
+            <Image
+               Source="heart.png"
+               WidthRequest="50"
+               HeightRequest="50"/>
+        </FlexLayout>
+
+        <Image Source="{Binding SelectedProduct.ImageUrl}"
+               Aspect="AspectFill"/>
+
+        <Label Text="Product description"
+               Style="{StaticResource SmallLabel}"/>
+        <Label Text="{Binding SelectedProduct.Description}"
+               Style="{StaticResource LabelText}"
+               LineBreakMode="WordWrap"/>
+
+        <Label Text="Recipes inspiration from the web"
+               Style="{StaticResource SmallLabel}"/>
+
     </VerticalStackLayout>
 </ContentPage>

@@ -1,4 +1,6 @@
-﻿namespace Mde.Project.Mobile
+﻿using Mde.Project.Mobile.Pages.User;
+
+namespace Mde.Project.Mobile
 {
     public partial class App : Application
     {
@@ -15,7 +17,8 @@
 			}
             else
             {
-			    MainPage = new AppShellUser();
+                //MainPage = new AppShellUser();
+                MainPage = new UserItemDetailsPage();
             }
 		}
     }

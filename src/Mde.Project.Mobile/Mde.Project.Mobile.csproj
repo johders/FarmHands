@@ -126,7 +126,10 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\FhColors.xaml">
-	    <Generator>MSBuild:Compile</Generator>
+	    <Generator></Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\FhStyles.xaml">
+	    <Generator></Generator>
 	  </MauiXaml>
 	</ItemGroup>
 

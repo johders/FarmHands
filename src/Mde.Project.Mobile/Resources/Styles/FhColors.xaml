@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mde.Project.Mobile.Resources.Styles.FhColors">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!--<Color x:Key="PrimaryDark">#ac99ea</Color>
-    <Color x:Key="PrimaryDarkText">#242424</Color>-->
-    <!--<Color x:Key="SecondaryDarkText">#9880e5</Color>-->
     <Color x:Key="LightBeige">#EDE9D7</Color>
     <Color x:Key="DarkBrown">#4E342E</Color>
     <Color x:Key="Sage">#A3B18A</Color>

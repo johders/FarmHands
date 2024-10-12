@@ -13,10 +13,7 @@
                    Margin="5,15,30,15"/>
 
         <Label Text="Farms near me"
-               FontSize="22"
-               FontAttributes="Bold"
-               TextColor="{StaticResource DarkBrown}"
-               Margin="0,20,0,5"/>
+               Style="{StaticResource LargeLabel}"/>
 
         <CollectionView ItemsSource="{Binding Farms}" Margin="0,0,0,30">
             <CollectionView.ItemsLayout>
@@ -57,10 +54,7 @@
         </CollectionView>
 
         <Label Text="Currently in season"
-               FontSize="22"
-               FontAttributes="Bold"
-               TextColor="{StaticResource DarkBrown}"
-               Margin="0,20,0,5"/>
+               Style="{StaticResource LargeLabel}"/>
 
         <CollectionView ItemsSource="{Binding Products}">
             <CollectionView.ItemsLayout>

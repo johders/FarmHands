@@ -1,12 +1,74 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerDashboardPage"
              Title="Dashboard">
-    <VerticalStackLayout>
-        <Label 
-        Text="View your inventory and access actions quickly"
-        VerticalOptions="Center" 
-        HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Margin="8">
+                <CollectionView ItemsSource="{Binding Offers}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Offer">
+                            <VerticalStackLayout>
+                                <Border Padding="5"
+                                StrokeShape="{RoundRectangle CornerRadius=5}"
+                                BackgroundColor="{StaticResource PaleOlive}">
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <VerticalStackLayout Spacing="5" Padding="8">
+                                            <Label Text="{Binding Product.Name}"
+                                   Style="{StaticResource SmallLabel}"/>
+                                            <FlexLayout JustifyContent="SpaceBetween"
+                                                    AlignItems="Center">
+                                                <Label Text="Available"
+                                               Style="{StaticResource LabelText}"/>
+                                                <Switch Style="{StaticResource FarmSwitch}"
+                                                IsToggled="{Binding IsAvailable}"/>
+                                            </FlexLayout>
+                                            <Label Style="{StaticResource LabelText}">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Price: {0:C2}/{1}">
+                                                        <Binding Path="Price"/>
+                                                        <Binding Path="Unit"/>
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <Border  Grid.Column="1"
+                                             WidthRequest="120"
+                                             HeightRequest="70"
+                                             StrokeShape="{RoundRectangle CornerRadius=8}">
+                                            <Image
+                                       Source="{Binding Product.ImageUrl}"
+                                       Aspect="AspectFill"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Text="Update Inventory"
+                TextColor="{StaticResource WhiteSmoke}"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Margin="0,0,0,20"
+                CornerRadius="30"
+                WidthRequest="300"
+                BackgroundColor="{StaticResource DarkOlive}">
+            <Button.Shadow>
+                <Shadow Brush="{StaticResource DarkBrown}"
+                        Offset="10,10"
+                        Radius="50"
+                        Opacity=".8"/>
+            </Button.Shadow>
+        </Button>
+    </Grid>
 </ContentPage>

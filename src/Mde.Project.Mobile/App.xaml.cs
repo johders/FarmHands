@@ -8,8 +8,8 @@ namespace Mde.Project.Mobile
         {
             InitializeComponent();
 
-            //string role = "farmer";
-			string role = "user";
+            string role = "farmer";
+			//string role = "user";
 
 			if (role == "farmer")
             {
@@ -17,8 +17,8 @@ namespace Mde.Project.Mobile
 			}
             else
             {
-                //MainPage = new AppShellUser();
-                MainPage = new UserItemDetailsPage();
+                MainPage = new AppShellUser();
+                //MainPage = new UserItemDetailsPage();
             }
 		}
     }

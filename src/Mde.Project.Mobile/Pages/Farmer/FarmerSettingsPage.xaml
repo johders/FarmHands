@@ -2,11 +2,74 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerSettingsPage"
+             HideSoftInputOnTapped="True"
              Title="Settings">
-    <VerticalStackLayout>
-        <Label 
-            Text="Set you settings and stuff"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Margin="8,20" Spacing="20">
+
+            <Label Text="Name"
+                   Style="{StaticResource SmallLabel}"/>
+            <Entry Placeholder="Enter product name"/>
+
+            <Label Text="Location"
+                   Style="{StaticResource SmallLabel}"/>
+            <Entry Placeholder="Enter product name"/>
+
+            <Label Text="Your story"
+                   Style="{StaticResource SmallLabel}"/>
+            <Editor Placeholder="Enter price"
+                    AutoSize="TextChanges"/>
+            
+            <Label Text="Image"
+                   Style="{StaticResource SmallLabel}"/>
+
+            <Border WidthRequest="300"
+                    HeightRequest="200"
+                    StrokeThickness="3"
+            Stroke="{StaticResource PaleOlive}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <FlexLayout JustifyContent="SpaceEvenly"
+                    AlignItems="Center">
+                    <VerticalStackLayout>
+                        <ImageButton Source="gallery.png"
+                         WidthRequest="60"
+                         HeightRequest="60"
+                         BackgroundColor="{StaticResource PaleOlive}"
+                         Padding="10"
+                         CornerRadius="30"/>
+                        <Label Text="From gallery"
+                       Style="{StaticResource LabelText}"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <ImageButton Source="camera.png"
+                         WidthRequest="60"
+                         HeightRequest="60"
+                         BackgroundColor="{StaticResource PaleOlive}"
+                         Padding="10"
+                         CornerRadius="30"/>
+                        <Label Text="Take picture"
+                       Style="{StaticResource LabelText}"/>
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </Border>
+
+
+            <Button Text="Save"
+            CornerRadius="50"
+            WidthRequest="100"
+            BackgroundColor="{StaticResource DarkOlive}"
+            TextColor="{StaticResource WhiteSmoke}"
+                Margin="20">
+                <Button.Shadow>
+                    <Shadow Brush="{StaticResource DarkBrown}"
+            Offset="10,10"
+            Radius="50"
+            Opacity=".8"/>
+                </Button.Shadow>
+            </Button>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

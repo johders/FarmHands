@@ -19,7 +19,7 @@
             Title="Home"
             Icon="home.png"
             ContentTemplate="{DataTemplate userpages:UserHomePage}"
-            Route="userhome" />
+            Route="userhome"/>
 
         <ShellContent
             Title="Map"

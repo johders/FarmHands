@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Mde.Project.Mobile.ViewModels"
              xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"           
+             x:DataType="viewmodels:UserHomeViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserHomePage"
              Title="Home"
              HideSoftInputOnTapped="True">

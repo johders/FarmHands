@@ -1,6 +1,5 @@
 ﻿using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
-using System.Collections.ObjectModel;
 
 namespace Mde.Project.Core.Data
 {

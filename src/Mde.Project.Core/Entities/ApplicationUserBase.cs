@@ -1,6 +1,6 @@
 ﻿namespace Mde.Project.Core.Entities
 {
-	public class UserBase
+	public class ApplicationUserBase
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

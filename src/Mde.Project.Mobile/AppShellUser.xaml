@@ -4,9 +4,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:userpages="clr-namespace:Mde.Project.Mobile.Pages.User"
+    xmlns:farmerpages="clr-namespace:Mde.Project.Mobile.Pages.Farmer"
+    
     Shell.FlyoutBehavior="Disabled"
     Title="Mde.Project.Mobile"
-    Shell.NavBarIsVisible="False"
+    Shell.NavBarIsVisible="True"
     Shell.BackgroundColor="{StaticResource LightBeige}"
     Shell.TabBarBackgroundColor="{StaticResource PaleOlive}"
     Shell.TabBarUnselectedColor="{StaticResource DarkOlive}"

@@ -2,9 +2,9 @@ using Mde.Project.Mobile.ViewModels;
 
 namespace Mde.Project.Mobile.Pages.User;
 
-public partial class UserFarmDetailPage : ContentPage
+public partial class UserProductDetailPage : ContentPage
 {
-	public UserFarmDetailPage(UserFarmDetailsViewModel viewModel)
+	public UserProductDetailPage(UserProductDetailsViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

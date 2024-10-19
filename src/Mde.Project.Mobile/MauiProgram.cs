@@ -41,6 +41,8 @@ namespace Mde.Project.Mobile
         {
 
             builder.Services.AddTransient<UserHomeViewModel>();
+            builder.Services.AddTransient<UserFarmDetailsViewModel>();
+            builder.Services.AddTransient<UserProductDetailsViewModel>();
 
             return builder;
         }
@@ -48,7 +50,8 @@ namespace Mde.Project.Mobile
         private static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
         {
             builder.Services.AddTransient<UserHomePage>();
-
+            builder.Services.AddTransient<UserFarmDetailPage>();
+            builder.Services.AddTransient<UserProductDetailPage>();
 
             return builder;
         }

@@ -4,7 +4,7 @@
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              x:Class="Mde.Project.Mobile.Pages.User.UserProductDetailPage"
              x:DataType="viewmodel:UserProductDetailsViewModel"
-             Title="UserProductDetailPage">
+             Title="{Binding SelectedProduct.Name}">
     <VerticalStackLayout Spacing="20" Margin="8">
         <FlexLayout JustifyContent="SpaceBetween"
                 AlignItems="Center"

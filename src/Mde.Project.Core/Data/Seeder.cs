@@ -37,19 +37,46 @@ namespace Mde.Project.Core.Data
 		public static IEnumerable<Offer> SeedFarmOffers()
 		{
 			var products = SeedProducts();
+			var farms = SeedFarms();
 
 			IEnumerable<Offer> offers = new List<Offer>
 			{
-				new Offer(Guid.Parse("d0c33cc1-bf85-47fc-b438-2bde03ef7c61"), products.ElementAt(1), Unit.Kilogram, 1.89m, false, true),
-				new Offer(Guid.Parse("8000422f-cfe9-4b5e-941d-c18a2a28e0ec"), products.ElementAt(8), Unit.Kilogram, 1.50m),
-				new Offer(Guid.Parse("18b02357-ac0d-41da-9d57-aab403e9896d"), products.ElementAt(13),Unit.Piece, 1.60m, true, true),
-				new Offer(Guid.Parse("cd8b3a94-895b-4fb9-9080-ed7c497fd388"), products.ElementAt(3), Unit.Litre, 1.20m),
-				new Offer(Guid.Parse("b8337eee-87a5-43db-8a5b-f951bbb0e661"), products.ElementAt(6), Unit.Kilogram, 6.99m, true, true),
-				new Offer(Guid.Parse("d0c33cc1-bf85-47fc-b438-4bde03ef7c61"), products.ElementAt(1), Unit.Kilogram, 1.89m, false, true),
-				new Offer(Guid.Parse("8000422f-cfe9-4b5e-941d-e18a2a28e0ec"), products.ElementAt(8), Unit.Kilogram, 1.50m),
-				new Offer(Guid.Parse("18b02357-ac0d-41da-9d57-aab403e9896d"), products.ElementAt(13),Unit.Piece, 1.60m, true, true),
-				new Offer(Guid.Parse("cd8b3a94-895b-4fb9-9080-5d7c497fd388"), products.ElementAt(3), Unit.Litre, 1.20m),
-				new Offer(Guid.Parse("b8337eee-87a5-43db-8a5b-7951bbb0e661"), products.ElementAt(6), Unit.Kilogram, 6.99m, true, true),
+				new Offer
+				{
+					Id = Guid.Parse("d0c33cc1-bf85-47fc-b438-2bde03ef7c61"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("ed424125-427c-4959-bcf8-4dd73b2691e1")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("a83588f4-6607-465a-ad5c-de9dd9d9b39e")),
+					Unit = Unit.Kilogram,
+					Price = 1.89m,
+					IsAvailable = true,
+					IsOrganic = false
+                },
+                new Offer
+                {
+                    Id = Guid.Parse("8000422f-cfe9-4b5e-941d-c18a2a28e0ec"),
+                    Product = products.FirstOrDefault(p => p.Id == Guid.Parse("158649b9-0ab4-4eca-93b4-b0ff95669596")),
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("a83588f4-6607-465a-ad5c-de9dd9d9b39e")),
+                    Unit = Unit.Kilogram,
+                    Price = 1.50m
+                },
+                new Offer
+                {
+                    Id = Guid.Parse("18b02357-ac0d-41da-9d57-aab403e9896d"),
+                    Product = products.FirstOrDefault(p => p.Id == Guid.Parse("0a1312b0-5310-47c8-99c9-2ea00e027481")),
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("a83588f4-6607-465a-ad5c-de9dd9d9b39e")),
+                    Unit = Unit.Piece,
+                    Price = 1.60m,
+                    IsAvailable = true,
+                    IsOrganic = true
+                },
+
+				//new Offer(Guid.Parse("cd8b3a94-895b-4fb9-9080-ed7c497fd388"), products.ElementAt(3), Unit.Litre, 1.20m),
+				//new Offer(Guid.Parse("b8337eee-87a5-43db-8a5b-f951bbb0e661"), products.ElementAt(6), Unit.Kilogram, 6.99m, true, true),
+				//new Offer(Guid.Parse("d0c33cc1-bf85-47fc-b438-4bde03ef7c61"), products.ElementAt(1), Unit.Kilogram, 1.89m, false, true),
+				//new Offer(Guid.Parse("8000422f-cfe9-4b5e-941d-e18a2a28e0ec"), products.ElementAt(8), Unit.Kilogram, 1.50m),
+				//new Offer(Guid.Parse("18b02357-ac0d-41da-9d57-aab403e9896d"), products.ElementAt(13),Unit.Piece, 1.60m, true, true),
+				//new Offer(Guid.Parse("cd8b3a94-895b-4fb9-9080-5d7c497fd388"), products.ElementAt(3), Unit.Litre, 1.20m),
+				//new Offer(Guid.Parse("b8337eee-87a5-43db-8a5b-7951bbb0e661"), products.ElementAt(6), Unit.Kilogram, 6.99m, true, true),
 			};
 
 			return offers;

@@ -2,35 +2,66 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:model="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
              x:Class="Mde.Project.Mobile.Pages.User.UserFarmDetailPage"
+             x:Name="page"
              x:DataType="viewmodel:UserFarmDetailsViewModel"
              Title="Farm details">
-    <VerticalStackLayout Spacing="20" Margin="8">
-        <FlexLayout JustifyContent="SpaceBetween"
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Margin="8">
+            <FlexLayout JustifyContent="SpaceBetween"
                     AlignItems="Center"
                     Margin="0,20">
-            <Label 
+                <Label 
             Text="{Binding SelectedFarm.Name}"
             Style="{StaticResource LargeLabel}"
                    Margin="0"/>
 
-            <Image
+                <Image
                Source="heart.png"
                WidthRequest="50"
                HeightRequest="50"/>
-        </FlexLayout>
+            </FlexLayout>
 
-        <Image Source="{Binding SelectedFarm.ImageUrl}"
+            <Image Source="{Binding SelectedFarm.ImageUrl}"
                Aspect="AspectFill"/>
 
-        <Label Text="Our story"
+            <Label Text="Our story"
                Style="{StaticResource SmallLabel}"/>
-        <Label Text="{Binding SelectedFarm.Description}"
+            <Label Text="{Binding SelectedFarm.Description}"
                Style="{StaticResource LabelText}"
                LineBreakMode="WordWrap"/>
 
-        <Label Text="Our harvest"
+            <Label Text="Our harvest"
                Style="{StaticResource SmallLabel}"/>
 
-    </VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding Offers}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Offer">
+                        <Border Style="{StaticResource TileBorder}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                          Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewOfferDetailsCommand}"/>
+                            </Border.GestureRecognizers>
+                            <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                                <Image Source="{Binding Product.ImageUrl}"
+                           Aspect="AspectFill"/>
+                                <VerticalStackLayout Grid.Row="1" Padding="5">
+                                    <Label Text="{Binding Product.Name}"
+                               Style="{StaticResource SmallLabel}"/>
+                                    <Label Text="{Binding Product.Description}"
+                               Style="{StaticResource LabelText}"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

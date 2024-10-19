@@ -8,6 +8,8 @@ namespace Mde.Project.Core.Services.Interfaces
     {
         Task<ResultModel<Offer>> GetByIdAsync(Guid id);
         Task<ResultModel<Offer>> GetAllAsync();
+        Task<ResultModel<Offer>> GetAllOffersByFarmIdAsync(Guid farmId);
+        Task<ResultModel<Offer>> GetAllOffersByProductIdAsync(Guid productId);
         Task<BaseResultModel> CreateAsync(OfferCreateRequestModel createModel);
         Task<BaseResultModel> UpdateAsync(OfferUpdateRequestModel updateModel);
         Task<BaseResultModel> DeleteAsync(Guid id);

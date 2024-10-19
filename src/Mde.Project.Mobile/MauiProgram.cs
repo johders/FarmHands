@@ -33,6 +33,7 @@ namespace Mde.Project.Mobile
         {
             builder.Services.AddTransient<IFarmService, FarmMockService>();
             builder.Services.AddTransient<IProductService, ProductMockService>();
+            builder.Services.AddTransient<IOfferService, OfferMockService>();
 
             return builder;
         }

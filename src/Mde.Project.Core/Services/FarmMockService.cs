@@ -8,7 +8,9 @@ namespace Mde.Project.Core.Services
 {
     public class FarmMockService : IFarmService
     {
-        
+        private readonly List<Farm> _farms = new(Seeder.SeedFarms());
+
+
         public Task<BaseResultModel> CreateAsync(FarmCreateRequestModel createModel)
         {
             throw new NotImplementedException();
@@ -21,7 +23,7 @@ namespace Mde.Project.Core.Services
 
         public IQueryable<Farm> GetAll()
         {
-            return Seeder.SeedFarms().AsQueryable();
+            return _farms.AsQueryable();
         }
 
         public async Task<ResultModel<Farm>> GetAllAsync()
@@ -33,9 +35,24 @@ namespace Mde.Project.Core.Services
             });
         }
 
-        public Task<ResultModel<Farm>> GetByIdAsync(Guid id)
+        public async Task<ResultModel<Farm>> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var farm = GetAll().FirstOrDefault(f => f.Id == id);
+
+            if (farm is null)
+            {
+                return new ResultModel<Farm>
+                {
+                    IsSuccess = false,
+                    Errors = new List<string> { "Farm not found!" }
+                };
+            }
+
+            return await Task.FromResult(new ResultModel<Farm>
+            {
+                IsSuccess = true,
+                Data = new List<Farm> { farm }
+            });
         }
 
         public Task<BaseResultModel> SaveChangesAsync()

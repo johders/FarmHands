@@ -8,6 +8,8 @@ namespace Mde.Project.Core.Services
 {
     public class ProductMockService : IProductService
     {
+        private readonly List<Product> _products = new(Seeder.SeedProducts());
+
         public Task<BaseResultModel> CreateAsync(ProductCreateRequestModel createModel)
         {
             throw new NotImplementedException();
@@ -20,7 +22,7 @@ namespace Mde.Project.Core.Services
 
         public IQueryable<Product> GetAll()
         {
-            return Seeder.SeedProducts().AsQueryable();
+            return _products.AsQueryable();
         }
 
         public async Task<ResultModel<Product>> GetAllAsync()

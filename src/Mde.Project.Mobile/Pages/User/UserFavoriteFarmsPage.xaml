@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"           
+             xmlns:model="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:UserFavoriteFarmsViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserFavoriteFarmsPage"
              Title="Favorite farms">
     <ScrollView>
         <VerticalStackLayout Margin="8">
-            <CollectionView ItemsSource="{Binding Farms}">
+            <CollectionView ItemsSource="{Binding FavoriteFarms}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Farm">
+                    <DataTemplate x:DataType="model:Farm">
                         <VerticalStackLayout>
                             <Border Padding="5"
                                 StrokeShape="{RoundRectangle CornerRadius=5}"

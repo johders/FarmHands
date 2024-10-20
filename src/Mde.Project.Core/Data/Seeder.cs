@@ -107,7 +107,31 @@ namespace Mde.Project.Core.Data
 			return farms;
 		}
 
-		public static IEnumerable<DietaryOption> SeedDietaryOptions()
+        public static IEnumerable<FavoriteFarm> SeedFavoriteFarms()
+        {
+            IEnumerable<FavoriteFarm> options = new List<FavoriteFarm>
+            {
+                new FavoriteFarm{ 
+					Id = Guid.Parse("3b2ed6e4-2c65-42fe-b1d8-387a90c06c52"),
+					UserId = Guid.Parse("f5de5446-4217-4171-ac34-f23d180ff767"),
+                    FarmId = Guid.Parse("38c44d86-0ea1-43fa-a110-fe898cb06390")
+                },
+                new FavoriteFarm{
+                    Id = Guid.Parse("5790f876-61f4-40ca-b8fb-c0bdf49159f1"),
+                    UserId = Guid.Parse("f5de5446-4217-4171-ac34-f23d180ff767"),
+                    FarmId = Guid.Parse("09354ca2-7d09-49fc-8281-6ae9f61a7680")
+                },
+                new FavoriteFarm{
+                    Id = Guid.Parse("5b0ac4a1-e5b7-4feb-8c37-cc94e9020bec"),
+                    UserId = Guid.Parse("f5de5446-4217-4171-ac34-f23d180ff767"),
+                    FarmId = Guid.Parse("2724591e-efed-4cb4-8cb5-0c38311b3954")
+                },
+            };
+
+            return options;
+        }
+
+        public static IEnumerable<DietaryOption> SeedDietaryOptions()
 		{
 			IEnumerable<DietaryOption> options = new List<DietaryOption>
 			{

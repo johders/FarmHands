@@ -20,5 +20,7 @@
         public double Longitude { get; set; }
         public IEnumerable<Product> Products { get; set; }
         public string ImageUrl { get; set; }
+
+        public ICollection<FavoriteFarm> FavoriteFarms { get; set; }
     }
 }

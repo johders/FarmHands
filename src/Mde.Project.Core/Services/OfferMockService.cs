@@ -8,6 +8,7 @@ namespace Mde.Project.Core.Services
 {
     public class OfferMockService : IOfferService
     {
+        private readonly List<Offer> _offers = new(Seeder.SeedFarmOffers());
         public Task<BaseResultModel> CreateAsync(OfferCreateRequestModel createModel)
         {
             throw new NotImplementedException();
@@ -20,7 +21,7 @@ namespace Mde.Project.Core.Services
 
         public IQueryable<Offer> GetAll()
         {
-            return Seeder.SeedFarmOffers().AsQueryable();
+            return _offers.AsQueryable();
         }
 
         public async Task<ResultModel<Offer>> GetAllAsync()

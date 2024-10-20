@@ -34,6 +34,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<IFarmService, FarmMockService>();
             builder.Services.AddTransient<IProductService, ProductMockService>();
             builder.Services.AddTransient<IOfferService, OfferMockService>();
+            builder.Services.AddTransient<IFavoriteFarmService, FavoriteFarmMockService>();
 
             return builder;
         }
@@ -44,6 +45,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserHomeViewModel>();
             builder.Services.AddTransient<UserFarmDetailsViewModel>();
             builder.Services.AddTransient<UserProductDetailsViewModel>();
+            builder.Services.AddTransient<UserFavoriteFarmsViewModel>();
 
             return builder;
         }
@@ -53,6 +55,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserHomePage>();
             builder.Services.AddTransient<UserFarmDetailPage>();
             builder.Services.AddTransient<UserProductDetailPage>();
+            builder.Services.AddTransient<UserFavoriteFarmsPage>();
 
             return builder;
         }

@@ -43,12 +43,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Offer">
                         <Border Style="{StaticResource TileBorder}">
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding .}"
-                                          Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewOfferDetailsCommand}"/>
-                            </Border.GestureRecognizers>
                             <Grid RowDefinitions="4*, 1.5*" Margin="0">
-                                <Image Source="{Binding Product.ImageUrl}"
+                                <Image Source="{Binding OfferImageUrl}"
                            Aspect="AspectFill"/>
                                 <VerticalStackLayout Grid.Row="1" Padding="5">
                                     <Label Text="{Binding Product.Name}"

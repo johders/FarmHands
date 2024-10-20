@@ -46,7 +46,7 @@ namespace Mde.Project.Core.Services
             return await Task.FromResult(new ResultModel<Offer>
             {
                 IsSuccess = true,
-                Data = GetAll().Where(o => o.ProductId == productId).ToList()
+                Data = GetAll().Where(o => o.Product.Id == productId).ToList()
             });
         }
 

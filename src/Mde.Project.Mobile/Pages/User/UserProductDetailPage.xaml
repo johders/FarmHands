@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:model="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
              x:Class="Mde.Project.Mobile.Pages.User.UserProductDetailPage"
              x:DataType="viewmodel:UserProductDetailsViewModel"
              Title="{Binding SelectedProduct.Name}">
@@ -29,7 +30,32 @@
            Style="{StaticResource LabelText}"
            LineBreakMode="WordWrap"/>
 
-        <Label Text="Recipes inspiration from the web"
+        <Label Text="Current offers"
+   Style="{StaticResource SmallLabel}"/>
+
+        <CollectionView ItemsSource="{Binding Offers}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Offer">
+                    <Border Style="{StaticResource TileBorder}">
+                        <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                            <Image Source="{Binding OfferImageUrl}"
+                                   Aspect="AspectFill"/>
+                            <VerticalStackLayout Grid.Row="1" Padding="5">
+                                <Label Text="{Binding Product.Name}"
+                                       Style="{StaticResource SmallLabel}"/>
+                                <Label Text="{Binding Product.Description}"
+                                       Style="{StaticResource LabelText}"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label Text="Recipe inspiration from the web"
            Style="{StaticResource SmallLabel}"/>
 
     </VerticalStackLayout>

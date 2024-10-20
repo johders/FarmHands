@@ -21,6 +21,7 @@ namespace Mde.Project.Core.Entities
         public Guid FarmId { get; set; }
         public Farm Farm { get; set; }
         public decimal Price { get; set; }
+        public string OfferImageUrl { get { return Product.ImageUrl; } }
         public bool IsAvailable { get; set; }
         public bool IsOrganic { get; set; }
 

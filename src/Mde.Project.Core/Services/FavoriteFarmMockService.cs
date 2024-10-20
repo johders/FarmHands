@@ -101,6 +101,23 @@ namespace Mde.Project.Core.Services
         public Task<ResultModel<FavoriteFarm>> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
+
+        }
+
+        public async Task<BaseResultModel> IsFavoritedAsync(Guid farmId)
+        {
+            var favoriteFarms = GetAll().ToList();
+            if (!favoriteFarms.Any(f => f.FarmId == farmId))
+            {
+                return await Task.FromResult(new BaseResultModel
+                {
+                    IsSuccess = false
+                });
+            }
+            return await Task.FromResult(new BaseResultModel
+            {
+                IsSuccess = true
+            });
         }
 
         public Task<BaseResultModel> SaveChangesAsync()

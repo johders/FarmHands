@@ -2,7 +2,6 @@
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
@@ -10,10 +9,12 @@ namespace Mde.Project.Mobile.ViewModels
     public class UserFarmDetailsViewModel : ObservableObject
     {
         private readonly IOfferService _offerService;
+        private readonly IFavoriteFarmService _favoriteFarmService;
 
-        public UserFarmDetailsViewModel(IOfferService offerService)
+        public UserFarmDetailsViewModel(IOfferService offerService, IFavoriteFarmService favoriteFarmService)
         {
             _offerService = offerService;
+            _favoriteFarmService = favoriteFarmService;
         }
 
         private Farm selectedFarm;
@@ -25,7 +26,8 @@ namespace Mde.Project.Mobile.ViewModels
             {
                if(SetProperty(ref selectedFarm, value))
                 {
-                    _ = LoadOffersForSelectedFarm();
+                    _ = LoadOffersForSelectedFarmAsync();
+                    _ = CheckIfFarmIsFavoritedAsync();
                 }
             }
         }
@@ -41,13 +43,40 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-        private async Task LoadOffersForSelectedFarm()
+        private bool isFavorite;
+
+        public bool IsFavorite
+        {
+            get { return isFavorite; }
+            set 
+            { 
+                SetProperty(ref isFavorite, value);
+            }
+        }
+
+        private async Task LoadOffersForSelectedFarmAsync()
         {
             if (SelectedFarm is not null)
             {
                 var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
                 var offers = result.Data;
                 Offers = new ObservableCollection<Offer>(offers);
+            }
+        }
+
+        private async Task CheckIfFarmIsFavoritedAsync()
+        {
+            if (SelectedFarm is not null)
+            {
+                try
+                {
+                    var result = await _favoriteFarmService.IsFavoritedAsync(SelectedFarm.Id);
+                    IsFavorite = result.IsSuccess;
+                }
+                catch(Exception ex)
+                {
+                    var result = ex.Message;
+                }
             }
         }
     }

@@ -6,57 +6,59 @@
              x:Class="Mde.Project.Mobile.Pages.User.UserProductDetailPage"
              x:DataType="viewmodel:UserProductDetailsViewModel"
              Title="{Binding SelectedProduct.Name}">
-    <VerticalStackLayout Spacing="20" Margin="8">
-        <FlexLayout JustifyContent="SpaceBetween"
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Margin="8">
+            <FlexLayout JustifyContent="SpaceBetween"
                 AlignItems="Center"
                 Margin="0,20">
-            <Label 
+                <Label 
         Text="{Binding SelectedProduct.Name}"
         Style="{StaticResource LargeLabel}"
                Margin="0"/>
 
-            <Image
+                <Image
            Source="heart.png"
            WidthRequest="50"
            HeightRequest="50"/>
-        </FlexLayout>
+            </FlexLayout>
 
-        <Image Source="{Binding SelectedProduct.ImageUrl}"
+            <Image Source="{Binding SelectedProduct.ImageUrl}"
            Aspect="AspectFill"/>
 
-        <Label Text="Product description"
+            <Label Text="Product description"
            Style="{StaticResource SmallLabel}"/>
-        <Label Text="{Binding SelectedProduct.Description}"
+            <Label Text="{Binding SelectedProduct.Description}"
            Style="{StaticResource LabelText}"
            LineBreakMode="WordWrap"/>
 
-        <Label Text="Current offers"
+            <Label Text="Current offers"
    Style="{StaticResource SmallLabel}"/>
 
-        <CollectionView ItemsSource="{Binding Offers}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Offer">
-                    <Border Style="{StaticResource TileBorder}">
-                        <Grid RowDefinitions="4*, 1.5*" Margin="0">
-                            <Image Source="{Binding OfferImageUrl}"
+            <CollectionView ItemsSource="{Binding Offers}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Offer">
+                        <Border Style="{StaticResource TileBorder}">
+                            <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                                <Image Source="{Binding OfferImageUrl}"
                                    Aspect="AspectFill"/>
-                            <VerticalStackLayout Grid.Row="1" Padding="5">
-                                <Label Text="{Binding Product.Name}"
+                                <VerticalStackLayout Grid.Row="1" Padding="5">
+                                    <Label Text="{Binding Product.Name}"
                                        Style="{StaticResource SmallLabel}"/>
-                                <Label Text="{Binding Product.Description}"
+                                    <Label Text="{Binding Product.Description}"
                                        Style="{StaticResource LabelText}"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Label Text="Recipe inspiration from the web"
+            <Label Text="Recipe inspiration from the web"
            Style="{StaticResource SmallLabel}"/>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

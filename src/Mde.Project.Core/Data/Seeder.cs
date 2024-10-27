@@ -134,29 +134,53 @@ namespace Mde.Project.Core.Data
 
         public static IEnumerable<FavoriteFarm> SeedFavoriteFarms()
         {
-            IEnumerable<FavoriteFarm> options = new List<FavoriteFarm>
+            IEnumerable<FavoriteFarm> favoriteFarms = new List<FavoriteFarm>
             {
                 new FavoriteFarm{ 
-					Id = Guid.Parse("30000000-0000-0000-0000-000000000001"),
-					UserId = Guid.Parse("40000000-0000-0000-0000-000000000001"),
+					Id = Guid.Parse("40000000-0000-0000-0000-000000000001"),
+					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
                     FarmId = Guid.Parse("10000000-0000-0000-0000-000000000002")
                 },
                 new FavoriteFarm{
-                    Id = Guid.Parse("30000000-0000-0000-0000-000000000002"),
-                    UserId = Guid.Parse("40000000-0000-0000-0000-000000000002"),
+                    Id = Guid.Parse("40000000-0000-0000-0000-000000000002"),
+                    UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
                     FarmId = Guid.Parse("10000000-0000-0000-0000-000000000007")
                 },
                 new FavoriteFarm{
-                    Id = Guid.Parse("30000000-0000-0000-0000-000000000003"),
-                    UserId = Guid.Parse("40000000-0000-0000-0000-000000000003"),
+                    Id = Guid.Parse("40000000-0000-0000-0000-000000000003"),
+                    UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
                     FarmId = Guid.Parse("10000000-0000-0000-0000-000000000003")
                 },
             };
 
-            return options;
+            return favoriteFarms;
         }
 
-        public static IEnumerable<DietaryOption> SeedDietaryOptions()
+		public static IEnumerable<FavoriteProduct> SeedFavoriteProducts()
+		{
+			IEnumerable<FavoriteProduct> favoriteProducts = new List<FavoriteProduct>
+			{
+				new FavoriteProduct{
+					Id = Guid.Parse("30000000-0000-0000-0000-000000000001"),
+					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
+					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+				},
+				new FavoriteProduct{
+					Id = Guid.Parse("30000000-0000-0000-0000-000000000002"),
+					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
+					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000014")
+				},
+				new FavoriteProduct{
+					Id = Guid.Parse("30000000-0000-0000-0000-000000000003"),
+					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
+					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000010")
+				},
+			};
+
+			return favoriteProducts;
+		}
+
+		public static IEnumerable<DietaryOption> SeedDietaryOptions()
 		{
 			IEnumerable<DietaryOption> options = new List<DietaryOption>
 			{

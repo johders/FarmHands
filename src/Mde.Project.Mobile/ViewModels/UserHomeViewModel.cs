@@ -65,7 +65,6 @@ namespace Mde.Project.Mobile.ViewModels
                 };
 
                 await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);
-
             });
 
         public ICommand ViewProductDetailsCommand =>
@@ -77,7 +76,6 @@ namespace Mde.Project.Mobile.ViewModels
                 };
 
                 await Shell.Current.GoToAsync(nameof(UserProductDetailPage), true, navigationParameter);
-
             });
 
 

@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              x:DataType="viewmodel:UserFavoriteFarmsViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserFavoriteFarmsPage"
+             x:Name="page"
              Title="Favorite farms">
     <ScrollView>
         <VerticalStackLayout Margin="8">
@@ -18,6 +19,10 @@
                             <Border Padding="5"
                                 StrokeShape="{RoundRectangle CornerRadius=5}"
                                 BackgroundColor="{StaticResource PaleOlive}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                  Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
+                                </Border.GestureRecognizers>
                                 <Grid ColumnDefinitions="*, Auto">
                                     <VerticalStackLayout Spacing="5" Padding="8">
                                         <Label Text="{Binding Name}"

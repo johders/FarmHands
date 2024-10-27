@@ -2,11 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"  
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:UserFavoriteProductsViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserFavoriteProductsPage"
+             x:Name="page"
              Title="Favorite products">
     <ScrollView>
         <VerticalStackLayout Margin="8">
-            <CollectionView ItemsSource="{Binding Products}">
+            <CollectionView ItemsSource="{Binding FavoriteProducts}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
@@ -16,6 +19,10 @@
                             <Border Padding="5"
                             StrokeShape="{RoundRectangle CornerRadius=5}"
                             BackgroundColor="{StaticResource PaleOlive}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                          Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
+                                </Border.GestureRecognizers>
                                 <Grid ColumnDefinitions="*, Auto">
                                     <VerticalStackLayout Spacing="5" Padding="8">
                                         <Label Text="{Binding Name}"
@@ -34,12 +41,10 @@
                                     </Border>
                                 </Grid>
                             </Border>
-
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

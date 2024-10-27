@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Mde.Project.Mobile</ApplicationTitle>
+		<ApplicationTitle>FarmHands</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.mde.project.mobile</ApplicationId>
@@ -40,10 +40,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundScale="0.85" BaseSize="128,128" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\farmhandsplash.svg" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -57,10 +57,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\appicon.svg" />
 	  <None Remove="Resources\Images\favorites.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\map.png" />
 	  <None Remove="Resources\Images\settings.png" />
+	  <None Remove="Resources\Splash\farmhandsplash.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -58,6 +58,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\appicon.svg" />
+	  <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
+	  <None Remove="Resources\Fonts\Poppins-SemiBold.ttf" />
 	  <None Remove="Resources\Images\favorites.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\map.png" />

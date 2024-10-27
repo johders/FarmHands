@@ -9,69 +9,71 @@
              Title="Home"
              HideSoftInputOnTapped="True">
 
-    <VerticalStackLayout Spacing="10" Margin="8">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Margin="8">
 
-        <SearchBar Placeholder="Search by farm, product, location,.."
+            <SearchBar Placeholder="Search by farm, product, location,.."
                    Keyboard="Default"
                    Margin="5,15,30,15"/>
 
-        <Label Text="Farms near me"
+            <Label Text="Farms near me"
                Style="{StaticResource LargeLabel}"/>
 
-        <CollectionView ItemsSource="{Binding Farms}" Margin="0,0,0,30">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Farm">
-                    <Border Style="{StaticResource TileBorder}">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer CommandParameter="{Binding .}"
+            <CollectionView ItemsSource="{Binding Farms}" Margin="0,0,0,30">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Farm">
+                        <Border Style="{StaticResource TileBorder}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
-                        </Border.GestureRecognizers>
-                        <Grid RowDefinitions="4*, 1.5*" Margin="0">
-                            <Image Source="{Binding ImageUrl}"
+                            </Border.GestureRecognizers>
+                            <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                                <Image Source="{Binding ImageUrl}"
                                    Aspect="AspectFill"/>
-                            <VerticalStackLayout Grid.Row="1" Padding="5">
-                                <Label Text="{Binding Name}"
+                                <VerticalStackLayout Grid.Row="1" Padding="5">
+                                    <Label Text="{Binding Name}"
                                        Style="{StaticResource SmallLabel}"/>
-                                <Label Text="{Binding Description}"
+                                    <Label Text="{Binding Description}"
                                        Style="{StaticResource LabelText}"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Label Text="Currently in season"
+            <Label Text="Currently in season"
                Style="{StaticResource LargeLabel}"/>
 
-        <CollectionView ItemsSource="{Binding Products}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Product">
-                    <Border Style="{StaticResource TileBorder}">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer CommandParameter="{Binding .}"
+            <CollectionView ItemsSource="{Binding Products}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <Border Style="{StaticResource TileBorder}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
-                        </Border.GestureRecognizers>
-                        <Grid RowDefinitions="4*, 1.5*" Margin="0">
-                            <Image Source="{Binding ImageUrl}"
+                            </Border.GestureRecognizers>
+                            <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                                <Image Source="{Binding ImageUrl}"
                                    Aspect="AspectFill"/>
-                            <VerticalStackLayout Grid.Row="1" Padding="5">
-                                <Label Text="{Binding Name}"
+                                <VerticalStackLayout Grid.Row="1" Padding="5">
+                                    <Label Text="{Binding Name}"
                                        Style="{StaticResource SmallLabel}"/>
-                                <Label Text="{Binding Description}"
+                                    <Label Text="{Binding Description}"
                                        Style="{StaticResource LabelText}"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+</ScrollView>
 </ContentPage>

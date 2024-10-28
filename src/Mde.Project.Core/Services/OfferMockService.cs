@@ -30,10 +30,22 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-        public Task<BaseResultModel> DeleteAsync(Guid id)
+        public async Task<BaseResultModel> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var offer = _offers.FirstOrDefault(o => o.Id == id);
+
+			if (offer is null)
+			{
+				return ResultHelper.CreateErrorResult("Offer not found!");
+			}
+
+            _offers.Remove(offer);
+
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
+		}
 
         public IQueryable<Offer> GetAll()
         {

@@ -34,7 +34,9 @@
                             <SwipeView.RightItems>
                                 <SwipeItem Text="Delete"
                                            BackgroundColor="DarkRed"
-                                           IconImageSource="bin.png"/>
+                                           IconImageSource="bin.png"
+                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
+                                           CommandParameter="{Binding .}"/>
                             </SwipeView.RightItems>
                             <Border Padding="5"
                                     StrokeShape="{RoundRectangle CornerRadius=5}"

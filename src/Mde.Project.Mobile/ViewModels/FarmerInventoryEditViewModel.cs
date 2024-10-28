@@ -5,6 +5,7 @@ using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
+using Mde.Project.Mobile.Helpers;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -148,8 +149,9 @@ namespace Mde.Project.Mobile.ViewModels
 
 					if (createResult.IsSuccess)
 					{
-						IToast toast = Toast.Make($"New offer created for {offer.Product.Name}!");
-						await toast.Show();
+						await ToastHelper.ShowToastAsync($"New offer created for {offer.Product.Name}!");
+						//IToast toast = Toast.Make($"New offer created for {offer.Product.Name}!");
+						//await toast.Show();
 					}
 				}
 				else
@@ -159,8 +161,10 @@ namespace Mde.Project.Mobile.ViewModels
 
 					if (updateResult.IsSuccess)
 					{
-						IToast toast = Toast.Make($"Offer for {offer.Product.Name} updated!");
-						await toast.Show();
+						await ToastHelper.ShowToastAsync($"Offer for {offer.Product.Name} updated!");
+
+						//IToast toast = Toast.Make($"Offer for {offer.Product.Name} updated!");
+						//await toast.Show();
 					}
 				}
 

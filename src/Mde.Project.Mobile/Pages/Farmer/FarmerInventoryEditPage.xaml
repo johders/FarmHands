@@ -12,9 +12,9 @@
             <Label Text="Product"
                    Style="{StaticResource SmallLabel}"/>
             <Picker Title="Select product"
-                    ItemsSource="{Binding Products}"
-                    ItemDisplayBinding="{Binding Name}"
-                    SelectedItem="{Binding SelectedProduct}"/>
+                    ItemsSource="{Binding Products, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding Name}"/>
 
             <Label Text="Description"
                    Style="{StaticResource SmallLabel}"/>

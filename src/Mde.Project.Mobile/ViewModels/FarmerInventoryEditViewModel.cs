@@ -120,6 +120,7 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
+
 		//public ICommand RefreshProductOptionsCommand =>
 		//	new Command(async () =>
 		//	{

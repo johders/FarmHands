@@ -2,7 +2,7 @@
 
 namespace Mde.Project.Core.Entities
 {
-	public class Product
+	public class Product : IEquatable<Product>
 	{
 		public Product(Guid id, string name, string description, string imageUrl)
 		{
@@ -10,6 +10,12 @@ namespace Mde.Project.Core.Entities
 			Name = name;
 			Description = description;
 			ImageUrl = imageUrl;
+		}
+
+		public bool Equals(Product? other)
+		{
+			if (other == null) return false;
+			return (this.Name.Equals(other.Name));
 		}
 
 		public Guid Id { get; set; }

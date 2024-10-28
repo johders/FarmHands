@@ -9,10 +9,25 @@ namespace Mde.Project.Core.Services
     public class OfferMockService : IOfferService
     {
         private readonly List<Offer> _offers = new(Seeder.SeedFarmOffers());
-        public Task<BaseResultModel> CreateAsync(OfferCreateRequestModel createModel)
+        public async Task<BaseResultModel> CreateAsync(OfferCreateRequestModel createModel)
         {
-            throw new NotImplementedException();
-        }
+            var offer = new Offer
+            {
+                Id = createModel.Id,
+                Price = createModel.Price,
+                Description = createModel.Description,
+                Unit = createModel.Unit,
+                Product = createModel.Product,
+                Farm = createModel.Farm,
+            };
+
+            _offers.Add(offer);
+
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
+		}
 
         public Task<BaseResultModel> DeleteAsync(Guid id)
         {

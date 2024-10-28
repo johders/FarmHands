@@ -34,10 +34,25 @@ namespace Mde.Project.Core.Services
             });
         }
 
-        public Task<ResultModel<Product>> GetByIdAsync(Guid id)
+        public async Task<ResultModel<Product>> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var product = GetAll().FirstOrDefault(p => p.Id == id);
+
+            if (product is null)
+            {
+                return await Task.FromResult(new ResultModel<Product>
+				{
+					IsSuccess = false,
+					Errors = new List<string> { "Product not found!" }
+				});
+			}
+
+			return await Task.FromResult(new ResultModel<Product>
+			{
+				IsSuccess = true,
+				Data = new List<Product> { product }
+			});
+		}
 
         public Task<BaseResultModel> SaveChangesAsync()
         {

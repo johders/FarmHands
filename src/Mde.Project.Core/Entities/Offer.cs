@@ -7,6 +7,7 @@ namespace Mde.Project.Core.Entities
 		public Guid Id { get; set; }
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
+		public string Description { get; set; }
 		public Unit Unit { get; set; }
         public Guid FarmId { get; set; }
         public Farm Farm { get; set; }

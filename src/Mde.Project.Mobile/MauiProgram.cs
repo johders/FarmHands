@@ -1,4 +1,5 @@
-﻿using Mde.Project.Core.Services;
+﻿using CommunityToolkit.Maui;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
 using Mde.Project.Mobile.Pages.User;
@@ -14,7 +15,8 @@ namespace Mde.Project.Mobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
+                .UseMauiCommunityToolkit()
+				.ConfigureFonts(fonts =>
                 {
 					fonts.AddFont("Poppins-Regular.ttf", "PoppinsRegular");
 					fonts.AddFont("Poppins-SemiBold.ttf", "PoppinsSemibold");
@@ -34,7 +36,7 @@ namespace Mde.Project.Mobile
         {
             builder.Services.AddTransient<IFarmService, FarmMockService>();
             builder.Services.AddTransient<IProductService, ProductMockService>();
-            builder.Services.AddTransient<IOfferService, OfferMockService>();
+            builder.Services.AddSingleton<IOfferService, OfferMockService>();
             builder.Services.AddTransient<IFavoriteFarmService, FavoriteFarmMockService>();
             builder.Services.AddTransient<IFavoriteProductService, FavoriteProductMockService>();
 
@@ -52,6 +54,7 @@ namespace Mde.Project.Mobile
 
             builder.Services.AddTransient<FarmerDashboardViewModel>();
             builder.Services.AddTransient<FarmerInventoryListViewModel>();
+            builder.Services.AddTransient<FarmerInventoryEditViewModel>();
 
             return builder;
         }
@@ -66,6 +69,7 @@ namespace Mde.Project.Mobile
 
             builder.Services.AddTransient<FarmerDashboardPage>();
             builder.Services.AddTransient<FarmerInventoryListPage>();
+            builder.Services.AddTransient<FarmerInventoryEditPage>();
 
             return builder;
         }

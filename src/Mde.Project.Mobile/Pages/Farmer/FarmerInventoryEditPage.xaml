@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:enums="clr-namespace:Mde.Project.Core.Enums;assembly=Mde.Project.Core"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:FarmerInventoryEditViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryEditPage"
              Title="Inventory Manager">
     <ScrollView>
@@ -11,32 +13,31 @@
                Style="{StaticResource LargeLabel}"
                HorizontalOptions="Center"/>
 
-            <Label Text="Name"
-               Style="{StaticResource SmallLabel}"/>
-            <Entry Placeholder="Enter product name"/>
+            <Label Text="Product"
+                   Style="{StaticResource SmallLabel}"/>
+            <Picker Title="Select product"
+                    ItemsSource="{Binding Products}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedProduct}"/>
 
             <Label Text="Description"
                    Style="{StaticResource SmallLabel}"/>
-            <Entry Placeholder="Enter product name"/>
-
-            <Label Text="Unit"
-               Style="{StaticResource SmallLabel}"/>
-            <Picker Title="Select unit">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Kilogram</x:String>
-                        <x:String>Piece</x:String>
-                        <x:String>Dozen</x:String>
-                        <x:String>Litre</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <Entry Placeholder="Enter product name"
+                   Text="{Binding Description}"/>
 
             <Label Text="Price per unit"
-               Style="{StaticResource SmallLabel}"/>
-            <Entry Placeholder="Enter price"/>
+                   Style="{StaticResource SmallLabel}"/>
+            <Entry Placeholder="Enter price"
+                   Text="{Binding Price}"
+                   Keyboard="Numeric"/>
+
+            <Label Text="Unit"
+                   Style="{StaticResource SmallLabel}"/>
+            <Picker Title="Select unit"
+                    ItemsSource="{Binding UnitOptions}"/>
+
             <Label Text="Image"
-               Style="{StaticResource SmallLabel}"/>
+                   Style="{StaticResource SmallLabel}"/>
 
             <Border WidthRequest="300"
                 HeightRequest="200"
@@ -72,11 +73,12 @@
 
 
             <Button Text="Save"
-                CornerRadius="50"
-                WidthRequest="100"
-                BackgroundColor="{StaticResource DarkOlive}"
-                TextColor="{StaticResource WhiteSmoke}"
-                    Margin="20">
+                    CornerRadius="50"
+                    WidthRequest="300"
+                    BackgroundColor="{StaticResource DarkOlive}"
+                    TextColor="{StaticResource WhiteSmoke}"
+                    Margin="20"
+                    Command="{Binding SaveCommand}">
                 <Button.Shadow>
                     <Shadow Brush="{StaticResource DarkBrown}"
                 Offset="10,10"

@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:FarmerInventoryListViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryListPage"
              Title="Inventory Manager">
     <ScrollView>
@@ -13,7 +15,7 @@
                     WidthRequest="200"
                     CornerRadius="30"
                     Margin="10,20"
-                    Clicked="Button_Clicked">
+                    Command="{Binding GoToInventoryEditPageCommand}">
                 <Button.Shadow>
                     <Shadow Brush="{StaticResource DarkBrown}"
                         Offset="10,10"

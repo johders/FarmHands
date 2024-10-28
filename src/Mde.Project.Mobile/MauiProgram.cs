@@ -1,5 +1,6 @@
 ﻿using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Mobile.Pages.Farmer;
 using Mde.Project.Mobile.Pages.User;
 using Mde.Project.Mobile.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -49,6 +50,9 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserFavoriteFarmsViewModel>();
             builder.Services.AddTransient<UserFavoriteProductsViewModel>();
 
+            builder.Services.AddTransient<FarmerDashboardViewModel>();
+            builder.Services.AddTransient<FarmerInventoryListViewModel>();
+
             return builder;
         }
 
@@ -59,6 +63,9 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserProductDetailPage>();
             builder.Services.AddTransient<UserFavoriteFarmsPage>();
             builder.Services.AddTransient<UserFavoriteProductsPage>();
+
+            builder.Services.AddTransient<FarmerDashboardPage>();
+            builder.Services.AddTransient<FarmerInventoryListPage>();
 
             return builder;
         }

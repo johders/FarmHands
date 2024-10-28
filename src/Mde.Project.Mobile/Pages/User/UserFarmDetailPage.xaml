@@ -19,8 +19,8 @@
                    Margin="0"/>
 
                 <Image Source="heart.png"
-                       WidthRequest="50"
-                       HeightRequest="50">
+                       WidthRequest="40"
+                       HeightRequest="40">
                     <Image.Triggers>
                         <DataTrigger TargetType="Image"
                                      Binding="{Binding IsFavorite}"

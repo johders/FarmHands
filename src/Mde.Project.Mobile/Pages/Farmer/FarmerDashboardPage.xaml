@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:FarmerDashboardViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerDashboardPage"
              Title="Dashboard">
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Margin="8">
+            <VerticalStackLayout Margin="8,8,8,80">
                 <CollectionView ItemsSource="{Binding Offers}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
@@ -62,7 +64,8 @@
                 Margin="0,0,0,20"
                 CornerRadius="30"
                 WidthRequest="300"
-                BackgroundColor="{StaticResource DarkOlive}">
+                BackgroundColor="{StaticResource DarkOlive}"
+                Command="{Binding GoToInventoryManagerCommand}">
             <Button.Shadow>
                 <Shadow Brush="{StaticResource DarkBrown}"
                         Offset="10,10"

@@ -4,14 +4,15 @@ namespace Mde.Project.Mobile.Pages.Farmer;
 
 public partial class FarmerInventoryListPage : ContentPage
 {
-	public FarmerInventoryListPage()
+	public FarmerInventoryListPage(FarmerInventoryListViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = new FarmDashboardViewModel();
+		BindingContext = viewModel;
 	}
-
-	private async void Button_Clicked(object sender, EventArgs e)
+	protected override void OnAppearing()
 	{
-		await Shell.Current.GoToAsync(nameof(FarmerInventoryEditPage), true);
-    }
+		FarmerInventoryListViewModel viewModel = BindingContext as FarmerInventoryListViewModel;
+		viewModel.RefreshOffersListCommand?.Execute(null);
+		base.OnAppearing();
+	}
 }

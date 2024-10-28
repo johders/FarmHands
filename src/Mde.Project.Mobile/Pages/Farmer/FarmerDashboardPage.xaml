@@ -25,7 +25,7 @@
                                    Style="{StaticResource SmallLabel}"/>
                                             <FlexLayout JustifyContent="SpaceBetween"
                                                     AlignItems="Center">
-                                                <Label Text="Available"
+                                                <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
                                                Style="{StaticResource LabelText}"/>
                                                 <Switch Style="{StaticResource FarmSwitch}"
                                                 IsToggled="{Binding IsAvailable}"/>

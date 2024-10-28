@@ -3,6 +3,7 @@ using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Core.Services.Models.RequestModels;
+using Pri.Pe1.Hsp.Core.Services.Helpers;
 
 namespace Mde.Project.Core.Services
 {
@@ -41,11 +42,7 @@ namespace Mde.Project.Core.Services
 
             if (farm is null)
             {
-                return new ResultModel<Farm>
-                {
-                    IsSuccess = false,
-                    Errors = new List<string> { "Farm not found!" }
-                };
+                return ResultHelper.CreateErrorResult<Farm>("Farm not found!");
             }
 
             return await Task.FromResult(new ResultModel<Farm>

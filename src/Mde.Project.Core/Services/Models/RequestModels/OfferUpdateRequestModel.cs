@@ -1,6 +1,6 @@
 ﻿namespace Mde.Project.Core.Services.Models.RequestModels
 {
-    public class OfferUpdateRequestModel
+    public class OfferUpdateRequestModel : OfferEditRequestModel
     {
     }
 }

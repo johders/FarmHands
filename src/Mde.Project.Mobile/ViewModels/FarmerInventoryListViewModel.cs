@@ -35,9 +35,24 @@ namespace Mde.Project.Mobile.ViewModels
 				Offers = new ObservableCollection<Offer>(offers);
 			});
 
-		public ICommand GoToInventoryEditPageCommand => new Command(async () =>
+		public ICommand EditOfferCommand => new Command<Offer>(async (offer) =>
 		{
-			await Shell.Current.GoToAsync(nameof(FarmerInventoryEditPage), true);
+			var navigationParameter = new Dictionary<string, object>
+			{
+				{nameof(FarmerInventoryEditViewModel.SelectedOffer), offer} 
+			};
+
+			await Shell.Current.GoToAsync(nameof(FarmerInventoryEditPage), true, navigationParameter);
+		});
+
+		public ICommand AddOfferCommand => new Command(async () =>
+		{
+			var navigationParameter = new Dictionary<string, object>
+			{
+				{nameof(FarmerInventoryEditViewModel.SelectedOffer), null}
+			};
+
+			await Shell.Current.GoToAsync(nameof(FarmerInventoryEditPage), true, navigationParameter);
 		});
 	}
 }

@@ -3,13 +3,14 @@ using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Core.Services.Models.RequestModels;
+using Pri.Pe1.Hsp.Core.Services.Helpers;
 
 namespace Mde.Project.Core.Services
 {
     public class OfferMockService : IOfferService
     {
         private readonly List<Offer> _offers = new(Seeder.SeedFarmOffers());
-        public async Task<BaseResultModel> CreateAsync(OfferCreateRequestModel createModel)
+        public async Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel)
         {
             var offer = new Offer
             {
@@ -76,9 +77,26 @@ namespace Mde.Project.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<BaseResultModel> UpdateAsync(OfferUpdateRequestModel updateModel)
+        public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel)
         {
-            throw new NotImplementedException();
-        }
+            var offer = await Task.FromResult(GetAll().FirstOrDefault(o => o.Id == updateModel.Id));
+
+            if (offer is null)
+            {
+				return ResultHelper.CreateErrorResult("Offer not found!");
+			}
+
+            offer.Unit = updateModel.Unit;
+            offer.Price = updateModel.Price;
+            offer.Description = updateModel.Description;
+            offer.Product = updateModel.Product;
+            offer.Farm = updateModel.Farm;
+            offer.IsOrganic = updateModel.IsOrganic;
+
+            return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
+		}
     }
 }

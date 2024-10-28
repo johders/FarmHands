@@ -5,12 +5,12 @@ using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
-using Mde.Project.Mobile.Pages.Farmer;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
+	[QueryProperty(nameof(SelectedOffer), nameof(SelectedOffer))]
 	public class FarmerInventoryEditViewModel : ObservableObject
 	{
 		private readonly IProductService _productService;
@@ -23,11 +23,50 @@ namespace Mde.Project.Mobile.ViewModels
 			_offerService = offerService;
 			_farmService = farmService;
 			LoadUnitOptions();
+			Products = new ObservableCollection<Product>(_productService.GetAll());
 		}
 
 		public ObservableCollection<Unit> UnitOptions { get; set; } = [];
 
-        private ObservableCollection<Product> products;
+		private string pageTitle;
+
+		public string PageTitle
+		{
+			get { return pageTitle; }
+			set { SetProperty(ref pageTitle, value); }
+		}
+
+		private Offer selectedOffer;
+
+		public Offer SelectedOffer
+		{
+			get { return selectedOffer; }
+			set 
+			{
+				//selectedOffer = value; 
+				SetProperty(ref selectedOffer, value);
+
+				if (selectedOffer is not null)
+				{
+					PageTitle = "Edit offer";
+					SelectedProduct = selectedOffer.Product;
+					Description = selectedOffer.Description;
+					Price = selectedOffer.Price;
+					SelectedUnit = selectedOffer.Unit;
+				}
+				else
+				{
+					PageTitle = "Create new offer";
+					SelectedProduct = default;
+					Description = default;
+					Price = default;
+					SelectedUnit = default;
+				}
+			}
+		}
+
+
+		private ObservableCollection<Product> products;
 
 		public ObservableCollection<Product> Products
 		{
@@ -80,13 +119,13 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-		public ICommand RefreshProductOptionsCommand =>
-			new Command(async () =>
-			{
-				var result = await _productService.GetAllAsync();
-				var products = result.Data;
-				Products = new ObservableCollection<Product>(products);
-			});
+		//public ICommand RefreshProductOptionsCommand =>
+		//	new Command(async () =>
+		//	{
+		//		var result = await _productService.GetAllAsync();
+		//		var products = result.Data;
+		//		Products = new ObservableCollection<Product>(products);
+		//	});
 
 		public ICommand SaveCommand =>
 			new Command(async () =>
@@ -94,24 +133,39 @@ namespace Mde.Project.Mobile.ViewModels
 				var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
 				var farmResult = await _farmService.GetByIdAsync(Guid.Parse("10000000-0000-0000-0000-000000000001"));
 
-				OfferCreateRequestModel offer = new OfferCreateRequestModel();
+				OfferEditRequestModel offer = new OfferEditRequestModel();
 
-				offer.Id = Guid.NewGuid();
-				offer.Price = price;
-				offer.Description = description;
+				offer.Price = Price;
+				offer.Description = Description;
 				offer.Unit = SelectedUnit;
 				offer.Product = productResult.Data.First();
 				offer.Farm = farmResult.Data.First();
 
-				var createResult = await _offerService.CreateAsync(offer);
-
-				if (createResult.IsSuccess)
+				if(SelectedOffer is null)
 				{
-					await Shell.Current.GoToAsync(nameof(FarmerInventoryListPage), true);
+					offer.Id = Guid.NewGuid();
+					var createResult = await _offerService.CreateAsync(offer);
 
-					IToast toast = Toast.Make($"New offer created for {offer.Product.Name}!");
-					await toast.Show();
+					if (createResult.IsSuccess)
+					{
+						IToast toast = Toast.Make($"New offer created for {offer.Product.Name}!");
+						await toast.Show();
+					}
 				}
+				else
+				{
+					offer.Id = SelectedOffer.Id;
+					var updateResult = await _offerService.UpdateAsync(offer);
+
+					if (updateResult.IsSuccess)
+					{
+						IToast toast = Toast.Make($"Offer for {offer.Product.Name} updated!");
+						await toast.Show();
+					}
+				}
+
+				await Shell.Current.GoToAsync("..", true);
+
 			});
 	}
 }

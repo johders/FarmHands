@@ -3,7 +3,7 @@ using Mde.Project.Core.Enums;
 
 namespace Mde.Project.Core.Services.Models.RequestModels
 {
-    public class OfferCreateRequestModel
+    public class OfferEditRequestModel
     {
 		public Guid Id { get; set; }
 		public Product Product { get; set; }

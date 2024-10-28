@@ -4,10 +4,14 @@
              xmlns:enums="clr-namespace:Mde.Project.Core.Enums;assembly=Mde.Project.Core"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              x:DataType="viewmodel:FarmerInventoryEditViewModel"
-             x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryEditPage"
-             Title="{Binding PageTitle}">
+             x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryCreatePage"
+             Title="Create new product">
     <ScrollView>
         <VerticalStackLayout Margin="8,20" Spacing="20">
+
+            <Label Text="New item"
+               Style="{StaticResource LargeLabel}"
+               HorizontalOptions="Center"/>
 
             <Label Text="Product"
                    Style="{StaticResource SmallLabel}"/>
@@ -30,8 +34,7 @@
             <Label Text="Unit"
                    Style="{StaticResource SmallLabel}"/>
             <Picker Title="Select unit"
-                    ItemsSource="{Binding UnitOptions}"
-                    SelectedItem="{Binding SelectedUnit}"/>
+                    ItemsSource="{Binding UnitOptions}"/>
 
             <Label Text="Image"
                    Style="{StaticResource SmallLabel}"/>

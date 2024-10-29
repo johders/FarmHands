@@ -18,7 +18,7 @@
                         <VerticalStackLayout>
                             <Border Padding="5"
                                 StrokeShape="{RoundRectangle CornerRadius=5}"
-                                BackgroundColor="{StaticResource PaleOlive}">
+                                BackgroundColor="{StaticResource TileBackgroundColor}">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>

@@ -11,14 +11,14 @@
     <ScrollView>
         <VerticalStackLayout Margin="8">
             <Button Text="Add new"
-                    BackgroundColor="{StaticResource DarkBrown}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                     HorizontalOptions="Center"
                     WidthRequest="200"
                     CornerRadius="30"
                     Margin="10,20"
                     Command="{Binding AddOfferCommand}">
                 <Button.Shadow>
-                    <Shadow Brush="{StaticResource DarkBrown}"
+                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                         Offset="10,10"
                         Radius="50"
                         Opacity=".8"/>
@@ -40,7 +40,7 @@
                             </SwipeView.RightItems>
                             <Border Padding="5"
                                     StrokeShape="{RoundRectangle CornerRadius=5}"
-                                    BackgroundColor="{StaticResource PaleOlive}">   
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">   
                                 <Grid ColumnDefinitions="*, Auto">
                                         <Label Text="{Binding Product.Name}"
                                                Style="{StaticResource SmallLabel}"
@@ -48,7 +48,8 @@
 
                                         <Button Grid.Column="1"
                                                 Text="Edit"
-                                                BackgroundColor="{StaticResource DarkOlive}"
+                                                TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
                                                 Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
                                                 CommandParameter="{Binding .}"/>
                                     </Grid>

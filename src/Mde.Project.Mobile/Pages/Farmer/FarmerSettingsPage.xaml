@@ -26,7 +26,10 @@
             <Label Text="Image"
                    Style="{StaticResource SmallLabel}"/>
 
-            <Border WidthRequest="300" HeightRequest="200" StrokeThickness="3" Stroke="{StaticResource PaleOlive}"
+            <Border WidthRequest="300" 
+                    HeightRequest="200" 
+                    StrokeThickness="3" 
+                    Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                     IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
@@ -39,7 +42,7 @@
             <Border WidthRequest="300"
                     HeightRequest="200"
                     StrokeThickness="3"
-                    Stroke="{StaticResource PaleOlive}"
+                    Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                     IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
@@ -50,7 +53,7 @@
                         <ImageButton Source="gallery.png"
                                      WidthRequest="60"
                                      HeightRequest="60"
-                                     BackgroundColor="{StaticResource PaleOlive}"
+                                     BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                      Padding="10"
                                      CornerRadius="30"/>
                         <Label Text="From gallery"
@@ -60,7 +63,7 @@
                         <ImageButton Source="camera.png"
                                      WidthRequest="60"
                                      HeightRequest="60"
-                                     BackgroundColor="{StaticResource PaleOlive}"
+                                     BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                      Padding="10"
                                      CornerRadius="30"/>
                         <Label Text="Take picture"
@@ -73,12 +76,12 @@
             <Button Text="Save"
                     CornerRadius="50"
                     WidthRequest="100"
-                    BackgroundColor="{StaticResource DarkOlive}"
-                    TextColor="{StaticResource WhiteSmoke}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
                     Margin="20"
                     Command="{Binding SaveCommand}">
                 <Button.Shadow>
-                    <Shadow Brush="{StaticResource DarkBrown}"
+                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                             Offset="10,10"
                             Radius="50"
                             Opacity=".8"/>

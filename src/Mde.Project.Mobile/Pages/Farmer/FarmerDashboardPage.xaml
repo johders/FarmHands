@@ -18,7 +18,7 @@
                             <VerticalStackLayout>
                                 <Border Padding="5"
                                 StrokeShape="{RoundRectangle CornerRadius=5}"
-                                BackgroundColor="{StaticResource PaleOlive}">
+                                BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
                                     <Grid ColumnDefinitions="*, Auto">
                                         <VerticalStackLayout Spacing="5" Padding="8">
                                             <Label Text="{Binding ProductName}"
@@ -58,16 +58,16 @@
             </VerticalStackLayout>
         </ScrollView>
         <Button Text="Update Inventory"
-                TextColor="{StaticResource WhiteSmoke}"
+                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
                 HorizontalOptions="Center"
                 VerticalOptions="End"
                 Margin="0,0,0,20"
                 CornerRadius="30"
                 WidthRequest="300"
-                BackgroundColor="{StaticResource DarkOlive}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
                 Command="{Binding GoToInventoryManagerCommand}">
             <Button.Shadow>
-                <Shadow Brush="{StaticResource DarkBrown}"
+                <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                         Offset="10,10"
                         Radius="50"
                         Opacity=".8"/>

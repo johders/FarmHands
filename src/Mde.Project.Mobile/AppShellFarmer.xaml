@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:farmerpages="clr-namespace:Mde.Project.Mobile.Pages.Farmer"
     Shell.FlyoutBehavior="Flyout"
-    Shell.BackgroundColor="{StaticResource LightBeige}"
-    FlyoutBackgroundColor="{StaticResource PaleOlive}"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryBackgroundColor}, Dark={StaticResource PrimaryBackgroundColorDark}}"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
     Title="Mde.Project.Mobile">
 
     <FlyoutItem Title="Dashboard"

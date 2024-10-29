@@ -1,6 +1,4 @@
-﻿using Mde.Project.Mobile.Pages.User;
-
-namespace Mde.Project.Mobile
+﻿namespace Mde.Project.Mobile
 {
     public partial class App : Application
     {

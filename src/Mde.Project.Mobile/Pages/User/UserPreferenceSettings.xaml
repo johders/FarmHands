@@ -13,11 +13,11 @@
                     <Label x:Name="lblDistance"/>
                 </FlexLayout>
 
-                <Slider ThumbColor="{StaticResource DarkOlive}"
+                <Slider ThumbColor="{StaticResource AccentColor}"
                     Maximum="100"
                     Minimum="1"
-                    MinimumTrackColor="{StaticResource DarkOlive}"
-                    MaximumTrackColor="{StaticResource PaleOlive}"
+                    MinimumTrackColor="{StaticResource AccentColor}"
+                    MaximumTrackColor="{StaticResource TileBackgroundColor}"
                     Margin="8"
                     ValueChanged="Slider_ValueChanged"/>
             </VerticalStackLayout>
@@ -71,10 +71,10 @@
             <Button Text="Save"
                 CornerRadius="50"
                 WidthRequest="100"
-                BackgroundColor="{StaticResource DarkOlive}"
-                TextColor="{StaticResource WhiteSmoke}">
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="{StaticResource SecondaryBackgroundColor}">
                 <Button.Shadow>
-                    <Shadow Brush="{StaticResource DarkBrown}"
+                    <Shadow Brush="{StaticResource PrimaryTextColor}"
                 Offset="10,10"
                 Radius="50"
                 Opacity=".8"/>

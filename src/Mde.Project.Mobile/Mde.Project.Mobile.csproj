@@ -134,6 +134,9 @@
 	  <MauiXaml Update="Pages\User\UserProductDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\FhDarkColors.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\FhColors.xaml">
 	    <Generator></Generator>
 	  </MauiXaml>

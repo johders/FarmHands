@@ -14,21 +14,21 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Offer">
+                        <DataTemplate x:DataType="viewmodel:OfferViewModel">
                             <VerticalStackLayout>
                                 <Border Padding="5"
                                 StrokeShape="{RoundRectangle CornerRadius=5}"
                                 BackgroundColor="{StaticResource PaleOlive}">
                                     <Grid ColumnDefinitions="*, Auto">
                                         <VerticalStackLayout Spacing="5" Padding="8">
-                                            <Label Text="{Binding Product.Name}"
-                                   Style="{StaticResource SmallLabel}"/>
+                                            <Label Text="{Binding ProductName}"
+                                                   Style="{StaticResource SmallLabel}"/>
                                             <FlexLayout JustifyContent="SpaceBetween"
-                                                    AlignItems="Center">
+                                                        AlignItems="Center">
                                                 <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
-                                               Style="{StaticResource LabelText}"/>
+                                                       Style="{StaticResource LabelText}"/>
                                                 <Switch Style="{StaticResource FarmSwitch}"
-                                                IsToggled="{Binding IsAvailable}"/>
+                                                        IsToggled="{Binding IsAvailable}"/>
                                             </FlexLayout>
                                             <Label Style="{StaticResource LabelText}">
                                                 <Label.Text>
@@ -44,8 +44,8 @@
                                              HeightRequest="70"
                                              StrokeShape="{RoundRectangle CornerRadius=8}">
                                             <Image
-                                       Source="{Binding Product.ImageUrl}"
-                                       Aspect="AspectFill"/>
+                                                Source="{Binding OfferImageUrl}"
+                                                Aspect="AspectFill"/>
                                         </Border>
                                     </Grid>
                                 </Border>

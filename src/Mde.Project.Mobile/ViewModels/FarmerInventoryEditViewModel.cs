@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
@@ -44,7 +42,6 @@ namespace Mde.Project.Mobile.ViewModels
 			get { return selectedOffer; }
 			set 
 			{
-				//selectedOffer = value; 
 				SetProperty(ref selectedOffer, value);
 
 				if (selectedOffer is not null)
@@ -151,8 +148,6 @@ namespace Mde.Project.Mobile.ViewModels
 					if (createResult.IsSuccess)
 					{
 						await ToastHelper.ShowToastAsync($"New offer created for {offer.Product.Name}!");
-						//IToast toast = Toast.Make($"New offer created for {offer.Product.Name}!");
-						//await toast.Show();
 					}
 				}
 				else
@@ -163,9 +158,6 @@ namespace Mde.Project.Mobile.ViewModels
 					if (updateResult.IsSuccess)
 					{
 						await ToastHelper.ShowToastAsync($"Offer for {offer.Product.Name} updated!");
-
-						//IToast toast = Toast.Make($"Offer for {offer.Product.Name} updated!");
-						//await toast.Show();
 					}
 				}
 

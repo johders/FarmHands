@@ -16,9 +16,9 @@ namespace Mde.Project.Mobile.ViewModels
 			_offerService = offerService;
 		}
 
-		private ObservableCollection<Offer> offers;
+		private ObservableCollection<OfferViewModel> offers;
 
-		public ObservableCollection<Offer> Offers
+		public ObservableCollection<OfferViewModel> Offers
 		{
 			get { return offers; }
 			set
@@ -27,12 +27,21 @@ namespace Mde.Project.Mobile.ViewModels
 			}
 		}
 
+		private bool isAvailable;
+
+		public bool IsAvailable
+		{
+			get { return isAvailable; }
+			set { SetProperty(ref isAvailable, value); }
+		}
+
+
 		public ICommand RefreshOffersListCommand =>
 			new Command(async () =>
 			{
 				var result = await _offerService.GetAllAsync();
-				var offers = result.Data;
-				Offers = new ObservableCollection<Offer>(offers);
+				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer));
+				Offers = new ObservableCollection<OfferViewModel>(offerViewModels);
 			});
 
 		public ICommand GoToInventoryManagerCommand => new Command(async () =>

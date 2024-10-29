@@ -9,7 +9,7 @@
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryListPage"
              Title="Inventory Manager">
     <ScrollView>
-        <Grid Style="{StaticResource MaxWidthGrid}">
+        <Grid MaximumWidthRequest="{OnPlatform WinUI=500}">
 
             <VerticalStackLayout Margin="8">
                 <Button Text="Add new"
@@ -32,7 +32,7 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Offer">
-                            <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
+                            <!--<SwipeView android:SwipeView.SwipeTransitionMode="Drag">
                                 <SwipeView.RightItems>
                                     <SwipeItem Text="Delete"
                                            BackgroundColor="DarkRed"
@@ -56,7 +56,64 @@
                                                 CommandParameter="{Binding .}"/>
                                     </Grid>
                                 </Border>
-                            </SwipeView>
+                            </SwipeView>-->
+
+                            <VerticalStackLayout>
+                                <SwipeView x:Name="MobileSwipeView"
+                                           IsVisible="{OnPlatform WinUI=False, Default=True}"
+                                           android:SwipeView.SwipeTransitionMode="Drag">
+                                    <SwipeView.RightItems>
+                                        <SwipeItem Text="Delete"
+                                                   BackgroundColor="DarkRed"
+                                                   IconImageSource="bin.png"
+                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
+                                                   CommandParameter="{Binding .}"/>
+                                    </SwipeView.RightItems>
+                                    <Border Padding="5"
+                                            StrokeShape="{RoundRectangle CornerRadius=5}"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                        <Grid ColumnDefinitions="*, Auto, Auto">
+                                            <Label Text="{Binding Product.Name}"
+                                                   Style="{StaticResource SmallLabel}"
+                                                   VerticalOptions="Center"/>
+
+                                            <Button Grid.Column="1"
+                                                    Text="Edit"
+                                                    TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                                                    Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
+                                                    CommandParameter="{Binding .}"/>
+                                        </Grid>
+                                    </Border>
+                                </SwipeView>
+
+                                <Grid x:Name="WindowsGrid" 
+                                      IsVisible="{OnPlatform WinUI=True, Default=False}"
+                                      Padding="5"
+                                      ColumnDefinitions="*, Auto, Auto"
+                                      BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+
+                                    <Label Text="{Binding Product.Name}"
+                                           Style="{StaticResource SmallLabel}"
+                                           VerticalOptions="Center"/>
+
+                                    <Button Grid.Column="1"
+                                            Text="Delete"
+                                            BackgroundColor="DarkRed"
+                                            TextColor="White"
+                                            Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
+                                            CommandParameter="{Binding .}"
+                                            Margin="0,0,10,0"/>
+
+                                    <Button Grid.Column="2"
+                                            Text="Edit"
+                                            TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                                            Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Grid>
+                            </VerticalStackLayout>
+
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

@@ -70,15 +70,16 @@
                     </CollectionView>
                 </VerticalStackLayout>
                 <Button Text="Save"
-                CornerRadius="50"
-                WidthRequest="100"
-                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
-                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}">
+                        CornerRadius="30"
+                        Margin="0,0,0,20"
+                        WidthRequest="200"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                Offset="10,10"
-                Radius="50"
-                Opacity=".8"/>
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
                     </Button.Shadow>
                 </Button>
 

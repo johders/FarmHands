@@ -10,7 +10,7 @@
 
     <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">
-            <VerticalStackLayout Spacing="20" Margin="8">
+            <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
                 <FlexLayout JustifyContent="SpaceBetween"
                     AlignItems="Center"
                     Margin="0,20">

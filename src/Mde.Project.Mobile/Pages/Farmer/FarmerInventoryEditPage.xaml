@@ -9,7 +9,8 @@
     <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <VerticalStackLayout Margin="8,20" Spacing="20">
+            <VerticalStackLayout Margin="8,20,8,0" Spacing="20" 
+                                 MinimumWidthRequest="{OnPlatform WinUI=500, Default=0}">
 
                 <Label Text="Product"
                    Style="{StaticResource SmallLabel}"/>
@@ -38,10 +39,24 @@
                 <Label Text="Image"
                    Style="{StaticResource SmallLabel}"/>
 
+                <Border WidthRequest="300" 
+                    HeightRequest="200" 
+                    StrokeThickness="3" 
+                    Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                    IsVisible="{Binding SelectedOffer.OfferImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <Image Source="{Binding SelectedOffer.OfferImageUrl}" 
+                           Aspect="AspectFill"/>
+
+                </Border>
+
                 <Border WidthRequest="300"
-                HeightRequest="200"
-                StrokeThickness="3"
-                Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                        HeightRequest="200"
+                        StrokeThickness="3"
+                        Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        IsVisible="{Binding SelectedOffer.OfferImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
@@ -80,9 +95,9 @@
                     Command="{Binding SaveCommand}">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                Offset="10,10"
-                Radius="50"
-                Opacity=".8"/>
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
                     </Button.Shadow>
                 </Button>
 

@@ -11,7 +11,7 @@
 
     <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">
-            <VerticalStackLayout Spacing="10" Margin="8">
+            <VerticalStackLayout Spacing="10" Margin="8,8,8,50">
 
                 <SearchBar Placeholder="Search by farm, product, location,.."
                    Keyboard="Default"

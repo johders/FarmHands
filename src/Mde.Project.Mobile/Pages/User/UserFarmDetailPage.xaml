@@ -9,68 +9,70 @@
              Title="Farm details">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Margin="8">
-            <FlexLayout JustifyContent="SpaceBetween"
+        <Grid Style="{StaticResource MaxWidthGrid}">
+            <VerticalStackLayout Spacing="20" Margin="8">
+                <FlexLayout JustifyContent="SpaceBetween"
                     AlignItems="Center"
                     Margin="0,20">
-                <Label 
+                    <Label 
             Text="{Binding SelectedFarm.Name}"
             Style="{StaticResource LargeLabel}"
                    Margin="0"/>
 
-                <Image Source="heart.png"
+                    <Image Source="heart.png"
                        WidthRequest="40"
                        HeightRequest="40">
-                    <Image.Triggers>
-                        <DataTrigger TargetType="Image"
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
                                      Binding="{Binding IsFavorite}"
                                      Value="True">
-                            <Setter Property="Source" Value="hearted.png"/>
-                        </DataTrigger>
+                                <Setter Property="Source" Value="hearted.png"/>
+                            </DataTrigger>
 
-                        <DataTrigger TargetType="Image"
+                            <DataTrigger TargetType="Image"
                                          Binding="{Binding IsFavorite}"
                                          Value="False">
-                            <Setter Property="Source" Value="heart.png"/>
-                        </DataTrigger>
-                    </Image.Triggers>
-                </Image>
-            </FlexLayout>
+                                <Setter Property="Source" Value="heart.png"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </FlexLayout>
 
-            <Image Source="{Binding SelectedFarm.ImageUrl}"
+                <Image Source="{Binding SelectedFarm.ImageUrl}"
                Aspect="AspectFill"/>
 
-            <Label Text="Our story"
+                <Label Text="Our story"
                Style="{StaticResource SmallLabel}"/>
-            <Label Text="{Binding SelectedFarm.Description}"
+                <Label Text="{Binding SelectedFarm.Description}"
                Style="{StaticResource LabelText}"
                LineBreakMode="WordWrap"/>
 
-            <Label Text="Our harvest"
+                <Label Text="Our harvest"
                Style="{StaticResource SmallLabel}"/>
 
-            <CollectionView ItemsSource="{Binding Offers}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Offer">
-                        <Border Style="{StaticResource TileBorder}">
-                            <Grid RowDefinitions="4*, 1.5*" Margin="0">
-                                <Image Source="{Binding OfferImageUrl}"
+                <CollectionView ItemsSource="{Binding Offers}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Offer">
+                            <Border Style="{StaticResource TileBorder}">
+                                <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                                    <Image Source="{Binding OfferImageUrl}"
                            Aspect="AspectFill"/>
-                                <VerticalStackLayout Grid.Row="1" Padding="5">
-                                    <Label Text="{Binding Product.Name}"
+                                    <VerticalStackLayout Grid.Row="1" Padding="5">
+                                        <Label Text="{Binding Product.Name}"
                                Style="{StaticResource SmallLabel}"/>
-                                    <Label Text="{Binding Product.Description}"
+                                        <Label Text="{Binding Product.Description}"
                                Style="{StaticResource LabelText}"/>
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

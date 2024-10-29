@@ -5,82 +5,84 @@
              x:Class="Mde.Project.Mobile.Pages.User.UserPreferenceSettings"
              Title="Preferences">
     <ScrollView>
-        <VerticalStackLayout Margin="8,20" Spacing="20">
-            <VerticalStackLayout>
-                <FlexLayout Direction="Row"
+        <Grid Style="{StaticResource MaxWidthGrid}">
+            <VerticalStackLayout Margin="8,20" Spacing="20">
+                <VerticalStackLayout>
+                    <FlexLayout Direction="Row"
                             JustifyContent="SpaceBetween">
-                    <Label Text="Search distance" Style="{StaticResource SmallLabel}"/>
-                    <Label x:Name="lblDistance"/>
-                </FlexLayout>
+                        <Label Text="Search distance" Style="{StaticResource SmallLabel}"/>
+                        <Label x:Name="lblDistance"/>
+                    </FlexLayout>
 
-                <Slider ThumbColor="{StaticResource AccentColor}"
+                    <Slider ThumbColor="{StaticResource AccentColor}"
                     Maximum="100"
                     Minimum="1"
                     MinimumTrackColor="{StaticResource AccentColor}"
-                    MaximumTrackColor="{StaticResource TileBackgroundColor}"
+                    MaximumTrackColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                     Margin="8"
                     ValueChanged="Slider_ValueChanged"/>
-            </VerticalStackLayout>
+                </VerticalStackLayout>
 
-            <VerticalStackLayout>
-                <Label Text="Dietary Preferences"
+                <VerticalStackLayout>
+                    <Label Text="Dietary Preferences"
                Style="{StaticResource SmallLabel}"/>
-                <CollectionView ItemsSource="{Binding DietaryOptions}" Margin="0">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:DietaryOption">
-                            <VerticalStackLayout>
-                                <FlexLayout Direction="Row"
+                    <CollectionView ItemsSource="{Binding DietaryOptions}" Margin="0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:DietaryOption">
+                                <VerticalStackLayout>
+                                    <FlexLayout Direction="Row"
                             JustifyContent="SpaceBetween">
-                                    <Label Text="{Binding Name}"
+                                        <Label Text="{Binding Name}"
                                    VerticalOptions="Center"/>
-                                    <Switch Style="{StaticResource FarmSwitch}"
+                                        <Switch Style="{StaticResource FarmSwitch}"
                                     IsToggled="{Binding IsSelected}"/>
-                                </FlexLayout>
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
+                                    </FlexLayout>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
 
-            <VerticalStackLayout>
-                <Label Text="My favorite cuisines"
+                <VerticalStackLayout>
+                    <Label Text="My favorite cuisines"
                    Style="{StaticResource SmallLabel}"/>
 
-                <Picker ItemsSource="{Binding CuisineOptions}" 
+                    <Picker ItemsSource="{Binding CuisineOptions}" 
                     ItemDisplayBinding="{Binding Name}"
                     Title="Add from this list">
-                </Picker>
+                    </Picker>
 
-                <CollectionView ItemsSource="{Binding CuisineOptions}" 
+                    <CollectionView ItemsSource="{Binding CuisineOptions}" 
                             Margin="10">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" 
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" 
                                      Span="3"
                                      VerticalItemSpacing="15"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding FlagImageUrl}"
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding FlagImageUrl}"
                                    WidthRequest="80"
                                    HeightRequest="45"
                                    Aspect="AspectFill"/>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-            <Button Text="Save"
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <Button Text="Save"
                 CornerRadius="50"
                 WidthRequest="100"
-                BackgroundColor="{StaticResource AccentColor}"
-                TextColor="{StaticResource SecondaryBackgroundColor}">
-                <Button.Shadow>
-                    <Shadow Brush="{StaticResource PrimaryTextColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}">
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                 Offset="10,10"
                 Radius="50"
                 Opacity=".8"/>
-                </Button.Shadow>
-            </Button>
+                    </Button.Shadow>
+                </Button>
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

@@ -9,39 +9,41 @@
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryListPage"
              Title="Inventory Manager">
     <ScrollView>
-        <VerticalStackLayout Margin="8">
-            <Button Text="Add new"
+        <Grid Style="{StaticResource MaxWidthGrid}">
+
+            <VerticalStackLayout Margin="8">
+                <Button Text="Add new"
                     BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                     HorizontalOptions="Center"
                     WidthRequest="200"
                     CornerRadius="30"
                     Margin="10,20"
                     Command="{Binding AddOfferCommand}">
-                <Button.Shadow>
-                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                         Offset="10,10"
                         Radius="50"
                         Opacity=".8"/>
-                </Button.Shadow>
-            </Button>
-            <CollectionView ItemsSource="{Binding Offers}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Offer">
-                        <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
-                            <SwipeView.RightItems>
-                                <SwipeItem Text="Delete"
+                    </Button.Shadow>
+                </Button>
+                <CollectionView ItemsSource="{Binding Offers}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Offer">
+                            <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
+                                <SwipeView.RightItems>
+                                    <SwipeItem Text="Delete"
                                            BackgroundColor="DarkRed"
                                            IconImageSource="bin.png"
                                            Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
                                            CommandParameter="{Binding .}"/>
-                            </SwipeView.RightItems>
-                            <Border Padding="5"
+                                </SwipeView.RightItems>
+                                <Border Padding="5"
                                     StrokeShape="{RoundRectangle CornerRadius=5}"
-                                    BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">   
-                                <Grid ColumnDefinitions="*, Auto">
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                    <Grid ColumnDefinitions="*, Auto">
                                         <Label Text="{Binding Product.Name}"
                                                Style="{StaticResource SmallLabel}"
                                                VerticalOptions="Center"/>
@@ -54,10 +56,11 @@
                                                 CommandParameter="{Binding .}"/>
                                     </Grid>
                                 </Border>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

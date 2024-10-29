@@ -7,83 +7,86 @@
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryEditPage"
              Title="{Binding PageTitle}">
     <ScrollView>
-        <VerticalStackLayout Margin="8,20" Spacing="20">
+        <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <Label Text="Product"
+            <VerticalStackLayout Margin="8,20" Spacing="20">
+
+                <Label Text="Product"
                    Style="{StaticResource SmallLabel}"/>
-            <Picker Title="Select product"
+                <Picker Title="Select product"
                     ItemsSource="{Binding Products, Mode=TwoWay}"
                     SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding Name}"/>
 
-            <Label Text="Description"
+                <Label Text="Description"
                    Style="{StaticResource SmallLabel}"/>
-            <Entry Placeholder="Enter product name"
+                <Entry Placeholder="Enter product name"
                    Text="{Binding Description}"/>
 
-            <Label Text="Price per unit"
+                <Label Text="Price per unit"
                    Style="{StaticResource SmallLabel}"/>
-            <Entry Placeholder="Enter price"
+                <Entry Placeholder="Enter price"
                    Text="{Binding Price}"
                    Keyboard="Numeric"/>
 
-            <Label Text="Unit"
+                <Label Text="Unit"
                    Style="{StaticResource SmallLabel}"/>
-            <Picker Title="Select unit"
+                <Picker Title="Select unit"
                     ItemsSource="{Binding UnitOptions}"
                     SelectedItem="{Binding SelectedUnit}"/>
 
-            <Label Text="Image"
+                <Label Text="Image"
                    Style="{StaticResource SmallLabel}"/>
 
-            <Border WidthRequest="300"
+                <Border WidthRequest="300"
                 HeightRequest="200"
                 StrokeThickness="3"
                 Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10"/>
-                </Border.StrokeShape>
-                <FlexLayout JustifyContent="SpaceEvenly"
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <FlexLayout JustifyContent="SpaceEvenly"
                         AlignItems="Center">
-                    <VerticalStackLayout>
-                        <ImageButton Source="gallery.png"
+                        <VerticalStackLayout>
+                            <ImageButton Source="gallery.png"
                              WidthRequest="60"
                              HeightRequest="60"
                              BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                              Padding="10"
                              CornerRadius="30"/>
-                        <Label Text="From gallery"
+                            <Label Text="From gallery"
                            Style="{StaticResource LabelText}"/>
-                    </VerticalStackLayout>
-                    <VerticalStackLayout>
-                        <ImageButton Source="camera.png"
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <ImageButton Source="camera.png"
                              WidthRequest="60"
                              HeightRequest="60"
                              BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                              Padding="10"
                              CornerRadius="30"/>
-                        <Label Text="Take picture"
+                            <Label Text="Take picture"
                            Style="{StaticResource LabelText}"/>
-                    </VerticalStackLayout>
-                </FlexLayout>
-            </Border>
+                        </VerticalStackLayout>
+                    </FlexLayout>
+                </Border>
 
 
-            <Button Text="Save"
+                <Button Text="Save"
                     CornerRadius="50"
                     WidthRequest="300"
                     BackgroundColor="{StaticResource AccentColor}"
                     TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
                     Margin="20"
                     Command="{Binding SaveCommand}">
-                <Button.Shadow>
-                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                 Offset="10,10"
                 Radius="50"
                 Opacity=".8"/>
-                </Button.Shadow>
-            </Button>
+                    </Button.Shadow>
+                </Button>
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

@@ -8,54 +8,57 @@
              Title="Dashboard">
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Margin="8,8,8,80">
-                <CollectionView ItemsSource="{Binding Offers}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodel:OfferViewModel">
-                            <VerticalStackLayout>
-                                <Border Padding="5"
+            <Grid Style="{StaticResource MaxWidthGrid}">
+
+                <VerticalStackLayout Margin="8,8,8,80">
+                    <CollectionView ItemsSource="{Binding Offers}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodel:OfferViewModel">
+                                <VerticalStackLayout>
+                                    <Border Padding="5"
                                 StrokeShape="{RoundRectangle CornerRadius=5}"
                                 BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
-                                    <Grid ColumnDefinitions="*, Auto">
-                                        <VerticalStackLayout Spacing="5" Padding="8">
-                                            <Label Text="{Binding ProductName}"
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <VerticalStackLayout Spacing="5" Padding="8">
+                                                <Label Text="{Binding ProductName}"
                                                    Style="{StaticResource SmallLabel}"/>
-                                            <FlexLayout JustifyContent="SpaceBetween"
+                                                <FlexLayout JustifyContent="SpaceBetween"
                                                         AlignItems="Center">
-                                                <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
+                                                    <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
                                                        Style="{StaticResource LabelText}"/>
-                                                <Switch Style="{StaticResource FarmSwitch}"
+                                                    <Switch Style="{StaticResource FarmSwitch}"
                                                         IsToggled="{Binding IsAvailable}"/>
-                                            </FlexLayout>
-                                            <Label Style="{StaticResource LabelText}">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="Price: {0:C2}/{1}">
-                                                        <Binding Path="Price"/>
-                                                        <Binding Path="Unit"/>
-                                                    </MultiBinding>
-                                                </Label.Text>
-                                            </Label>
-                                        </VerticalStackLayout>
-                                        <Border  Grid.Column="1"
+                                                </FlexLayout>
+                                                <Label Style="{StaticResource LabelText}">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="Price: {0:C2}/{1}">
+                                                            <Binding Path="Price"/>
+                                                            <Binding Path="Unit"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+                                            </VerticalStackLayout>
+                                            <Border  Grid.Column="1"
                                              WidthRequest="120"
                                              HeightRequest="70"
                                              StrokeShape="{RoundRectangle CornerRadius=8}">
-                                            <Image
+                                                <Image
                                                 Source="{Binding OfferImageUrl}"
                                                 Aspect="AspectFill"/>
-                                        </Border>
-                                    </Grid>
-                                </Border>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
 
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
         </ScrollView>
         <Button Text="Update Inventory"
                 TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"

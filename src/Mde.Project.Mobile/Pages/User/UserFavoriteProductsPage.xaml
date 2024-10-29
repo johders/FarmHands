@@ -8,43 +8,45 @@
              x:Name="page"
              Title="Favorite products">
     <ScrollView>
-        <VerticalStackLayout Margin="8">
-            <CollectionView ItemsSource="{Binding FavoriteProducts}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Product">
-                        <VerticalStackLayout>
-                            <Border Padding="5"
+        <Grid Style="{StaticResource MaxWidthGrid}">
+            <VerticalStackLayout Margin="8">
+                <CollectionView ItemsSource="{Binding FavoriteProducts}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Product">
+                            <VerticalStackLayout>
+                                <Border Padding="5"
                             StrokeShape="{RoundRectangle CornerRadius=5}"
-                            BackgroundColor="{StaticResource TileBackgroundColor}">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
-                                </Border.GestureRecognizers>
-                                <Grid ColumnDefinitions="*, Auto">
-                                    <VerticalStackLayout Spacing="5" Padding="8">
-                                        <Label Text="{Binding Name}"
+                                    </Border.GestureRecognizers>
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <VerticalStackLayout Spacing="5" Padding="8">
+                                            <Label Text="{Binding Name}"
                                Style="{StaticResource SmallLabel}"/>
-                                        <Label Text="{Binding Description}"
+                                            <Label Text="{Binding Description}"
                                            Style="{StaticResource LabelText}"
                                            LineBreakMode="WordWrap"/>
-                                    </VerticalStackLayout>
-                                    <Border  Grid.Column="1"
+                                        </VerticalStackLayout>
+                                        <Border  Grid.Column="1"
                                          WidthRequest="120"
                                          HeightRequest="70"
                                          StrokeShape="{RoundRectangle CornerRadius=8}">
-                                        <Image
+                                            <Image
                                    Source="{Binding ImageUrl}"
                                    Aspect="AspectFill"/>
-                                    </Border>
-                                </Grid>
-                            </Border>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

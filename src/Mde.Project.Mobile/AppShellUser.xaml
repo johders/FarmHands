@@ -9,12 +9,11 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Mde.Project.Mobile"
     Shell.NavBarIsVisible="True"
-    Shell.BackgroundColor="{StaticResource PrimaryBackgroundColor}"
-    Shell.TabBarBackgroundColor="{StaticResource TileBackgroundColor}"
-    Shell.TabBarUnselectedColor="{StaticResource AccentColor}"
-    Shell.TabBarForegroundColor="{StaticResource SecondaryBackgroundColor}"
-  
-    Shell.TabBarTitleColor="{StaticResource WhiteSmoke}">
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryBackgroundColor}, Dark={StaticResource PrimaryBackgroundColorDark}}"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+    Shell.TabBarUnselectedColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+    Shell.TabBarForegroundColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}">
 
     <TabBar>
         <ShellContent

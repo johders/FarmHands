@@ -51,6 +51,7 @@ namespace Mde.Project.Mobile.ViewModels
 					Description = selectedOffer.Description;
 					Price = selectedOffer.Price;
 					SelectedUnit = selectedOffer.Unit;
+					ImageUrl = selectedOffer.OfferImageUrl;
 				}
 				else
 				{
@@ -59,6 +60,7 @@ namespace Mde.Project.Mobile.ViewModels
 					Description = default;
 					Price = default;
 					SelectedUnit = default;
+					ImageUrl = default;
 				}
 			}
 		}
@@ -106,6 +108,14 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			get { return price; }
 			set { SetProperty(ref price, value); }
+		}
+
+		private string imageUrl;
+
+		public string ImageUrl
+		{
+			get { return imageUrl; }
+			set { SetProperty(ref imageUrl, value); }
 		}
 
 		private void LoadUnitOptions()

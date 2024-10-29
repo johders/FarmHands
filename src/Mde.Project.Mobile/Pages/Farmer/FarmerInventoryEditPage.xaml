@@ -43,7 +43,7 @@
                     HeightRequest="200" 
                     StrokeThickness="3" 
                     Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                    IsVisible="{Binding SelectedOffer.OfferImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
+                    IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
@@ -56,7 +56,7 @@
                         HeightRequest="200"
                         StrokeThickness="3"
                         Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        IsVisible="{Binding SelectedOffer.OfferImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
+                        IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>

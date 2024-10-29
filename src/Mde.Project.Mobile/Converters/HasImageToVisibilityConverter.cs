@@ -6,11 +6,7 @@ namespace Mde.Project.Mobile.Converters
 	{
 		public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 		{
-			if (value is not string)
-				throw new ArgumentException("Value provided is not a string, Cannot convert.");
-
 			bool hasImage = !String.IsNullOrEmpty((string)value);
-
 			return hasImage;
 		}
 

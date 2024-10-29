@@ -32,32 +32,6 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Offer">
-                            <!--<SwipeView android:SwipeView.SwipeTransitionMode="Drag">
-                                <SwipeView.RightItems>
-                                    <SwipeItem Text="Delete"
-                                           BackgroundColor="DarkRed"
-                                           IconImageSource="bin.png"
-                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
-                                           CommandParameter="{Binding .}"/>
-                                </SwipeView.RightItems>
-                                <Border Padding="5"
-                                    StrokeShape="{RoundRectangle CornerRadius=5}"
-                                    BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
-                                    <Grid ColumnDefinitions="*, Auto">
-                                        <Label Text="{Binding Product.Name}"
-                                               Style="{StaticResource SmallLabel}"
-                                               VerticalOptions="Center"/>
-
-                                        <Button Grid.Column="1"
-                                                Text="Edit"
-                                                TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                                                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
-                                                Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
-                                                CommandParameter="{Binding .}"/>
-                                    </Grid>
-                                </Border>
-                            </SwipeView>-->
-
                             <VerticalStackLayout>
                                 <SwipeView x:Name="MobileSwipeView"
                                            IsVisible="{OnPlatform WinUI=False, Default=True}"

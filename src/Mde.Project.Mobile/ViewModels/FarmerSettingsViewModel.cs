@@ -10,12 +10,21 @@ namespace Mde.Project.Mobile.ViewModels
 	public class FarmerSettingsViewModel : ObservableObject
 	{
 		private readonly IFarmService _farmService;
-		private Farm _farm;
+		private Farm farm;
 
 		public FarmerSettingsViewModel(IFarmService farmService)
 		{
 			_farmService = farmService;
 			Initialize();
+
+			if(farm is not null)
+			{
+				Name = farm.Name;
+				Description = farm.Description;
+				Latitude = farm.Latitude;
+				Longitude = farm.Longitude;
+				ImageUrl = farm.ImageUrl;
+			}
 		}
 
 		private async void Initialize()
@@ -29,36 +38,37 @@ namespace Mde.Project.Mobile.ViewModels
 			
 			if (result.IsSuccess)
 			{
-				_farm = result.Data.First();
+				farm = result.Data.First();
 			}		
 		}
 
-		private string _name;
+
+		private string name;
 		public string Name
 		{
-			get => _name;
-			set => SetProperty(ref _name, value);
+			get => name;
+			set => SetProperty(ref name, value);
 		}
 
-		private string _description;
+		private string description;
 		public string Description
 		{
-			get => _description;
-			set => SetProperty(ref _description, value);
+			get => description;
+			set => SetProperty(ref description, value);
 		}
 
-		private double _latitude;
+		private double latitude;
 		public double Latitude
 		{
-			get => _latitude;
-			set => SetProperty(ref _latitude, value);
+			get => latitude;
+			set => SetProperty(ref latitude, value);
 		}
 
-		private double _longitude;
+		private double longitude;
 		public double Longitude
 		{
-			get => _longitude;
-			set => SetProperty(ref _longitude, value);
+			get => longitude;
+			set => SetProperty(ref longitude, value);
 		}
 
 		private string _imageUrl;
@@ -72,7 +82,7 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			var updateModel = new FarmUpdateRequestModel
 			{
-				Id = _farm.Id,
+				Id = farm.Id,
 				Name = Name,
 				Description = Description,
 				Latitude = Latitude,

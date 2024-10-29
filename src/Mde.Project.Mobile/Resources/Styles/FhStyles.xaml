@@ -4,6 +4,8 @@
                     xmlns:converters="clr-namespace:Mde.Project.Mobile.Converters">
 
     <converters:BoolToAvailabilityStringConverter x:Key="BoolToAvailabitilyStringConverter"/>
+    <converters:HasImageToVisibilityConverter x:Key="HasImageToVisibilityConverter"/>
+    <converters:NoImageToVisibilityConverter x:Key="NoImageToVisibilityConverter"/>
 
     <Style x:Key="LargeLabel" TargetType="Label">
         <Setter Property="FontSize" Value="22"/>

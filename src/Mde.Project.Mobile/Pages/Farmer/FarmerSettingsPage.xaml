@@ -26,17 +26,21 @@
             <Label Text="Image"
                    Style="{StaticResource SmallLabel}"/>
 
-            <Border WidthRequest="300" HeightRequest="200" StrokeThickness="3" Stroke="{StaticResource PaleOlive}">
+            <Border WidthRequest="300" HeightRequest="200" StrokeThickness="3" Stroke="{StaticResource PaleOlive}"
+                    IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
-                <Image Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+                <Image Source="{Binding ImageUrl}" 
+                       Aspect="AspectFill"/>
+
             </Border>
 
             <Border WidthRequest="300"
                     HeightRequest="200"
                     StrokeThickness="3"
-                    Stroke="{StaticResource PaleOlive}">
+                    Stroke="{StaticResource PaleOlive}"
+                    IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
@@ -71,7 +75,8 @@
                     WidthRequest="100"
                     BackgroundColor="{StaticResource DarkOlive}"
                     TextColor="{StaticResource WhiteSmoke}"
-                    Margin="20">
+                    Margin="20"
+                    Command="{Binding SaveCommand}">
                 <Button.Shadow>
                     <Shadow Brush="{StaticResource DarkBrown}"
                             Offset="10,10"

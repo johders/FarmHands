@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
 using System.Collections.ObjectModel;
@@ -7,7 +6,7 @@ using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-    public class FarmerDashboardViewModel : ObservableObject
+	public class FarmerDashboardViewModel : ObservableObject
     {
         private readonly IOfferService _offerService;
 

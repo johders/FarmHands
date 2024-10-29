@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:FarmerSettingsViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerSettingsPage"
              HideSoftInputOnTapped="True"
              Title="Settings">
@@ -9,64 +11,72 @@
 
             <Label Text="Name"
                    Style="{StaticResource SmallLabel}"/>
-            <Entry Placeholder="Enter product name"/>
+            <Entry Placeholder="Enter product name"
+                   Text="{Binding Name}"/>
 
             <Label Text="Location"
                    Style="{StaticResource SmallLabel}"/>
-            <Entry Placeholder="Enter product name"/>
+            <Entry Placeholder="Enter latitude" Text="{Binding Latitude}" Keyboard="Numeric"/>
+            <Entry Placeholder="Enter longitude" Text="{Binding Longitude}" Keyboard="Numeric"/>
 
             <Label Text="Your story"
                    Style="{StaticResource SmallLabel}"/>
-            <Editor Placeholder="Enter price"
-                    AutoSize="TextChanges"/>
-            
+            <Editor Placeholder="Tell us more about your farm" AutoSize="TextChanges" Text="{Binding Description}"/>
+
             <Label Text="Image"
                    Style="{StaticResource SmallLabel}"/>
+
+            <Border WidthRequest="300" HeightRequest="200" StrokeThickness="3" Stroke="{StaticResource PaleOlive}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <Image Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+            </Border>
 
             <Border WidthRequest="300"
                     HeightRequest="200"
                     StrokeThickness="3"
-            Stroke="{StaticResource PaleOlive}">
+                    Stroke="{StaticResource PaleOlive}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
                 <FlexLayout JustifyContent="SpaceEvenly"
-                    AlignItems="Center">
+                            AlignItems="Center">
                     <VerticalStackLayout>
                         <ImageButton Source="gallery.png"
-                         WidthRequest="60"
-                         HeightRequest="60"
-                         BackgroundColor="{StaticResource PaleOlive}"
-                         Padding="10"
-                         CornerRadius="30"/>
+                                     WidthRequest="60"
+                                     HeightRequest="60"
+                                     BackgroundColor="{StaticResource PaleOlive}"
+                                     Padding="10"
+                                     CornerRadius="30"/>
                         <Label Text="From gallery"
-                       Style="{StaticResource LabelText}"/>
+                               Style="{StaticResource LabelText}"/>
                     </VerticalStackLayout>
                     <VerticalStackLayout>
                         <ImageButton Source="camera.png"
-                         WidthRequest="60"
-                         HeightRequest="60"
-                         BackgroundColor="{StaticResource PaleOlive}"
-                         Padding="10"
-                         CornerRadius="30"/>
+                                     WidthRequest="60"
+                                     HeightRequest="60"
+                                     BackgroundColor="{StaticResource PaleOlive}"
+                                     Padding="10"
+                                     CornerRadius="30"/>
                         <Label Text="Take picture"
-                       Style="{StaticResource LabelText}"/>
+                               Style="{StaticResource LabelText}"/>
                     </VerticalStackLayout>
                 </FlexLayout>
             </Border>
 
 
             <Button Text="Save"
-            CornerRadius="50"
-            WidthRequest="100"
-            BackgroundColor="{StaticResource DarkOlive}"
-            TextColor="{StaticResource WhiteSmoke}"
-                Margin="20">
+                    CornerRadius="50"
+                    WidthRequest="100"
+                    BackgroundColor="{StaticResource DarkOlive}"
+                    TextColor="{StaticResource WhiteSmoke}"
+                    Margin="20">
                 <Button.Shadow>
                     <Shadow Brush="{StaticResource DarkBrown}"
-            Offset="10,10"
-            Radius="50"
-            Opacity=".8"/>
+                            Offset="10,10"
+                            Radius="50"
+                            Opacity=".8"/>
                 </Button.Shadow>
             </Button>
 

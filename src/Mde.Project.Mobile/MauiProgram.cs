@@ -55,6 +55,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerDashboardViewModel>();
             builder.Services.AddTransient<FarmerInventoryListViewModel>();
             builder.Services.AddTransient<FarmerInventoryEditViewModel>();
+            builder.Services.AddTransient<FarmerSettingsViewModel>();
 
             return builder;
         }
@@ -70,6 +71,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerDashboardPage>();
             builder.Services.AddTransient<FarmerInventoryListPage>();
             builder.Services.AddTransient<FarmerInventoryEditPage>();
+            builder.Services.AddTransient<FarmerSettingsPage>();
 
             return builder;
         }

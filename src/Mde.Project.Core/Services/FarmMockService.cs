@@ -57,9 +57,25 @@ namespace Mde.Project.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)
+        public async Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)
         {
-            throw new NotImplementedException();
-        }
+			var farm = GetAll().FirstOrDefault(o => o.Id == updateModel.Id);
+
+			if (farm is null)
+			{
+				return ResultHelper.CreateErrorResult("Farm not found!");
+			}
+
+			farm.Name = updateModel.Name;
+            farm.Description = updateModel.Description;
+            farm.Latitude = updateModel.Latitude;
+            farm.Longitude = updateModel.Longitude;
+            farm.ImageUrl = updateModel.ImageUrl;
+
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
+		}
     }
 }

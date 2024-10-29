@@ -1,6 +1,7 @@
 ﻿using Mde.Project.Core.Data;
 using Mde.Project.Core.Entities;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
@@ -13,5 +14,10 @@ namespace Mde.Project.Mobile.ViewModels
         }
         public ObservableCollection<DietaryOption> DietaryOptions { get; set; }
         public ObservableCollection<CuisineOption> CuisineOptions { get; set; }
-    }
+
+		public ICommand SwitchToFarmerViewCommand => new Command(() =>
+		{
+			App.Current.MainPage = new AppShellFarmer();
+		});
+	}
 }

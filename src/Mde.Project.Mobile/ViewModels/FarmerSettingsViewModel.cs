@@ -101,5 +101,10 @@ namespace Mde.Project.Mobile.ViewModels
 				await Application.Current.MainPage.DisplayAlert("Error", "Failed to update farm details.", "OK");
 			}
 		});
+
+		public ICommand SwitchToUserViewCommand => new Command(() =>
+		{
+			App.Current.MainPage = new AppShellUser();
+		});
 	}
 }

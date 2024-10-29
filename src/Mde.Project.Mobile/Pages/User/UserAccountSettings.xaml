@@ -8,5 +8,6 @@
             Text="Welcome to Account settings"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
     </VerticalStackLayout>
 </ContentPage>

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Mde.Project.Core.Data;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
@@ -11,14 +12,17 @@ namespace Mde.Project.Mobile.ViewModels
     public class UserProductDetailsViewModel : ObservableObject
     {
 		private readonly IOfferService _offerService;
+		private readonly IFavoriteProductService _favoriteProductsService;
 
-        public UserProductDetailsViewModel(IOfferService offerService)
-        {
-            _offerService = offerService;
-        }
+		//private List<FavoriteProduct> _userFavoriteProducts = new List<FavoriteProduct>(Seeder.SeedFavoriteProducts());
 
-        private Product selectedProduct;
+		public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService)
+		{
+			_offerService = offerService;
+			_favoriteProductsService = favoriteProductsService;
+		}
 
+		private Product selectedProduct;
 		public Product SelectedProduct
         {
 			get { return selectedProduct; }
@@ -32,7 +36,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
         private ObservableCollection<Offer> offers;
-
         public ObservableCollection<Offer> Offers
         {
             get { return offers; }
@@ -48,13 +51,28 @@ namespace Mde.Project.Mobile.ViewModels
 			get => isFavorite;
 			set
 			{
-				isFavorite = value;
-				OnPropertyChanged();
+				SetProperty(ref isFavorite, value);
 			}
 		}
-
-		public ICommand ToggleFavoriteCommand => new Command(() =>
+		public ICommand CheckIfProductIsFavoriteCommand => new Command(async () =>
 		{
+			if (SelectedProduct != null)
+			{
+				var result = await _favoriteProductsService.IsFavoritedAsync(SelectedProduct.Id);
+				IsFavorite = result.IsSuccess;
+			}
+		});
+
+		public ICommand ToggleFavoriteCommand => new Command(async () =>
+		{
+			if (IsFavorite)
+			{
+				await _favoriteProductsService.DeleteAsync(SelectedProduct.Id);
+			}
+			else
+			{
+				await _favoriteProductsService.CreateAsync(SelectedProduct.Id);
+			}
 			IsFavorite = !IsFavorite;
 		});
 

@@ -22,7 +22,9 @@
                     Minimum="1"
                     MinimumTrackColor="{StaticResource AccentColor}"
                     MaximumTrackColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                    x:Name="sldDistance"
                     Margin="8"
+                    Value="15"
                     ValueChanged="Slider_ValueChanged"/>
                 </VerticalStackLayout>
 

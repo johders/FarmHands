@@ -10,8 +10,6 @@ namespace Mde.Project.Core.Services
     public class FarmMockService : IFarmService
     {
         private readonly List<Farm> _farms = new(Seeder.SeedFarms());
-
-
         public Task<BaseResultModel> CreateAsync(FarmCreateRequestModel createModel)
         {
             throw new NotImplementedException();

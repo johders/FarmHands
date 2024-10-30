@@ -28,7 +28,7 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshFavoriteProductsListCommand => new Command(async () =>
 		{
-			var result = await _favoriteProductService.GetAllFavoriteProductssAsync();
+			var result = await _favoriteProductService.GetAllFavoriteProductsAsync();
 			var favoriteProducts = result.Data;
 
 			FavoriteProducts = new ObservableCollection<Product>(favoriteProducts);

@@ -5,6 +5,7 @@ namespace Mde.Project.Core.Data
 {
 	public static class Seeder
 	{
+
 		public static IEnumerable<Product> SeedProducts()
 		{
 			IEnumerable<Product> products = new List<Product>
@@ -132,7 +133,25 @@ namespace Mde.Project.Core.Data
 			return offers;
 		}
 
-        public static IEnumerable<FavoriteFarm> SeedFavoriteFarms()
+		public static IEnumerable<ApplicationUser> SeedUsers()
+		{
+			IEnumerable<ApplicationUser> users = new List<ApplicationUser>
+			{
+				new ApplicationUser
+				{
+					Id = Guid.Parse("30000000-0000-0000-0000-000000000001"),
+					Name = "Jefke Delaplace",
+					UserName = "JDTester",
+					Password = "password",
+					FavoriteFarms = new List<FavoriteFarm>(),
+					FavoriteProducts = new List<FavoriteProduct>(),
+				}
+			};
+
+			return users;
+		}
+
+		public static IEnumerable<FavoriteFarm> SeedFavoriteFarms()
         {
             IEnumerable<FavoriteFarm> favoriteFarms = new List<FavoriteFarm>
             {
@@ -161,17 +180,17 @@ namespace Mde.Project.Core.Data
 			IEnumerable<FavoriteProduct> favoriteProducts = new List<FavoriteProduct>
 			{
 				new FavoriteProduct{
-					Id = Guid.Parse("30000000-0000-0000-0000-000000000001"),
+					Id = Guid.Parse("50000000-0000-0000-0000-000000000001"),
 					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
 					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000001")
 				},
 				new FavoriteProduct{
-					Id = Guid.Parse("30000000-0000-0000-0000-000000000002"),
+					Id = Guid.Parse("50000000-0000-0000-0000-000000000002"),
 					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
 					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000014")
 				},
 				new FavoriteProduct{
-					Id = Guid.Parse("30000000-0000-0000-0000-000000000003"),
+					Id = Guid.Parse("50000000-0000-0000-0000-000000000003"),
 					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
 					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000010")
 				},

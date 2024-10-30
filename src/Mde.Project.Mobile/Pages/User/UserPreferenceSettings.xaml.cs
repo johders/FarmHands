@@ -12,10 +12,16 @@ public partial class UserPreferenceSettings : ContentPage
 		BindingContext = new UserPreferencesViewModel();
 	}
 
+	protected override void OnAppearing()
+	{
+		lblDistance.Text = GetSliderLabelString(sldDistance.Value.ToString());
+		base.OnAppearing();
+	}
+
 	private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
 	{
 		sliderAdjustedValue = (int)(e.NewValue / sliderIncrement) * sliderIncrement;
-		lblDistance.Text = sliderAdjustedValue.ToString() + " km";
+		lblDistance.Text = GetSliderLabelString(sliderAdjustedValue.ToString());
     }
 
 	private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -24,5 +30,10 @@ public partial class UserPreferenceSettings : ContentPage
 		{
 			viewModel.UpdateSelectedCuisines();
 		}
+	}
+
+	private string GetSliderLabelString(string sliderValue)
+	{
+		return sliderValue + " km";
 	}
 }

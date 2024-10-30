@@ -7,30 +7,66 @@ namespace Mde.Project.Core.Services
 {
 	public class FavoriteProductMockService : IFavoriteProductService
 	{
-		private readonly List<FavoriteProduct> _favoriteProducts = new List<FavoriteProduct>(Seeder.SeedFavoriteProducts());
 		private readonly List<Product> _products = new List<Product>(Seeder.SeedProducts());
 
-		public Task<BaseResultModel> CreateAsync(Guid farmId)
+		public List<FavoriteProduct> UserFavoriteProducts { get; } = Seeder.SeedFavoriteProducts().ToList();
+		public async Task<BaseResultModel> CreateAsync(Guid id)
 		{
-			throw new NotImplementedException();
+			var isFavorite = GetAll().Any(p => p.ProductId == id);
+			if (!isFavorite)
+			{
+				var product = _products.FirstOrDefault(p => p.Id == id);
+				UserFavoriteProducts.Add(new FavoriteProduct
+				{
+					Id = Guid.NewGuid(),
+					Product = product,
+					ProductId = product.Id,
+					FavoritedOn = DateTime.Now,
+				});
+			}
+
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
 		}
 
-		public Task<BaseResultModel> DeleteAsync(Guid id)
+		public async Task<BaseResultModel> DeleteAsync(Guid id)
 		{
-			throw new NotImplementedException();
+			var favoriteProduct = UserFavoriteProducts.FirstOrDefault(p => p.ProductId == id);
+
+			if(favoriteProduct is null)
+			{
+				return await Task.FromResult(new BaseResultModel
+				{
+					IsSuccess = false,
+					Errors = new List<string> { "Favorite product not found!" }
+				});
+			}
+
+			UserFavoriteProducts.Remove(favoriteProduct);
+
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
 		}
 
 		public IQueryable<FavoriteProduct> GetAll()
 		{
-			return _favoriteProducts.AsQueryable();
+			return UserFavoriteProducts.AsQueryable();
 		}
 
-		public Task<ResultModel<FavoriteProduct>> GetAllAsync()
+		public async Task<ResultModel<FavoriteProduct>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			return await Task.FromResult(new ResultModel<FavoriteProduct>
+			{
+				IsSuccess = true,
+				Data = GetAll().ToList()
+			});
 		}
 
-		public async Task<ResultModel<Product>> GetAllFavoriteProductssAsync()
+		public async Task<ResultModel<Product>> GetAllFavoriteProductsAsync()
 		{
 			var favoriteProducts = GetAll().ToList();
 			var products = new List<Product>();
@@ -65,8 +101,8 @@ namespace Mde.Project.Core.Services
 
 		public async Task<BaseResultModel> IsFavoritedAsync(Guid productId)
 		{
-			var favoriteProducs = GetAll().ToList();
-			if (!favoriteProducs.Any(p => p.ProductId == productId))
+			var isFavorite = GetAll().Any(p => p.ProductId == productId);
+			if (!isFavorite)
 			{
 				return await Task.FromResult(new BaseResultModel
 				{

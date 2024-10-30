@@ -53,7 +53,7 @@
 
                                             <Button Grid.Column="1"
                                                     Text="Edit"
-                                                    TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                                    TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource PrimaryTextColorDark}}"
                                                     BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
                                                     Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
                                                     CommandParameter="{Binding .}"/>

@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              x:DataType="viewmodel:FarmerInventoryEditViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryEditPage"
+             HideSoftInputOnTapped="True"          
              Title="{Binding PageTitle}">
     <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">

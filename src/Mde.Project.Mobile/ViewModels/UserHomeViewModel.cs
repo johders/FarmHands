@@ -40,43 +40,39 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-        public ICommand RefreshFarmListCommand =>
-			new Command(async () =>
-			{
-				var result = await _farmService.GetAllAsync();
-				var farms = result.Data;
-				Farms = new ObservableCollection<Farm>(farms);
-			});
+        public ICommand RefreshFarmListCommand => new Command(async () =>
+		{
+			var result = await _farmService.GetAllAsync();
+			var farms = result.Data;
+			Farms = new ObservableCollection<Farm>(farms);
+		});
 
-        public ICommand RefreshProductListCommand =>
-            new Command(async () =>
+        public ICommand RefreshProductListCommand => new Command(async () =>
+        {
+            var result = await _productService.GetAllAsync();
+            var products = result.Data;
+            Products = new ObservableCollection<Product>(products);
+        });
+
+        public ICommand ViewFarmDetailsCommand => new Command<Farm>(async (farm) =>
+        {
+            var navigationParameter = new Dictionary<string, object>()
             {
-                var result = await _productService.GetAllAsync();
-                var products = result.Data;
-                Products = new ObservableCollection<Product>(products);
-            });
+                { nameof(UserFarmDetailsViewModel.SelectedFarm), farm }
+            };
 
-        public ICommand ViewFarmDetailsCommand =>
-            new Command<Farm>(async (farm) =>
+             await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);
+        });
+
+        public ICommand ViewProductDetailsCommand => new Command<Product>(async (product) =>
+        {
+            var navigationParameter = new Dictionary<string, object>()
             {
-                var navigationParameter = new Dictionary<string, object>()
-                {
-                    { nameof(UserFarmDetailsViewModel.SelectedFarm), farm }
-                };
+                { nameof(UserProductDetailsViewModel.SelectedProduct), product }
+            };
 
-                await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);
-            });
-
-        public ICommand ViewProductDetailsCommand =>
-            new Command<Product>(async (product) =>
-            {
-                var navigationParameter = new Dictionary<string, object>()
-                {
-                    { nameof(UserProductDetailsViewModel.SelectedProduct), product }
-                };
-
-                await Shell.Current.GoToAsync(nameof(UserProductDetailPage), true, navigationParameter);
-            });
+            await Shell.Current.GoToAsync(nameof(UserProductDetailPage), true, navigationParameter);
+        });
 
 
     }

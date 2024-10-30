@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
@@ -49,5 +51,16 @@ namespace Mde.Project.Mobile.ViewModels
                 Offers = new ObservableCollection<Offer>(offers);
             }
 		}
+
+		public ICommand ViewOfferDetailsCommand => new Command<Offer>(async (offer) =>
+		{
+
+			var navigationParameter = new Dictionary<string, object>()
+			{
+				{ nameof(UserOfferDetailsViewModel.SelectedOffer), offer }
+			};
+
+			await Shell.Current.GoToAsync(nameof(UserOfferDetailPage), true, navigationParameter);
+		});
 	}
 }

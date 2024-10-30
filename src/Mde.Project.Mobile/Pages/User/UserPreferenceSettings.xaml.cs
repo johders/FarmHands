@@ -17,4 +17,12 @@ public partial class UserPreferenceSettings : ContentPage
 		sliderAdjustedValue = (int)(e.NewValue / sliderIncrement) * sliderIncrement;
 		lblDistance.Text = sliderAdjustedValue.ToString() + " km";
     }
+
+	private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+	{
+		if (BindingContext is UserPreferencesViewModel viewModel)
+		{
+			viewModel.UpdateSelectedCuisines();
+		}
+	}
 }

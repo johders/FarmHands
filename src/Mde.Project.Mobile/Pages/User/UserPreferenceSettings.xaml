@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls.Compatibility;assembly=Microsoft.Maui.Controls.Compatibility"
              xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              x:DataType="viewmodel:UserPreferencesViewModel"
@@ -27,17 +28,17 @@
 
                 <VerticalStackLayout>
                     <Label Text="Dietary Preferences"
-               Style="{StaticResource SmallLabel}"/>
+                           Style="{StaticResource SmallLabel}"/>
                     <CollectionView ItemsSource="{Binding DietaryOptions}" Margin="0">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:DietaryOption">
                                 <VerticalStackLayout>
                                     <FlexLayout Direction="Row"
-                            JustifyContent="SpaceBetween">
+                                                JustifyContent="SpaceBetween">
                                         <Label Text="{Binding Name}"
-                                   VerticalOptions="Center"/>
+                                               VerticalOptions="Center"/>
                                         <Switch Style="{StaticResource FarmSwitch}"
-                                    IsToggled="{Binding IsSelected}"/>
+                                                IsToggled="{Binding IsSelected}"/>
                                     </FlexLayout>
                                 </VerticalStackLayout>
                             </DataTemplate>
@@ -47,14 +48,14 @@
 
                 <VerticalStackLayout>
                     <Label Text="My favorite cuisines"
-                   Style="{StaticResource SmallLabel}"/>
+                           Style="{StaticResource SmallLabel}"/>
 
-                    <Picker ItemsSource="{Binding CuisineOptions}" 
-                    ItemDisplayBinding="{Binding Name}"
-                    Title="Add from this list">
-                    </Picker>
+                    <!--<Picker ItemsSource="{Binding CuisineOptions}" 
+                            ItemDisplayBinding="{Binding Name}"
+                            Title="Add from this list">
+                    </Picker>-->
 
-                    <CollectionView ItemsSource="{Binding CuisineOptions}" 
+                    <!--<CollectionView ItemsSource="{Binding CuisineOptions}" 
                             Margin="10">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical" 
@@ -69,7 +70,33 @@
                                        Aspect="AspectFill"/>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
+                    </CollectionView>-->
+
+                    <CollectionView ItemsSource="{Binding CuisineOptions}"
+                                    SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CuisineOption">
+                                <HorizontalStackLayout>
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                              CheckedChanged="CheckBox_CheckedChanged"/>
+                                    <Label Text="{Binding Name}"
+                                           VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
                     </CollectionView>
+
+                    <Label Text="Selected Cuisines:" Style="{StaticResource SmallLabel}" />
+                    <CollectionView ItemsSource="{Binding SelectedCuisines}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CuisineOption">
+                                <Frame Padding="5" CornerRadius="10">
+                                    <Label Text="{Binding Name}" />
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
                 </VerticalStackLayout>
                 <Button Text="Save"
                         CornerRadius="30"

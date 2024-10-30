@@ -6,6 +6,7 @@
     <converters:BoolToAvailabilityStringConverter x:Key="BoolToAvailabitilyStringConverter"/>
     <converters:HasImageToVisibilityConverter x:Key="HasImageToVisibilityConverter"/>
     <converters:NoImageToVisibilityConverter x:Key="NoImageToVisibilityConverter"/>
+    <converters:FavoriteToHeartImageConverter x:Key="FavoriteToHeartImageConverter"/>
 
     <Style TargetType="Grid" x:Key="MaxWidthGrid">
         <Setter Property="HorizontalOptions" Value="Center" />

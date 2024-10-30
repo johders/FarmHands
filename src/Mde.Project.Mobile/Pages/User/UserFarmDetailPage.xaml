@@ -14,27 +14,18 @@
                 <FlexLayout JustifyContent="SpaceBetween"
                     AlignItems="Center"
                     Margin="0,20">
-                    <Label 
-            Text="{Binding SelectedFarm.Name}"
-            Style="{StaticResource LargeLabel}"
-                   Margin="0"/>
+                    <Label Text="{Binding SelectedFarm.Name}"
+                            Style="{StaticResource LargeLabel}"
+                            Margin="0"/>
 
-                    <Image Source="heart.png"
-                       WidthRequest="40"
-                       HeightRequest="40">
-                        <Image.Triggers>
-                            <DataTrigger TargetType="Image"
-                                     Binding="{Binding IsFavorite}"
-                                     Value="True">
-                                <Setter Property="Source" Value="hearted.png"/>
-                            </DataTrigger>
+                    <Image Source="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartImageConverter}}"
+                           WidthRequest="40"
+                           HeightRequest="40">
 
-                            <DataTrigger TargetType="Image"
-                                         Binding="{Binding IsFavorite}"
-                                         Value="False">
-                                <Setter Property="Source" Value="heart.png"/>
-                            </DataTrigger>
-                        </Image.Triggers>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
+                        </Image.GestureRecognizers>
+
                     </Image>
                 </FlexLayout>
 
@@ -42,10 +33,10 @@
                Aspect="AspectFill"/>
 
                 <Label Text="Our story"
-               Style="{StaticResource SmallLabel}"/>
+                       Style="{StaticResource SmallLabel}"/>
                 <Label Text="{Binding SelectedFarm.Description}"
-               Style="{StaticResource LabelText}"
-               LineBreakMode="WordWrap"/>
+                       Style="{StaticResource LabelText}"
+                       LineBreakMode="WordWrap"/>
 
                 <Label Text="Our harvest"
                Style="{StaticResource SmallLabel}"/>

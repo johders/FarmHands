@@ -94,7 +94,7 @@
                         CornerRadius="50"
                         WidthRequest="300"
                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
                         Margin="20"
                         Command="{Binding SwitchToUserViewCommand}">
                     <Button.Shadow>

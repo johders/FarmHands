@@ -42,7 +42,23 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-        private async Task LoadOffersForSelectedProduct()
+		private bool isFavorite;
+		public bool IsFavorite
+		{
+			get => isFavorite;
+			set
+			{
+				isFavorite = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public ICommand ToggleFavoriteCommand => new Command(() =>
+		{
+			IsFavorite = !IsFavorite;
+		});
+
+		private async Task LoadOffersForSelectedProduct()
 		{
             if(SelectedProduct is not null)
             {

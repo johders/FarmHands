@@ -29,7 +29,7 @@ namespace Mde.Project.Mobile.ViewModels
                if(SetProperty(ref selectedFarm, value))
                 {
                     _ = LoadOffersForSelectedFarmAsync();
-                    _ = CheckIfFarmIsFavoritedAsync();
+                    //_ = CheckIfFarmIsFavoritedAsync();
                 }
             }
         }
@@ -66,21 +66,26 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-        private async Task CheckIfFarmIsFavoritedAsync()
-        {
-            if (SelectedFarm is not null)
-            {
-                try
-                {
-                    var result = await _favoriteFarmService.IsFavoritedAsync(SelectedFarm.Id);
-                    IsFavorite = result.IsSuccess;
-                }
-                catch(Exception ex)
-                {
-                    var result = ex.Message;
-                }
-            }
-        }
+		public ICommand ToggleFavoriteCommand => new Command(() =>
+		{
+			IsFavorite = !IsFavorite;
+		});
+
+		//private async Task CheckIfFarmIsFavoritedAsync()
+  //      {
+  //          if (SelectedFarm is not null)
+  //          {
+  //              try
+  //              {
+  //                  var result = await _favoriteFarmService.IsFavoritedAsync(SelectedFarm.Id);
+  //                  IsFavorite = result.IsSuccess;
+  //              }
+  //              catch(Exception ex)
+  //              {
+  //                  var result = ex.Message;
+  //              }
+  //          }
+  //      }
 
 		public ICommand ViewOfferDetailsCommand => new Command<Offer>(async (offer) =>
 		{

@@ -50,28 +50,6 @@
                     <Label Text="My favorite cuisines"
                            Style="{StaticResource SmallLabel}"/>
 
-                    <!--<Picker ItemsSource="{Binding CuisineOptions}" 
-                            ItemDisplayBinding="{Binding Name}"
-                            Title="Add from this list">
-                    </Picker>-->
-
-                    <!--<CollectionView ItemsSource="{Binding CuisineOptions}" 
-                            Margin="10">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" 
-                                     Span="3"
-                                     VerticalItemSpacing="15"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Image 
-                                       WidthRequest="80"
-                                       HeightRequest="45"
-                                       Aspect="AspectFill"/>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>-->
-
                     <CollectionView ItemsSource="{Binding CuisineOptions}"
                                     SelectionMode="None">
                         <CollectionView.ItemTemplate>
@@ -82,17 +60,6 @@
                                     <Label Text="{Binding Name}"
                                            VerticalOptions="Center"/>
                                 </HorizontalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <Label Text="Selected Cuisines:" Style="{StaticResource SmallLabel}" />
-                    <CollectionView ItemsSource="{Binding SelectedCuisines}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:CuisineOption">
-                                <Frame Padding="5" CornerRadius="10">
-                                    <Label Text="{Binding Name}" />
-                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -116,7 +83,7 @@
                         CornerRadius="50"
                         WidthRequest="300"
                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
                         Margin="20"
                         Command="{Binding SwitchToFarmerViewCommand}">
                     <Button.Shadow>

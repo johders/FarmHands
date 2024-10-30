@@ -18,9 +18,15 @@
                        Style="{StaticResource LargeLabel}"
                        Margin="0"/>
 
-                    <Image Source="heart.png"
-                       WidthRequest="40"
-                       HeightRequest="40"/>
+                    <Image Source="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartImageConverter}}"
+                           WidthRequest="40"
+                           HeightRequest="40">
+
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
+                        </Image.GestureRecognizers>
+                        
+                    </Image>
                 </FlexLayout>
 
                 <Image Source="{Binding SelectedProduct.ImageUrl}"

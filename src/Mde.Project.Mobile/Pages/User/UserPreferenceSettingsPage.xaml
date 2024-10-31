@@ -5,7 +5,7 @@
              xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              x:DataType="viewmodel:UserPreferencesViewModel"
-             x:Class="Mde.Project.Mobile.Pages.User.UserPreferenceSettings"
+             x:Class="Mde.Project.Mobile.Pages.User.UserPreferenceSettingsPage"
              Title="Preferences">
     <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">

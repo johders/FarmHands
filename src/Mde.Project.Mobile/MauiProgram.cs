@@ -53,6 +53,8 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserFavoriteFarmsViewModel>();
             builder.Services.AddTransient<UserFavoriteProductsViewModel>();
             builder.Services.AddTransient<UserOfferDetailsViewModel>();
+            builder.Services.AddTransient<UserAccountSettingsViewModel>();
+            builder.Services.AddTransient<UserPreferencesViewModel>();
 
             builder.Services.AddTransient<FarmerDashboardViewModel>();
             builder.Services.AddTransient<FarmerInventoryListViewModel>();
@@ -72,6 +74,8 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserFavoriteFarmsPage>();
             builder.Services.AddTransient<UserFavoriteProductsPage>();
             builder.Services.AddTransient<UserOfferDetailPage>();
+            builder.Services.AddTransient<UserAccountSettingsPage>();
+            builder.Services.AddTransient<UserPreferenceSettingsPage>();
 
             builder.Services.AddTransient<FarmerDashboardPage>();
             builder.Services.AddTransient<FarmerInventoryListPage>();

@@ -45,12 +45,12 @@
              Icon="settings.png">
             <ShellContent
                 Title="Preferences"
-                ContentTemplate="{DataTemplate userpages:UserPreferenceSettings}"
+                ContentTemplate="{DataTemplate userpages:UserPreferenceSettingsPage}"
                 Route="userpreferencesettings" />
 
             <ShellContent
                 Title="Account"
-                ContentTemplate="{DataTemplate userpages:UserAccountSettings}"
+                ContentTemplate="{DataTemplate userpages:UserAccountSettingsPage}"
                 Route="useraccountsettings" />
         </Tab>
 

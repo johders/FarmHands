@@ -2,11 +2,11 @@ using Mde.Project.Mobile.ViewModels;
 
 namespace Mde.Project.Mobile.Pages.User;
 
-public partial class UserPreferenceSettings : ContentPage
+public partial class UserPreferenceSettingsPage : ContentPage
 {
 	private readonly int sliderIncrement = 1;
 	private int sliderAdjustedValue;
-	public UserPreferenceSettings()
+	public UserPreferenceSettingsPage()
 	{
 		InitializeComponent();
 		BindingContext = new UserPreferencesViewModel();
@@ -22,7 +22,7 @@ public partial class UserPreferenceSettings : ContentPage
 	{
 		sliderAdjustedValue = (int)(e.NewValue / sliderIncrement) * sliderIncrement;
 		lblDistance.Text = GetSliderLabelString(sliderAdjustedValue.ToString());
-    }
+	}
 
 	private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
 	{

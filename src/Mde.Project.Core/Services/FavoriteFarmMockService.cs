@@ -7,15 +7,20 @@ namespace Mde.Project.Core.Services
 {
     public class FavoriteFarmMockService : IFavoriteFarmService
     {
-        private readonly List<Farm> _farms = new(Seeder.SeedFarms());
+		private readonly IFarmService _farmService;
 		public List<FavoriteFarm> UserFavoriteFarms { get; } = Seeder.SeedFavoriteFarms().ToList();
+
+		public FavoriteFarmMockService(IFarmService farmService)
+		{
+			_farmService = farmService;
+		}
 
 		public async Task<BaseResultModel> CreateAsync(Guid farmId)
         {
 			var isFavorite = GetAll().Any(f => f.FarmId == farmId);
 			if (!isFavorite)
 			{
-				var farm = _farms.FirstOrDefault(f => f.Id == farmId);
+				var farm = _farmService.GetAll().FirstOrDefault(f => f.Id == farmId);
 				UserFavoriteFarms.Add(new FavoriteFarm
 				{
 					Id = Guid.NewGuid(),
@@ -68,7 +73,7 @@ namespace Mde.Project.Core.Services
 			var farms = new List<Farm>();
 			foreach (var favFarm in favoriteFarms)
 			{
-				Farm farm = _farms.FirstOrDefault(f => f.Id == favFarm.FarmId);
+				Farm farm = _farmService.GetAll().FirstOrDefault(f => f.Id == favFarm.FarmId);
 
 				if (farm is null)
 				{
@@ -88,24 +93,6 @@ namespace Mde.Project.Core.Services
 				IsSuccess = true,
 				Data = farms
 			});
-
-			//var favoriteFarmIds = GetAll().Select(f => f.FarmId).ToList();
-			//var farms = _farms.Where(f => favoriteFarmIds.Contains(f.Id)).ToList();
-
-			//if (!farms.Any())
-			//{
-			//	return new ResultModel<Farm>
-			//	{
-			//		IsSuccess = false,
-			//		Errors = new List<string> { "No favorite farms found" }
-			//	};
-			//}
-
-			//return await Task.FromResult(new ResultModel<Farm>
-			//{
-			//	IsSuccess = true,
-			//	Data = farms
-			//});
 		}
 
         public Task<ResultModel<FavoriteFarm>> GetByIdAsync(Guid id)

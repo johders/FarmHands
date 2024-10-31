@@ -35,7 +35,7 @@ namespace Mde.Project.Mobile
 
         private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransient<IFarmService, FarmMockService>();
+            builder.Services.AddSingleton<IFarmService, FarmMockService>();
             builder.Services.AddTransient<IProductService, ProductMockService>();
             builder.Services.AddSingleton<IOfferService, OfferMockService>();
             builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();

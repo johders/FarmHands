@@ -17,10 +17,10 @@
                         <Label x:Name="lblDistance"/>
                     </FlexLayout>
 
-                    <Slider ThumbColor="{StaticResource AccentColor}"
+                    <Slider ThumbColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                             Maximum="100"
                             Minimum="1"
-                            MinimumTrackColor="{StaticResource AccentColor}"
+                            MinimumTrackColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                             MaximumTrackColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                             x:Name="sldDistance"
                             Margin="8"
@@ -51,28 +51,26 @@
                 <VerticalStackLayout>
                     <Label Text="My favorite cuisines"
                            Style="{StaticResource SmallLabel}"/>
-
-                    <CollectionView ItemsSource="{Binding CuisineOptions}"
+                        <CollectionView ItemsSource="{Binding CuisineOptions}"
                                     SelectionMode="None">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:CuisineOption">
-                                <HorizontalStackLayout>
-                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:CuisineOption">
+                                    <HorizontalStackLayout>
+                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
                                               CheckedChanged="CheckBox_CheckedChanged"/>
-                                    <Label Text="{Binding Name}"
+                                        <Label Text="{Binding Name}"
                                            VerticalOptions="Center"/>
-                                </HorizontalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
                 </VerticalStackLayout>
                 <Button Text="Save"
                         CornerRadius="30"
-                        Margin="0,0,0,20"
                         WidthRequest="200"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}">
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                                 Offset="10,10"
@@ -86,7 +84,6 @@
                         WidthRequest="300"
                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                         TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
-                        Margin="20"
                         Command="{Binding SwitchToFarmerViewCommand}">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"

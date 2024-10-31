@@ -43,7 +43,7 @@
     </Style>
 
     <Style x:Key="FarmSwitch" TargetType="Switch">
-        <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"/>
+        <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource SoftOlive}, Dark={StaticResource BorderColorDark}}"/>
         <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"/>
     </Style>
 

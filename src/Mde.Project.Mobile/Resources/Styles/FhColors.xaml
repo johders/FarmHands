@@ -16,4 +16,10 @@
     <Color x:Key="SecondaryBackgroundColorDark">#E1E1E1</Color>
     <Color x:Key="AccentColorDark">#272F1C</Color>
 
+    <Color x:Key="BurgondyRed">#800020</Color>
+    <Color x:Key="SoftOlive">#6B8E23</Color>
+    <Color x:Key="Charcoal">#333333</Color>
+
+
+
 </ResourceDictionary>

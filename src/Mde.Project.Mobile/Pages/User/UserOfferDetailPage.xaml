@@ -29,8 +29,8 @@
                            LineBreakMode="WordWrap"/>
                 </VerticalStackLayout>
                 <Button Text="More from this farm"
-                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                         Command="{Binding ViewFarmDetailsCommand}"
                         CommandParameter="{Binding SelectedOffer.Farm}"/>
                 </FlexLayout>

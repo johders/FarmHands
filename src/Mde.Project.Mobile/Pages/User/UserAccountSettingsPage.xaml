@@ -5,9 +5,9 @@
              Title="UserAccountSettingsPage">
     <VerticalStackLayout>
         <Button Text="Sign out"
-                CornerRadius="50"
-                WidthRequest="300"
-                BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                CornerRadius="25"
+                WidthRequest="200"
+                BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource BurgondyRed}}"
                 TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
                 Margin="20"
                 Command="{Binding LogOutCommand}">

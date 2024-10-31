@@ -16,7 +16,7 @@
                         BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                         HorizontalOptions="Center"
                         WidthRequest="200"
-                        CornerRadius="30"
+                        CornerRadius="25"
                         Margin="10,20"
                         Command="{Binding AddOfferCommand}">
                     <Button.Shadow>
@@ -49,6 +49,7 @@
                                         <Grid ColumnDefinitions="*, Auto, Auto">
                                             <Label Text="{Binding Product.Name}"
                                                    Style="{StaticResource SmallLabel}"
+                                                   TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                    VerticalOptions="Center"/>
 
                                             <Button Grid.Column="1"
@@ -69,6 +70,7 @@
 
                                     <Label Text="{Binding Product.Name}"
                                            Style="{StaticResource SmallLabel}"
+                                           TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                            VerticalOptions="Center"/>
 
                                     <Button Grid.Column="1"

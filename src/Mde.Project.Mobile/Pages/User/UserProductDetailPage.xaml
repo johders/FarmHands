@@ -25,7 +25,7 @@
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
                         </Image.GestureRecognizers>
-                        
+
                     </Image>
                 </FlexLayout>
 
@@ -57,9 +57,11 @@
                                            Aspect="AspectFill"/>
                                     <VerticalStackLayout Grid.Row="1" Padding="5">
                                         <Label Text="{Binding Product.Name}"
-                                               Style="{StaticResource SmallLabel}"/>
+                                               Style="{StaticResource SmallLabel}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                         <Label Text="{Binding Product.Description}"
-                                               Style="{StaticResource LabelText}"/>
+                                               Style="{StaticResource LabelText}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                     </VerticalStackLayout>
                                 </Grid>
                             </Border>

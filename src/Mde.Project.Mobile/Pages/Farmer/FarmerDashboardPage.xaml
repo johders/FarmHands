@@ -24,15 +24,18 @@
                                         <Grid ColumnDefinitions="*, Auto">
                                             <VerticalStackLayout Spacing="5" Padding="8">
                                                 <Label Text="{Binding ProductName}"
-                                                       Style="{StaticResource SmallLabel}"/>
+                                                       Style="{StaticResource SmallLabel}"
+                                                       TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                                 <FlexLayout JustifyContent="SpaceBetween"
                                                             AlignItems="Center">
                                                     <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
-                                                           Style="{StaticResource LabelText}"/>
+                                                           Style="{StaticResource LabelText}"
+                                                           TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                                     <Switch Style="{StaticResource FarmSwitch}"
                                                             IsToggled="{Binding IsAvailable}"/>
                                                 </FlexLayout>
-                                                <Label Style="{StaticResource LabelText}">
+                                                <Label Style="{StaticResource LabelText}"
+                                                       TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}">
                                                     <Label.Text>
                                                         <MultiBinding StringFormat="Price: {0:C2}/{1}">
                                                             <Binding Path="Price"/>
@@ -60,13 +63,13 @@
             </Grid>
         </ScrollView>
         <Button Text="Update Inventory"
-                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
                 HorizontalOptions="Center"
                 VerticalOptions="End"
                 Margin="0,0,0,20"
-                CornerRadius="30"
+                CornerRadius="25"
                 WidthRequest="300"
-                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                 Command="{Binding GoToInventoryManagerCommand}">
             <Button.Shadow>
                 <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"

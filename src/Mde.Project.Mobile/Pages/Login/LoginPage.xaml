@@ -7,14 +7,16 @@
              HideSoftInputOnTapped="True"
              BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryBackgroundColor}, Dark={StaticResource PrimaryBackgroundColorDark}}">
 
-    <Grid>
+    <Grid Style="{StaticResource MaxWidthGrid}">
 
         <Image Source="fhbg.webp"
                Aspect="AspectFill"
                Opacity="0.5" />
 
         <VerticalStackLayout Spacing="30"
-                             Padding="20">
+                             Padding="20"
+                             MaximumWidthRequest="{OnPlatform WinUI=500}"
+                             HorizontalOptions="Center">
 
             <Label Text="Welcome to FarmHands!"
                    Style="{StaticResource LargeLabel}"
@@ -22,7 +24,7 @@
 
             <Label Text="Incorrect login credentials, please try again"
                    Style="{StaticResource SmallLabel}"
-                   TextColor="Red"
+                   TextColor="{AppThemeBinding Light={StaticResource AccentColorDark}, Dark={StaticResource TileBackgroundColor}}"
                    HorizontalOptions="Center"
                    IsVisible="{Binding UnSuccessful}"/>
 
@@ -35,7 +37,7 @@
             </Border.StrokeShape>
             <Entry Placeholder="Username"
                    Text="{Binding Username}"
-                   TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                   TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColor}}"
                    PlaceholderColor="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"
                    ClearButtonVisibility="WhileEditing"/>
         </Border>
@@ -49,7 +51,7 @@
             </Border.StrokeShape>
             <Entry Placeholder="Password"
                    Text="{Binding Password}"
-                   TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                   TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColor}}"
                    PlaceholderColor="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"
                    IsPassword="True"
                    ClearButtonVisibility="WhileEditing"/>
@@ -71,7 +73,7 @@
                    HorizontalOptions="Center" />
             <Button Text="Register"
                     BackgroundColor="Transparent"
-                    TextColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                     FontAttributes="Bold"
                     HorizontalOptions="Center" />
         </VerticalStackLayout>

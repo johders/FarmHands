@@ -27,10 +27,12 @@
                                     <Grid ColumnDefinitions="*, Auto">
                                         <VerticalStackLayout Spacing="5" Padding="8">
                                             <Label Text="{Binding Name}"
-                                                   Style="{StaticResource SmallLabel}"/>
+                                                   Style="{StaticResource SmallLabel}"
+                                                   TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                             <Label Text="{Binding Description}"
-                                               Style="{StaticResource LabelText}"
-                                               LineBreakMode="WordWrap"/>
+                                                   Style="{StaticResource LabelText}"
+                                                   LineBreakMode="WordWrap"
+                                                   TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                         </VerticalStackLayout>
                                         <Border  Grid.Column="1"
                                                  WidthRequest="120"

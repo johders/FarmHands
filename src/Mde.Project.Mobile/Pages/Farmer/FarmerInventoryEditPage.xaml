@@ -13,29 +13,37 @@
             <VerticalStackLayout Margin="8,20,8,0" Spacing="20" 
                                  MinimumWidthRequest="{OnPlatform WinUI=500, Default=0}">
 
-                <Label Text="Product"
-                       Style="{StaticResource SmallLabel}"/>
-                <Picker Title="Select product"
-                        ItemsSource="{Binding Products, Mode=TwoWay}"
-                        SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                        ItemDisplayBinding="{Binding Name}"/>
+                <VerticalStackLayout>
+                    <Label Text="Product"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Picker Title="Select product"
+                            ItemsSource="{Binding Products, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                            ItemDisplayBinding="{Binding Name}"/>
+                </VerticalStackLayout>
 
-                <Label Text="Description"
-                       Style="{StaticResource SmallLabel}"/>
-                <Entry Placeholder="Enter product name"
-                       Text="{Binding Description}"/>
+                <VerticalStackLayout>
+                    <Label Text="Description"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter product name"
+                           Text="{Binding Description}"/>
+                </VerticalStackLayout>
 
-                <Label Text="Price per unit"
-                       Style="{StaticResource SmallLabel}"/>
-                <Entry Placeholder="Enter price"
+                <VerticalStackLayout>
+                    <Label Text="Price per unit"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter price"
                        Text="{Binding Price}"
                        Keyboard="Numeric"/>
+                </VerticalStackLayout>
 
-                <Label Text="Unit"
-                       Style="{StaticResource SmallLabel}"/>
-                <Picker Title="Select unit"
-                        ItemsSource="{Binding UnitOptions}"
-                        SelectedItem="{Binding SelectedUnit}"/>
+                <VerticalStackLayout>
+                    <Label Text="Unit"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Picker Title="Select unit"
+                            ItemsSource="{Binding UnitOptions}"
+                            SelectedItem="{Binding SelectedUnit}"/>
+                </VerticalStackLayout>
 
                 <Label Text="Image"
                        Style="{StaticResource SmallLabel}"/>
@@ -88,10 +96,10 @@
 
 
                 <Button Text="Save"
-                        CornerRadius="50"
+                        CornerRadius="25"
                         WidthRequest="300"
-                        BackgroundColor="{StaticResource AccentColor}"
-                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
                         Margin="20"
                         Command="{Binding SaveCommand}">
                     <Button.Shadow>

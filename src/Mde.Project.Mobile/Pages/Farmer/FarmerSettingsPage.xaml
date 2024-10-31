@@ -9,27 +9,33 @@
     <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <VerticalStackLayout Margin="8,20" Spacing="20">
+            <VerticalStackLayout Margin="8,0" Spacing="20">
 
-                <Label Text="Name"
+                <VerticalStackLayout>
+                    <Label Text="Name"
                        Style="{StaticResource SmallLabel}"/>
-                <Entry Placeholder="Enter product name"
+                    <Entry Placeholder="Enter product name"
                        Text="{Binding Name}"/>
+                </VerticalStackLayout>
 
-                <Label Text="Location"
+                <VerticalStackLayout>
+                    <Label Text="Location"
                        Style="{StaticResource SmallLabel}"/>
-                <Entry Placeholder="Enter latitude" 
+                    <Entry Placeholder="Enter latitude" 
                        Text="{Binding Latitude}" 
                        Keyboard="Numeric"/>
-                <Entry Placeholder="Enter longitude" 
+                    <Entry Placeholder="Enter longitude" 
                        Text="{Binding Longitude}" 
                        Keyboard="Numeric"/>
+                </VerticalStackLayout>
 
-                <Label Text="Your story"
+                <VerticalStackLayout>
+                    <Label Text="Your story"
                        Style="{StaticResource SmallLabel}"/>
-                <Editor Placeholder="Tell us more about your farm" 
+                    <Editor Placeholder="Tell us more about your farm" 
                         AutoSize="TextChanges" 
                         Text="{Binding Description}"/>
+                </VerticalStackLayout>
 
                 <Label Text="Image"
                        Style="{StaticResource SmallLabel}"/>
@@ -82,10 +88,10 @@
 
 
                 <Button Text="Save"
-                        CornerRadius="50"
+                        CornerRadius="25"
                         WidthRequest="100"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
-                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
                         Margin="20"
                         Command="{Binding SaveCommand}">
                     <Button.Shadow>
@@ -97,11 +103,10 @@
                 </Button>
 
                 <Button Text="Customer View"
-                        CornerRadius="50"
+                        CornerRadius="25"
                         WidthRequest="300"
                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                         TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
-                        Margin="20"
                         Command="{Binding SwitchToUserViewCommand}">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
@@ -112,12 +117,12 @@
                 </Button>
 
                 <Button Text="Sign out"
-                        CornerRadius="50"
-                        WidthRequest="300"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
-                        Margin="20"
-                        Command="{Binding LogOutCommand}">
+                        CornerRadius="25"
+                        WidthRequest="200"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource BurgondyRed}, Dark={StaticResource BurgondyRed}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        Command="{Binding LogOutCommand}"
+                        Margin="0,0,0,20">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                                 Offset="10,10"

@@ -2,6 +2,7 @@
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
+using Pri.Pe1.Hsp.Core.Services.Helpers;
 
 namespace Mde.Project.Core.Services
 {
@@ -37,11 +38,7 @@ namespace Mde.Project.Core.Services
 
 			if(favoriteProduct is null)
 			{
-				return await Task.FromResult(new BaseResultModel
-				{
-					IsSuccess = false,
-					Errors = new List<string> { "Favorite product not found!" }
-				});
+				return ResultHelper.CreateErrorResult("Favorite product not found!");
 			}
 
 			UserFavoriteProducts.Remove(favoriteProduct);
@@ -76,11 +73,7 @@ namespace Mde.Project.Core.Services
 
 				if (product is null)
 				{
-					return new ResultModel<Product>
-					{
-						IsSuccess = false,
-						Errors = new List<string> { "Product not found" }
-					};
+					return ResultHelper.CreateErrorResult<Product>("Product not found!");
 				}
 
 				favProduct.Product = product;

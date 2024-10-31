@@ -3,6 +3,7 @@ using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Core.Services.Models.RequestModels;
+using Pri.Pe1.Hsp.Core.Services.Helpers;
 
 namespace Mde.Project.Core.Services
 {
@@ -40,11 +41,7 @@ namespace Mde.Project.Core.Services
 
             if (product is null)
             {
-                return await Task.FromResult(new ResultModel<Product>
-				{
-					IsSuccess = false,
-					Errors = new List<string> { "Product not found!" }
-				});
+				return ResultHelper.CreateErrorResult<Product>("Product not found!");
 			}
 
 			return await Task.FromResult(new ResultModel<Product>

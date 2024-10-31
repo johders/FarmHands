@@ -2,6 +2,7 @@
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
+using Pri.Pe1.Hsp.Core.Services.Helpers;
 
 namespace Mde.Project.Core.Services
 {
@@ -42,11 +43,7 @@ namespace Mde.Project.Core.Services
 
 			if (favoriteFarm is null)
 			{
-				return await Task.FromResult(new BaseResultModel
-				{
-					IsSuccess = false,
-					Errors = new List<string> { "Favorite farm not found!" }
-				});
+				return ResultHelper.CreateErrorResult("Favorite farm not found!");
 			}
 
 			UserFavoriteFarms.Remove(favoriteFarm);
@@ -77,11 +74,7 @@ namespace Mde.Project.Core.Services
 
 				if (farm is null)
 				{
-					return new ResultModel<Farm>
-					{
-						IsSuccess = false,
-						Errors = new List<string> { "Farm not found" }
-					};
+					return ResultHelper.CreateErrorResult<Farm>("Farm not found!");
 				}
 
 				favFarm.Farm = farm;

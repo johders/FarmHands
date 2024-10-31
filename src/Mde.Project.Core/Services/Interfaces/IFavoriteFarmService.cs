@@ -5,7 +5,8 @@ namespace Mde.Project.Core.Services.Interfaces
 {
     public interface IFavoriteFarmService
     {
-        Task<ResultModel<FavoriteFarm>> GetByIdAsync(Guid id);
+		List<FavoriteFarm> UserFavoriteFarms { get; }
+		Task<ResultModel<FavoriteFarm>> GetByIdAsync(Guid id);
         Task<ResultModel<FavoriteFarm>> GetAllAsync();
         Task<ResultModel<Farm>> GetAllFavoriteFarmsAsync();
         Task<BaseResultModel> IsFavoritedAsync(Guid farmId);

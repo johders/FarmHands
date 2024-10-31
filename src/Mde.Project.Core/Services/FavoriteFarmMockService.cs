@@ -7,62 +7,54 @@ namespace Mde.Project.Core.Services
 {
     public class FavoriteFarmMockService : IFavoriteFarmService
     {
-        private readonly List<FavoriteFarm> _favoriteFarms = new(Seeder.SeedFavoriteFarms());
         private readonly List<Farm> _farms = new(Seeder.SeedFarms());
+		public List<FavoriteFarm> UserFavoriteFarms { get; } = Seeder.SeedFavoriteFarms().ToList();
 
-        public async Task<BaseResultModel> CreateAsync(Guid farmId)
+		public async Task<BaseResultModel> CreateAsync(Guid farmId)
         {
-            var farm = _farms.FirstOrDefault(f => f.Id == farmId);
+			var isFavorite = GetAll().Any(f => f.FarmId == farmId);
+			if (!isFavorite)
+			{
+				var farm = _farms.FirstOrDefault(f => f.Id == farmId);
+				UserFavoriteFarms.Add(new FavoriteFarm
+				{
+					Id = Guid.NewGuid(),
+					Farm = farm,
+					FarmId = farm.Id,
+					FavoritedOn = DateTime.Now,
+				});
+			}
 
-            if (farm is null)
-            {
-                return await Task.FromResult(new BaseResultModel
-                {
-                    IsSuccess = false,
-                    Errors = new List<string> { "Farm not found!" }
-                });
-            }
-
-            var favorite = new FavoriteFarm
-            {
-                Id = Guid.NewGuid(),
-                FarmId = farm.Id,
-                Farm = farm,
-                FavoritedOn = DateTime.Now,
-            };
-
-            _favoriteFarms.Add(favorite);
-
-            return await Task.FromResult(new BaseResultModel
-            {
-                IsSuccess = true
-            });
-        }
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
+		}
 
         public async Task<BaseResultModel> DeleteAsync(Guid farmId)
         {
-            var favoriteFarm = _favoriteFarms.FirstOrDefault(f => f.FarmId == farmId);
+			var favoriteFarm = UserFavoriteFarms.FirstOrDefault(f => f.FarmId == farmId);
 
-            if (favoriteFarm is null)
-            {
-                return await Task.FromResult(new BaseResultModel
-                {
-                    IsSuccess = false,
-                    Errors = new List<string> { "Farm not found!" }
-                });
-            }
+			if (favoriteFarm is null)
+			{
+				return await Task.FromResult(new BaseResultModel
+				{
+					IsSuccess = false,
+					Errors = new List<string> { "Favorite farm not found!" }
+				});
+			}
 
-            _favoriteFarms.Remove(favoriteFarm);
+			UserFavoriteFarms.Remove(favoriteFarm);
 
-            return await Task.FromResult(new BaseResultModel
-            {
-                IsSuccess = true
-            });
-        }
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
+		}
 
         public IQueryable<FavoriteFarm> GetAll()
         {
-            return _favoriteFarms.AsQueryable();
+            return UserFavoriteFarms.AsQueryable();
         }
 
         public Task<ResultModel<FavoriteFarm>> GetAllAsync()
@@ -72,31 +64,49 @@ namespace Mde.Project.Core.Services
 
         public async Task<ResultModel<Farm>> GetAllFavoriteFarmsAsync()
         {
-            var favoriteFarms = GetAll().ToList();
-            var farms = new List<Farm>();
-            foreach (var favFarm in favoriteFarms)
-            {
-                Farm farm = _farms.FirstOrDefault(f => f.Id == favFarm.FarmId);
+			var favoriteFarms = GetAll().ToList();
+			var farms = new List<Farm>();
+			foreach (var favFarm in favoriteFarms)
+			{
+				Farm farm = _farms.FirstOrDefault(f => f.Id == favFarm.FarmId);
 
-                if(farm is null)
-                {
-                    return new ResultModel<Farm>
-                    {
-                        IsSuccess = false,
-                        Errors = new List<string> { "Farm not found" }
-                    };
-                }
+				if (farm is null)
+				{
+					return new ResultModel<Farm>
+					{
+						IsSuccess = false,
+						Errors = new List<string> { "Farm not found" }
+					};
+				}
 
-                favFarm.Farm = farm;
-                farms.Add(farm);
-            }
+				favFarm.Farm = farm;
+				farms.Add(farm);
+			}
 
-            return await Task.FromResult(new ResultModel<Farm>
-            {
-                IsSuccess = true,
-                Data = farms
-            });
-        }
+			return await Task.FromResult(new ResultModel<Farm>
+			{
+				IsSuccess = true,
+				Data = farms
+			});
+
+			//var favoriteFarmIds = GetAll().Select(f => f.FarmId).ToList();
+			//var farms = _farms.Where(f => favoriteFarmIds.Contains(f.Id)).ToList();
+
+			//if (!farms.Any())
+			//{
+			//	return new ResultModel<Farm>
+			//	{
+			//		IsSuccess = false,
+			//		Errors = new List<string> { "No favorite farms found" }
+			//	};
+			//}
+
+			//return await Task.FromResult(new ResultModel<Farm>
+			//{
+			//	IsSuccess = true,
+			//	Data = farms
+			//});
+		}
 
         public Task<ResultModel<FavoriteFarm>> GetByIdAsync(Guid id)
         {
@@ -106,19 +116,19 @@ namespace Mde.Project.Core.Services
 
         public async Task<BaseResultModel> IsFavoritedAsync(Guid farmId)
         {
-            var favoriteFarms = GetAll().ToList();
-            if (!favoriteFarms.Any(f => f.FarmId == farmId))
-            {
-                return await Task.FromResult(new BaseResultModel
-                {
-                    IsSuccess = false
-                });
-            }
-            return await Task.FromResult(new BaseResultModel
-            {
-                IsSuccess = true
-            });
-        }
+			var isFavorite = GetAll().Any(p => p.FarmId == farmId);
+			if (!isFavorite)
+			{
+				return await Task.FromResult(new BaseResultModel
+				{
+					IsSuccess = false
+				});
+			}
+			return await Task.FromResult(new BaseResultModel
+			{
+				IsSuccess = true
+			});
+		}
 
         public Task<BaseResultModel> SaveChangesAsync()
         {

@@ -20,7 +20,6 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private Farm selectedFarm;
-
         public Farm SelectedFarm
         {
             get { return selectedFarm; }
@@ -29,13 +28,11 @@ namespace Mde.Project.Mobile.ViewModels
                if(SetProperty(ref selectedFarm, value))
                 {
                     _ = LoadOffersForSelectedFarmAsync();
-                    //_ = CheckIfFarmIsFavoritedAsync();
                 }
             }
         }
 
         private ObservableCollection<Offer> offers;
-
         public ObservableCollection<Offer> Offers
         {
             get { return offers; }
@@ -56,36 +53,37 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-        private async Task LoadOffersForSelectedFarmAsync()
-        {
-            if (SelectedFarm is not null)
-            {
-                var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
-                var offers = result.Data;
-                Offers = new ObservableCollection<Offer>(offers);
-            }
-        }
-
-		public ICommand ToggleFavoriteCommand => new Command(() =>
+		public ICommand CheckIfFarmIsFavoriteCommand => new Command(async () =>
 		{
+			if (SelectedFarm != null)
+			{
+				var result = await _favoriteFarmService.IsFavoritedAsync(SelectedFarm.Id);
+				IsFavorite = result.IsSuccess;
+			}
+		});
+
+		public ICommand ToggleFavoriteCommand => new Command(async () =>
+		{
+			if (IsFavorite)
+			{
+				await _favoriteFarmService.DeleteAsync(SelectedFarm.Id);
+			}
+			else
+			{
+				await _favoriteFarmService.CreateAsync(SelectedFarm.Id);
+			}
 			IsFavorite = !IsFavorite;
 		});
 
-		//private async Task CheckIfFarmIsFavoritedAsync()
-  //      {
-  //          if (SelectedFarm is not null)
-  //          {
-  //              try
-  //              {
-  //                  var result = await _favoriteFarmService.IsFavoritedAsync(SelectedFarm.Id);
-  //                  IsFavorite = result.IsSuccess;
-  //              }
-  //              catch(Exception ex)
-  //              {
-  //                  var result = ex.Message;
-  //              }
-  //          }
-  //      }
+		private async Task LoadOffersForSelectedFarmAsync()
+		{
+			if (SelectedFarm is not null)
+			{
+				var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
+				var offers = result.Data;
+				Offers = new ObservableCollection<Offer>(offers);
+			}
+		}
 
 		public ICommand ViewOfferDetailsCommand => new Command<Offer>(async (offer) =>
 		{

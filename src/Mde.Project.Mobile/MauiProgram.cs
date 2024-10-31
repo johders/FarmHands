@@ -37,7 +37,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<IFarmService, FarmMockService>();
             builder.Services.AddTransient<IProductService, ProductMockService>();
             builder.Services.AddSingleton<IOfferService, OfferMockService>();
-            builder.Services.AddTransient<IFavoriteFarmService, FavoriteFarmMockService>();
+            builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
             builder.Services.AddSingleton<IApplicationUserService, ApplicationUserMockService>();
 

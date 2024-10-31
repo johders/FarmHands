@@ -9,4 +9,11 @@ public partial class UserFarmDetailPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+	protected override void OnAppearing()
+	{
+		UserFarmDetailsViewModel viewModel = BindingContext as UserFarmDetailsViewModel;
+		viewModel.CheckIfFarmIsFavoriteCommand?.Execute(null);
+		base.OnAppearing();
+	}
 }

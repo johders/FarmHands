@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Data;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
@@ -13,8 +12,6 @@ namespace Mde.Project.Mobile.ViewModels
     {
 		private readonly IOfferService _offerService;
 		private readonly IFavoriteProductService _favoriteProductsService;
-
-		//private List<FavoriteProduct> _userFavoriteProducts = new List<FavoriteProduct>(Seeder.SeedFavoriteProducts());
 
 		public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService)
 		{
@@ -48,7 +45,7 @@ namespace Mde.Project.Mobile.ViewModels
 		private bool isFavorite;
 		public bool IsFavorite
 		{
-			get => isFavorite;
+			get { return isFavorite; }
 			set
 			{
 				SetProperty(ref isFavorite, value);

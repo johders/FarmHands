@@ -1,23 +1,80 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:LoginViewModel"
              x:Class="Mde.Project.Mobile.Pages.Login.LoginPage"
-             Title="LoginPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to FarmHands"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             HideSoftInputOnTapped="True"
+             BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryBackgroundColor}, Dark={StaticResource PrimaryBackgroundColorDark}}">
 
-        <Button Text="Sign in"/>
-        <!--Check credentials and role to route to UserHome or FarmerDashboard-->
+    <Grid>
 
-        <Label 
-            Text="No account yet?"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Image Source="fhbg.webp"
+               Aspect="AspectFill"
+               Opacity="0.5" />
 
-        <Button Text="Register"/>
-        <!--Route to RegisterPage-->
+        <VerticalStackLayout Spacing="30"
+                         Padding="20">
+
+            <Label Text="Welcome to FarmHands!"
+               Style="{StaticResource LargeLabel}"
+               HorizontalOptions="Center" />
+
+            <Label Text="Username or password incorrect, please try again"
+                   Style="{StaticResource SmallLabel}"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding UnSuccessful}"/>
+
+            <Border Stroke="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                StrokeThickness="1"
+                Padding="8">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+            <Entry Placeholder="Username"
+                   Text="{Binding Username}"
+                   TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                   PlaceholderColor="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"
+                   ClearButtonVisibility="WhileEditing"/>
+        </Border>
+
+        <Border Stroke="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                StrokeThickness="1"
+                Padding="8">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+            <Entry Placeholder="Password"
+                   Text="{Binding Password}"
+                   TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                   PlaceholderColor="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"
+                   IsPassword="True"
+                   ClearButtonVisibility="WhileEditing"/>
+        </Border>
+
+        <Button Text="Sign in"
+                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                CornerRadius="25"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                Command="{Binding LoginCommand}"/>
+
+        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Label Text="No account yet?"
+                   Style="{StaticResource SmallLabel}"
+                   HorizontalOptions="Center" />
+            <Button Text="Register"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
     </VerticalStackLayout>
+    </Grid>
+
 </ContentPage>

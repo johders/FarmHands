@@ -2,6 +2,7 @@
 using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
+using Mde.Project.Mobile.Pages.Login;
 using Mde.Project.Mobile.Pages.User;
 using Mde.Project.Mobile.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -59,7 +60,9 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerInventoryEditViewModel>();
             builder.Services.AddTransient<FarmerSettingsViewModel>();
 
-            return builder;
+			builder.Services.AddTransient<LoginViewModel>();
+
+			return builder;
         }
 
         private static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
@@ -76,7 +79,9 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerInventoryEditPage>();
             builder.Services.AddTransient<FarmerSettingsPage>();
 
-            return builder;
+			builder.Services.AddTransient<LoginPage>();
+
+			return builder;
         }
     }
 }

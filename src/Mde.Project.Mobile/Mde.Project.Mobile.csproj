@@ -61,6 +61,7 @@
 	  <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-SemiBold.ttf" />
 	  <None Remove="Resources\Images\favorites.png" />
+	  <None Remove="Resources\Images\fhbg.webp" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\map.png" />
 	  <None Remove="Resources\Images\settings.png" />
@@ -80,6 +81,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AppShellStartup.xaml.cs">
+	    <DependentUpon>AppShellStartup.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="AppShellUser.xaml.cs">
 	    <DependentUpon>AppShellUser.xaml</DependentUpon>
 	  </Compile>
@@ -89,6 +93,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AppShellStartup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="AppShellFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -6,17 +6,19 @@
         {
             InitializeComponent();
 
-            string role = "farmer";
-			//string role = "user";
+            //         string role = "farmer";
+            //string role = "user";
 
-			if (role == "farmer")
-            {
-                MainPage = new AppShellFarmer();
-			}
-            else
-            {
-                MainPage = new AppShellUser();
-            }
+            //if (role == "farmer")
+            //         {
+            //             MainPage = new AppShellFarmer();
+            //}
+            //         else
+            //         {
+            //             MainPage = new AppShellUser();
+            //         }
+
+            MainPage = new AppShellStartup();
 		}
     }
 }

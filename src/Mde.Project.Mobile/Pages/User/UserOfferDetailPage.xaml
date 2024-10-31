@@ -37,18 +37,18 @@
                 
                 <VerticalStackLayout>
                     <Label Text="Offer description"
-                       Style="{StaticResource SmallLabel}"/>
+                           Style="{StaticResource SmallLabel}"/>
                     <Label Text="{Binding SelectedOffer.Description}"
-                       Style="{StaticResource LabelText}"
-                       LineBreakMode="WordWrap"/>
+                           Style="{StaticResource LabelText}"
+                           LineBreakMode="WordWrap"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
                     <Label Text="Price"
-                       Style="{StaticResource SmallLabel}"/>
+                           Style="{StaticResource SmallLabel}"/>
                     <Label Text="{Binding FormattedPrice}"
-                       Style="{StaticResource LabelText}"
-                       LineBreakMode="WordWrap"/>
+                           Style="{StaticResource LabelText}"
+                           LineBreakMode="WordWrap"/>
                 </VerticalStackLayout>
 
                 <Label Text="Recipe inspiration from the web"

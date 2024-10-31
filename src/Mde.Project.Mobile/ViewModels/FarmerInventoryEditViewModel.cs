@@ -28,7 +28,6 @@ namespace Mde.Project.Mobile.ViewModels
 		public ObservableCollection<Unit> UnitOptions { get; set; } = [];
 
 		private string pageTitle;
-
 		public string PageTitle
 		{
 			get { return pageTitle; }
@@ -36,7 +35,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private Offer selectedOffer;
-
 		public Offer SelectedOffer
 		{
 			get { return selectedOffer; }
@@ -67,7 +65,6 @@ namespace Mde.Project.Mobile.ViewModels
 
 
 		private ObservableCollection<Product> products;
-
 		public ObservableCollection<Product> Products
 		{
 			get { return products; }
@@ -78,7 +75,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private Product selectedProduct;
-
 		public Product SelectedProduct
 		{
 			get { return selectedProduct; }
@@ -87,7 +83,6 @@ namespace Mde.Project.Mobile.ViewModels
 
 
 		private string description;
-
 		public string Description
 		{
 			get { return description; }
@@ -95,7 +90,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private Unit selectedUnit;
-
 		public Unit SelectedUnit
 		{
 			get { return selectedUnit; }
@@ -103,7 +97,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private decimal price;
-
 		public decimal Price
 		{
 			get { return price; }
@@ -111,7 +104,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private string imageUrl;
-
 		public string ImageUrl
 		{
 			get { return imageUrl; }
@@ -126,15 +118,6 @@ namespace Mde.Project.Mobile.ViewModels
 				UnitOptions.Add(unit);
             }
         }
-
-
-		//public ICommand RefreshProductOptionsCommand =>
-		//	new Command(async () =>
-		//	{
-		//		var result = await _productService.GetAllAsync();
-		//		var products = result.Data;
-		//		Products = new ObservableCollection<Product>(products);
-		//	});
 
 		public ICommand SaveCommand =>
 			new Command(async () =>

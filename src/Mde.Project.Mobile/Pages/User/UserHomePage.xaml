@@ -58,16 +58,16 @@
                             <Border Style="{StaticResource TileBorder}">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}"
-                                                  Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
+                                                          Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
                                 </Border.GestureRecognizers>
                                 <Grid RowDefinitions="4*, 1.5*" Margin="0">
                                     <Image Source="{Binding ImageUrl}"
-                                   Aspect="AspectFill"/>
+                                           Aspect="AspectFill"/>
                                     <VerticalStackLayout Grid.Row="1" Padding="5">
                                         <Label Text="{Binding Name}"
-                                       Style="{StaticResource SmallLabel}"/>
+                                               Style="{StaticResource SmallLabel}"/>
                                         <Label Text="{Binding Description}"
-                                       Style="{StaticResource LabelText}"/>
+                                               Style="{StaticResource LabelText}"/>
                                     </VerticalStackLayout>
                                 </Grid>
                             </Border>

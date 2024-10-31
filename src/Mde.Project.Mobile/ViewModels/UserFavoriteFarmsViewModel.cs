@@ -17,7 +17,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private ObservableCollection<Farm> favoriteFarms;
-
 		public ObservableCollection<Farm> FavoriteFarms
 		{
 			get { return favoriteFarms; }

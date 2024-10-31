@@ -12,20 +12,20 @@
             <VerticalStackLayout Margin="8,20" Spacing="20">
                 <VerticalStackLayout>
                     <FlexLayout Direction="Row"
-                            JustifyContent="SpaceBetween">
+                                JustifyContent="SpaceBetween">
                         <Label Text="Search distance" Style="{StaticResource SmallLabel}"/>
                         <Label x:Name="lblDistance"/>
                     </FlexLayout>
 
                     <Slider ThumbColor="{StaticResource AccentColor}"
-                    Maximum="100"
-                    Minimum="1"
-                    MinimumTrackColor="{StaticResource AccentColor}"
-                    MaximumTrackColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                    x:Name="sldDistance"
-                    Margin="8"
-                    Value="15"
-                    ValueChanged="Slider_ValueChanged"/>
+                            Maximum="100"
+                            Minimum="1"
+                            MinimumTrackColor="{StaticResource AccentColor}"
+                            MaximumTrackColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                            x:Name="sldDistance"
+                            Margin="8"
+                            Value="15"
+                            ValueChanged="Slider_ValueChanged"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>

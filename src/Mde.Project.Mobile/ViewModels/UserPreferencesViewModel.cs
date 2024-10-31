@@ -16,7 +16,6 @@ namespace Mde.Project.Mobile.ViewModels
         public ObservableCollection<CuisineOption> CuisineOptions { get; set; }
         public ObservableCollection<CuisineOption> SelectedCuisines { get; set; } = new();
 
-
 		public ICommand SwitchToFarmerViewCommand => new Command(() =>
 		{
 			App.Current.MainPage = new AppShellFarmer();

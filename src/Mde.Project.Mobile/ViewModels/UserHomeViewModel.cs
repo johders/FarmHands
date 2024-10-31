@@ -19,7 +19,6 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private ObservableCollection<Farm> farms;
-
 		public ObservableCollection<Farm> Farms
 		{
 			get { return farms; }
@@ -30,7 +29,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
         private ObservableCollection<Product> products;
-
         public ObservableCollection<Product> Products
         {
             get { return products; }

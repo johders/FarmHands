@@ -12,8 +12,8 @@
         <Grid Style="{StaticResource MaxWidthGrid}">
             <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
                 <FlexLayout JustifyContent="SpaceBetween"
-                    AlignItems="Center"
-                    Margin="0,20">
+                            AlignItems="Center"
+                            Margin="0,20">
                     <Label Text="{Binding SelectedFarm.Name}"
                             Style="{StaticResource LargeLabel}"
                             Margin="0"/>
@@ -30,7 +30,7 @@
                 </FlexLayout>
 
                 <Image Source="{Binding SelectedFarm.ImageUrl}"
-               Aspect="AspectFill"/>
+                       Aspect="AspectFill"/>
 
                 <Label Text="Our story"
                        Style="{StaticResource SmallLabel}"/>
@@ -39,7 +39,7 @@
                        LineBreakMode="WordWrap"/>
 
                 <Label Text="Our harvest"
-               Style="{StaticResource SmallLabel}"/>
+                       Style="{StaticResource SmallLabel}"/>
 
                 <CollectionView ItemsSource="{Binding Offers}">
                     <CollectionView.ItemsLayout>

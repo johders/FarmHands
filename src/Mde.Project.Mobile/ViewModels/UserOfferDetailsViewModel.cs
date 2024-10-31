@@ -10,7 +10,6 @@ namespace Mde.Project.Mobile.ViewModels
     {
 
 		private Offer selectedOffer;
-
 		public Offer SelectedOffer
 		{
 			get { return selectedOffer; }

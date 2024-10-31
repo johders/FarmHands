@@ -13,12 +13,12 @@
 
             <VerticalStackLayout Margin="8">
                 <Button Text="Add new"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                    HorizontalOptions="Center"
-                    WidthRequest="200"
-                    CornerRadius="30"
-                    Margin="10,20"
-                    Command="{Binding AddOfferCommand}">
+                        BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                        HorizontalOptions="Center"
+                        WidthRequest="200"
+                        CornerRadius="30"
+                        Margin="10,20"
+                        Command="{Binding AddOfferCommand}">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                         Offset="10,10"

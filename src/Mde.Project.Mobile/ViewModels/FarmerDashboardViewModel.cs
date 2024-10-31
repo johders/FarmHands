@@ -16,7 +16,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private ObservableCollection<OfferViewModel> offers;
-
 		public ObservableCollection<OfferViewModel> Offers
 		{
 			get { return offers; }
@@ -27,13 +26,11 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private bool isAvailable;
-
 		public bool IsAvailable
 		{
 			get { return isAvailable; }
 			set { SetProperty(ref isAvailable, value); }
 		}
-
 
 		public ICommand RefreshOffersListCommand =>
 			new Command(async () =>

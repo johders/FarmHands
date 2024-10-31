@@ -14,11 +14,11 @@
                Opacity="0.5" />
 
         <VerticalStackLayout Spacing="30"
-                         Padding="20">
+                             Padding="20">
 
             <Label Text="Welcome to FarmHands!"
-               Style="{StaticResource LargeLabel}"
-               HorizontalOptions="Center" />
+                   Style="{StaticResource LargeLabel}"
+                   HorizontalOptions="Center" />
 
             <Label Text="Incorrect login credentials, please try again"
                    Style="{StaticResource SmallLabel}"
@@ -27,9 +27,9 @@
                    IsVisible="{Binding UnSuccessful}"/>
 
             <Border Stroke="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource BorderColorDark}}"
-                BackgroundColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
-                StrokeThickness="1"
-                Padding="8">
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                    StrokeThickness="1"
+                    Padding="8">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="8" />
             </Border.StrokeShape>

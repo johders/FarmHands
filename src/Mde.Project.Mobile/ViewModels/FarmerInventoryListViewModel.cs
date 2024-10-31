@@ -19,7 +19,6 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		private ObservableCollection<Offer> offers;
-
 		public ObservableCollection<Offer> Offers
 		{
 			get { return offers; }
@@ -76,7 +75,6 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			return await Application.Current.MainPage.DisplayAlert("Confirm Delete", $"Are you sure you want to delete your offer for {offerItem}?", "Yes", "No");
 		}
-
 		
 	}
 }

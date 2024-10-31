@@ -12,54 +12,60 @@
             <VerticalStackLayout Margin="8,20" Spacing="20">
 
                 <Label Text="Name"
-                   Style="{StaticResource SmallLabel}"/>
+                       Style="{StaticResource SmallLabel}"/>
                 <Entry Placeholder="Enter product name"
-                   Text="{Binding Name}"/>
+                       Text="{Binding Name}"/>
 
                 <Label Text="Location"
-                   Style="{StaticResource SmallLabel}"/>
-                <Entry Placeholder="Enter latitude" Text="{Binding Latitude}" Keyboard="Numeric"/>
-                <Entry Placeholder="Enter longitude" Text="{Binding Longitude}" Keyboard="Numeric"/>
+                       Style="{StaticResource SmallLabel}"/>
+                <Entry Placeholder="Enter latitude" 
+                       Text="{Binding Latitude}" 
+                       Keyboard="Numeric"/>
+                <Entry Placeholder="Enter longitude" 
+                       Text="{Binding Longitude}" 
+                       Keyboard="Numeric"/>
 
                 <Label Text="Your story"
-                   Style="{StaticResource SmallLabel}"/>
-                <Editor Placeholder="Tell us more about your farm" AutoSize="TextChanges" Text="{Binding Description}"/>
+                       Style="{StaticResource SmallLabel}"/>
+                <Editor Placeholder="Tell us more about your farm" 
+                        AutoSize="TextChanges" 
+                        Text="{Binding Description}"/>
 
                 <Label Text="Image"
-                   Style="{StaticResource SmallLabel}"/>
+                       Style="{StaticResource SmallLabel}"/>
 
                 <Border WidthRequest="300" 
-                    HeightRequest="200" 
-                    StrokeThickness="3" 
-                    Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                    IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
+                        HeightRequest="200" 
+                        StrokeThickness="3" 
+                        Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
                     <Image Source="{Binding ImageUrl}" 
-                       Aspect="AspectFill"/>
+                           Aspect="AspectFill"/>
 
                 </Border>
 
                 <Border WidthRequest="300"
-                    HeightRequest="200"
-                    StrokeThickness="3"
-                    Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                    IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
+                        HeightRequest="200"
+                        StrokeThickness="3"
+                        Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
                     <FlexLayout JustifyContent="SpaceEvenly"
-                            AlignItems="Center">
+                                AlignItems="Center">
                         <VerticalStackLayout>
                             <ImageButton Source="gallery.png"
-                                     WidthRequest="60"
-                                     HeightRequest="60"
-                                     BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                                     Padding="10"
-                                     CornerRadius="30"/>
+                                         WidthRequest="60"
+                                         HeightRequest="60"
+                                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                                         Padding="10"
+                                         CornerRadius="30"/>
                             <Label Text="From gallery"
-                               Style="{StaticResource LabelText}"/>
+                                   Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <ImageButton Source="camera.png"
@@ -69,24 +75,24 @@
                                      Padding="10"
                                      CornerRadius="30"/>
                             <Label Text="Take picture"
-                               Style="{StaticResource LabelText}"/>
+                                   Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>
                     </FlexLayout>
                 </Border>
 
 
                 <Button Text="Save"
-                    CornerRadius="50"
-                    WidthRequest="100"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
-                    TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
-                    Margin="20"
-                    Command="{Binding SaveCommand}">
+                        CornerRadius="50"
+                        WidthRequest="100"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        Margin="20"
+                        Command="{Binding SaveCommand}">
                     <Button.Shadow>
                         <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                            Offset="10,10"
-                            Radius="50"
-                            Opacity=".8"/>
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
                     </Button.Shadow>
                 </Button>
 

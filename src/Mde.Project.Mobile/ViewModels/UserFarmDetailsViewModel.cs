@@ -43,7 +43,6 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private bool isFavorite;
-
         public bool IsFavorite
         {
             get { return isFavorite; }

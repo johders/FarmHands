@@ -18,27 +18,26 @@
                         <DataTemplate x:DataType="model:Farm">
                             <VerticalStackLayout>
                                 <Border Padding="5"
-                                StrokeShape="{RoundRectangle CornerRadius=5}"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                        StrokeShape="{RoundRectangle CornerRadius=5}"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer CommandParameter="{Binding .}"
-                                                  Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
+                                                              Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
                                     </Border.GestureRecognizers>
                                     <Grid ColumnDefinitions="*, Auto">
                                         <VerticalStackLayout Spacing="5" Padding="8">
                                             <Label Text="{Binding Name}"
-                                   Style="{StaticResource SmallLabel}"/>
+                                                   Style="{StaticResource SmallLabel}"/>
                                             <Label Text="{Binding Description}"
                                                Style="{StaticResource LabelText}"
                                                LineBreakMode="WordWrap"/>
                                         </VerticalStackLayout>
                                         <Border  Grid.Column="1"
-                                             WidthRequest="120"
-                                             HeightRequest="70"
-                                             StrokeShape="{RoundRectangle CornerRadius=8}">
-                                            <Image
-                                       Source="{Binding ImageUrl}"
-                                       Aspect="AspectFill"/>
+                                                 WidthRequest="120"
+                                                 HeightRequest="70"
+                                                 StrokeShape="{RoundRectangle CornerRadius=8}">
+                                            <Image Source="{Binding ImageUrl}"
+                                                   Aspect="AspectFill"/>
                                         </Border>
                                     </Grid>
                                 </Border>

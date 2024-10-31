@@ -11,7 +11,6 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IFarmService _farmService;
 		private Farm farm;
-
 		public FarmerSettingsViewModel(IFarmService farmService)
 		{
 			_farmService = farmService;

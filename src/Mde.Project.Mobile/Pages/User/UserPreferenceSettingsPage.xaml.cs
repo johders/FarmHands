@@ -6,10 +6,10 @@ public partial class UserPreferenceSettingsPage : ContentPage
 {
 	private readonly int sliderIncrement = 1;
 	private int sliderAdjustedValue;
-	public UserPreferenceSettingsPage()
+	public UserPreferenceSettingsPage(UserPreferencesViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = new UserPreferencesViewModel();
+		BindingContext = viewModel;
 	}
 
 	protected override void OnAppearing()

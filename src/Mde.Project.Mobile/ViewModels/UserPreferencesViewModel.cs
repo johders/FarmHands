@@ -1,5 +1,6 @@
 ﻿using Mde.Project.Core.Data;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -7,10 +8,10 @@ namespace Mde.Project.Mobile.ViewModels
 {
     public class UserPreferencesViewModel
     {
-        public UserPreferencesViewModel() 
+        public UserPreferencesViewModel(IUserPreferencesService userPreferencesService) 
         {
-            DietaryOptions = new ObservableCollection<DietaryOption>(Seeder.SeedDietaryOptions());
-            CuisineOptions = new ObservableCollection<CuisineOption>(Seeder.SeedCuisineOptions());
+            DietaryOptions = new ObservableCollection<DietaryOption>(userPreferencesService.GetDietaryOptions());
+            CuisineOptions = new ObservableCollection<CuisineOption>(userPreferencesService.GetCuisineOptions());
         }
         public ObservableCollection<DietaryOption> DietaryOptions { get; set; }
         public ObservableCollection<CuisineOption> CuisineOptions { get; set; }

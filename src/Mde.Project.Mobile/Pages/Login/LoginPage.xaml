@@ -20,8 +20,9 @@
                Style="{StaticResource LargeLabel}"
                HorizontalOptions="Center" />
 
-            <Label Text="Username or password incorrect, please try again"
+            <Label Text="Incorrect login credentials, please try again"
                    Style="{StaticResource SmallLabel}"
+                   TextColor="Red"
                    HorizontalOptions="Center"
                    IsVisible="{Binding UnSuccessful}"/>
 

@@ -1,6 +1,4 @@
-﻿using Mde.Project.Core.Entities;
-
-namespace Mde.Project.Core.Services.Models.RequestModels
+﻿namespace Mde.Project.Core.Services.Models.RequestModels
 {
     public class FarmUpdateRequestModel
     {

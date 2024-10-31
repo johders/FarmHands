@@ -40,7 +40,6 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IOfferService, OfferMockService>();
             builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
-            builder.Services.AddSingleton<IApplicationUserService, ApplicationUserMockService>();
 
             return builder;
         }

@@ -2,7 +2,6 @@
 {
     public class FavoriteProduct : FavoriteBase
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public Guid ProductId { get; set; }

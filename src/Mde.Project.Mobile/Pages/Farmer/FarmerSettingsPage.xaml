@@ -111,6 +111,21 @@
                     </Button.Shadow>
                 </Button>
 
+                <Button Text="Sign out"
+                        CornerRadius="50"
+                        WidthRequest="300"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        Margin="20"
+                        Command="{Binding LogOutCommand}">
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
+                    </Button.Shadow>
+                </Button>
+
             </VerticalStackLayout>
         </Grid>
     </ScrollView>

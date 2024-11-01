@@ -100,6 +100,12 @@ namespace Mde.Project.Core.Data
 					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
 					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
 					Unit = Unit.Kilogram,
+					Variant = "Sweet 100",
+					Description = "A burst of sweetness in every bite! These bright red, perfectly round tomatoes are known for their incredible flavor and juicy texture, " +
+					"making them ideal for snacking right off the vine or adding vibrant color to your favorite salads. Sweet 100s are famous for " +
+					"producing hundreds of little gems per plant, so you get a bounty of flavor all season long. Our Sweet 100s are hand-picked to ensure only the ripest, " +
+					"sweetest tomatoes make it to you. Whether you're a tomato lover or just looking to add a pop of natural sweetness to your meals, Sweet 100s are the perfect choice. " +
+					"Come pick up a basket today and taste the sunshine in every bite!",
 					Price = 1.89m,
 					IsAvailable = true,
 					IsOrganic = false,
@@ -111,7 +117,12 @@ namespace Mde.Project.Core.Data
                     Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000009")),
                     Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
                     Unit = Unit.Kilogram,
-                    Price = 1.50m,
+					Variant = "Yukon Gold",
+					Description = "Every cook’s dream and an absolute staple in the kitchen. With their thin, golden skin and creamy, buttery texture, these potatoes are incredibly versatile, " +
+					"perfect for everything from fluffy mashed potatoes to golden-roasted sides. Yukon Golds have a naturally rich, slightly sweet flavor that makes every dish shine, whether " +
+					"you’re cooking up a cozy stew or a crisp batch of homemade fries. Grown with care here on our farm, our Yukon Golds are freshly harvested to deliver that just-dug " +
+					"flavor and quality straight to your table. Pick up a bag today, and bring home the warmth and satisfaction only Yukon Golds can add to your meals!",
+					Price = 1.50m,
 					OfferImageUrl = "https://cdn.pixabay.com/photo/2016/09/01/19/30/potatoes-1637280_1280.jpg"
 				},
                 new Offer
@@ -120,7 +131,12 @@ namespace Mde.Project.Core.Data
                     Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000014")),
                     Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
                     Unit = Unit.Piece,
-                    Price = 1.60m,
+					Variant = "Romanesco",
+					Description = "A true masterpiece of nature. With its stunning spiral pattern and bright green color, Romanesco isn’t just a vegetable; it’s a conversation piece! " +
+					"Each head has a unique, mesmerizing fractal shape that makes it as beautiful as it is delicious. Romanesco has a mild, nutty flavor with a hint of sweetness, making it " +
+					"perfect for roasting, steaming, or enjoying raw in salads. It holds its texture well, adding a satisfying crunch to any dish. Packed with vitamins and minerals, " +
+					"Romanesco is as nutritious as it is eye-catching. Pick one up today, and experience a new level of taste and visual appeal on your plate!",
+					Price = 1.60m,
                     IsAvailable = true,
                     IsOrganic = true,
 					OfferImageUrl = "https://cdn.pixabay.com/photo/2015/03/14/13/59/vegetables-673181_1280.jpg"
@@ -134,6 +150,11 @@ namespace Mde.Project.Core.Data
 					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000003")),
 					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000003")),
 					Unit = Unit.Dozen,
+					Variant = "Pasture-raised",
+					Description = "A genuine taste of nature and quality. Our hens roam freely over lush pastures, foraging for a natural diet of grasses and insects, which gives their " +
+					"eggs a vibrant orange yolk and a rich, flavorful taste that you won’t find in conventional eggs. These eggs are packed with nutrients, boasting higher levels of " +
+					"omega-3s and vitamins, thanks to the hens' healthy, active lifestyle. When you crack open one of our pasture-raised eggs, you’ll see and taste the difference right away. " +
+					"They’re perfect for everything from hearty breakfasts to delicious baked goods. Pick up a dozen and experience the wholesome, farm-fresh quality that only pasture-raised eggs can offer. You’ll never go back!",
 					Price = 5.5m,
 					IsAvailable = true,
 					IsOrganic = true,
@@ -145,6 +166,15 @@ namespace Mde.Project.Core.Data
 					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000004")),
 					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000003")),
 					Unit = Unit.Litre,
+					Variant = "Whole Milk",
+					Description = "Pure, creamy goodness straight from our happy cows to your table. Our whole milk is minimally processed " +
+					"and packed with essential nutrients, making it a wholesome choice for your family. With its rich, creamy texture and " +
+					"delightful flavor, it’s perfect for drinking, cooking, and baking. Our cows roam freely on lush pastures, grazing on " +
+					"natural grass, which contributes to the exceptional taste and quality of our milk. You’ll notice the difference in every " +
+					"glass, with a taste that’s fresh and full-bodied, just like milk used to be. Whether you’re pouring it over your morning " +
+					"cereal, using it in your favorite recipes, or enjoying it on its own, our farm-fresh whole milk is a delicious and " +
+					"nutritious addition to your daily routine. Come by and grab a jug today—you’ll be supporting local farming while " +
+					"enjoying the best milk nature has to offer!",
 					Price = 2.50m,
 					IsAvailable = true,
 					IsOrganic = true,
@@ -159,6 +189,15 @@ namespace Mde.Project.Core.Data
 					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000007")),
 					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000007")),
 					Unit = Unit.Kilogram,
+					Variant = "Seascape",
+					Description = "a true delight for your taste buds! Known for their exceptional sweetness and juiciness, " +
+					"these vibrant red berries are perfect for snacking, baking, or adding to your favorite salads. Seascape strawberries are " +
+					"unique because they’re ever-bearing, which means you can enjoy fresh strawberries from late spring through fall! " +
+					"Each berry is plump, flavorful, and bursting with that sweet, tangy taste you love. They’re also easy to grow, " +
+					"making them a favorite among home gardeners and professional growers alike. Hand-picked at the peak of ripeness, " +
+					"our Seascape strawberries are a delicious way to support local agriculture. Whether you’re enjoying them fresh, making jams, " +
+					"or adding them to desserts, these strawberries will bring a taste of summer to your table all year round. " +
+					"Come visit us and pick up a basket of Seascape strawberries today—you won’t be disappointed!",
 					Price = 14m,
 					IsAvailable = true,
 					IsOrganic = true,
@@ -170,6 +209,16 @@ namespace Mde.Project.Core.Data
 					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000008")),
 					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000007")),
 					Unit = Unit.Piece,
+					Variant = "Lavender honey",
+					Description = "Crafted from the nectar of our vibrant lavender fields, this honey is not just sweet; it’s an aromatic " +
+					"experience. With its light golden color and floral notes, our lavender honey captures the essence of summer blooms " +
+					"in every jar. Each spoonful is a delightful blend of mild sweetness and the calming scent of lavender, making it perfect " +
+					"for drizzling over yogurt, adding to your favorite teas, or enhancing baked goods. Whether you’re looking to elevate your " +
+					"culinary creations or simply enjoy a soothing treat, our lavender honey is the perfect choice. Not only does it taste " +
+					"amazing, but it also offers potential health benefits, including antioxidants and soothing properties. " +
+					"It makes a wonderful gift for friends or a luxurious addition to your pantry. " +
+					"Come visit us and take home a jar of our farm-fresh lavender honey today—you won’t want to miss this unique " +
+					"flavor experience!",
 					Price = 7.50m,
 					IsAvailable = true,
 					IsOrganic = true,

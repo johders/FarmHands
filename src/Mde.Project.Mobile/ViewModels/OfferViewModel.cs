@@ -16,6 +16,7 @@ namespace Mde.Project.Mobile.ViewModels
 		}
 
 		public string ProductName => _offer.Product.Name;
+		public string VariantName => _offer.Variant;
 		public string OfferImageUrl => _offer.OfferImageUrl;
 		public decimal Price => _offer.Price;
 		public Unit Unit => _offer.Unit;

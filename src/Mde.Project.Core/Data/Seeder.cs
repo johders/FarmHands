@@ -39,13 +39,13 @@ namespace Mde.Project.Core.Data
 		{
 			IEnumerable<Farm> farms = new List<Farm>
 			{
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000001"), "Green Valley Orchards", "Nestled in the hills, this family-owned orchard specializes in organic apples, pears, and seasonal berries, grown with sustainable farming practices.", 51.2564, 3.0432, new List<Product>(), "https://statbel.fgov.be/sites/default/files/styles/news_full/public/images/landbouw/8.2%20Biologische%20landbouw/AdobeStock_200879536.jpeg?itok=9JTAiqrQ"),
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000002"), "Sunny Acres Farm", "Known for its sprawling sunflower fields and fresh vegetables, this farm offers a delightful experience with pick-your-own options.", 51.2593, 3.0481, new List<Product>(), "https://www.nationsencyclopedia.com/photos/belgium-agriculture-1547.jpg"),
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000003"), "Riverside Pastures", "Situated along the riverbank, Riverside Pastures is famous for its pasture-raised eggs, dairy products, and heritage breed livestock.", 51.2666, 3.0395, new List<Product>(), "https://www.theclimakers.org/wp/wp-content/uploads/2021/11/Boerenbond-Belgian-Farmers-Union.png"),
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000004"), "Maple Leaf Gardens", "A picturesque farm with an array of maple trees, offering fresh produce and locally produced maple syrup straight from the source.", 51.2670, 3.0569, new List<Product>(), "https://cdn.pixabay.com/photo/2023/08/24/12/21/farming-8210675_1280.jpg"),
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000005"), "Harvest Moon Homestead", "This small yet abundant farm is dedicated to cultivating heirloom tomatoes, peppers, and herbs with an emphasis on organic and permaculture techniques.", 51.2752, 3.0497, new List<Product>(), "https://growingformarket.com/custom/2022%20Issues/may%202022/cas/web%204%20CSA%20members%20Klara%20and%20Marijke%20harvesting.jpg"),
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000006"), "Breezy Hill Farm", "With a focus on sustainable grains and legumes, Breezy Hill Farm is a local favorite for artisanal bread flour and fresh beans.", 51.2557, 3.0604, new List<Product>(), "https://lh-images.us-east-1.linodeobjects.com/4005.jpg"),
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000007"), "Lavender Lane", "A serene haven with rows of aromatic lavender, this farm also produces lavender-infused honey, soaps, and teas for a unique farm experience.", 51.2473, 3.0270, new List<Product>(), "https://diplomatie.belgium.be/sites/default/files/styles/fluid_image/public/2022-04/shutterstock_436506028.jpg?itok=0vXbgD-t"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000001"), "Green Valley Orchards", "At Green Valley Orchards, the air buzzed with the sweet scent of ripening fruit and the promise of harvest. Rows of apple and pear trees stood proudly, their branches heavy with color, like tipsy dancers swaying in the gentle breeze. Old man Tom, with his weathered skin and sun-brightened eyes, shuffled through the orchards, a worn straw hat perched atop his head, muttering about the good old days when everything felt simpler and the world wasn’t so damn complicated.\r\n\r\nDays here were a symphony of sounds: the rustle of leaves, the laughter of children running through the trees, and the occasional squawk of a disgruntled chicken that had wandered too far from its coop. Tom worked alongside his grandson, a wiry kid with energy to burn, who believed every tree had its secrets. They shared jokes and stories, their voices weaving through the branches like the warm sun that filtered down, turning the orchard into a patch of gold.\r\n\r\nAs dusk settled over the valley, the sky turned a deep indigo, dotted with stars like scattered dreams. Tom would sit on the porch, the day’s labors behind him, a glass of cider in hand, savoring the sweet, tangy flavor of their hard work. Green Valley Orchards was a refuge, a place where life thrived in abundance and every apple told a story of resilience and love, reminding him that even in the messiness of life, there was beauty to be found in the simplest of moments.", 51.2564, 3.0432, new List<Product>(), "https://statbel.fgov.be/sites/default/files/styles/news_full/public/images/landbouw/8.2%20Biologische%20landbouw/AdobeStock_200879536.jpeg?itok=9JTAiqrQ"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000002"), "Sunny Acres Farm", "At Sunny Acres Farm, where the sun beamed down like a benevolent overseer, life meandered along at a pace that would make a tortoise seem hasty. The fields sprawled out like a patchwork quilt, stitched together with rows of corn and patches of wildflowers, all dancing merrily in the warm breeze. Old Joe, the farmer, was a man of considerable girth and a mustache that curled like a lazy river, always found seated on his creaky porch, whittling away at a piece of wood as if it were a wayward thought begging to be shaped into something grand.\r\n\r\nThe farm was alive with sounds, a symphony of cackling hens, lowing cows, and the occasional chatter of children playing hide-and-seek among the apple trees. Joe’s daughter, Mary, with her sun-kissed hair and infectious laugh, often led her brothers on escapades that left them muddy and breathless, while the dogs barked and chased after their little feet, hoping to join in the fun. The simple pleasures of farm life were the currency of happiness here, as each day rolled into the next like the gentle ebb and flow of the Mississippi.\r\n\r\nAs twilight settled over Sunny Acres, the sky transformed into a canvas of oranges and purples, a masterpiece that seemed to draw the whole farm into a moment of quiet reverence. Joe would set down his whittling knife, take a long draw from his jug of homemade lemonade, and tip his hat to the heavens, thankful for another day of toil and laughter. In this slice of paradise, where the air was thick with the scent of fresh hay and blooming flowers, life was not merely lived; it was celebrated, one simple joy at a time.", 51.2593, 3.0481, new List<Product>(), "https://www.nationsencyclopedia.com/photos/belgium-agriculture-1547.jpg"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000003"), "Riverside Pastures", "Welcome to Riverside Pastures, where we cultivate harmony between nature and nurturing. Our farm is committed to raising healthy livestock and growing organic produce while prioritizing sustainable farming practices. We believe in animal welfare, allowing our livestock to roam freely in lush pastures and enjoy a natural diet.\r\n\r\nCommunity engagement and education are essential to our mission. Through workshops, farm tours, and volunteer opportunities, we share our passion for sustainable agriculture and foster a deeper connection between people and the land.\r\n\r\nAt Riverside Pastures, environmental stewardship is paramount. We employ regenerative practices to enhance soil health, conserve water, and protect local ecosystems. Join us as we cultivate a thriving community grounded in care, responsibility, and respect for all living things.", 51.2666, 3.0395, new List<Product>(), "https://www.theclimakers.org/wp/wp-content/uploads/2021/11/Boerenbond-Belgian-Farmers-Union.png"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000004"), "Maple Leaf Gardens", "At Maple Leaf Gardens, the air was thick with the sweet scent of ripe strawberries, their vibrant red hues peeking through lush green foliage like forbidden treasures. The late afternoon sun cast a golden glow over the garden, and Emily, the spirited owner, moved gracefully among the rows, her sundress fluttering softly against her skin, radiating effortless beauty.\r\n\r\nEach plucked berry felt like a promise waiting to be fulfilled, her hands brushing tenderly over the leaves, igniting a spark of excitement with every harvest. Her laughter rang out like music, inviting anyone who wandered close into her sun-kissed world of fresh produce and tantalizing possibilities.\r\n\r\nAs the sun set, painting the sky in shades of pink and orange, Emily paused to soak in the beauty around her. The rustling leaves formed a soothing melody, wrapping her in a moment of connection to the land and a whisper of passion and dreams waiting just beyond the horizon of her Maple Leaf Gardens.", 51.2670, 3.0569, new List<Product>(), "https://cdn.pixabay.com/photo/2023/08/24/12/21/farming-8210675_1280.jpg"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000005"), "Harvest Moon Homestead", "Welcome to Harvest Moon Homestead Farm, where sustainability and a passion for the land come together. Specializing in organic fruits, vegetables, and herbs, we proudly grow heirloom varieties without synthetic pesticides or fertilizers, honoring traditional farming practices.\r\n\r\nOur commitment to regenerative agriculture allows us to nurture the soil, protect local biodiversity, and promote ecological balance while providing fresh, nutritious produce for our community.\r\n\r\nAt the heart of our farm is a dedication to connection. We host seasonal workshops and farm-to-table events, inviting you to celebrate the joys of farming and nature with us. Together, we can cultivate a brighter, more sustainable future—one harvest at a time.", 51.2752, 3.0497, new List<Product>(), "https://growingformarket.com/custom/2022%20Issues/may%202022/cas/web%204%20CSA%20members%20Klara%20and%20Marijke%20harvesting.jpg"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000006"), "Breezy Hill Farm", "At Breezy Hill Farm, the sun hung low, casting shadows over rows of tired crops. The air was thick with the scent of rich soil and the last of the summer strawberries, clinging stubbornly to their vines. Hank, the farmer with a wild beard and calloused hands, wandered the fields like a ghost, mumbling to himself about life’s absurdity. He preferred the company of crops over people; they were demanding, yet silent companions.\r\n\r\nDays melted into one another—a routine of planting, weeding, and harvesting. The chickens clucked in protest, and the cows mooed their discontent, but Hank didn’t care. He had his cheap whiskey hidden in the barn and a dog named Rusty, loyal and unbothered by the chaos around them. Breezy Hill wasn’t the idyllic farm of fairy tales; it was a gritty reminder of life’s struggles, where laughter was rare, yet the earth breathed with a pulse all its own.\r\n\r\nAs the sun dipped below the horizon, painting the sky in shades of bruised purple and orange, Hank would sit on the porch with a glass of something strong, toasting to the day’s labor and the tomorrow that came too soon. Breezy Hill was more than just a place; it was a sanctuary for the weary, where dreams still whispered among the corn stalks, and life was raw and unapologetic, just like him.", 51.2557, 3.0604, new List<Product>(), "https://lh-images.us-east-1.linodeobjects.com/4005.jpg"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000007"), "Lavender Lane", "At Lavender Lane, the air shimmered with the delightful scent of blooming lavender, where the vibrant purple plants danced merrily in the breeze. Farmer Lila, a jolly woman with a wild mane of curly hair and twinkling eyes, tended to her fragrant paradise with infectious glee, making every day feel like a whimsical adventure.\r\n\r\nOne sunny morning, Lila discovered her lavender had grown unusually large, with blossoms sparkling like jewels. With a cheeky grin, she brewed her special lavender tea, which had the magical ability to make anyone who sipped it burst into song! Soon, her little farm rang with cheerful melodies, as neighbors and passersby couldn’t resist joining in the joyful chorus.\r\n\r\nAs dusk painted the sky in warm hues, Lila gathered her harvest, dreaming of soothing balms and fragrant sachets. At Lavender Lane, every day was an enchanting escapade, where the ordinary transformed into the extraordinary, and every sweet scent promised a sprinkle of magic waiting to unfold.", 51.2473, 3.0270, new List<Product>(), "https://diplomatie.belgium.be/sites/default/files/styles/fluid_image/public/2022-04/shutterstock_436506028.jpg?itok=0vXbgD-t"),
 			};
 
 			return farms;
@@ -58,6 +58,87 @@ namespace Mde.Project.Core.Data
 
 			IEnumerable<Offer> offers = new List<Offer>
 			{
+
+				//Breezy Hill Farm
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000017"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000001")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000006")),
+					Variant = "Jonagold",
+					Description = "Welcome to our patch of dirt, where the sun beats down and the earth gives life to the Jonagold " +
+					"apples—a glorious mess of sweetness and a bit of bite. These beauties, a wild lovechild of Jonathan and Golden Delicious, " +
+					"wear their yellow-green skin like a badge of honor, kissed with a touch of red. You bite in, and it’s a symphony—a " +
+					"crisp crunch followed by juicy sweetness that dances on your tongue, then a sharp little kick that reminds you life isn’t " +
+					"all sugar. Perfect for snacking, tossing into a pie, or just letting them sit on your kitchen counter to inspire you. " +
+					"Grab some Jonagolds. They’re not just apples; they’re a slice of life, ready to add a bit of flavor to your chaotic world.",
+					Unit = Unit.Dozen,
+					Price = 3.5m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn11.bigcommerce.com/s-625n27otji/images/stencil/1280x1280/products/1684/2734/jonagold-red-apple-02__23331.1639395146.jpg?c=1"
+				},
+
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000018"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000009")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000006")),
+					Variant = "Fingerling",
+					Description = "Welcome to our humble plot, where the earth gives birth to fingerling potatoes—the rebels of the spud world. " +
+					"These little beauties, like tiny golden fingers reaching up from the dirt, come in shades of yellow, red, and purple, " +
+					"each with a character as rich as a poet’s heart. With their nutty flavor and creamy texture, fingerlings are the kind of " +
+					"potatoes you want to roast until they’re golden and crispy, then toss with a bit of salt and fresh herbs. They’re perfect for " +
+					"those nights when you want something simple yet elegant, a nod to the good life amid the chaos. Grab a handful of these oddballs. " +
+					"They’re not just potatoes; they’re a reminder that sometimes the best things in life come in small, quirky packages. Cook them up, " +
+					"and you’ll taste the earth—raw, real, and beautifully imperfect.",
+					Unit = Unit.Kilogram,
+					Price = 2.85m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Fingerling_Potatoes%2C_Pike_Place_Market.jpg"
+				},
+
+
+				//Harvest Moon Homestead
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000015"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000014")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000005")),
+					Variant = "Broccolini",
+					Description = "We’re proud to offer Broccolini, a delicious hybrid of broccoli and Chinese broccoli. " +
+					"With its tender, slender stems and small florets, Broccolini has a milder, slightly sweet flavor that sets " +
+					"it apart from regular broccoli. Packed with vitamins A, C, and K, it’s a nutritious addition to any meal. " +
+					"Enjoy it steamed, sautéed, or grilled for a delightful crunch. Our Broccolini is sustainably grown and harvested at " +
+					"peak freshness for the best taste. Try our Broccolini and elevate your dishes today!",
+					Unit = Unit.Kilogram,
+					Price = 4.65m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.healthline.com%2Fnutrition%2Fbroccolini-nutrition&psig=AOvVaw07tdDodhox81gyqK9CgiGh&ust=1730540105689000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPDbr8bquokDFQAAAAAdAAAAABAE"
+				},
+
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000016"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000005")),
+					Variant = "Lemon Boy",
+					Description = "A delightful variety known for its bright yellow color and sweet, tangy flavor. These medium-sized, " +
+					"round tomatoes are perfect for salads, sandwiches, and cooking, adding a splash of sunshine to your dishes. " +
+					"Lemon Boy tomatoes are not only delicious but also packed with vitamins and antioxidants, making them a healthy " +
+					"choice for your meals. They thrive in the garden and are known for their excellent disease resistance, ensuring a " +
+					"bountiful harvest. Bring home some Lemon Boy tomatoes today and enjoy their unique flavor and vibrant color " +
+					"in your cooking!",
+					Unit = Unit.Kilogram,
+					Price = 6.5m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://live.staticflickr.com/7024/6737258681_4ef1ab2555_b.jpg"
+				},
+
+
 				//Maple Leaf Gardens
 				new Offer
 				{

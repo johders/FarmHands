@@ -10,11 +10,12 @@ public partial class UserPreferenceSettingsPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
+		sliderAdjustedValue = 15;
 	}
 
 	protected override void OnAppearing()
 	{
-		lblDistance.Text = GetSliderLabelString(sldDistance.Value.ToString());
+		lblDistance.Text = GetSliderLabelString(sliderAdjustedValue.ToString());
 		base.OnAppearing();
 	}
 

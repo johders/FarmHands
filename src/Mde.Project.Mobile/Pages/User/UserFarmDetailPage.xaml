@@ -32,12 +32,6 @@
                 <Image Source="{Binding SelectedFarm.ImageUrl}"
                        Aspect="AspectFill"/>
 
-                <Label Text="Our story"
-                       Style="{StaticResource SmallLabel}"/>
-                <Label Text="{Binding SelectedFarm.Description}"
-                       Style="{StaticResource LabelText}"
-                       LineBreakMode="WordWrap"/>
-
                 <Label Text="Our harvest"
                        Style="{StaticResource SmallLabel}"/>
 
@@ -69,6 +63,12 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+                <Label Text="Our story"
+                       Style="{StaticResource SmallLabel}"/>
+                <Label Text="{Binding SelectedFarm.Description}"
+                       Style="{StaticResource LabelText}"
+                       LineBreakMode="WordWrap"/>
 
             </VerticalStackLayout>
         </Grid>

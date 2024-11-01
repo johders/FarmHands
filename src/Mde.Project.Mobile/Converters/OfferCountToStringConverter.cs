@@ -10,7 +10,7 @@ namespace Mde.Project.Mobile.Converters
 			string singular = "offer";
 			string plural = "offers";
 
-			return offerCount <= 1 ? $"{offerCount} {singular}" : $"{offerCount} {plural}";
+			return offerCount == 1 ? $"{offerCount} {singular}" : $"{offerCount} {plural}";
 
 		}
 

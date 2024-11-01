@@ -10,14 +10,17 @@ namespace Mde.Project.Mobile.ViewModels
     public class UserFavoriteProductsViewModel : ObservableObject
     {
         private readonly IFavoriteProductService _favoriteProductService;
+		private readonly IProductService _productService;
 
-		public UserFavoriteProductsViewModel(IFavoriteProductService favoriteProductService)
+		public UserFavoriteProductsViewModel(IFavoriteProductService favoriteProductService, IProductService productService)
 		{
 			_favoriteProductService = favoriteProductService;
+			_productService = productService;
+
 		}
 
-		private ObservableCollection<Product> favoriteProducts;
-		public ObservableCollection<Product> FavoriteProducts
+		private ObservableCollection<ProductViewModel> favoriteProducts;
+		public ObservableCollection<ProductViewModel> FavoriteProducts
 		{
 			get { return favoriteProducts; }
 			set 
@@ -29,13 +32,22 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand RefreshFavoriteProductsListCommand => new Command(async () =>
 		{
 			var result = await _favoriteProductService.GetAllFavoriteProductsAsync();
-			var favoriteProducts = result.Data;
+			var favoriteProducts = result.Data.Select(fp => new ProductViewModel(fp, _productService));
 
-			FavoriteProducts = new ObservableCollection<Product>(favoriteProducts);
+			FavoriteProducts = new ObservableCollection<ProductViewModel>(favoriteProducts);
 		});
 
-		public ICommand ViewProductDetailsCommand => new Command<Product>(async (product) =>
+		public ICommand ViewProductDetailsCommand => new Command<ProductViewModel>(async (productViewModel) =>
 		{
+			var result = await _productService.GetByIdAsync(productViewModel.Id);
+			var product = result.Data.FirstOrDefault();
+
+			if (!result.IsSuccess)
+			{
+				Shell.Current.DisplayAlert("Oops", $"{String.Join(", ", result.Errors)}", "OK");
+				return;
+			}
+
 			var navigationParameter = new Dictionary<string, object>()
 			{
 				{ nameof(UserProductDetailsViewModel.SelectedProduct), product }

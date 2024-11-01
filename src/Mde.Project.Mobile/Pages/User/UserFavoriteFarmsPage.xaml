@@ -37,7 +37,9 @@
                                         <Border  Grid.Column="1"
                                                  WidthRequest="120"
                                                  HeightRequest="70"
-                                                 StrokeShape="{RoundRectangle CornerRadius=8}">
+                                                 StrokeShape="{RoundRectangle CornerRadius=8}"
+                                                 VerticalOptions="Start"
+                                                 Margin="0,30">
                                             <Image Source="{Binding ImageUrl}"
                                                    Aspect="AspectFill"/>
                                         </Border>

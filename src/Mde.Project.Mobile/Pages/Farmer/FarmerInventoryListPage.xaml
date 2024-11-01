@@ -47,11 +47,17 @@
                                             StrokeShape="{RoundRectangle CornerRadius=5}"
                                             BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
                                         <Grid ColumnDefinitions="*, Auto, Auto">
-                                            <Label Text="{Binding Product.Name}"
-                                                   Style="{StaticResource SmallLabel}"
-                                                   TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
-                                                   VerticalOptions="Center"/>
-
+                                            <HorizontalStackLayout Spacing="10">
+                                                <Label Text="{Binding Variant}"
+                                                       Style="{StaticResource SmallLabel}"
+                                                       TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                                       VerticalOptions="Center"/>
+                                                <Label Text="{Binding Product.Name}"
+                                                       Style="{StaticResource SmallLabel}"
+                                                       FontSize="13"
+                                                       TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                                       VerticalOptions="Center"/>
+                                            </HorizontalStackLayout>
                                             <Button Grid.Column="1"
                                                     Text="Edit"
                                                     TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource PrimaryTextColorDark}}"
@@ -68,10 +74,22 @@
                                       ColumnDefinitions="*, Auto, Auto"
                                       BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
 
-                                    <Label Text="{Binding Product.Name}"
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding Variant}"
+                                               Style="{StaticResource SmallLabel}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                               VerticalOptions="Center"/>
+                                        <Label Text="{Binding Product.Name}"
+                                               Style="{StaticResource SmallLabel}"
+                                               FontSize="13"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                               VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                    
+                                    <!--<Label Text="{Binding Product.Name}"
                                            Style="{StaticResource SmallLabel}"
                                            TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
-                                           VerticalOptions="Center"/>
+                                           VerticalOptions="Center"/>-->
 
                                     <Button Grid.Column="1"
                                             Text="Delete"

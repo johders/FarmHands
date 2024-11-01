@@ -67,7 +67,7 @@
 
                 </VerticalStackLayout>
                 <Button Text="Save"
-                        CornerRadius="30"
+                        CornerRadius="25"
                         WidthRequest="200"
                         BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                         TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}">
@@ -80,7 +80,7 @@
                 </Button>
 
                 <Button Text="Farmer View"
-                        CornerRadius="50"
+                        CornerRadius="25"
                         WidthRequest="300"
                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                         TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"

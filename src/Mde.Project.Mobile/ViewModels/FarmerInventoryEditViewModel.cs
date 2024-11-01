@@ -132,7 +132,7 @@ namespace Mde.Project.Mobile.ViewModels
 			new Command(async () =>
 			{
 				var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
-				var farmResult = await _farmService.GetByIdAsync(Guid.Parse("10000000-0000-0000-0000-000000000001"));
+				var farmResult = await _farmService.GetByIdAsync(Guid.Parse("10000000-0000-0000-0000-000000000007"));
 
 				OfferEditRequestModel offer = new OfferEditRequestModel();
 

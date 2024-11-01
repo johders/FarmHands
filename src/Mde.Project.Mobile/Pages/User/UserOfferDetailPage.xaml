@@ -16,7 +16,7 @@
 
 
                     <Image Source="{Binding SelectedOffer.OfferImageUrl}"
-                           MaximumHeightRequest="300"
+                           MaximumHeightRequest="{OnPlatform WinUI=500, Default=300}"
                            Aspect="AspectFill"/>
 
                 <FlexLayout JustifyContent="SpaceBetween"

@@ -9,7 +9,21 @@ namespace Mde.Project.Core.Services
 {
     public class ProductMockService : IProductService
     {
+        private readonly IOfferService _offerService;
+
+		public ProductMockService(IOfferService offerService)
+		{
+			_offerService = offerService;
+		}
+
+        private readonly List<Offer> _offers;
         private readonly List<Product> _products = new(Seeder.SeedProducts());
+
+        public async Task<int> GetOfferCountAsync(Guid productId)
+        {
+            var result = await _offerService.GetAllOffersByProductIdAsync(productId);
+            return result.Data.Count();
+        }
 
         public Task<BaseResultModel> CreateAsync(ProductCreateRequestModel createModel)
         {

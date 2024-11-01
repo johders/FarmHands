@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mde.Project.Mobile.Pages.User.UserAccountSettingsPage"
-             Title="UserAccountSettingsPage">
+             Title="Account Settings">
     <VerticalStackLayout>
         <Button Text="Sign out"
                 CornerRadius="25"

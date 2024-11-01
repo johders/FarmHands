@@ -9,8 +9,21 @@ namespace Mde.Project.Core.Services
 {
     public class FarmMockService : IFarmService
     {
-        private readonly List<Farm> _farms = new(Seeder.SeedFarms());
-        public Task<BaseResultModel> CreateAsync(FarmCreateRequestModel createModel)
+		private readonly IOfferService _offerService;
+
+		public FarmMockService(IOfferService offerService)
+		{
+			_offerService = offerService;
+		}
+		private readonly List<Farm> _farms = new(Seeder.SeedFarms());
+
+		public async Task<int> GetOfferCountAsync(Guid farmId)
+		{
+			var result = await _offerService.GetAllOffersByFarmIdAsync(farmId);
+			return result.Data.Count();
+		}
+
+		public Task<BaseResultModel> CreateAsync(FarmCreateRequestModel createModel)
         {
             throw new NotImplementedException();
         }

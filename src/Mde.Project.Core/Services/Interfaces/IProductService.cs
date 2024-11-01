@@ -9,7 +9,6 @@ namespace Mde.Project.Core.Services.Interfaces
         Task<ResultModel<Product>> GetByIdAsync(Guid id);
         Task<ResultModel<Product>> GetAllAsync();
         Task<int> GetOfferCountAsync(Guid productId);
-
 		Task<BaseResultModel> CreateAsync(ProductCreateRequestModel createModel);
         Task<BaseResultModel> UpdateAsync(ProductUpdateRequestModel updateModel);
         Task<BaseResultModel> DeleteAsync(Guid id);

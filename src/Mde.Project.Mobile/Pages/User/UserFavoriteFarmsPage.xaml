@@ -15,7 +15,7 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Farm">
+                        <DataTemplate x:DataType="viewmodel:FarmViewModel">
                             <VerticalStackLayout>
                                 <Border Padding="5"
                                         StrokeShape="{RoundRectangle CornerRadius=5}"
@@ -29,7 +29,7 @@
                                             <Label Text="{Binding Name}"
                                                    Style="{StaticResource SmallLabel}"
                                                    TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                            <Label Text="{Binding Description}"
+                                            <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
                                                    Style="{StaticResource LabelText}"
                                                    LineBreakMode="WordWrap"
                                                    TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
@@ -37,9 +37,7 @@
                                         <Border  Grid.Column="1"
                                                  WidthRequest="120"
                                                  HeightRequest="70"
-                                                 StrokeShape="{RoundRectangle CornerRadius=8}"
-                                                 VerticalOptions="Start"
-                                                 Margin="0,30">
+                                                 StrokeShape="{RoundRectangle CornerRadius=8}">
                                             <Image Source="{Binding ImageUrl}"
                                                    Aspect="AspectFill"/>
                                         </Border>

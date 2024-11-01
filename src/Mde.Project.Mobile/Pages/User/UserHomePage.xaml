@@ -57,7 +57,7 @@
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Product">
+                        <DataTemplate x:DataType="viewmodels:ProductViewModel">
                             <Border Style="{StaticResource TileBorder}">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}"
@@ -71,7 +71,7 @@
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                LineBreakMode="TailTruncation"/>
-                                        <Label Text="{Binding Description}"
+                                        <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                     </VerticalStackLayout>

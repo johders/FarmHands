@@ -58,6 +58,102 @@ namespace Mde.Project.Core.Data
 
 			IEnumerable<Offer> offers = new List<Offer>
 			{
+				//Maple Leaf Gardens
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000010"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000009")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Variant = "Russet",
+					Description = "Our russet potatoes are grown with care to achieve a hearty, earthy taste and a satisfyingly fluffy texture. " +
+					"With their thick, rough skins and dense, starchy flesh, russets are the perfect choice for baking, mashing, " +
+					"and frying—they hold up beautifully in any hearty dish. These are the potatoes that give you crispy, " +
+					"golden fries, pillowy mashed potatoes, and perfectly baked jackets with that delightful balance of crispy " +
+					"skin and soft inside. When you pick russets from our farm, you’re getting potatoes that have been nurtured from seed to harvest, " +
+					"ensuring quality, freshness, and flavor in every bite. Perfect for everything from weeknight dinners to holiday feasts!",
+					Unit = Unit.Kilogram,
+					Price = 2.15m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2018/05/29/23/18/potato-3440360_1280.jpg"
+				},
+
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000011"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Variant = "Roma",
+					Description = "At our farm, we grow Romas with a firm, meaty texture and a perfectly balanced, rich flavor. " +
+					"With their oblong shape and deep red hue, these tomatoes are packed with less juice and fewer seeds, making them ideal for sauces, " +
+					"salsas, and canning. Our Roma tomatoes are nurtured under the sun to bring out their natural sweetness and subtle tang. " +
+					"They cook down beautifully, creating thick, flavorful sauces, and they’re also delicious fresh—adding a vibrant, " +
+					"savory taste to salads, sandwiches, and bruschetta. When you choose our farm’s Roma tomatoes, you’re getting quality, " +
+					"flavor, and versatility in every bite!",
+					Unit = Unit.Kilogram,
+					Price = 3.4m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2017/09/05/06/39/roma-tomatoes-2716569_1280.jpg"
+				},
+
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000012"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Variant = "San Marzano",
+					Description = "Grown with exceptional care, these Italian favorites are prized for their rich, sweet flavor and low acidity, " +
+					"making them perfect for creating authentic sauces, soups, and Italian dishes. Our San Marzanos have a distinct oblong " +
+					"shape, thick skin, and fewer seeds, giving you more of the rich, dense flesh that transforms into a beautifully " +
+					"smooth, velvety sauce. Handpicked at peak ripeness, our San Marzano tomatoes bring you a taste of " +
+					"Italy in every bite. Whether you’re making a classic marinara, a comforting tomato soup, or a fresh " +
+					"bruschetta, these tomatoes add unparalleled depth and flavor. With our farm’s San Marzano tomatoes, " +
+					"elevate every dish with the quality that chefs and home cooks alike cherish!",
+					Unit = Unit.Kilogram,
+					Price = 4.1m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/TomateSanMarzano.jpg/450px-TomateSanMarzano.jpg"
+				},
+
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000013"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000002")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Variant = "Nantes",
+					Description = "These carrots are grown on our farm with care to bring out their signature smooth, " +
+					"cylindrical shape and vibrant orange color. Nantes carrots are known for their tender, almost coreless texture, " +
+					"making them wonderfully juicy and easy to bite into, whether fresh or cooked. These beauties are excellent for snacking, " +
+					"adding to salads, or roasting to caramelized perfection. Their sweetness intensifies when cooked, and they blend seamlessly " +
+					"into soups and stews. When you buy Nantes carrots from our farm, you’re choosing the best in flavor, quality, and freshness. " +
+					"Perfect for families, chefs, and anyone who loves a carrot with pure, natural sweetness!",
+					Unit = Unit.Kilogram,
+					Price = 4.1m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2017/05/13/15/23/carrot-2309814_1280.jpg"
+				},
+
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000014"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000001")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Variant = "Granny Smith",
+					Description = "Renowned for their bright green skin and crisp texture, these apples are a delightful combination of tartness and " +
+					"sweetness that will invigorate your taste buds. Each bite delivers a refreshing crunch, " +
+					"making them perfect for snacking straight from the orchard! When you choose our Granny Smith apples, you’re choosing quality and freshness from our farm to your table. " +
+					"Experience the crisp, tangy goodness that has made Granny Smith a beloved favorite for generations!",
+					Unit = Unit.Kilogram,
+					Price = 4.1m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2017/07/01/21/15/apple-2462753_1280.jpg"
+				},
+
+
 				// Green Valley Orchards
 				new Offer
 				{

@@ -46,10 +46,10 @@
                                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewOfferDetailsCommand}"/>
                                 </Border.GestureRecognizers>
-                                <Grid RowDefinitions="4*, 1.5*" Margin="0">
+                                <Grid RowDefinitions="4*, 2*" Margin="0">
                                     <Image Source="{Binding OfferImageUrl}"
                                            Aspect="AspectFill"/>
-                                    <VerticalStackLayout Grid.Row="1" Padding="5">
+                                    <VerticalStackLayout Grid.Row="1" Padding="10">
                                         <Label Text="{Binding Variant}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>

@@ -42,7 +42,7 @@ namespace Mde.Project.Core.Data
 				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000001"), "Green Valley Orchards", "Nestled in the hills, this family-owned orchard specializes in organic apples, pears, and seasonal berries, grown with sustainable farming practices.", 51.2564, 3.0432, new List<Product>(), "https://statbel.fgov.be/sites/default/files/styles/news_full/public/images/landbouw/8.2%20Biologische%20landbouw/AdobeStock_200879536.jpeg?itok=9JTAiqrQ"),
 				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000002"), "Sunny Acres Farm", "Known for its sprawling sunflower fields and fresh vegetables, this farm offers a delightful experience with pick-your-own options.", 51.2593, 3.0481, new List<Product>(), "https://www.nationsencyclopedia.com/photos/belgium-agriculture-1547.jpg"),
 				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000003"), "Riverside Pastures", "Situated along the riverbank, Riverside Pastures is famous for its pasture-raised eggs, dairy products, and heritage breed livestock.", 51.2666, 3.0395, new List<Product>(), "https://www.theclimakers.org/wp/wp-content/uploads/2021/11/Boerenbond-Belgian-Farmers-Union.png"),
-				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000004"), "Maple Leaf Gardens", "A picturesque farm with an array of maple trees, offering fresh produce and locally produced maple syrup straight from the source.", 51.2670, 3.0569, new List<Product>(), "https://www.shutterstock.com/image-photo/dark-clouds-over-field-young-600nw-2179706511.jpg"),
+				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000004"), "Maple Leaf Gardens", "A picturesque farm with an array of maple trees, offering fresh produce and locally produced maple syrup straight from the source.", 51.2670, 3.0569, new List<Product>(), "https://cdn.pixabay.com/photo/2023/08/24/12/21/farming-8210675_1280.jpg"),
 				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000005"), "Harvest Moon Homestead", "This small yet abundant farm is dedicated to cultivating heirloom tomatoes, peppers, and herbs with an emphasis on organic and permaculture techniques.", 51.2752, 3.0497, new List<Product>(), "https://growingformarket.com/custom/2022%20Issues/may%202022/cas/web%204%20CSA%20members%20Klara%20and%20Marijke%20harvesting.jpg"),
 				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000006"), "Breezy Hill Farm", "With a focus on sustainable grains and legumes, Breezy Hill Farm is a local favorite for artisanal bread flour and fresh beans.", 51.2557, 3.0604, new List<Product>(), "https://lh-images.us-east-1.linodeobjects.com/4005.jpg"),
 				new Farm(Guid.Parse("10000000-0000-0000-0000-000000000007"), "Lavender Lane", "A serene haven with rows of aromatic lavender, this farm also produces lavender-infused honey, soaps, and teas for a unique farm experience.", 51.2473, 3.0270, new List<Product>(), "https://diplomatie.belgium.be/sites/default/files/styles/fluid_image/public/2022-04/shutterstock_436506028.jpg?itok=0vXbgD-t"),
@@ -58,6 +58,42 @@ namespace Mde.Project.Core.Data
 
 			IEnumerable<Offer> offers = new List<Offer>
 			{
+				// Green Valley Orchards
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000008"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000001")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000001")),
+					Variant = "Fuji",
+					Description = "Fuji apples have a flavor that’s mellow and smooth, ideal for snacking, baking, or tossing into salads. " +
+					"Because they stay fresh for weeks, they’re a reliable, delicious choice for your kitchen. Come try a sample! " +
+					"We’re confident you’ll fall in love with the taste and quality of our farm-fresh Fujis.",
+					Unit = Unit.Kilogram,
+					Price = 2.1m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2017/09/06/03/50/apple-2720105_1280.jpg"
+				},
+
+				new Offer
+				{
+					Id = Guid.Parse("20000000-0000-0000-0000-000000000009"),
+					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000007")),
+					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000001")),
+					Unit = Unit.Kilogram,
+					Variant = "Albion",
+					Description = "Let us introduce you to our Albion strawberries—one of the sweetest, juiciest berries you’ll ever taste! " +
+					"Grown with care right here on our farm, these strawberries are large, beautifully red, and bursting with flavor. " +
+					"Albions are special because they’re firm and hold up well, making them perfect for everything from fresh snacking to " +
+					"delicious desserts. We guarantee each berry is handpicked for the best taste and quality. Come try trem, you won’t be disappointed!",
+					Price = 16.5m,
+					IsAvailable = true,
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2020/04/22/17/24/strawberry-5079237_960_720.jpg"
+				},
+
+
+				// Sunny Acres Farm
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000001"),
@@ -66,16 +102,18 @@ namespace Mde.Project.Core.Data
 					Unit = Unit.Kilogram,
 					Price = 1.89m,
 					IsAvailable = true,
-					IsOrganic = false
-                },
+					IsOrganic = false,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2014/11/20/21/17/tomatoes-539909_1280.jpg"
+				},
                 new Offer
                 {
                     Id = Guid.Parse("20000000-0000-0000-0000-000000000002"),
                     Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000009")),
                     Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
                     Unit = Unit.Kilogram,
-                    Price = 1.50m
-                },
+                    Price = 1.50m,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2016/09/01/19/30/potatoes-1637280_1280.jpg"
+				},
                 new Offer
                 {
                     Id = Guid.Parse("20000000-0000-0000-0000-000000000003"),
@@ -84,9 +122,12 @@ namespace Mde.Project.Core.Data
                     Unit = Unit.Piece,
                     Price = 1.60m,
                     IsAvailable = true,
-                    IsOrganic = true
-                },
+                    IsOrganic = true,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2015/03/14/13/59/vegetables-673181_1280.jpg"
+				},
 
+
+				// Riverside Pastures
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000004"),
@@ -95,7 +136,8 @@ namespace Mde.Project.Core.Data
 					Unit = Unit.Dozen,
 					Price = 5.5m,
 					IsAvailable = true,
-					IsOrganic = true
+					IsOrganic = true,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2022/07/26/13/55/protein-7345935_1280.jpg"
 				},
 				new Offer
 				{
@@ -105,9 +147,12 @@ namespace Mde.Project.Core.Data
 					Unit = Unit.Litre,
 					Price = 2.50m,
 					IsAvailable = true,
-					IsOrganic = true
+					IsOrganic = true,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2017/07/05/15/41/milk-2474993_1280.jpg"
 				},
 
+
+				//Lavender Lane
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000006"),
@@ -116,7 +161,8 @@ namespace Mde.Project.Core.Data
 					Unit = Unit.Kilogram,
 					Price = 14m,
 					IsAvailable = true,
-					IsOrganic = true
+					IsOrganic = true,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2021/07/01/16/36/strawberries-6379817_1280.jpg"
 				},
 				new Offer
 				{
@@ -126,7 +172,8 @@ namespace Mde.Project.Core.Data
 					Unit = Unit.Piece,
 					Price = 7.50m,
 					IsAvailable = true,
-					IsOrganic = true
+					IsOrganic = true,
+					OfferImageUrl = "https://cdn.pixabay.com/photo/2014/05/23/18/15/honey-352205_1280.jpg"
 				},
 			};
 

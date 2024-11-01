@@ -23,10 +23,18 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
+                    <Label Text="Variant"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter variant"
+                           Text="{Binding Variant}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
                     <Label Text="Description"
                            Style="{StaticResource SmallLabel}"/>
-                    <Entry Placeholder="Enter product name"
-                           Text="{Binding Description}"/>
+                    <Editor Placeholder="Enter your description here..."
+                            AutoSize="TextChanges"
+                            Text="{Binding Description}"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>

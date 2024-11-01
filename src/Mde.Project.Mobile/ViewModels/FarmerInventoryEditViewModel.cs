@@ -46,6 +46,7 @@ namespace Mde.Project.Mobile.ViewModels
 				{
 					PageTitle = "Edit offer";
 					SelectedProduct = selectedOffer.Product;
+					Variant = selectedOffer.Variant;
 					Description = selectedOffer.Description;
 					Price = selectedOffer.Price;
 					SelectedUnit = selectedOffer.Unit;
@@ -54,6 +55,7 @@ namespace Mde.Project.Mobile.ViewModels
 				else
 				{
 					PageTitle = "Create new offer";
+					Variant = default;
 					SelectedProduct = default;
 					Description = default;
 					Price = default;
@@ -79,6 +81,13 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			get { return selectedProduct; }
 			set { SetProperty(ref selectedProduct, value); }
+		}
+
+		private string variant;
+		public string Variant
+		{
+			get { return variant; }
+			set { SetProperty(ref variant, value); }
 		}
 
 
@@ -128,6 +137,7 @@ namespace Mde.Project.Mobile.ViewModels
 				OfferEditRequestModel offer = new OfferEditRequestModel();
 
 				offer.Price = Price;
+				offer.Variant = Variant;
 				offer.Description = Description;
 				offer.Unit = SelectedUnit;
 				offer.Product = productResult.Data.First();

@@ -10,12 +10,13 @@
 
             <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
                 
-                    <Label Text="{Binding SelectedOffer.Product.Name}"
+                    <Label Text="{Binding SelectedOffer.Variant}"
                            Style="{StaticResource LargeLabel}"
                            Margin="0"/>
 
 
                     <Image Source="{Binding SelectedOffer.OfferImageUrl}"
+                           MaximumHeightRequest="300"
                            Aspect="AspectFill"/>
 
                 <FlexLayout JustifyContent="SpaceBetween"

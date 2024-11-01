@@ -17,6 +17,7 @@ namespace Mde.Project.Core.Services
                 Id = createModel.Id,
                 Price = createModel.Price,
                 Description = createModel.Description,
+                Variant = createModel.Variant,
                 Unit = createModel.Unit,
                 Product = createModel.Product,
                 Farm = createModel.Farm,
@@ -101,6 +102,7 @@ namespace Mde.Project.Core.Services
             offer.Unit = updateModel.Unit;
             offer.Price = updateModel.Price;
             offer.Description = updateModel.Description;
+            offer.Variant = updateModel.Variant;
             offer.Product = updateModel.Product;
             offer.Farm = updateModel.Farm;
             offer.IsOrganic = updateModel.IsOrganic;

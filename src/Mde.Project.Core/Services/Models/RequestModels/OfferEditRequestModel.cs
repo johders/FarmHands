@@ -8,6 +8,7 @@ namespace Mde.Project.Core.Services.Models.RequestModels
 		public Guid Id { get; set; }
 		public Product Product { get; set; }
 		public string Description { get; set; }
+		public string Variant { get; set; }
 		public Unit Unit { get; set; }
 		public Farm Farm { get; set; }
 		public decimal Price { get; set; }

@@ -32,12 +32,6 @@
                 <Image Source="{Binding SelectedProduct.ImageUrl}"
                        Aspect="AspectFill"/>
 
-                <Label Text="Product description"
-                       Style="{StaticResource SmallLabel}"/>
-                <Label Text="{Binding SelectedProduct.Description}"
-                       Style="{StaticResource LabelText}"
-                       LineBreakMode="WordWrap"/>
-
                 <Label Text="Current offers"
                        Style="{StaticResource SmallLabel}"/>
 
@@ -56,10 +50,10 @@
                                     <Image Source="{Binding OfferImageUrl}"
                                            Aspect="AspectFill"/>
                                     <VerticalStackLayout Grid.Row="1" Padding="5">
-                                        <Label Text="{Binding Product.Name}"
+                                        <Label Text="{Binding Variant}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                        <Label Text="{Binding Product.Description}"
+                                        <Label Text="{Binding Farm.Name}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                     </VerticalStackLayout>

@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Mde.Project.Mobile</ApplicationTitle>
+		<ApplicationTitle>FarmHands</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.mde.project.mobile</ApplicationId>
@@ -40,10 +40,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundScale="0.85" BaseSize="128,128" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\farmhandsplash.svg" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -57,12 +57,33 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\appicon.svg" />
+	  <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
+	  <None Remove="Resources\Fonts\Poppins-SemiBold.ttf" />
+	  <None Remove="Resources\Images\favorites.png" />
+	  <None Remove="Resources\Images\fhbg.webp" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\map.png" />
+	  <None Remove="Resources\Images\settings.png" />
+	  <None Remove="Resources\Splash\farmhandsplash.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Mde.Project.Core\Mde.Project.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="AppShellStartup.xaml.cs">
+	    <DependentUpon>AppShellStartup.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="AppShellUser.xaml.cs">
 	    <DependentUpon>AppShellUser.xaml</DependentUpon>
 	  </Compile>
@@ -72,6 +93,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AppShellStartup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="AppShellFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -93,23 +117,41 @@
 	  <MauiXaml Update="Pages\Login\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\User\UserAccountSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\User\UserFarmDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\User\UserFavoritesPage.xaml">
+	  <MauiXaml Update="Pages\User\UserFavoriteFarmsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\User\UserFavoriteProductsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\User\UserHomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\User\UserItemDetailsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\User\UserMapViewPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\User\UserSettingsPage.xaml">
+	  <MauiXaml Update="Pages\User\UserOfferDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\User\UserPreferenceSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\User\UserProductDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\FhDarkColors.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\FhColors.xaml">
+	    <Generator></Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\FhStyles.xaml">
+	    <Generator></Generator>
 	  </MauiXaml>
 	</ItemGroup>
 

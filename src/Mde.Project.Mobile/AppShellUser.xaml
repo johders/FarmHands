@@ -3,30 +3,57 @@
     x:Class="Mde.Project.Mobile.AppShellUser"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:userpages="clr-namespace:Mde.Project.Mobile.Pages.UserPages"
+    xmlns:userpages="clr-namespace:Mde.Project.Mobile.Pages.User"
+    xmlns:farmerpages="clr-namespace:Mde.Project.Mobile.Pages.Farmer"
+    
     Shell.FlyoutBehavior="Disabled"
-    Title="Mde.Project.Mobile">
+    Title="Mde.Project.Mobile"
+    Shell.NavBarIsVisible="True"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryBackgroundColor}, Dark={StaticResource PrimaryBackgroundColorDark}}"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+    Shell.TabBarUnselectedColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
+    Shell.TabBarForegroundColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource SecondaryBackgroundColorDark}}">
 
     <TabBar>
         <ShellContent
             Title="Home"
+            Icon="home.png"
             ContentTemplate="{DataTemplate userpages:UserHomePage}"
-            Route="userhome" />
+            Route="userhome"/>
 
         <ShellContent
             Title="Map"
+            Icon="map.png"
             ContentTemplate="{DataTemplate userpages:UserMapViewPage}"
             Route="usermap" />
 
-        <ShellContent
-            Title="Favorites"
-            ContentTemplate="{DataTemplate userpages:UserFavoritesPage}"
-            Route="userfavorites" />
+        <Tab Title="Favorites"
+             Icon="favorites.png">
+            <ShellContent
+                Title="Products"
+                ContentTemplate="{DataTemplate userpages:UserFavoriteProductsPage}"
+                Route="userfavoriteproducts" />
 
-        <ShellContent
-            Title="Settings"
-            ContentTemplate="{DataTemplate userpages:UserSettingsPage}"
-            Route="usersettings" />
+            <ShellContent
+                Title="Farms"
+                ContentTemplate="{DataTemplate userpages:UserFavoriteFarmsPage}"
+                Route="userfavoritefarms" />
+        </Tab>
+
+        <Tab Title="Settings"
+             Icon="settings.png">
+            <ShellContent
+                Title="Preferences"
+                ContentTemplate="{DataTemplate userpages:UserPreferenceSettingsPage}"
+                Route="userpreferencesettings" />
+
+            <ShellContent
+                Title="Account"
+                ContentTemplate="{DataTemplate userpages:UserAccountSettingsPage}"
+                Route="useraccountsettings" />
+        </Tab>
+
     </TabBar>
 
 </Shell>

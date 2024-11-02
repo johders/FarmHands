@@ -8,7 +8,10 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 
 ## Extra info
 
-- API keys
-- Login credentials
-- Database configurations
-- ...
+###   Farmer login  
+   username: test@farm.com  
+   password: password  
+
+###   User login  
+   username: test@user.com  
+   password: password

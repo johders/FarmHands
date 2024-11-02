@@ -14,7 +14,4 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 
 ###   User login  
    username: test@user.com  
-   password: password  
-
-- API keys: N/A
-- Database configurations: N/A
+   password: password

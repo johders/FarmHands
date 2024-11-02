@@ -1,12 +1,124 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mde.Project.Mobile.Pages.FarmerPages.FarmerInventoryEditPage"
-             Title="Manage Item">
-    <VerticalStackLayout>
-        <Label 
-            Text="Add, edit and delete items here"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:enums="clr-namespace:Mde.Project.Core.Enums;assembly=Mde.Project.Core"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:FarmerInventoryEditViewModel"
+             x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryEditPage"
+             HideSoftInputOnTapped="True"          
+             Title="{Binding PageTitle}">
+    <ScrollView>
+        <Grid Style="{StaticResource MaxWidthGrid}">
+
+            <VerticalStackLayout Margin="8,20,8,0" Spacing="20" 
+                                 MinimumWidthRequest="{OnPlatform WinUI=500, Default=0}">
+
+                <VerticalStackLayout>
+                    <Label Text="Product"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Picker Title="Select product"
+                            ItemsSource="{Binding Products, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                            ItemDisplayBinding="{Binding Name}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Variant"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter variant"
+                           Text="{Binding Variant}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Description"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Editor Placeholder="Enter your description here..."
+                            AutoSize="TextChanges"
+                            Text="{Binding Description}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Price per unit"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter price"
+                       Text="{Binding Price}"
+                       Keyboard="Numeric"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Unit"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Picker Title="Select unit"
+                            ItemsSource="{Binding UnitOptions}"
+                            SelectedItem="{Binding SelectedUnit}"/>
+                </VerticalStackLayout>
+
+                <Label Text="Image"
+                       Style="{StaticResource SmallLabel}"/>
+
+                <Border WidthRequest="300" 
+                        HeightRequest="200" 
+                        StrokeThickness="3" 
+                        Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <Image Source="{Binding SelectedOffer.OfferImageUrl}" 
+                           Aspect="AspectFill"/>
+
+                </Border>
+
+                <Border WidthRequest="300"
+                        HeightRequest="200"
+                        StrokeThickness="3"
+                        Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <FlexLayout JustifyContent="SpaceEvenly"
+                                AlignItems="Center">
+                        <VerticalStackLayout>
+                            <ImageButton Source="gallery.png"
+                                         WidthRequest="60"
+                                         HeightRequest="60"
+                                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                                         Padding="10"
+                                         CornerRadius="30"/>
+                            <Label Text="From gallery"
+                                   Style="{StaticResource LabelText}"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <ImageButton Source="camera.png"
+                                         WidthRequest="60"
+                                         HeightRequest="60"
+                                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                                         Padding="10"
+                                         CornerRadius="30"/>
+                            <Label Text="Take picture"
+                                   Style="{StaticResource LabelText}"/>
+                        </VerticalStackLayout>
+                    </FlexLayout>
+                </Border>
+
+
+                <Button Text="Save"
+                        CornerRadius="25"
+                        WidthRequest="300"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                        Margin="20"
+                        Command="{Binding SaveCommand}">
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
+                    </Button.Shadow>
+                </Button>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

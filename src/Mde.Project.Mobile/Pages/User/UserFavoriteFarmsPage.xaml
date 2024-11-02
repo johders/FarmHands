@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:UserFavoriteFarmsViewModel"
+             x:Class="Mde.Project.Mobile.Pages.User.UserFavoriteFarmsPage"
+             x:Name="page"
+             Title="Favorite farms">
+    <ScrollView>
+        <Grid Style="{StaticResource MaxWidthGrid}">
+            <VerticalStackLayout Margin="8">
+                <CollectionView ItemsSource="{Binding FavoriteFarms}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewmodel:FarmViewModel">
+                            <VerticalStackLayout>
+                                <Border Padding="5"
+                                        StrokeShape="{RoundRectangle CornerRadius=5}"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
+                                    </Border.GestureRecognizers>
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <VerticalStackLayout Spacing="5" Padding="8">
+                                            <Label Text="{Binding Name}"
+                                                   Style="{StaticResource SmallLabel}"
+                                                   TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
+                                            <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
+                                                   Style="{StaticResource LabelText}"
+                                                   LineBreakMode="WordWrap"
+                                                   TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
+                                        </VerticalStackLayout>
+                                        <Border  Grid.Column="1"
+                                                 WidthRequest="120"
+                                                 HeightRequest="70"
+                                                 StrokeShape="{RoundRectangle CornerRadius=8}">
+                                            <Image Source="{Binding ImageUrl}"
+                                                   Aspect="AspectFill"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

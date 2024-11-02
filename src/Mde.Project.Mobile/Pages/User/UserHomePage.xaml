@@ -1,70 +1,87 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mde.Project.Mobile.Pages.UserPages.UserHomePage"
-             Title="Home">
+             xmlns:viewmodels="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"           
+             x:DataType="viewmodels:UserHomeViewModel"
+             x:Class="Mde.Project.Mobile.Pages.User.UserHomePage"
+             x:Name="page"
+             Title="Home"
+             HideSoftInputOnTapped="True">
 
-    <VerticalStackLayout>
-        <SearchBar Placeholder="Search by farm, product, location,.."
-                   Keyboard="Default"/>
+    <ScrollView>
+        <Grid Style="{StaticResource MaxWidthGrid}">
+            <VerticalStackLayout Spacing="10" Margin="8,8,8,50">
 
-        <Label 
-        Text="Farms near me"
-        VerticalOptions="Center" 
-        HorizontalOptions="Center" />
+                <SearchBar Placeholder="Search by farm, product, location,.."
+                           Keyboard="Default"
+                           Margin="5,15,30,15"/>
 
-        <ScrollView>
-            <HorizontalStackLayout  Spacing="10" Margin="15">
-                <BoxView WidthRequest="150"
- HeightRequest="150"
- Color="Brown"/>
-                <BoxView WidthRequest="150"
- HeightRequest="150"
- Color="Brown"/>
-                <BoxView WidthRequest="150"
- HeightRequest="150"
- Color="Brown"/>
-                <BoxView WidthRequest="150"
- HeightRequest="150"
- Color="Brown"/>
-                <BoxView WidthRequest="150"
- HeightRequest="150"
- Color="Brown"/>
-                <BoxView WidthRequest="150"
- HeightRequest="150"
- Color="Brown"/>
-            </HorizontalStackLayout>
+                <Label Text="Farms near me"
+                       Style="{StaticResource LargeLabel}"/>
 
-        </ScrollView>
+                <CollectionView ItemsSource="{Binding Farms}" Margin="0,0,0,15">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Farm">
+                            <Border Style="{StaticResource TileBorder}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                          Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
+                                </Border.GestureRecognizers>
+                                <Grid RowDefinitions="4*, 2*" Margin="0">
+                                    <Image Source="{Binding ImageUrl}"
+                                           Aspect="AspectFill"/>
+                                    <VerticalStackLayout Grid.Row="1" Padding="10">
+                                        <Label Text="{Binding Name}"
+                                               Style="{StaticResource SmallLabel}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Description}"
+                                               Style="{StaticResource LabelText}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        
+                <Label Text="Currently in season"
+                       Style="{StaticResource LargeLabel}"/>
 
+                <CollectionView ItemsSource="{Binding Products}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewmodels:ProductViewModel">
+                            <Border Style="{StaticResource TileBorder}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                          Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
+                                </Border.GestureRecognizers>
+                                <Grid RowDefinitions="4*, 2*" Margin="0">
+                                    <Image Source="{Binding ImageUrl}"
+                                           Aspect="AspectFill"/>
+                                    <VerticalStackLayout Grid.Row="1" Padding="10">
+                                        <Label Text="{Binding Name}"
+                                               Style="{StaticResource SmallLabel}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
+                                               Style="{StaticResource LabelText}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        <Label 
-        Text="Currently in season"
-        VerticalOptions="Center" 
-        HorizontalOptions="Center" />
-
-        <HorizontalStackLayout Spacing="10" Margin="15">
-            <BoxView WidthRequest="150"
-                 HeightRequest="150"
-                 Color="Green"/>
-            <BoxView WidthRequest="150"
-                 HeightRequest="150"
-                 Color="Green"/>
-            <BoxView WidthRequest="150"
-                 HeightRequest="150"
-                 Color="Green"/>
-            <BoxView WidthRequest="150"
-                 HeightRequest="150"
-                 Color="Green"/>
-            <BoxView WidthRequest="150"
-                 HeightRequest="150"
-                 Color="Green"/>
-            <BoxView WidthRequest="150"
-                 HeightRequest="150"
-                 Color="Green"/>
-        </HorizontalStackLayout>
-
-    </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

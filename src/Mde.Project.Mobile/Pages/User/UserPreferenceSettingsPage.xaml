@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls.Compatibility;assembly=Microsoft.Maui.Controls.Compatibility"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:UserPreferencesViewModel"
+             x:Class="Mde.Project.Mobile.Pages.User.UserPreferenceSettingsPage"
+             Title="Preferences">
+    <ScrollView>
+        <Grid Style="{StaticResource MaxWidthGrid}">
+            <VerticalStackLayout Margin="8,20" Spacing="20">
+                <VerticalStackLayout>
+                    <FlexLayout Direction="Row"
+                                JustifyContent="SpaceBetween">
+                        <Label Text="Search distance" Style="{StaticResource SmallLabel}"/>
+                        <Label x:Name="lblDistance"/>
+                    </FlexLayout>
+
+                    <Slider ThumbColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                            Maximum="100"
+                            Minimum="1"
+                            MinimumTrackColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                            MaximumTrackColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                            x:Name="sldDistance"
+                            Margin="8"
+                            Value="15"
+                            ValueChanged="Slider_ValueChanged"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Dietary Preferences"
+                           Style="{StaticResource SmallLabel}"/>
+                    <CollectionView ItemsSource="{Binding DietaryOptions}" Margin="0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:DietaryOption">
+                                <VerticalStackLayout>
+                                    <FlexLayout Direction="Row"
+                                                JustifyContent="SpaceBetween">
+                                        <Label Text="{Binding Name}"
+                                               VerticalOptions="Center"/>
+                                        <Switch Style="{StaticResource FarmSwitch}"
+                                                IsToggled="{Binding IsSelected}"/>
+                                    </FlexLayout>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="My favorite cuisines"
+                           Style="{StaticResource SmallLabel}"/>
+                        <CollectionView ItemsSource="{Binding CuisineOptions}"
+                                    SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:CuisineOption">
+                                    <HorizontalStackLayout>
+                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                              CheckedChanged="CheckBox_CheckedChanged"/>
+                                        <Label Text="{Binding Name}"
+                                           VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                </VerticalStackLayout>
+                <Button Text="Save"
+                        CornerRadius="25"
+                        WidthRequest="200"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}">
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
+                    </Button.Shadow>
+                </Button>
+
+                <Button Text="Farmer View"
+                        CornerRadius="25"
+                        WidthRequest="300"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
+                        Command="{Binding SwitchToFarmerViewCommand}">
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
+                    </Button.Shadow>
+                </Button>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

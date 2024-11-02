@@ -1,12 +1,76 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mde.Project.Mobile.Pages.UserPages.UserFarmDetailPage"
-             Title="UserFarmDetailPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:model="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             x:Class="Mde.Project.Mobile.Pages.User.UserFarmDetailPage"
+             x:Name="page"
+             x:DataType="viewmodel:UserFarmDetailsViewModel"
+             Title="Farm details">
+
+    <ScrollView>
+        <Grid Style="{StaticResource MaxWidthGrid}">
+            <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
+                <FlexLayout JustifyContent="SpaceBetween"
+                            AlignItems="Center"
+                            Margin="0,20">
+                    <Label Text="{Binding SelectedFarm.Name}"
+                            Style="{StaticResource LargeLabel}"
+                            Margin="0"/>
+
+                    <Image Source="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartImageConverter}}"
+                           WidthRequest="40"
+                           HeightRequest="40">
+
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
+                        </Image.GestureRecognizers>
+
+                    </Image>
+                </FlexLayout>
+
+                <Image Source="{Binding SelectedFarm.ImageUrl}"
+                       Aspect="AspectFill"/>
+
+                <Label Text="Our harvest"
+                       Style="{StaticResource SmallLabel}"/>
+
+                <CollectionView ItemsSource="{Binding Offers}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Offer">
+                            <Border Style="{StaticResource TileBorder}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                          Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewOfferDetailsCommand}"/>
+                                </Border.GestureRecognizers>
+                                <Grid RowDefinitions="4*, 2*" Margin="0">
+                                    <Image Source="{Binding OfferImageUrl}"
+                                           Aspect="AspectFill"/>
+                                    <VerticalStackLayout Grid.Row="1" Padding="10">
+                                        <Label Text="{Binding Variant}"
+                                               Style="{StaticResource SmallLabel}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Label Text="{Binding Farm.Name}"
+                                               Style="{StaticResource LabelText}"
+                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Our story"
+                       Style="{StaticResource SmallLabel}"/>
+                <Label Text="{Binding SelectedFarm.Description}"
+                       Style="{StaticResource LabelText}"
+                       LineBreakMode="WordWrap"/>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

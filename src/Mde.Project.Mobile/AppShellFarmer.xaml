@@ -3,26 +3,29 @@
     x:Class="Mde.Project.Mobile.AppShellFarmer"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:farmerpages="clr-namespace:Mde.Project.Mobile.Pages.FarmerPages"
+    xmlns:farmerpages="clr-namespace:Mde.Project.Mobile.Pages.Farmer"
     Shell.FlyoutBehavior="Flyout"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryBackgroundColor}, Dark={StaticResource PrimaryBackgroundColorDark}}"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
     Title="Mde.Project.Mobile">
 
-    <FlyoutItem Title="Dashboard">
+    <FlyoutItem Title="Dashboard"
+                Icon="dashboard.png">
         <ShellContent
             ContentTemplate="{DataTemplate farmerpages:FarmerDashboardPage}"
             Route="dashboard" />
     </FlyoutItem>
-    <FlyoutItem Title="Inventory Manager">
+    <FlyoutItem Title="Inventory Manager"
+                Icon="inventory.png">
         <ShellContent
             ContentTemplate="{DataTemplate farmerpages:FarmerInventoryListPage}"
             Route="inventory" />
     </FlyoutItem>
-    <FlyoutItem Title="Settings">
+    <FlyoutItem Title="Settings"
+                Icon="settings.png">
         <ShellContent
             ContentTemplate="{DataTemplate farmerpages:FarmerSettingsPage}"
             Route="farmersettings" />
     </FlyoutItem>
-
-
 
 </Shell>

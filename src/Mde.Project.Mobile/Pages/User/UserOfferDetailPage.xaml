@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:UserOfferDetailsViewModel"
+             x:Class="Mde.Project.Mobile.Pages.User.UserOfferDetailPage"
+             Title="Offer Details">
+    <ScrollView>
+        <Grid Style="{StaticResource MaxWidthGrid}">
+
+            <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
+                
+                    <Label Text="{Binding SelectedOffer.Variant}"
+                           Style="{StaticResource LargeLabel}"
+                           Margin="0"/>
+
+
+                    <Image Source="{Binding SelectedOffer.OfferImageUrl}"
+                           MaximumHeightRequest="{OnPlatform WinUI=500, Default=300}"
+                           Aspect="AspectFill"/>
+
+                <FlexLayout JustifyContent="SpaceBetween"
+                            AlignItems="Center"
+                            Margin="0,20">
+                <VerticalStackLayout>
+                    <Label Text="Cultivated by"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Label Text="{Binding SelectedOffer.Farm.Name}"
+                           Style="{StaticResource LabelText}"
+                           LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
+                <Button Text="More from this farm"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                        Command="{Binding ViewFarmDetailsCommand}"
+                        CommandParameter="{Binding SelectedOffer.Farm}"/>
+                </FlexLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Price"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Label Text="{Binding FormattedPrice}"
+                            Style="{StaticResource LabelText}"
+                            LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Offer description"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Label Text="{Binding SelectedOffer.Description}"
+                           Style="{StaticResource LabelText}"
+                           LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

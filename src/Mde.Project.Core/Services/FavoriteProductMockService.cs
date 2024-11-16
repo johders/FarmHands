@@ -26,10 +26,7 @@ namespace Mde.Project.Core.Services
 				});
 			}
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+			return await Task.FromResult(new BaseResultModel());
 		}
 
 		public async Task<BaseResultModel> DeleteAsync(string id)
@@ -43,10 +40,7 @@ namespace Mde.Project.Core.Services
 
 			UserFavoriteProducts.Remove(favoriteProduct);
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+			return await Task.FromResult(new BaseResultModel());
 		}
 
 		public IQueryable<FavoriteProduct> GetAll()
@@ -57,9 +51,7 @@ namespace Mde.Project.Core.Services
 		public async Task<ResultModel<IEnumerable<FavoriteProduct>>> GetAllAsync()
 		{
 			return await Task.FromResult(new ResultModel<IEnumerable<FavoriteProduct>>
-
             {
-				IsSuccess = true,
 				Data = GetAll()
 			});
 		}
@@ -83,7 +75,6 @@ namespace Mde.Project.Core.Services
 
 			return await Task.FromResult(new ResultModel<IEnumerable<Product>>
 			{
-				IsSuccess = true,
 				Data = products
 			});
 		}
@@ -95,13 +86,10 @@ namespace Mde.Project.Core.Services
 			{
 				return await Task.FromResult(new BaseResultModel
 				{
-					IsSuccess = false
+					Errors = new List<string> { "Product not in favorites list!" }
 				});
 			}
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+			return await Task.FromResult(new BaseResultModel());
 		}
 
 	}

@@ -25,10 +25,7 @@ namespace Mde.Project.Core.Services
 
             _offers.Add(offer);
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
 
         public async Task<BaseResultModel> DeleteAsync(string id)
@@ -42,10 +39,7 @@ namespace Mde.Project.Core.Services
 
             _offers.Remove(offer);
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
 
         public IQueryable<Offer> GetAll()
@@ -57,7 +51,6 @@ namespace Mde.Project.Core.Services
         {
             return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
-                IsSuccess = true,
                 Data = GetAll()
             });
         }
@@ -66,7 +59,6 @@ namespace Mde.Project.Core.Services
         {
             return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
-                IsSuccess = true,
                 Data = GetAll().Where(o => o.Farm.Id == farmId)
             });
         }
@@ -75,19 +67,8 @@ namespace Mde.Project.Core.Services
         {
             return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
-                IsSuccess = true,
                 Data = GetAll().Where(o => o.Product.Id == productId)
             });
-        }
-
-        public Task<ResultModel<Offer>> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel)
@@ -107,10 +88,7 @@ namespace Mde.Project.Core.Services
             offer.Farm = updateModel.Farm;
             offer.IsOrganic = updateModel.IsOrganic;
 
-            return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
     }
 }

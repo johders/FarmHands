@@ -31,10 +31,7 @@ namespace Mde.Project.Core.Services
 				});
 			}
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+			return await Task.FromResult(new BaseResultModel());
 		}
 
         public async Task<BaseResultModel> DeleteAsync(string farmId)
@@ -48,10 +45,7 @@ namespace Mde.Project.Core.Services
 
 			UserFavoriteFarms.Remove(favoriteFarm);
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+			return await Task.FromResult(new BaseResultModel());
 		}
 
         public IQueryable<FavoriteFarm> GetAll()
@@ -78,7 +72,6 @@ namespace Mde.Project.Core.Services
 
 			return await Task.FromResult(new ResultModel<IEnumerable<Farm>>
             {
-				IsSuccess = true,
 				Data = farms
 			});
 		}
@@ -90,13 +83,10 @@ namespace Mde.Project.Core.Services
 			{
 				return await Task.FromResult(new BaseResultModel
 				{
-					IsSuccess = false
+					Errors = new List<string> { "Farm not in favorites list" }
 				});
 			}
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+			return await Task.FromResult(new BaseResultModel());
 		}
 
     }

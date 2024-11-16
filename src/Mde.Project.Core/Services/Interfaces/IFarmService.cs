@@ -9,10 +9,7 @@ namespace Mde.Project.Core.Services.Interfaces
         Task<ResultModel<Farm>> GetByIdAsync(string id);
         Task<ResultModel<IEnumerable<Farm>>> GetAllAsync();
         Task<int> GetOfferCountAsync(string farmId);
-		Task<BaseResultModel> CreateAsync(FarmCreateRequestModel createModel);
         Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel);
-        Task<BaseResultModel> DeleteAsync(Guid id);
         IQueryable<Farm> GetAll();
-        Task<BaseResultModel> SaveChangesAsync();
     }
 }

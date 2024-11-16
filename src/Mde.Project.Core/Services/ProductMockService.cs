@@ -2,7 +2,6 @@
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
-using Mde.Project.Core.Services.Models.RequestModels;
 using Pri.Pe1.Hsp.Core.Services.Helpers;
 
 namespace Mde.Project.Core.Services
@@ -25,16 +24,6 @@ namespace Mde.Project.Core.Services
             return result.Data.Count();
         }
 
-        public Task<BaseResultModel> CreateAsync(ProductCreateRequestModel createModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IQueryable<Product> GetAll()
         {
             return _products.AsQueryable();
@@ -44,7 +33,6 @@ namespace Mde.Project.Core.Services
         {
             return await Task.FromResult(new ResultModel<IEnumerable<Product>>
             {
-                IsSuccess = true,
                 Data = GetAll()
             });
         }
@@ -60,19 +48,9 @@ namespace Mde.Project.Core.Services
 
 			return await Task.FromResult(new ResultModel<Product>
 			{
-				IsSuccess = true,
 				Data = product
 			});
 		}
 
-        public Task<BaseResultModel> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> UpdateAsync(ProductUpdateRequestModel updateModel)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

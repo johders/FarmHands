@@ -23,16 +23,6 @@ namespace Mde.Project.Core.Services
 			return result.Data.Count();
 		}
 
-		public Task<BaseResultModel> CreateAsync(FarmCreateRequestModel createModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IQueryable<Farm> GetAll()
         {
             return _farms.AsQueryable();
@@ -42,7 +32,6 @@ namespace Mde.Project.Core.Services
         {
             return await Task.FromResult(new ResultModel<IEnumerable<Farm>>
             {
-                IsSuccess = true,
                 Data = GetAll()
             });
         }
@@ -58,14 +47,8 @@ namespace Mde.Project.Core.Services
 
             return await Task.FromResult(new ResultModel<Farm>
             {
-                IsSuccess = true,
                 Data = farm
             });
-        }
-
-        public Task<BaseResultModel> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)
@@ -83,10 +66,7 @@ namespace Mde.Project.Core.Services
             farm.Longitude = updateModel.Longitude;
             farm.ImageUrl = updateModel.ImageUrl;
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
     }
 }

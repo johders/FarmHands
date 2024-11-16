@@ -8,7 +8,6 @@ namespace Pri.Pe1.Hsp.Core.Services.Helpers
 		{
 			return new BaseResultModel
 			{
-				IsSuccess = false,
 				Errors = new List<string>() { error }
 			};
 		}
@@ -17,7 +16,6 @@ namespace Pri.Pe1.Hsp.Core.Services.Helpers
 		{
 			return new ResultModel<T>
 			{
-				IsSuccess = false,
 				Errors = new List<string>() { error }
 			};
 		}

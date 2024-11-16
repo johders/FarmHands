@@ -59,7 +59,7 @@ namespace Mde.Project.Core.Services
             return UserFavoriteFarms.AsQueryable();
         }
 
-        public async Task<ResultModel<Farm>> GetAllFavoriteFarmsAsync()
+        public async Task<ResultModel<IEnumerable<Farm>>> GetAllFavoriteFarmsAsync()
         {
 			var favoriteFarms = GetAll().ToList();
 			var farms = new List<Farm>();
@@ -69,15 +69,15 @@ namespace Mde.Project.Core.Services
 
 				if (farm is null)
 				{
-					return ResultHelper.CreateErrorResult<Farm>("Farm not found!");
+					return ResultHelper.CreateErrorResult<IEnumerable<Farm>>("Farm not found!");
 				}
 
 				favFarm.Farm = farm;
 				farms.Add(farm);
 			}
 
-			return await Task.FromResult(new ResultModel<Farm>
-			{
+			return await Task.FromResult(new ResultModel<IEnumerable<Farm>>
+            {
 				IsSuccess = true,
 				Data = farms
 			});

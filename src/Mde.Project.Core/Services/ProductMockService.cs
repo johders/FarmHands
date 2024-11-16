@@ -40,12 +40,12 @@ namespace Mde.Project.Core.Services
             return _products.AsQueryable();
         }
 
-        public async Task<ResultModel<Product>> GetAllAsync()
+        public async Task<ResultModel<IEnumerable<Product>>> GetAllAsync()
         {
-            return await Task.FromResult(new ResultModel<Product>
+            return await Task.FromResult(new ResultModel<IEnumerable<Product>>
             {
                 IsSuccess = true,
-                Data = GetAll().ToList()
+                Data = GetAll()
             });
         }
 
@@ -61,7 +61,7 @@ namespace Mde.Project.Core.Services
 			return await Task.FromResult(new ResultModel<Product>
 			{
 				IsSuccess = true,
-				Data = new List<Product> { product }
+				Data = product
 			});
 		}
 

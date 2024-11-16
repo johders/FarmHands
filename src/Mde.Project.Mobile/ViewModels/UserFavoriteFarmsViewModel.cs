@@ -40,7 +40,7 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farmViewModel) =>
 		{
 			var result = await _farmService.GetByIdAsync(farmViewModel.Id);
-			var farm = result.Data.FirstOrDefault();
+			var farm = result.Data;
 
 			if (!result.IsSuccess)
 			{

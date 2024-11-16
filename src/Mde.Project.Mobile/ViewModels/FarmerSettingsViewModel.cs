@@ -37,7 +37,7 @@ namespace Mde.Project.Mobile.ViewModels
 			
 			if (result.IsSuccess)
 			{
-				farm = result.Data.First();
+				farm = result.Data;
 			}		
 		}
 

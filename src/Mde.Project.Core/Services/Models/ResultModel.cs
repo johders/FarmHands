@@ -2,6 +2,6 @@
 {
     public class ResultModel<T> : BaseResultModel
     {
-        public IEnumerable<T> Data { get; set; }
+        public T Data { get; set; }
     }
 }

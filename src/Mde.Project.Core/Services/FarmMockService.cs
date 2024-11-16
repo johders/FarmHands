@@ -38,12 +38,12 @@ namespace Mde.Project.Core.Services
             return _farms.AsQueryable();
         }
 
-        public async Task<ResultModel<Farm>> GetAllAsync()
+        public async Task<ResultModel<IEnumerable<Farm>>> GetAllAsync()
         {
-            return await Task.FromResult(new ResultModel<Farm>
+            return await Task.FromResult(new ResultModel<IEnumerable<Farm>>
             {
                 IsSuccess = true,
-                Data = GetAll().ToList()
+                Data = GetAll()
             });
         }
 
@@ -59,7 +59,7 @@ namespace Mde.Project.Core.Services
             return await Task.FromResult(new ResultModel<Farm>
             {
                 IsSuccess = true,
-                Data = new List<Farm> { farm }
+                Data = farm
             });
         }
 

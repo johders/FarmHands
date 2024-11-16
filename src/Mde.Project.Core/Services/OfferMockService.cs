@@ -53,30 +53,30 @@ namespace Mde.Project.Core.Services
             return _offers.AsQueryable();
         }
 
-        public async Task<ResultModel<Offer>> GetAllAsync()
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllAsync()
         {
-            return await Task.FromResult(new ResultModel<Offer>
+            return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
                 IsSuccess = true,
-                Data = GetAll().ToList()
+                Data = GetAll()
             });
         }
 
-        public async Task<ResultModel<Offer>> GetAllOffersByFarmIdAsync(string farmId)
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByFarmIdAsync(string farmId)
         {
-            return await Task.FromResult(new ResultModel<Offer>
+            return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
                 IsSuccess = true,
-                Data = GetAll().Where(o => o.Farm.Id == farmId).ToList()
+                Data = GetAll().Where(o => o.Farm.Id == farmId)
             });
         }
 
-        public async Task<ResultModel<Offer>> GetAllOffersByProductIdAsync(string productId)
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByProductIdAsync(string productId)
         {
-            return await Task.FromResult(new ResultModel<Offer>
+            return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
                 IsSuccess = true,
-                Data = GetAll().Where(o => o.Product.Id == productId).ToList()
+                Data = GetAll().Where(o => o.Product.Id == productId)
             });
         }
 

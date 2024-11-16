@@ -54,16 +54,17 @@ namespace Mde.Project.Core.Services
 			return UserFavoriteProducts.AsQueryable();
 		}
 
-		public async Task<ResultModel<FavoriteProduct>> GetAllAsync()
+		public async Task<ResultModel<IEnumerable<FavoriteProduct>>> GetAllAsync()
 		{
-			return await Task.FromResult(new ResultModel<FavoriteProduct>
-			{
+			return await Task.FromResult(new ResultModel<IEnumerable<FavoriteProduct>>
+
+            {
 				IsSuccess = true,
-				Data = GetAll().ToList()
+				Data = GetAll()
 			});
 		}
 
-		public async Task<ResultModel<Product>> GetAllFavoriteProductsAsync()
+		public async Task<ResultModel<IEnumerable<Product>>> GetAllFavoriteProductsAsync()
 		{
 			var favoriteProducts = GetAll().ToList();
 			var products = new List<Product>();
@@ -73,14 +74,14 @@ namespace Mde.Project.Core.Services
 
 				if (product is null)
 				{
-					return ResultHelper.CreateErrorResult<Product>("Product not found!");
+					return ResultHelper.CreateErrorResult<IEnumerable<Product>>("Product not found!");
 				}
 
 				favProduct.Product = product;
 				products.Add(product);
 			}
 
-			return await Task.FromResult(new ResultModel<Product>
+			return await Task.FromResult(new ResultModel<IEnumerable<Product>>
 			{
 				IsSuccess = true,
 				Data = products

@@ -140,8 +140,8 @@ namespace Mde.Project.Mobile.ViewModels
 				offer.Variant = Variant;
 				offer.Description = Description;
 				offer.Unit = SelectedUnit;
-				offer.Product = productResult.Data.First();
-				offer.Farm = farmResult.Data.First();
+				offer.Product = productResult.Data;
+				offer.Farm = farmResult.Data;
 
 				if(SelectedOffer is null)
 				{

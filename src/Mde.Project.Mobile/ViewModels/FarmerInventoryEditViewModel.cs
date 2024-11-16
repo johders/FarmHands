@@ -145,7 +145,7 @@ namespace Mde.Project.Mobile.ViewModels
 
 				if(SelectedOffer is null)
 				{
-					offer.Id = Guid.NewGuid();
+					offer.Id = Guid.NewGuid().ToString();
 					var createResult = await _offerService.CreateAsync(offer);
 
 					if (createResult.IsSuccess)

@@ -5,7 +5,7 @@ namespace Mde.Project.Core.Services.Models.RequestModels
 {
     public class OfferEditRequestModel
     {
-		public Guid Id { get; set; }
+		public string Id { get; set; }
 		public Product Product { get; set; }
 		public string Description { get; set; }
 		public string Variant { get; set; }

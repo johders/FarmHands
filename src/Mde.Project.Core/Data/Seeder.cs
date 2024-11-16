@@ -62,7 +62,7 @@ namespace Mde.Project.Core.Data
 				//Breezy Hill Farm
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000017"),
+					Id = "20000000-0000-0000-0000-000000000017",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000001"),
 					ProductId = "00000000-0000-0000-0000-000000000001",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000006"),
@@ -83,7 +83,7 @@ namespace Mde.Project.Core.Data
 
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000018"),
+					Id = "20000000-0000-0000-0000-000000000018",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000009"),
 					ProductId = "00000000-0000-0000-0000-000000000009",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000006"),
@@ -107,7 +107,7 @@ namespace Mde.Project.Core.Data
 				//Harvest Moon Homestead
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000015"),
+					Id = "20000000-0000-0000-0000-000000000015",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000014"),
 					ProductId = "00000000-0000-0000-0000-000000000014",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000005"),
@@ -127,7 +127,7 @@ namespace Mde.Project.Core.Data
 
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000016"),
+					Id = "20000000-0000-0000-0000-000000000016",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
 					ProductId = "00000000-0000-0000-0000-000000000005",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000005"),
@@ -150,7 +150,7 @@ namespace Mde.Project.Core.Data
 				//Maple Leaf Gardens
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000010"),
+					Id = "20000000-0000-0000-0000-000000000010",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000009"),
 					ProductId = "00000000-0000-0000-0000-000000000009",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000004"),
@@ -171,7 +171,7 @@ namespace Mde.Project.Core.Data
 
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000011"),
+					Id = "20000000-0000-0000-0000-000000000011",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
 					ProductId = "00000000-0000-0000-0000-000000000005",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000004"),
@@ -192,7 +192,7 @@ namespace Mde.Project.Core.Data
 
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000012"),
+					Id = "20000000-0000-0000-0000-000000000012",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
 					ProductId = "00000000-0000-0000-0000-000000000005",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000004"),
@@ -214,7 +214,7 @@ namespace Mde.Project.Core.Data
 
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000013"),
+					Id = "20000000-0000-0000-0000-000000000013",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000002"),
 					ProductId = "00000000-0000-0000-0000-000000000002",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000004"),
@@ -235,7 +235,7 @@ namespace Mde.Project.Core.Data
 
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000014"),
+					Id = "20000000-0000-0000-0000-000000000014",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000001"),
 					ProductId = "00000000-0000-0000-0000-000000000001",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000004"),
@@ -256,7 +256,7 @@ namespace Mde.Project.Core.Data
 				// Green Valley Orchards
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000008"),
+					Id = "20000000-0000-0000-0000-000000000008",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000001"),
 					ProductId = "00000000-0000-0000-0000-000000000001",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000001"),
@@ -274,7 +274,7 @@ namespace Mde.Project.Core.Data
 
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000009"),
+					Id = "20000000-0000-0000-0000-000000000009",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000007"),
 					ProductId = "00000000-0000-0000-0000-000000000007",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000001"),
@@ -295,7 +295,7 @@ namespace Mde.Project.Core.Data
 				// Sunny Acres Farm
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000001"),
+					Id = "20000000-0000-0000-0000-000000000001",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
 					ProductId = "00000000-0000-0000-0000-000000000005",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000002"),
@@ -314,7 +314,7 @@ namespace Mde.Project.Core.Data
 				},
                 new Offer
                 {
-                    Id = Guid.Parse("20000000-0000-0000-0000-000000000002"),
+                    Id = "20000000-0000-0000-0000-000000000002",
                     Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000009"),
 					ProductId = "00000000-0000-0000-0000-000000000009",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000002"),
@@ -330,7 +330,7 @@ namespace Mde.Project.Core.Data
 				},
                 new Offer
                 {
-                    Id = Guid.Parse("20000000-0000-0000-0000-000000000003"),
+                    Id = "20000000-0000-0000-0000-000000000003",
                     Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000014"),
 					ProductId = "00000000-0000-0000-0000-000000000014",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000002"),
@@ -351,7 +351,7 @@ namespace Mde.Project.Core.Data
 				// Riverside Pastures
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000004"),
+					Id = "20000000-0000-0000-0000-000000000004",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000003"),
 					ProductId = "00000000-0000-0000-0000-000000000003",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000003"),
@@ -369,7 +369,7 @@ namespace Mde.Project.Core.Data
 				},
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000005"),
+					Id = "20000000-0000-0000-0000-000000000005",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000004"),
 					ProductId = "00000000-0000-0000-0000-000000000004",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000003"),
@@ -394,7 +394,7 @@ namespace Mde.Project.Core.Data
 				//Lavender Lane
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000006"),
+					Id = "20000000-0000-0000-0000-000000000006",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000007"),
 					ProductId = "00000000-0000-0000-0000-000000000007",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000007"),
@@ -416,7 +416,7 @@ namespace Mde.Project.Core.Data
 				},
 				new Offer
 				{
-					Id = Guid.Parse("20000000-0000-0000-0000-000000000007"),
+					Id = "20000000-0000-0000-0000-000000000007",
 					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000008"),
 					ProductId = "00000000-0000-0000-0000-000000000008",
                     Farm = farms.FirstOrDefault(f => f.Id == "10000000-0000-0000-0000-000000000007"),

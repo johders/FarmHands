@@ -12,7 +12,7 @@ namespace Mde.Project.Core.Services.Interfaces
         Task<ResultModel<Offer>> GetAllOffersByProductIdAsync(string productId);
         Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel);
         Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel);
-        Task<BaseResultModel> DeleteAsync(Guid id);
+        Task<BaseResultModel> DeleteAsync(string id);
         IQueryable<Offer> GetAll();
         Task<BaseResultModel> SaveChangesAsync();
     }

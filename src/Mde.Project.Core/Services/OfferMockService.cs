@@ -31,7 +31,7 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-        public async Task<BaseResultModel> DeleteAsync(Guid id)
+        public async Task<BaseResultModel> DeleteAsync(string id)
         {
             var offer = _offers.FirstOrDefault(o => o.Id == id);
 

@@ -17,7 +17,7 @@ namespace Mde.Project.Mobile.ViewModels
 			_ = LoadOfferCountAsync();
 		}
 
-		public Guid Id => _farm.Id;
+		public string Id => _farm.Id;
 		public string Name => _farm.Name;
 		public string ImageUrl => _farm.ImageUrl;
 		public int? OfferCount

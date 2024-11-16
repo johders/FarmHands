@@ -17,7 +17,7 @@ namespace Mde.Project.Core.Services
 		}
 		private readonly List<Farm> _farms = new(Seeder.SeedFarms());
 
-		public async Task<int> GetOfferCountAsync(Guid farmId)
+		public async Task<int> GetOfferCountAsync(string farmId)
 		{
 			var result = await _offerService.GetAllOffersByFarmIdAsync(farmId);
 			return result.Data.Count();
@@ -47,7 +47,7 @@ namespace Mde.Project.Core.Services
             });
         }
 
-        public async Task<ResultModel<Farm>> GetByIdAsync(Guid id)
+        public async Task<ResultModel<Farm>> GetByIdAsync(string id)
         {
             var farm = GetAll().FirstOrDefault(f => f.Id == id);
 

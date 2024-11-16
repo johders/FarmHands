@@ -16,7 +16,7 @@ namespace Mde.Project.Core.Services
 			_farmService = farmService;
 		}
 
-		public async Task<BaseResultModel> CreateAsync(Guid farmId)
+		public async Task<BaseResultModel> CreateAsync(string farmId)
         {
 			var isFavorite = GetAll().Any(f => f.FarmId == farmId);
 			if (!isFavorite)
@@ -37,7 +37,7 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-        public async Task<BaseResultModel> DeleteAsync(Guid farmId)
+        public async Task<BaseResultModel> DeleteAsync(string farmId)
         {
 			var favoriteFarm = UserFavoriteFarms.FirstOrDefault(f => f.FarmId == farmId);
 
@@ -57,11 +57,6 @@ namespace Mde.Project.Core.Services
         public IQueryable<FavoriteFarm> GetAll()
         {
             return UserFavoriteFarms.AsQueryable();
-        }
-
-        public Task<ResultModel<FavoriteFarm>> GetAllAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<ResultModel<Farm>> GetAllFavoriteFarmsAsync()
@@ -88,13 +83,7 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-        public Task<ResultModel<FavoriteFarm>> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        public async Task<BaseResultModel> IsFavoritedAsync(Guid farmId)
+        public async Task<BaseResultModel> IsFavoritedAsync(string farmId)
         {
 			var isFavorite = GetAll().Any(p => p.FarmId == farmId);
 			if (!isFavorite)
@@ -110,14 +99,5 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-        public Task<BaseResultModel> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> UpdateAsync(Guid farmId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

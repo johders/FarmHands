@@ -33,7 +33,7 @@ namespace Mde.Project.Mobile.ViewModels
 
 		private async Task GetMockFarm()
 		{
-			var result = await _farmService.GetByIdAsync(Guid.Parse("10000000-0000-0000-0000-000000000007"));
+			var result = await _farmService.GetByIdAsync("10000000-0000-0000-0000-000000000007");
 			
 			if (result.IsSuccess)
 			{

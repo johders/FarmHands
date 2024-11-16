@@ -62,7 +62,7 @@ namespace Mde.Project.Core.Services
             });
         }
 
-        public async Task<ResultModel<Offer>> GetAllOffersByFarmIdAsync(Guid farmId)
+        public async Task<ResultModel<Offer>> GetAllOffersByFarmIdAsync(string farmId)
         {
             return await Task.FromResult(new ResultModel<Offer>
             {

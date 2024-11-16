@@ -2,7 +2,7 @@
 {
 	public class Farm
 	{
-		public Farm(Guid id, string name, string description, double latitude, double longitude, IEnumerable<Product> products, string imageUrl)
+		public Farm(string id, string name, string description, double latitude, double longitude, IEnumerable<Product> products, string imageUrl)
 		{
 			Id = id;
 			Name = name;
@@ -13,7 +13,7 @@
 			ImageUrl = imageUrl;
 		}
 
-		public Guid Id { get; set; }
+		public string Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
         public double Latitude { get; set; }

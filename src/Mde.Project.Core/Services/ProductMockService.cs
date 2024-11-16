@@ -19,7 +19,7 @@ namespace Mde.Project.Core.Services
         private readonly List<Offer> _offers;
         private readonly List<Product> _products = new(Seeder.SeedProducts());
 
-        public async Task<int> GetOfferCountAsync(Guid productId)
+        public async Task<int> GetOfferCountAsync(string productId)
         {
             var result = await _offerService.GetAllOffersByProductIdAsync(productId);
             return result.Data.Count();
@@ -49,7 +49,7 @@ namespace Mde.Project.Core.Services
             });
         }
 
-        public async Task<ResultModel<Product>> GetByIdAsync(Guid id)
+        public async Task<ResultModel<Product>> GetByIdAsync(string id)
         {
             var product = GetAll().FirstOrDefault(p => p.Id == id);
 

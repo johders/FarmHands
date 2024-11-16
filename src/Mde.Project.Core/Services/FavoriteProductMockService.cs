@@ -11,12 +11,12 @@ namespace Mde.Project.Core.Services
 		private readonly List<Product> _products = new List<Product>(Seeder.SeedProducts());
 
 		public List<FavoriteProduct> UserFavoriteProducts { get; } = Seeder.SeedFavoriteProducts().ToList();
-		public async Task<BaseResultModel> CreateAsync(Guid id)
+		public async Task<BaseResultModel> CreateAsync(string id)
 		{
 			var isFavorite = GetAll().Any(p => p.ProductId == id);
 			if (!isFavorite)
 			{
-				var product = _products.FirstOrDefault(p => p.Id == id);
+				var product = _products.FirstOrDefault(p => p.Id == id.ToString());
 				UserFavoriteProducts.Add(new FavoriteProduct
 				{
 					Id = Guid.NewGuid(),
@@ -32,7 +32,7 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-		public async Task<BaseResultModel> DeleteAsync(Guid id)
+		public async Task<BaseResultModel> DeleteAsync(string id)
 		{
 			var favoriteProduct = UserFavoriteProducts.FirstOrDefault(p => p.ProductId == id);
 
@@ -87,12 +87,7 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-		public Task<ResultModel<FavoriteProduct>> GetByIdAsync(Guid id)
-		{
-			throw new NotImplementedException();
-		}
-
-		public async Task<BaseResultModel> IsFavoritedAsync(Guid productId)
+		public async Task<BaseResultModel> IsFavoritedAsync(string productId)
 		{
 			var isFavorite = GetAll().Any(p => p.ProductId == productId);
 			if (!isFavorite)
@@ -108,14 +103,5 @@ namespace Mde.Project.Core.Services
 			});
 		}
 
-		public Task<BaseResultModel> SaveChangesAsync()
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<BaseResultModel> UpdateAsync(Guid farmId)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

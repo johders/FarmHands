@@ -6,9 +6,9 @@ namespace Mde.Project.Core.Services.Interfaces
 {
     public interface IProductService
     {
-        Task<ResultModel<Product>> GetByIdAsync(Guid id);
+        Task<ResultModel<Product>> GetByIdAsync(string id);
         Task<ResultModel<Product>> GetAllAsync();
-        Task<int> GetOfferCountAsync(Guid productId);
+        Task<int> GetOfferCountAsync(string productId);
 		Task<BaseResultModel> CreateAsync(ProductCreateRequestModel createModel);
         Task<BaseResultModel> UpdateAsync(ProductUpdateRequestModel updateModel);
         Task<BaseResultModel> DeleteAsync(Guid id);

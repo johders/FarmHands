@@ -71,7 +71,7 @@ namespace Mde.Project.Core.Services
             });
         }
 
-        public async Task<ResultModel<Offer>> GetAllOffersByProductIdAsync(Guid productId)
+        public async Task<ResultModel<Offer>> GetAllOffersByProductIdAsync(string productId)
         {
             return await Task.FromResult(new ResultModel<Offer>
             {

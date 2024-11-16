@@ -10,26 +10,26 @@ namespace Mde.Project.Core.Data
 		{
 			IEnumerable<Product> products = new List<Product>
 				{
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000001"), "Apples", "Freshly picked, juicy apples.","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1jkLfZNwVPgxhe8FlmI3gZo6GIYhkzOiftg&s"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000002"), "Carrots", "Organic carrots, straight from the farm.", "https://ucarecdn.com/459eb7be-115a-4d85-b1d8-deaabc94c643/-/format/auto/-/preview/3000x3000/-/quality/lighter/"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000003"), "Free-Range Eggs", "Dozen of farm fresh eggs.", "https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000004"), "Milk", "Fresh cow milk, non-pasteurized.", "https://t3.ftcdn.net/jpg/03/30/09/16/360_F_330091642_6AniY6wGxENL6WCzdrHpLhu3Y2HrcWuY.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000005"), "Tomatoes", "Plump and ripe tomatoes.", "https://cdn.pixabay.com/photo/2022/09/05/09/50/tomatoes-7433786_1280.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000006"), "Pumpkin", "Seasonal pumpkins, great for pies.", "https://upload.wikimedia.org/wikipedia/commons/5/5c/FrenchMarketPumpkinsB.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000007"), "Strawberries", "Sweet and juicy strawberries.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRXKcGr0rnAeasxCbSBGSPlWo8rOGnTJM7hQ&s"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000008"), "Honey", "Organic honey from local bees.", "https://3.imimg.com/data3/NG/IC/MY-11241820/lychee-honey-250x250.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000009"), "Potatoes", "Golden potatoes, perfect for mashing.", "https://live2giveorganics.nz/cdn/shop/products/E1CA67E3-4A64-4388-9454-F9AC247D0693_1_201_a.jpg?v=1667075696&width=1904"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000010"), "Spinach", "Fresh spinach leaves, great for salads.", "https://www.realfoodco.co.za/cdn/shop/products/spinach_1024x1024.jpg?v=1580301409"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000011"), "Oranges", "Citrusy and sweet oranges.", "https://www.sunshinecooperative.co.uk/wp-content/uploads/2018/09/oranges-2100108_1280.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000012"), "Zucchini", "Fresh zucchini, straight from the garden.", "https://www.edenbrothers.com/cdn/shop/products/squash-organic-dark-green-zucchini-shk-1.jpg?v=1653502252"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000013"), "Cherries", "Sweet and tart cherries, perfect for snacks.", "https://www.edible-garden.co/wp-content/uploads/2024/05/Cherries.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000014"), "Broccoli", "Crisp and green broccoli heads.", "https://www.groworganic.com/cdn/shop/products/broccoli-calabrese.jpg?v=1570226464&width=800"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000015"), "Peaches", "Delicious peaches, full of flavor.", "https://www.froghollow.com/cdn/shop/products/gold_dust_3_lr_sq_a7ab3913-b5a1-42b3-8374-6deda4e3411a_300x300.jpg?v=1691172993"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000016"), "Lettuce", "Crisp, green lettuce for salads.", "https://wearelittlefarms.com/cdn/shop/products/image_35b45e84-cb02-4af8-96e0-af532e97ed6a_1500x.heic?v=1668155846"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000017"), "Watermelon", "Large, juicy watermelons.", "https://delvinfarms.com/wp-content/uploads/2015/08/DSC_0276.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000018"), "Garlic", "Organic garlic bulbs.", "https://natureandnurtureseeds.com/cdn/shop/collections/IMG_2367_garlic_website.jpg?v=1679510965"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000019"), "Corn", "Sweet corn on the cob, fresh from the field.", "https://cdn.shopify.com/s/files/1/0569/0615/4154/files/iStock-119709782-9-scaled.jpg"),
-					new Product(Guid.Parse("00000000-0000-0000-0000-000000000020"), "Cabbage", "Green cabbage heads, perfect for slaw.", "https://www.seedway.com/app/uploads/2019/05/Reaction-bj-4.jpg")
+					new Product("00000000-0000-0000-0000-000000000001", "Apples", "Freshly picked, juicy apples.","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1jkLfZNwVPgxhe8FlmI3gZo6GIYhkzOiftg&s"),
+					new Product("00000000-0000-0000-0000-000000000002", "Carrots", "Organic carrots, straight from the farm.", "https://ucarecdn.com/459eb7be-115a-4d85-b1d8-deaabc94c643/-/format/auto/-/preview/3000x3000/-/quality/lighter/"),
+					new Product("00000000-0000-0000-0000-000000000003", "Free-Range Eggs", "Dozen of farm fresh eggs.", "https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg"),
+					new Product("00000000-0000-0000-0000-000000000004", "Milk", "Fresh cow milk, non-pasteurized.", "https://t3.ftcdn.net/jpg/03/30/09/16/360_F_330091642_6AniY6wGxENL6WCzdrHpLhu3Y2HrcWuY.jpg"),
+					new Product("00000000-0000-0000-0000-000000000005", "Tomatoes", "Plump and ripe tomatoes.", "https://cdn.pixabay.com/photo/2022/09/05/09/50/tomatoes-7433786_1280.jpg"),
+					new Product("00000000-0000-0000-0000-000000000006", "Pumpkin", "Seasonal pumpkins, great for pies.", "https://upload.wikimedia.org/wikipedia/commons/5/5c/FrenchMarketPumpkinsB.jpg"),
+					new Product("00000000-0000-0000-0000-000000000007", "Strawberries", "Sweet and juicy strawberries.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRXKcGr0rnAeasxCbSBGSPlWo8rOGnTJM7hQ&s"),
+					new Product("00000000-0000-0000-0000-000000000008", "Honey", "Organic honey from local bees.", "https://3.imimg.com/data3/NG/IC/MY-11241820/lychee-honey-250x250.jpg"),
+					new Product("00000000-0000-0000-0000-000000000009", "Potatoes", "Golden potatoes, perfect for mashing.", "https://live2giveorganics.nz/cdn/shop/products/E1CA67E3-4A64-4388-9454-F9AC247D0693_1_201_a.jpg?v=1667075696&width=1904"),
+					new Product("00000000-0000-0000-0000-000000000010", "Spinach", "Fresh spinach leaves, great for salads.", "https://www.realfoodco.co.za/cdn/shop/products/spinach_1024x1024.jpg?v=1580301409"),
+					new Product("00000000-0000-0000-0000-000000000011", "Oranges", "Citrusy and sweet oranges.", "https://www.sunshinecooperative.co.uk/wp-content/uploads/2018/09/oranges-2100108_1280.jpg"),
+					new Product("00000000-0000-0000-0000-000000000012", "Zucchini", "Fresh zucchini, straight from the garden.", "https://www.edenbrothers.com/cdn/shop/products/squash-organic-dark-green-zucchini-shk-1.jpg?v=1653502252"),
+					new Product("00000000-0000-0000-0000-000000000013", "Cherries", "Sweet and tart cherries, perfect for snacks.", "https://www.edible-garden.co/wp-content/uploads/2024/05/Cherries.jpg"),
+					new Product("00000000-0000-0000-0000-000000000014", "Broccoli", "Crisp and green broccoli heads.", "https://www.groworganic.com/cdn/shop/products/broccoli-calabrese.jpg?v=1570226464&width=800"),
+					new Product("00000000-0000-0000-0000-000000000015", "Peaches", "Delicious peaches, full of flavor.", "https://www.froghollow.com/cdn/shop/products/gold_dust_3_lr_sq_a7ab3913-b5a1-42b3-8374-6deda4e3411a_300x300.jpg?v=1691172993"),
+					new Product("00000000-0000-0000-0000-000000000016", "Lettuce", "Crisp, green lettuce for salads.", "https://wearelittlefarms.com/cdn/shop/products/image_35b45e84-cb02-4af8-96e0-af532e97ed6a_1500x.heic?v=1668155846"),
+					new Product("00000000-0000-0000-0000-000000000017", "Watermelon", "Large, juicy watermelons.", "https://delvinfarms.com/wp-content/uploads/2015/08/DSC_0276.jpg"),
+					new Product("00000000-0000-0000-0000-000000000018", "Garlic", "Organic garlic bulbs.", "https://natureandnurtureseeds.com/cdn/shop/collections/IMG_2367_garlic_website.jpg?v=1679510965"),
+					new Product("00000000-0000-0000-0000-000000000019", "Corn", "Sweet corn on the cob, fresh from the field.", "https://cdn.shopify.com/s/files/1/0569/0615/4154/files/iStock-119709782-9-scaled.jpg"),
+					new Product("00000000-0000-0000-0000-000000000020", "Cabbage", "Green cabbage heads, perfect for slaw.", "https://www.seedway.com/app/uploads/2019/05/Reaction-bj-4.jpg")
 				};
 
 			return products;
@@ -63,8 +63,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000017"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000001")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000006")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000001"),
+					ProductId = "00000000-0000-0000-0000-000000000001",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000006")),
 					Variant = "Jonagold",
 					Description = "Welcome to our patch of dirt, where the sun beats down and the earth gives life to the Jonagold " +
 					"apples—a glorious mess of sweetness and a bit of bite. These beauties, a wild lovechild of Jonathan and Golden Delicious, " +
@@ -82,8 +83,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000018"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000009")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000006")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000009"),
+					ProductId = "00000000-0000-0000-0000-000000000009",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000006")),
 					Variant = "Fingerling",
 					Description = "Welcome to our humble plot, where the earth gives birth to fingerling potatoes—the rebels of the spud world. " +
 					"These little beauties, like tiny golden fingers reaching up from the dirt, come in shades of yellow, red, and purple, " +
@@ -104,8 +106,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000015"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000014")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000005")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000014"),
+					ProductId = "00000000-0000-0000-0000-000000000014",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000005")),
 					Variant = "Broccolini",
 					Description = "We’re proud to offer Broccolini, a delicious hybrid of broccoli and Chinese broccoli. " +
 					"With its tender, slender stems and small florets, Broccolini has a milder, slightly sweet flavor that sets " +
@@ -122,8 +125,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000016"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000005")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
+					ProductId = "00000000-0000-0000-0000-000000000005",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000005")),
 					Variant = "Lemon Boy",
 					Description = "A delightful variety known for its bright yellow color and sweet, tangy flavor. These medium-sized, " +
 					"round tomatoes are perfect for salads, sandwiches, and cooking, adding a splash of sunshine to your dishes. " +
@@ -143,8 +147,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000010"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000009")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000009"),
+					ProductId = "00000000-0000-0000-0000-000000000009",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
 					Variant = "Russet",
 					Description = "Our russet potatoes are grown with care to achieve a hearty, earthy taste and a satisfyingly fluffy texture. " +
 					"With their thick, rough skins and dense, starchy flesh, russets are the perfect choice for baking, mashing, " +
@@ -162,8 +167,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000011"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
+					ProductId = "00000000-0000-0000-0000-000000000005",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
 					Variant = "Roma",
 					Description = "At our farm, we grow Romas with a firm, meaty texture and a perfectly balanced, rich flavor. " +
 					"With their oblong shape and deep red hue, these tomatoes are packed with less juice and fewer seeds, making them ideal for sauces, " +
@@ -181,8 +187,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000012"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
+					ProductId = "00000000-0000-0000-0000-000000000005",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
 					Variant = "San Marzano",
 					Description = "Grown with exceptional care, these Italian favorites are prized for their rich, sweet flavor and low acidity, " +
 					"making them perfect for creating authentic sauces, soups, and Italian dishes. Our San Marzanos have a distinct oblong " +
@@ -201,8 +208,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000013"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000002")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000002"),
+					ProductId = "00000000-0000-0000-0000-000000000002",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
 					Variant = "Nantes",
 					Description = "These carrots are grown on our farm with care to bring out their signature smooth, " +
 					"cylindrical shape and vibrant orange color. Nantes carrots are known for their tender, almost coreless texture, " +
@@ -220,8 +228,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000014"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000001")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000001"),
+					ProductId = "00000000-0000-0000-0000-000000000001",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000004")),
 					Variant = "Granny Smith",
 					Description = "Renowned for their bright green skin and crisp texture, these apples are a delightful combination of tartness and " +
 					"sweetness that will invigorate your taste buds. Each bite delivers a refreshing crunch, " +
@@ -239,8 +248,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000008"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000001")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000001")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000001"),
+					ProductId = "00000000-0000-0000-0000-000000000001",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000001")),
 					Variant = "Fuji",
 					Description = "Fuji apples have a flavor that’s mellow and smooth, ideal for snacking, baking, or tossing into salads. " +
 					"Because they stay fresh for weeks, they’re a reliable, delicious choice for your kitchen. Come try a sample! " +
@@ -255,8 +265,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000009"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000007")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000001")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000007"),
+					ProductId = "00000000-0000-0000-0000-000000000007",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000001")),
 					Unit = Unit.Kilogram,
 					Variant = "Albion",
 					Description = "Let us introduce you to our Albion strawberries—one of the sweetest, juiciest berries you’ll ever taste! " +
@@ -274,8 +285,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000001"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000005")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000005"),
+					ProductId = "00000000-0000-0000-0000-000000000005",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
 					Unit = Unit.Kilogram,
 					Variant = "Sweet 100",
 					Description = "A burst of sweetness in every bite! These bright red, perfectly round tomatoes are known for their incredible flavor and juicy texture, " +
@@ -291,7 +303,8 @@ namespace Mde.Project.Core.Data
                 new Offer
                 {
                     Id = Guid.Parse("20000000-0000-0000-0000-000000000002"),
-                    Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000009")),
+                    Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000009"),
+					ProductId = "00000000-0000-0000-0000-000000000009",
                     Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
                     Unit = Unit.Kilogram,
 					Variant = "Yukon Gold",
@@ -305,7 +318,8 @@ namespace Mde.Project.Core.Data
                 new Offer
                 {
                     Id = Guid.Parse("20000000-0000-0000-0000-000000000003"),
-                    Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000014")),
+                    Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000014"),
+					ProductId = "00000000-0000-0000-0000-000000000014",
                     Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000002")),
                     Unit = Unit.Piece,
 					Variant = "Romanesco",
@@ -324,8 +338,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000004"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000003")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000003")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000003"),
+					ProductId = "00000000-0000-0000-0000-000000000003",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000003")),
 					Unit = Unit.Dozen,
 					Variant = "Pasture-raised",
 					Description = "A genuine taste of nature and quality. Our hens roam freely over lush pastures, foraging for a natural diet of grasses and insects, which gives their " +
@@ -340,8 +355,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000005"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000004")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000003")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000004"),
+					ProductId = "00000000-0000-0000-0000-000000000004",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000003")),
 					Unit = Unit.Litre,
 					Variant = "Whole Milk",
 					Description = "Pure, creamy goodness straight from our happy cows to your table. Our whole milk is minimally processed " +
@@ -363,8 +379,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000006"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000007")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000007")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000007"),
+					ProductId = "00000000-0000-0000-0000-000000000007",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000007")),
 					Unit = Unit.Kilogram,
 					Variant = "Seascape",
 					Description = "a true delight for your taste buds! Known for their exceptional sweetness and juiciness, " +
@@ -383,8 +400,9 @@ namespace Mde.Project.Core.Data
 				new Offer
 				{
 					Id = Guid.Parse("20000000-0000-0000-0000-000000000007"),
-					Product = products.FirstOrDefault(p => p.Id == Guid.Parse("00000000-0000-0000-0000-000000000008")),
-					Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000007")),
+					Product = products.FirstOrDefault(p => p.Id == "00000000-0000-0000-0000-000000000008"),
+					ProductId = "00000000-0000-0000-0000-000000000008",
+                    Farm = farms.FirstOrDefault(f => f.Id == Guid.Parse("10000000-0000-0000-0000-000000000007")),
 					Unit = Unit.Piece,
 					Variant = "Lavender honey",
 					Description = "Crafted from the nectar of our vibrant lavender fields, this honey is not just sweet; it’s an aromatic " +
@@ -455,17 +473,17 @@ namespace Mde.Project.Core.Data
 				new FavoriteProduct{
 					Id = Guid.Parse("50000000-0000-0000-0000-000000000001"),
 					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
-					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+					ProductId = "00000000-0000-0000-0000-000000000001"
 				},
 				new FavoriteProduct{
 					Id = Guid.Parse("50000000-0000-0000-0000-000000000002"),
 					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
-					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000014")
+					ProductId = "00000000-0000-0000-0000-000000000014"
 				},
 				new FavoriteProduct{
 					Id = Guid.Parse("50000000-0000-0000-0000-000000000003"),
 					UserId = Guid.Parse("30000000-0000-0000-0000-000000000001"),
-					ProductId = Guid.Parse("00000000-0000-0000-0000-000000000010")
+					ProductId = "00000000-0000-0000-0000-000000000010"
 				},
 			};
 

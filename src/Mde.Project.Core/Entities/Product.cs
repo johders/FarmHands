@@ -1,10 +1,8 @@
-﻿using Mde.Project.Core.Enums;
-
-namespace Mde.Project.Core.Entities
+﻿namespace Mde.Project.Core.Entities
 {
-	public class Product : IEquatable<Product>
+    public class Product : IEquatable<Product>
 	{
-		public Product(Guid id, string name, string description, string imageUrl)
+		public Product(string id, string name, string description, string imageUrl)
 		{
 			Id = id;
 			Name = name;
@@ -18,7 +16,7 @@ namespace Mde.Project.Core.Entities
 			return (this.Name.Equals(other.Name));
 		}
 
-		public Guid Id { get; set; }
+		public string Id { get; set; }
         public string Name { get; set; }
 		public string Description { get; set; }
 		public string ImageUrl { get; set; }

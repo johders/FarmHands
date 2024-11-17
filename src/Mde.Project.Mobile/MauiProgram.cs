@@ -46,6 +46,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
             builder.Services.AddSingleton<FarmService>();
             builder.Services.AddSingleton<ProductService>();
+            builder.Services.AddSingleton<OfferService>();
 
             return builder;
         }

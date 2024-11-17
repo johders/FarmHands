@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
 using System.Collections.ObjectModel;
@@ -10,9 +11,12 @@ namespace Mde.Project.Mobile.ViewModels
     {
         private readonly IOfferService _offerService;
 
-		public FarmerDashboardViewModel(IOfferService offerService)
+        private readonly OfferService _testService;
+
+		public FarmerDashboardViewModel(IOfferService offerService, OfferService tester)
 		{
 			_offerService = offerService;
+			_testService = tester;
 		}
 
 		private ObservableCollection<OfferViewModel> offers;
@@ -36,6 +40,9 @@ namespace Mde.Project.Mobile.ViewModels
 			new Command(async () =>
 			{
 				var result = await _offerService.GetAllAsync();
+
+				var tester = await _testService.GetAllAsync();
+
 				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer));
 				Offers = new ObservableCollection<OfferViewModel>(offerViewModels);
 			});

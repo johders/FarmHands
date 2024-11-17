@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -7,16 +7,18 @@ using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class UserFavoriteFarmsViewModel : ObservableObject
+    public class UserFavoriteFarmsViewModel : ObservableObject
 	{
 		private readonly IFavoriteFarmService _favoriteFarmService;
 		private readonly IFarmService _farmService;
+        private readonly FarmService _testService;
 
 
-		public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService)
+        public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService, FarmService testService)
 		{
 			_favoriteFarmService = favoriteFarmService;
 			_farmService = farmService;
+			_testService = testService;
 		}
 
 		private ObservableCollection<FarmViewModel> favoriteFarms;
@@ -39,7 +41,8 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farmViewModel) =>
 		{
-			var result = await _farmService.GetByIdAsync(farmViewModel.Id);
+			//var result = await _farmService.GetByIdAsync(farmViewModel.Id);
+            var result = await _testService.GetByIdAsync(farmViewModel.Id);
 			var farm = result.Data;
 
 			if (!result.IsSuccess)

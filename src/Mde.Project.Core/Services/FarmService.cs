@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using Mde.Project.Core.Constants;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
@@ -38,15 +39,37 @@ namespace Mde.Project.Core.Services
             }
             catch (Exception ex)
             {
-                result.Errors.Add($"Error fetching farms: {ex.Message}");
+                result.Errors.Add(string.Format(FirestoreMessage.ExceptionMessage, "farms", ex.Message));
             }
 
             return result;
         }
 
-        public Task<ResultModel<Farm>> GetByIdAsync(string id)
+        public async Task<ResultModel<Farm>> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var result = new ResultModel<Farm>();
+            try
+            {
+                var farmDoc = _firestoreDb.Collection("Farms").Document(id);
+                var snapshot = await farmDoc.GetSnapshotAsync();
+
+                if (snapshot.Exists)
+                {
+                    var farm = snapshot.ConvertTo<Farm>();
+                    result.Data = farm;
+                }
+                else
+                {
+                    result.Errors.Add(FirestoreMessage.FarmNotFound);
+                }
+            }
+            catch(Exception ex)
+            {
+                result.Errors.Add(string.Format(FirestoreMessage.ExceptionMessage, "farm by ID", ex.Message));
+            }
+
+            return result;
+
         }
 
         public Task<int> GetOfferCountAsync(string farmId)

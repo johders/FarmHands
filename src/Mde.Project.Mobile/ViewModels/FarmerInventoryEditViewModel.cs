@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
@@ -16,11 +17,16 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IOfferService _offerService;
 		private readonly IFarmService _farmService;
 
-		public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService)
+        private readonly ProductService _prodTesterService;
+
+        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, ProductService prodTesterService)
 		{
 			_productService = productService;
 			_offerService = offerService;
 			_farmService = farmService;
+
+			_prodTesterService = prodTesterService;
+
 			LoadUnitOptions();
 			Products = new ObservableCollection<Product>(_productService.GetAll());
 		}
@@ -131,8 +137,10 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand SaveCommand =>
 			new Command(async () =>
 			{
-				var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
-				var farmResult = await _farmService.GetByIdAsync("10000000-0000-0000-0000-000000000007");
+                //var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
+                var productResult = await _prodTesterService.GetByIdAsync(SelectedProduct.Id);
+
+                var farmResult = await _farmService.GetByIdAsync("10000000-0000-0000-0000-000000000007");
 
 				OfferEditRequestModel offer = new OfferEditRequestModel();
 

@@ -53,15 +53,15 @@ namespace Mde.Project.Core.Services
                 var farmDoc = _firestoreDb.Collection("Farms").Document(id);
                 var snapshot = await farmDoc.GetSnapshotAsync();
 
-                if (snapshot.Exists)
-                {
-                    var farm = snapshot.ConvertTo<Farm>();
-                    result.Data = farm;
-                }
-                else
+                if (!snapshot.Exists)
                 {
                     result.Errors.Add(FirestoreMessage.FarmNotFound);
+                    return result;
                 }
+
+                var farm = snapshot.ConvertTo<Farm>();
+                result.Data = farm;
+
             }
             catch(Exception ex)
             {
@@ -74,12 +74,44 @@ namespace Mde.Project.Core.Services
 
         public Task<int> GetOfferCountAsync(string farmId)
         {
+            //needs offers
             throw new NotImplementedException();
         }
 
-        public Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)
+        public async Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)
         {
-            throw new NotImplementedException();
+            var result = new BaseResultModel();
+
+            try
+            {
+                var farmDoc = _firestoreDb.Collection("Farms").Document(updateModel.Id);
+                var snapshot = await farmDoc.GetSnapshotAsync();
+
+                if (!snapshot.Exists)
+                {
+                    result.Errors.Add(FirestoreMessage.FarmNotFound);
+                    return result;
+                }
+
+                var updateFields = new Dictionary<string, object>
+                {
+                    { "Id", updateModel.Id },
+                    { "Name", updateModel.Name },
+                    { "Description", updateModel.Description },
+                    { "Latitude", updateModel.Latitude },
+                    { "Longitude", updateModel.Longitude },
+                    { "ImageUrl", updateModel.ImageUrl }
+                };
+
+                await farmDoc.UpdateAsync(updateFields);
+
+            }
+            catch(Exception ex)
+            {
+                result.Errors.Add(string.Format(FirestoreMessage.UpdateError, "farm", ex.Message));
+            }
+
+            return result;
         }
 
         public IQueryable<Farm> GetAll()

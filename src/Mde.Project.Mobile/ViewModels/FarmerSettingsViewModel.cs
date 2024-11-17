@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
@@ -11,22 +12,27 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IFarmService _farmService;
 		private Farm farm;
-		public FarmerSettingsViewModel(IFarmService farmService)
-		{
-			_farmService = farmService;
-			Initialize();
 
-			if(farm is not null)
-			{
-				Name = farm.Name;
-				Description = farm.Description;
-				Latitude = farm.Latitude;
-				Longitude = farm.Longitude;
-				ImageUrl = farm.ImageUrl;
-			}
-		}
+		private readonly FarmService _testService;
+        public FarmerSettingsViewModel(IFarmService farmService, FarmService testService)
+        {
+            _farmService = farmService;
+            _testService = testService;
 
-		private async void Initialize()
+            Initialize();
+
+            if (farm is not null)
+            {
+                Name = farm.Name;
+                Description = farm.Description;
+                Latitude = farm.Latitude;
+                Longitude = farm.Longitude;
+                ImageUrl = farm.ImageUrl;
+            }
+            
+        }
+
+        private async void Initialize()
 		{
 			await GetMockFarm();
 		}
@@ -89,9 +95,10 @@ namespace Mde.Project.Mobile.ViewModels
 				ImageUrl = ImageUrl
 			};
 
-			var result = await _farmService.UpdateAsync(updateModel);
+            //var result = await _farmService.UpdateAsync(updateModel);
+            var result = await _testService.UpdateAsync(updateModel);
 
-			if (result.IsSuccess)
+            if (result.IsSuccess)
 			{
 				await ToastHelper.ShowToastAsync($"Changes successfully saved");
 			}

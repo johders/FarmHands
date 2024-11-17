@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using Mde.Project.Core.Data.Firestore;
 using Mde.Project.Core.Enums;
 
 namespace Mde.Project.Core.Entities
@@ -24,14 +25,14 @@ namespace Mde.Project.Core.Entities
         [FirestoreProperty]
         public string Description { get; set; }
 
-        [FirestoreProperty]
+        [FirestoreProperty(ConverterType = typeof(EnumConverter<Unit>))]
         public Unit Unit { get; set; }
 
         [FirestoreProperty]
         public string FarmId { get; set; }
         public Farm Farm { get; set; }
 
-        [FirestoreProperty]
+        [FirestoreProperty(ConverterType = typeof(DecimalConverter))]
         public decimal Price { get; set; }
 
         [FirestoreProperty]

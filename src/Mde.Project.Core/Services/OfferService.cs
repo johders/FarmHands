@@ -11,10 +11,14 @@ namespace Mde.Project.Core.Services
     {
 
         private readonly FirestoreDb _firestoreDb;
+        private readonly ProductService _productService;
+        private readonly FarmService _farmService;
 
-        public OfferService(IFirestoreContext firestoreDb)
+        public OfferService(IFirestoreContext firestoreDb, FarmService farmService, ProductService productService)
         {
             _firestoreDb = firestoreDb.GetFireStoreDb();
+            _farmService = farmService;
+            _productService = productService;
         }
 
         public Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel)
@@ -48,6 +52,27 @@ namespace Mde.Project.Core.Services
                     if (document.Exists)
                     {
                         var offer = document.ConvertTo<Offer>();
+
+                        if (!string.IsNullOrEmpty(offer.FarmId))
+                        {
+                            var farmResult = await _farmService.GetByIdAsync(offer.FarmId);
+
+                            if (farmResult.IsSuccess)
+                            {
+                                offer.Farm = farmResult.Data;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(offer.ProductId))
+                        {
+                            var productResult = await _productService.GetByIdAsync(offer.ProductId);
+
+                            if (productResult.IsSuccess)
+                            {
+                                offer.Product = productResult.Data;
+                            }
+                        }
+
                         offers.Add(offer);
                     }
                 }

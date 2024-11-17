@@ -39,9 +39,10 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand RefreshOffersListCommand =>
 			new Command(async () =>
 			{
-				var result = await _offerService.GetAllAsync();
+                //var result = await _offerService.GetAllAsync();
+                var result = await _testService.GetAllAsync();
 
-				var tester = await _testService.GetAllAsync();
+                //var tester = await _testService.GetAllAsync();
 
 				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer));
 				Offers = new ObservableCollection<OfferViewModel>(offerViewModels);

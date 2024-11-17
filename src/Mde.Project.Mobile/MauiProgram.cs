@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Mde.Project.Core.Services;
+using Mde.Project.Core.Services.Firestore;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
 using Mde.Project.Mobile.Pages.Login;
@@ -41,6 +42,9 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
+
+            builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
+            builder.Services.AddSingleton<FarmService>();
 
             return builder;
         }

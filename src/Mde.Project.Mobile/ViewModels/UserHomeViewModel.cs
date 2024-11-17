@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -11,11 +12,14 @@ namespace Mde.Project.Mobile.ViewModels
     {
 		private readonly IFarmService _farmService;
         private readonly IProductService _productService;
+        private readonly FarmService _testService;
 
-        public UserHomeViewModel(IFarmService farmService, IProductService productService)
+        public UserHomeViewModel(IFarmService farmService, IProductService productService, FarmService testService)
         {
             _farmService = farmService;
             _productService = productService;
+
+            _testService = testService;
         }
 
         private ObservableCollection<Farm> farms;
@@ -40,8 +44,11 @@ namespace Mde.Project.Mobile.ViewModels
 
         public ICommand RefreshFarmListCommand => new Command(async () =>
 		{
-			var result = await _farmService.GetAllAsync();
-			var farms = result.Data;
+            //var result = await _farmService.GetAllAsync();
+            
+            var result = await _testService.GetAllAsync();
+
+            var farms = result.Data;
 			Farms = new ObservableCollection<Farm>(farms);
 		});
 

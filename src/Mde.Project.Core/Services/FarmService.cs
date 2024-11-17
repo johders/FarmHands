@@ -1,0 +1,68 @@
+﻿using Google.Cloud.Firestore;
+using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Models;
+using Mde.Project.Core.Services.Models.RequestModels;
+
+namespace Mde.Project.Core.Services
+{
+    public class FarmService : IFarmService
+    {
+        private readonly FirestoreDb _firestoreDb;
+
+        public FarmService(IFirestoreContext firestoreDb)
+        {
+            _firestoreDb = firestoreDb.GetFireStoreDb();
+        }
+
+        public async Task<ResultModel<IEnumerable<Farm>>> GetAllAsync()
+        {
+            var result = new ResultModel<IEnumerable<Farm>> { Data = new List<Farm>() };
+
+            try
+            {
+                var farmsCollection = _firestoreDb.Collection("Farms");
+                var snapshot = await farmsCollection.GetSnapshotAsync();
+                var farms = new List<Farm>();
+
+                foreach (var document in snapshot.Documents)
+                {
+                    if (document.Exists)
+                    {
+                        var farm = document.ConvertTo<Farm>();
+                        farms.Add(farm);
+                    }
+                }
+
+                result.Data = farms;
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add($"Error fetching farms: {ex.Message}");
+            }
+
+            return result;
+        }
+
+        public Task<ResultModel<Farm>> GetByIdAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetOfferCountAsync(string farmId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<Farm> GetAll()
+        {
+            //not favorable with firebase
+            throw new NotImplementedException();
+        }
+    }
+}

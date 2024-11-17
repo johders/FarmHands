@@ -5,7 +5,8 @@
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShellStartup();
+            //MainPage = new AppShellStartup();
+            MainPage = new AppShellUser();
 		}
     }
 }

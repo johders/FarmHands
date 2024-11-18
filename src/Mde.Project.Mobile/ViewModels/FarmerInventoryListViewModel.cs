@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Mobile.Helpers;
@@ -12,10 +13,13 @@ namespace Mde.Project.Mobile.ViewModels
 	public class FarmerInventoryListViewModel : ObservableObject
 	{
 		private readonly IOfferService _offerService;
+		private readonly OfferService _offerTestService;
 
-		public FarmerInventoryListViewModel(IOfferService offerService)
+		public FarmerInventoryListViewModel(IOfferService offerService, OfferService testSerevice)
 		{
 			_offerService = offerService;
+			_offerTestService = testSerevice;
+
 		}
 
 		private ObservableCollection<Offer> offers;
@@ -30,7 +34,8 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshOffersListCommand => new Command(async () =>
 		{
-			var result = await _offerService.GetAllAsync();
+			//var result = await _offerService.GetAllAsync();
+            var result = await _offerTestService.GetAllAsync();
 			var offers = result.Data;
 			Offers = new ObservableCollection<Offer>(offers);
 		});
@@ -61,7 +66,8 @@ namespace Mde.Project.Mobile.ViewModels
 			BaseResultModel result = new();
 
 			if (isConfirmed)
-				result = await _offerService.DeleteAsync(offer.Id);
+				//result = await _offerService.DeleteAsync(offer.Id);
+				result = await _offerTestService.DeleteAsync(offer.Id);
 
 			if (result.IsSuccess)
 			{

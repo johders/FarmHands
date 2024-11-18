@@ -18,14 +18,17 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IFarmService _farmService;
 
         private readonly ProductService _prodTesterService;
+        private readonly OfferService _offerTesterService;
 
-        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, ProductService prodTesterService)
+        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, ProductService prodTesterService, OfferService offerTestService)
 		{
 			_productService = productService;
 			_offerService = offerService;
 			_farmService = farmService;
 
+
 			_prodTesterService = prodTesterService;
+			_offerTesterService = offerTestService;
 
 			LoadUnitOptions();
 			Products = new ObservableCollection<Product>(_productService.GetAll());
@@ -154,9 +157,13 @@ namespace Mde.Project.Mobile.ViewModels
 				if(SelectedOffer is null)
 				{
 					offer.Id = Guid.NewGuid().ToString();
-					var createResult = await _offerService.CreateAsync(offer);
 
-					if (createResult.IsSuccess)
+
+                    //var createResult = await _offerService.CreateAsync(offer);
+					var createResult = await _offerTesterService.CreateAsync(offer);
+
+
+                    if (createResult.IsSuccess)
 					{
 						await ToastHelper.ShowToastAsync($"New offer created for {offer.Product.Name}!");
 					}
@@ -164,7 +171,8 @@ namespace Mde.Project.Mobile.ViewModels
 				else
 				{
 					offer.Id = SelectedOffer.Id;
-					var updateResult = await _offerService.UpdateAsync(offer);
+                    //var updateResult = await _offerService.UpdateAsync(offer);
+					var updateResult = await _offerTesterService.UpdateAsync(offer);
 
 					if (updateResult.IsSuccess)
 					{

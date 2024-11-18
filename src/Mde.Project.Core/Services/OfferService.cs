@@ -21,14 +21,73 @@ namespace Mde.Project.Core.Services
             _productService = productService;
         }
 
-        public Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel)
+        public async Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel)
         {
-            throw new NotImplementedException();
+            var result = new BaseResultModel();
+
+            try
+            {
+                var farmResult = await _farmService.GetByIdAsync(createModel.Farm.Id);
+                if (!farmResult.IsSuccess || farmResult.Data is null)
+                {
+                    result.Errors.Add(string.Format(FirestoreMessage.CreateError, nameof(Offer), FirestoreMessage.FarmNotFound));
+                    return result;
+                }
+
+                var productResult = await _productService.GetByIdAsync(createModel.Product.Id);
+                if (!productResult.IsSuccess || productResult.Data is null)
+                {
+                    result.Errors.Add(string.Format(FirestoreMessage.CreateError, nameof(Offer), FirestoreMessage.ProductNotFound));
+                    return result;
+                }
+
+                var newOffer = new Offer
+                {
+                    ProductId = createModel.Product.Id,
+                    FarmId = createModel.Farm.Id,
+                    Variant = createModel.Variant,
+                    Description = createModel.Description,
+                    Unit = createModel.Unit,
+                    Price = createModel.Price,
+                    OfferImageUrl = createModel.OfferImageUrl,
+                    IsAvailable = createModel.IsAvailable,
+                    IsOrganic = createModel.IsOrganic,
+                };
+
+                var offerCollection = _firestoreDb.Collection("Offers");
+                await offerCollection.AddAsync(newOffer);
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(string.Format(FirestoreMessage.ExceptionMessage, "offers", ex.Message));
+            }
+
+            return result;
+
         }
 
-        public Task<BaseResultModel> DeleteAsync(string id)
+        public async Task<BaseResultModel> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var result = new BaseResultModel();
+
+            try
+            {
+                var offerDoc = _firestoreDb.Collection("Offers").Document(id);
+                var snapshot = await offerDoc.GetSnapshotAsync();
+                if (!snapshot.Exists)
+                {
+                    result.Errors.Add(FirestoreMessage.OfferNotFound);
+                    return result;
+                }
+
+                await offerDoc.DeleteAsync();
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(string.Format(FirestoreMessage.DeleteError, "offer", ex.Message));
+            }
+
+            return result;
         }
 
         public IQueryable<Offer> GetAll()
@@ -87,19 +146,146 @@ namespace Mde.Project.Core.Services
             return result;
         }
 
-        public Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByFarmIdAsync(string farmId)
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByFarmIdAsync(string farmId)
         {
-            throw new NotImplementedException();
+            var result = new ResultModel<IEnumerable<Offer>> { Data = new List<Offer>() };
+
+            try
+            {
+                var offerQuery = _firestoreDb.Collection("Offers").WhereEqualTo("FarmId", farmId);
+                var snapshot = await offerQuery.GetSnapshotAsync();
+                var offers = new List<Offer>();
+
+                foreach (var document in snapshot.Documents)
+                {
+                    if (document.Exists)
+                    {
+                        var offer = document.ConvertTo<Offer>();
+
+                        var farmResult = await _farmService.GetByIdAsync(offer.FarmId);
+                        if (farmResult.IsSuccess)
+                        {
+                            offer.Farm = farmResult.Data;
+                        }
+
+                        if (!string.IsNullOrEmpty(offer.ProductId))
+                        {
+                            var productResult = await _productService.GetByIdAsync(offer.ProductId);
+                            if (productResult.IsSuccess)
+                            {
+                                offer.Product = productResult.Data;
+                            }
+                        }
+
+                        offers.Add(offer);
+                    }
+                }
+
+                result.Data = offers;
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(string.Format(FirestoreMessage.ExceptionMessage, "offers by FarmId", ex.Message));
+            }
+
+            return result;
         }
 
-        public Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByProductIdAsync(string productId)
+
+
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByProductIdAsync(string productId)
         {
-            throw new NotImplementedException();
+            var result = new ResultModel<IEnumerable<Offer>> { Data = new List<Offer>() };
+
+            try
+            {
+                var offerQuery = _firestoreDb.Collection("Offers").WhereEqualTo("ProductId", productId);
+                var snapshot = await offerQuery.GetSnapshotAsync();
+                var offers = new List<Offer>();
+
+                foreach (var document in snapshot.Documents)
+                {
+                    if (document.Exists)
+                    {
+                        var offer = document.ConvertTo<Offer>();
+
+                        var farmResult = await _farmService.GetByIdAsync(offer.FarmId);
+                        if (farmResult.IsSuccess)
+                        {
+                            offer.Farm = farmResult.Data;
+                        }
+
+                        if (!string.IsNullOrEmpty(offer.ProductId))
+                        {
+                            var productResult = await _productService.GetByIdAsync(offer.ProductId);
+                            if (productResult.IsSuccess)
+                            {
+                                offer.Product = productResult.Data;
+                            }
+                        }
+
+                        offers.Add(offer);
+                    }
+                }
+
+                result.Data = offers;
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(string.Format(FirestoreMessage.ExceptionMessage, "offers by ProductId", ex.Message));
+            }
+
+            return result;
         }
 
-        public Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel)
+        public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel)
         {
-            throw new NotImplementedException();
+            var result = new BaseResultModel();
+
+            try
+            {
+                var offerDoc = _firestoreDb.Collection("Offers").Document(updateModel.Id);
+                var snapshot = await offerDoc.GetSnapshotAsync();
+
+                if (!snapshot.Exists)
+                {
+                    result.Errors.Add(FirestoreMessage.OfferNotFound);
+                    return result;
+                }
+
+                var offerToUpdate = snapshot.ConvertTo<Offer>();
+
+                if (!string.IsNullOrEmpty(updateModel.Product.Id))
+                    offerToUpdate.ProductId = updateModel.Product.Id;
+
+                if (!string.IsNullOrEmpty(updateModel.Farm.Id))
+                    offerToUpdate.FarmId = updateModel.Farm.Id;
+
+                if (!string.IsNullOrEmpty(updateModel.Variant))
+                    offerToUpdate.Variant = updateModel.Variant;
+
+                if (!string.IsNullOrEmpty(updateModel.Description))
+                    offerToUpdate.Description = updateModel.Description;
+
+                if (updateModel.Price != 0)
+                    offerToUpdate.Price = updateModel.Price;
+
+                if (!string.IsNullOrEmpty(updateModel.OfferImageUrl))
+                    offerToUpdate.OfferImageUrl = updateModel.OfferImageUrl;
+
+                offerToUpdate.IsAvailable = updateModel.IsAvailable;
+
+                offerToUpdate.IsOrganic = updateModel.IsOrganic;
+
+                await offerDoc.SetAsync(offerToUpdate, SetOptions.Overwrite);
+
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(string.Format(FirestoreMessage.UpdateError, nameof(Offer), ex.Message));
+            }
+
+            return result;
         }
     }
 }

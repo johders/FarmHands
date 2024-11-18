@@ -9,11 +9,15 @@ namespace Mde.Project.Core.Services
     public class FavoriteFarmMockService : IFavoriteFarmService
     {
 		private readonly IFarmService _farmService;
+        private readonly FarmService _farmTestService;
+		
 		public List<FavoriteFarm> UserFavoriteFarms { get; } = Seeder.SeedFavoriteFarms().ToList();
+        
 
-		public FavoriteFarmMockService(IFarmService farmService)
+		public FavoriteFarmMockService(IFarmService farmService, FarmService tester)
 		{
 			_farmService = farmService;
+			_farmTestService = tester;
 		}
 
 		public async Task<BaseResultModel> CreateAsync(string farmId)
@@ -21,8 +25,10 @@ namespace Mde.Project.Core.Services
 			var isFavorite = GetAll().Any(f => f.FarmId == farmId);
 			if (!isFavorite)
 			{
-				var farm = _farmService.GetAll().FirstOrDefault(f => f.Id == farmId);
-				UserFavoriteFarms.Add(new FavoriteFarm
+				//var farm = _farmService.GetAll().FirstOrDefault(f => f.Id == farmId);
+				var farm = (await _farmTestService.GetByIdAsync(farmId)).Data;
+
+                UserFavoriteFarms.Add(new FavoriteFarm
 				{
 					Id = Guid.NewGuid(),
 					Farm = farm,
@@ -59,9 +65,11 @@ namespace Mde.Project.Core.Services
 			var farms = new List<Farm>();
 			foreach (var favFarm in favoriteFarms)
 			{
-				Farm farm = _farmService.GetAll().FirstOrDefault(f => f.Id == favFarm.FarmId);
+				//Farm farm = _farmService.GetAll().FirstOrDefault(f => f.Id == favFarm.FarmId);
+                
+				var farm = (await _farmTestService.GetByIdAsync(favFarm.FarmId)).Data;
 
-				if (farm is null)
+                if (farm is null)
 				{
 					return ResultHelper.CreateErrorResult<IEnumerable<Farm>>("Farm not found!");
 				}

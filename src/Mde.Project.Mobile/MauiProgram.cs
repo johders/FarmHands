@@ -36,14 +36,16 @@ namespace Mde.Project.Mobile
 
         private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
         {
+            builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
+
             builder.Services.AddSingleton<IFarmService, FarmMockService>();
             builder.Services.AddTransient<IProductService, ProductMockService>();
             builder.Services.AddSingleton<IOfferService, OfferMockService>();
+
             builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
 
-            builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
             builder.Services.AddSingleton<FarmService>();
             builder.Services.AddSingleton<ProductService>();
             builder.Services.AddSingleton<OfferService>();

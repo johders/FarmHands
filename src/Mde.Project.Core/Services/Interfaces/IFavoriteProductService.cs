@@ -11,6 +11,6 @@ namespace Mde.Project.Core.Services.Interfaces
 		Task<BaseResultModel> IsFavoritedAsync(string id);
 		Task<BaseResultModel> CreateAsync(string id);
 		Task<BaseResultModel> DeleteAsync(string id);
-		IQueryable<FavoriteProduct> GetAll();
+		Task<IQueryable<FavoriteProduct>> GetAll();
 	}
 }

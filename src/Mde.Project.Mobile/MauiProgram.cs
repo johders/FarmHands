@@ -38,7 +38,8 @@ namespace Mde.Project.Mobile
         {
             builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
 
-            builder.Services.AddSingleton<IFarmService, FarmMockService>();
+            builder.Services.AddTransient<IFarmService, FarmService>();
+
             builder.Services.AddTransient<IProductService, ProductMockService>();
             builder.Services.AddSingleton<IOfferService, OfferMockService>();
 
@@ -46,7 +47,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
 
-            builder.Services.AddSingleton<FarmService>();
+            //builder.Services.AddSingleton<FarmService>();
             builder.Services.AddSingleton<ProductService>();
             builder.Services.AddSingleton<OfferService>();
 

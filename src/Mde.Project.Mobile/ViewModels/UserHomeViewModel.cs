@@ -12,15 +12,13 @@ namespace Mde.Project.Mobile.ViewModels
     {
 		private readonly IFarmService _farmService;
         private readonly IProductService _productService;
-        private readonly FarmService _testService;
         private readonly ProductService _prodTesterService;
 
-        public UserHomeViewModel(IFarmService farmService, IProductService productService, FarmService testService, ProductService prodTesterService)
+        public UserHomeViewModel(IFarmService farmService, IProductService productService, ProductService prodTesterService)
         {
             _farmService = farmService;
             _productService = productService;
 
-            _testService = testService;
             _prodTesterService = prodTesterService;
         }
 
@@ -46,9 +44,7 @@ namespace Mde.Project.Mobile.ViewModels
 
         public ICommand RefreshFarmListCommand => new Command(async () =>
 		{
-            //var result = await _farmService.GetAllAsync();
-            
-            var result = await _testService.GetAllAsync();
+            var result = await _farmService.GetAllAsync();
 
             var farms = result.Data;
 			Farms = new ObservableCollection<Farm>(farms);

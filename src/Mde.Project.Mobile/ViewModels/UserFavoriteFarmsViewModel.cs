@@ -11,14 +11,11 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IFavoriteFarmService _favoriteFarmService;
 		private readonly IFarmService _farmService;
-        private readonly FarmService _testService;
 
-
-        public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService, FarmService testService)
+        public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService)
 		{
 			_favoriteFarmService = favoriteFarmService;
 			_farmService = farmService;
-			_testService = testService;
 		}
 
 		private ObservableCollection<FarmViewModel> favoriteFarms;
@@ -41,8 +38,7 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farmViewModel) =>
 		{
-			//var result = await _farmService.GetByIdAsync(farmViewModel.Id);
-            var result = await _testService.GetByIdAsync(farmViewModel.Id);
+			var result = await _farmService.GetByIdAsync(farmViewModel.Id);
 			var farm = result.Data;
 
 			if (!result.IsSuccess)

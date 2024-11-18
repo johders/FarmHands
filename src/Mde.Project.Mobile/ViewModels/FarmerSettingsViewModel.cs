@@ -12,12 +12,9 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IFarmService _farmService;
 		private Farm farm;
-
-		private readonly FarmService _testService;
-        public FarmerSettingsViewModel(IFarmService farmService, FarmService testService)
+        public FarmerSettingsViewModel(IFarmService farmService)
         {
             _farmService = farmService;
-            _testService = testService;
 
             Initialize();
 
@@ -95,8 +92,7 @@ namespace Mde.Project.Mobile.ViewModels
 				ImageUrl = ImageUrl
 			};
 
-            //var result = await _farmService.UpdateAsync(updateModel);
-            var result = await _testService.UpdateAsync(updateModel);
+            var result = await _farmService.UpdateAsync(updateModel);
 
             if (result.IsSuccess)
 			{

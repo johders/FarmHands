@@ -72,10 +72,21 @@ namespace Mde.Project.Core.Services
 
         }
 
-        public Task<int> GetOfferCountAsync(string farmId)
+        public async Task<int> GetOfferCountAsync(string farmId)
         {
-            //needs offers
-            throw new NotImplementedException();
+            try
+            {
+                var offerCollection = _firestoreDb.Collection("Offers");
+                var query = offerCollection.WhereEqualTo("FarmId", farmId);
+                var snapshot = await query.GetSnapshotAsync();
+                int offerCount = snapshot.Documents.Count;
+                return offerCount;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format(FirestoreMessage.ExceptionMessage, "offer count", ex.Message));
+                return 0;
+            }
         }
 
         public async Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)

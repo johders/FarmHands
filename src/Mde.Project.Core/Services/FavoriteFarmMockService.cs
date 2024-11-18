@@ -9,15 +9,14 @@ namespace Mde.Project.Core.Services
     public class FavoriteFarmMockService : IFavoriteFarmService
     {
 		private readonly IFarmService _farmService;
-        private readonly FarmService _farmTestService;
+        //private readonly FarmService _farmTestService;
 		
 		public List<FavoriteFarm> UserFavoriteFarms { get; } = Seeder.SeedFavoriteFarms().ToList();
         
 
-		public FavoriteFarmMockService(IFarmService farmService, FarmService tester)
+		public FavoriteFarmMockService(IFarmService farmService)
 		{
 			_farmService = farmService;
-			_farmTestService = tester;
 		}
 
 		public async Task<BaseResultModel> CreateAsync(string farmId)
@@ -26,7 +25,7 @@ namespace Mde.Project.Core.Services
 			if (!isFavorite)
 			{
 				//var farm = _farmService.GetAll().FirstOrDefault(f => f.Id == farmId);
-				var farm = (await _farmTestService.GetByIdAsync(farmId)).Data;
+				var farm = (await _farmService.GetByIdAsync(farmId)).Data;
 
                 UserFavoriteFarms.Add(new FavoriteFarm
 				{
@@ -67,7 +66,7 @@ namespace Mde.Project.Core.Services
 			{
 				//Farm farm = _farmService.GetAll().FirstOrDefault(f => f.Id == favFarm.FarmId);
                 
-				var farm = (await _farmTestService.GetByIdAsync(favFarm.FarmId)).Data;
+				var farm = (await _farmService.GetByIdAsync(favFarm.FarmId)).Data;
 
                 if (farm is null)
 				{

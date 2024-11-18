@@ -14,8 +14,10 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			_farm = farm;
 			_farmService = farmService;
-			_ = LoadOfferCountAsync();
-		}
+            //_ = LoadOfferCountAsync();
+
+            _ = Task.Run(() => LoadOfferCountAsync());
+        }
 
 		public string Id => _farm.Id;
 		public string Name => _farm.Name;

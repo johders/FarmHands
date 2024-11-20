@@ -13,9 +13,12 @@ namespace Mde.Project.Mobile.ViewModels
 		private Farm farm;
         public FarmerSettingsViewModel(IFarmService farmService)
         {
-            _farmService = farmService;
+            _farmService = farmService;          
+        }
 
-            Initialize();
+        public async Task InitializeAsync()
+		{
+			await GetMockFarm();
 
             if (farm is not null)
             {
@@ -25,13 +28,7 @@ namespace Mde.Project.Mobile.ViewModels
                 Longitude = farm.Longitude;
                 ImageUrl = farm.ImageUrl;
             }
-            
         }
-
-        private async void Initialize()
-		{
-			await GetMockFarm();
-		}
 
 		private async Task GetMockFarm()
 		{

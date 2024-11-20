@@ -30,9 +30,11 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand RefreshFavoriteProductsListCommand => new Command(async () =>
 		{
 			var result = await _favoriteProductService.GetAllFavoriteProductsAsync();
-			var favoriteProducts = result.Data.Select(fp => new ProductViewModel(fp, _productService));
+			var favoriteProducts = result.Data.Select(fp => new ProductViewModel(fp, _productService)).ToList();
 
-			FavoriteProducts = new ObservableCollection<ProductViewModel>(favoriteProducts);
+            await Task.WhenAll(favoriteProducts.Select(vm => vm.LoadOfferCountAsync()));
+
+            FavoriteProducts = new ObservableCollection<ProductViewModel>(favoriteProducts);
 		});
 
 		public ICommand ViewProductDetailsCommand => new Command<ProductViewModel>(async (productViewModel) =>

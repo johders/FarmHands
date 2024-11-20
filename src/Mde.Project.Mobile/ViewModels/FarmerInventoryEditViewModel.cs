@@ -29,10 +29,22 @@ namespace Mde.Project.Mobile.ViewModels
 			_offerTesterService = offerTestService;
 
 			LoadUnitOptions();
-			Products = new ObservableCollection<Product>(_productService.GetAll());
+			Products = new ObservableCollection<Product>();
 		}
 
-		public ObservableCollection<Unit> UnitOptions { get; set; } = [];
+        public async Task InitializeAsync()
+        {
+            var result = await _productService.GetAllAsync();
+            if (result.IsSuccess && result.Data != null)
+            {
+                foreach (var product in result.Data)
+                {
+                    Products.Add(product);
+                }
+            }
+        }
+
+        public ObservableCollection<Unit> UnitOptions { get; set; } = [];
 
 		private string pageTitle;
 		public string PageTitle

@@ -14,8 +14,6 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			_product = product;
 			_productService = productService;
-			//_ = LoadOfferCountAsync();
-			_offerCount = 5;
         }
 
 		public string Id => _product.Id;
@@ -27,7 +25,7 @@ namespace Mde.Project.Mobile.ViewModels
 			get => _offerCount;
 			private set => SetProperty(ref _offerCount, value);
 		}
-		private async Task LoadOfferCountAsync()
+        public async Task LoadOfferCountAsync()
 		{
 			OfferCount = await _productService.GetOfferCountAsync(_product.Id);
 		}

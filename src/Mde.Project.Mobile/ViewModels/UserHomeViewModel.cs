@@ -10,7 +10,7 @@ namespace Mde.Project.Mobile.ViewModels
 {
     public class UserHomeViewModel : ObservableObject
     {
-		private readonly IFarmService _farmService;
+        private readonly IFarmService _farmService;
         private readonly IProductService _productService;
 
         public UserHomeViewModel(IFarmService farmService, IProductService productService)
@@ -20,14 +20,14 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private ObservableCollection<Farm> farms;
-		public ObservableCollection<Farm> Farms
-		{
-			get { return farms; }
-			set 
-			{ 
-				SetProperty(ref farms, value);
-			}
-		}
+        public ObservableCollection<Farm> Farms
+        {
+            get { return farms; }
+            set
+            {
+                SetProperty(ref farms, value);
+            }
+        }
 
         private ObservableCollection<ProductViewModel> products;
         public ObservableCollection<ProductViewModel> Products
@@ -40,19 +40,27 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         public ICommand RefreshFarmListCommand => new Command(async () =>
-		{
+        {
             var result = await _farmService.GetAllAsync();
 
             var farms = result.Data;
-			Farms = new ObservableCollection<Farm>(farms);
-		});
+            Farms = new ObservableCollection<Farm>(farms);
+        });
 
         public ICommand RefreshProductListCommand => new Command(async () =>
         {
             var result = await _productService.GetAllAsync();
-            var products = result.Data.Select(product => new ProductViewModel(product, _productService));
-            Products = new ObservableCollection<ProductViewModel>(products.Where(p => p.OfferCount > 0).OrderByDescending(p => p.OfferCount));
-		});
+
+            var productViewModels = result.Data
+                .Select(product => new ProductViewModel(product, _productService))
+                .ToList();
+
+            await Task.WhenAll(productViewModels.Select(vm => vm.LoadOfferCountAsync()));
+
+            Products = new ObservableCollection<ProductViewModel>(productViewModels
+                .Where(p => p.OfferCount > 0)
+                .OrderByDescending(p => p.OfferCount));
+        });
 
         public ICommand ViewFarmDetailsCommand => new Command<Farm>(async (farm) =>
         {
@@ -61,7 +69,7 @@ namespace Mde.Project.Mobile.ViewModels
                 { nameof(UserFarmDetailsViewModel.SelectedFarm), farm }
             };
 
-             await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);
+            await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);
         });
 
         public ICommand ViewProductDetailsCommand => new Command<ProductViewModel>(async (productViewModel) =>
@@ -69,7 +77,7 @@ namespace Mde.Project.Mobile.ViewModels
             var result = await _productService.GetByIdAsync(productViewModel.Id);
             var product = result.Data;
 
-            if (!result.IsSuccess) 
+            if (!result.IsSuccess)
             {
                 Shell.Current.DisplayAlert("Oops", $"{String.Join(", ", result.Errors)}", "OK");
                 return;

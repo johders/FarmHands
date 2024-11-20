@@ -14,14 +14,10 @@ namespace Mde.Project.Mobile.ViewModels
         private readonly IOfferService _offerService;
         private readonly IFavoriteFarmService _favoriteFarmService;
 
-        private readonly OfferService _testOfferService;
-
-        public UserFarmDetailsViewModel(IOfferService offerService, IFavoriteFarmService favoriteFarmService, OfferService tester)
+        public UserFarmDetailsViewModel(IOfferService offerService, IFavoriteFarmService favoriteFarmService)
         {
             _offerService = offerService;
             _favoriteFarmService = favoriteFarmService;
-
-            _testOfferService = tester;
         }
 
         private Farm selectedFarm;
@@ -83,8 +79,7 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			if (SelectedFarm is not null)
 			{
-				//var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
-                var result = await _testOfferService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
+				var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
 				var offers = result.Data;
 				Offers = new ObservableCollection<Offer>(offers);
 			}

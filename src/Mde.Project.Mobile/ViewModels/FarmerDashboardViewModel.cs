@@ -11,12 +11,9 @@ namespace Mde.Project.Mobile.ViewModels
     {
         private readonly IOfferService _offerService;
 
-        private readonly OfferService _testService;
-
-		public FarmerDashboardViewModel(IOfferService offerService, OfferService tester)
+		public FarmerDashboardViewModel(IOfferService offerService)
 		{
 			_offerService = offerService;
-			_testService = tester;
 		}
 
 		private ObservableCollection<OfferViewModel> offers;
@@ -39,10 +36,7 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand RefreshOffersListCommand =>
 			new Command(async () =>
 			{
-                //var result = await _offerService.GetAllAsync();
-                var result = await _testService.GetAllAsync();
-
-                //var tester = await _testService.GetAllAsync();
+                var result = await _offerService.GetAllAsync();
 
 				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer));
 				Offers = new ObservableCollection<OfferViewModel>(offerViewModels);

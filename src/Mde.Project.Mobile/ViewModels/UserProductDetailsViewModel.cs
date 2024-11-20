@@ -14,14 +14,10 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IOfferService _offerService;
 		private readonly IFavoriteProductService _favoriteProductsService;
 
-		private readonly OfferService _testOfferService;
-
-		public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService, OfferService tester)
+		public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService)
 		{
 			_offerService = offerService;
 			_favoriteProductsService = favoriteProductsService;
-
-			_testOfferService = tester;
 		}
 
 		private Product selectedProduct;
@@ -82,8 +78,7 @@ namespace Mde.Project.Mobile.ViewModels
 		{
             if(SelectedProduct is not null)
             {
-                //var result = await _offerService.GetAllOffersByProductIdAsync(SelectedProduct.Id);
-                var result = await _testOfferService.GetAllOffersByProductIdAsync(SelectedProduct.Id);
+                var result = await _offerService.GetAllOffersByProductIdAsync(SelectedProduct.Id);
                 var offers = result.Data;
                 Offers = new ObservableCollection<Offer>(offers);
             }

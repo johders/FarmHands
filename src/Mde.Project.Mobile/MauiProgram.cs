@@ -40,16 +40,11 @@ namespace Mde.Project.Mobile
 
             builder.Services.AddTransient<IFarmService, FarmService>();
             builder.Services.AddTransient<IProductService, ProductService>();
-            builder.Services.AddSingleton<IOfferService, OfferMockService>();
-
+            builder.Services.AddSingleton<IOfferService, OfferService>();
 
             builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
-
-            //builder.Services.AddSingleton<FarmService>();
-            //builder.Services.AddSingleton<ProductService>();
-            builder.Services.AddSingleton<OfferService>();
 
             return builder;
         }

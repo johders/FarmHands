@@ -13,12 +13,10 @@ namespace Mde.Project.Mobile.ViewModels
 	public class FarmerInventoryListViewModel : ObservableObject
 	{
 		private readonly IOfferService _offerService;
-		private readonly OfferService _offerTestService;
 
-		public FarmerInventoryListViewModel(IOfferService offerService, OfferService testSerevice)
+		public FarmerInventoryListViewModel(IOfferService offerService)
 		{
 			_offerService = offerService;
-			_offerTestService = testSerevice;
 
 		}
 
@@ -34,8 +32,7 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshOffersListCommand => new Command(async () =>
 		{
-			//var result = await _offerService.GetAllAsync();
-            var result = await _offerTestService.GetAllAsync();
+			var result = await _offerService.GetAllAsync();
 			var offers = result.Data;
 			Offers = new ObservableCollection<Offer>(offers);
 		});
@@ -66,8 +63,7 @@ namespace Mde.Project.Mobile.ViewModels
 			BaseResultModel result = new();
 
 			if (isConfirmed)
-				//result = await _offerService.DeleteAsync(offer.Id);
-				result = await _offerTestService.DeleteAsync(offer.Id);
+				result = await _offerService.DeleteAsync(offer.Id);
 
 			if (result.IsSuccess)
 			{

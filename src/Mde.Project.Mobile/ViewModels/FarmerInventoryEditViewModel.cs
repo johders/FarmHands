@@ -17,16 +17,11 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IOfferService _offerService;
 		private readonly IFarmService _farmService;
 
-        //private readonly ProductService _prodTesterService;
-        private readonly OfferService _offerTesterService;
-
-        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, OfferService offerTestService)
+        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService)
 		{
 			_productService = productService;
 			_offerService = offerService;
 			_farmService = farmService;
-
-			_offerTesterService = offerTestService;
 
 			LoadUnitOptions();
 			Products = new ObservableCollection<Product>();
@@ -151,7 +146,6 @@ namespace Mde.Project.Mobile.ViewModels
 			new Command(async () =>
 			{
                 var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
-                //var productResult = await _prodTesterService.GetByIdAsync(SelectedProduct.Id);
 
                 var farmResult = await _farmService.GetByIdAsync("10000000-0000-0000-0000-000000000007");
 
@@ -169,8 +163,7 @@ namespace Mde.Project.Mobile.ViewModels
 					offer.Id = Guid.NewGuid().ToString();
 
 
-                    //var createResult = await _offerService.CreateAsync(offer);
-					var createResult = await _offerTesterService.CreateAsync(offer);
+                    var createResult = await _offerService.CreateAsync(offer);
 
 
                     if (createResult.IsSuccess)
@@ -181,8 +174,7 @@ namespace Mde.Project.Mobile.ViewModels
 				else
 				{
 					offer.Id = SelectedOffer.Id;
-                    //var updateResult = await _offerService.UpdateAsync(offer);
-					var updateResult = await _offerTesterService.UpdateAsync(offer);
+                    var updateResult = await _offerService.UpdateAsync(offer);
 
 					if (updateResult.IsSuccess)
 					{

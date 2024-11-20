@@ -17,17 +17,15 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IOfferService _offerService;
 		private readonly IFarmService _farmService;
 
-        private readonly ProductService _prodTesterService;
+        //private readonly ProductService _prodTesterService;
         private readonly OfferService _offerTesterService;
 
-        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, ProductService prodTesterService, OfferService offerTestService)
+        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, OfferService offerTestService)
 		{
 			_productService = productService;
 			_offerService = offerService;
 			_farmService = farmService;
 
-
-			_prodTesterService = prodTesterService;
 			_offerTesterService = offerTestService;
 
 			LoadUnitOptions();
@@ -140,8 +138,8 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand SaveCommand =>
 			new Command(async () =>
 			{
-                //var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
-                var productResult = await _prodTesterService.GetByIdAsync(SelectedProduct.Id);
+                var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
+                //var productResult = await _prodTesterService.GetByIdAsync(SelectedProduct.Id);
 
                 var farmResult = await _farmService.GetByIdAsync("10000000-0000-0000-0000-000000000007");
 

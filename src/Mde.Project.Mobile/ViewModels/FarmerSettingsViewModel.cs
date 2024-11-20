@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
@@ -8,7 +7,7 @@ using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class FarmerSettingsViewModel : ObservableObject
+    public class FarmerSettingsViewModel : ObservableObject
 	{
 		private readonly IFarmService _farmService;
 		private Farm farm;

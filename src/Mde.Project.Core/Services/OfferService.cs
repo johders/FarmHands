@@ -11,10 +11,10 @@ namespace Mde.Project.Core.Services
     {
 
         private readonly FirestoreDb _firestoreDb;
-        private readonly ProductService _productService;
+        private readonly IProductService _productService;
         private readonly IFarmService _farmService;
 
-        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, ProductService productService)
+        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, IProductService productService)
         {
             _firestoreDb = firestoreDb.GetFireStoreDb();
             _farmService = farmService;

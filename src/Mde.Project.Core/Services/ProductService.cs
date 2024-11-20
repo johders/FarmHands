@@ -78,10 +78,21 @@ namespace Mde.Project.Core.Services
             return result;
         }
 
-        public Task<int> GetOfferCountAsync(string productId)
+        public async Task<int> GetOfferCountAsync(string productId)
         {
-            //requires offers
-            throw new NotImplementedException();
+            try
+            {
+                var offerCollection = _firestoreDb.Collection("Offers");
+                var query = offerCollection.WhereEqualTo("ProductId", productId);
+                var snapshot = await query.GetSnapshotAsync();
+                int offerCount = snapshot.Documents.Count;
+                return offerCount;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format(FirestoreMessage.ExceptionMessage, "offer count", ex.Message));
+                return 0;
+            }
         }
     }
 }

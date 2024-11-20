@@ -9,12 +9,12 @@ namespace Mde.Project.Core.Services
 	public class FavoriteProductMockService : IFavoriteProductService
 	{
 		//private readonly List<Product> _products = new List<Product>(Seeder.SeedProducts());
-		private readonly ProductService _productTestService;
+		private readonly IProductService _productTestService;
 
 		private readonly List<Product> _products = new List<Product>();
 		public List<FavoriteProduct> UserFavoriteProducts { get; } = Seeder.SeedFavoriteProducts().ToList();
 
-        public FavoriteProductMockService(ProductService productService)
+        public FavoriteProductMockService(IProductService productService)
         {
 			_productTestService = productService;
         }

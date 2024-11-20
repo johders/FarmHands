@@ -14,8 +14,9 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			_product = product;
 			_productService = productService;
-			_ = LoadOfferCountAsync();
-		}
+			//_ = LoadOfferCountAsync();
+			_offerCount = 5;
+        }
 
 		public string Id => _product.Id;
 

@@ -28,6 +28,7 @@ namespace Mde.Project.Mobile
                 .RegisterViewModels()
                 .RegisterViews();
 
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -35,12 +36,15 @@ namespace Mde.Project.Mobile
             return builder.Build();
         }
 
+
+
         private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
             builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
 
             builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
+            builder.Services.AddSingleton<FirebaseAuthService>();
 
             builder.Services.AddTransient<IFarmService, FarmService>();
             builder.Services.AddTransient<IProductService, ProductService>();

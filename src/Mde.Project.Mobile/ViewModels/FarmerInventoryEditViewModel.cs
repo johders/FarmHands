@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
@@ -10,7 +9,7 @@ using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	[QueryProperty(nameof(SelectedOffer), nameof(SelectedOffer))]
+    [QueryProperty(nameof(SelectedOffer), nameof(SelectedOffer))]
 	public class FarmerInventoryEditViewModel : ObservableObject
 	{
 		private readonly IProductService _productService;
@@ -142,6 +141,56 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
+		public ICommand SelectImageCommand => new Command(async () =>
+		{
+			try
+			{
+				var result = await MediaPicker.PickPhotoAsync();
+
+				if (result is not null)
+				{
+					var stream = await result.OpenReadAsync();
+					var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
+
+					using (var fileStream = File.Create(filePath))
+					{
+						await stream.CopyToAsync(fileStream);
+					}
+
+					ImageUrl = filePath;
+				}
+			}
+			catch (Exception ex)
+			{
+				await Shell.Current.DisplayAlert("Error", "Unable to open file, try again later", "OK");
+			}
+
+		});
+
+		public ICommand TakePictureCommand => new Command(async () =>
+		{
+			try
+			{
+				var result = await MediaPicker.CapturePhotoAsync();
+
+				if (result is not null)
+				{
+					var stream = await result.OpenReadAsync();
+					var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
+					using (var fileStream = File.Create(filePath))
+					{
+						await stream.CopyToAsync(fileStream);
+					}
+					ImageUrl = filePath;
+				}
+			}
+			catch (Exception ex)
+			{
+				var result = ex.Message;
+                await Shell.Current.DisplayAlert("Error", $"Unable to take photo at this time, try again later: {ex.Message}", "OK");
+            }
+        });
+
 		public ICommand SaveCommand =>
 			new Command(async () =>
 			{
@@ -157,6 +206,7 @@ namespace Mde.Project.Mobile.ViewModels
 				offer.Unit = SelectedUnit;
 				offer.Product = productResult.Data;
 				offer.Farm = farmResult.Data;
+				offer.OfferImageUrl = ImageUrl ?? productResult.Data.ImageUrl;
 
 				if(SelectedOffer is null)
 				{

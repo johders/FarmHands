@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -13,10 +12,13 @@ namespace Mde.Project.Mobile.ViewModels
         private readonly IFarmService _farmService;
         private readonly IProductService _productService;
 
-        public UserHomeViewModel(IFarmService farmService, IProductService productService)
+        private readonly IConnectivityService _connectivityService;
+
+        public UserHomeViewModel(IFarmService farmService, IProductService productService, IConnectivityService connectivityService)
         {
             _farmService = farmService;
             _productService = productService;
+            _connectivityService = connectivityService;
         }
 
         private ObservableCollection<Farm> farms;
@@ -41,6 +43,13 @@ namespace Mde.Project.Mobile.ViewModels
 
         public ICommand RefreshFarmListCommand => new Command(async () =>
         {
+            //if (!_connectivityService.IsConnected())
+            //{
+            //    await Shell.Current.DisplayAlert("No Internet", "Unable to load products. Please check your connection.", "OK");
+            //    return;
+            //}
+
+
             var result = await _farmService.GetAllAsync();
 
             var farms = result.Data;

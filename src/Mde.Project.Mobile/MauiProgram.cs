@@ -5,6 +5,7 @@ using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
 using Mde.Project.Mobile.Pages.Login;
 using Mde.Project.Mobile.Pages.User;
+using Mde.Project.Mobile.Services;
 using Mde.Project.Mobile.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -36,6 +37,9 @@ namespace Mde.Project.Mobile
 
         private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
         {
+            builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+            builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
+
             builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
 
             builder.Services.AddTransient<IFarmService, FarmService>();

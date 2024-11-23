@@ -8,6 +8,7 @@
     <converters:NoImageToVisibilityConverter x:Key="NoImageToVisibilityConverter"/>
     <converters:FavoriteToHeartImageConverter x:Key="FavoriteToHeartImageConverter"/>
     <converters:OfferCountToStringConverter x:Key="OfferCountToStringConverter"/>
+    <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
 
     <Style TargetType="Grid" x:Key="MaxWidthGrid">
         <Setter Property="HorizontalOptions" Value="Center" />

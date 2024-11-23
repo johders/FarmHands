@@ -10,7 +10,7 @@ namespace Mde.Project.Core.Entities
         public ApplicationUserBase() { }
 
         [FirestoreDocumentId]
-        public string UID { get; set; }
+        public string Uid { get; set; }
 
         [FirestoreProperty]
         public string Email { get; set; }

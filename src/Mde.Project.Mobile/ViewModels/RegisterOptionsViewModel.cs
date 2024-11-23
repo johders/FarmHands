@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Mde.Project.Core.Enums;
 using Mde.Project.Mobile.Pages.Login;
 using System.Windows.Input;
 
@@ -10,7 +11,7 @@ namespace Mde.Project.Mobile.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>()
             {
-                { nameof(RegisterViewModel.RoleName), "user" }
+                { nameof(RegisterViewModel.Role), UserRole.User }
             };
 
             await Shell.Current.GoToAsync(nameof(RegisterPage), true, navigationParameter);
@@ -20,7 +21,7 @@ namespace Mde.Project.Mobile.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>()
             {
-                { nameof(RegisterViewModel.RoleName), "farmer" }
+                { nameof(RegisterViewModel.Role), UserRole.Farmer }
             };
 
             await Shell.Current.GoToAsync(nameof(RegisterPage), true, navigationParameter);

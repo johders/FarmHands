@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mde.Project.Mobile.Pages.Login.RegisterOptionsPage"
              xmlns:viewmodel ="clr-namespace:Mde.Project.Mobile.ViewModels"
-             x:DataType="viewmodel:"
+             x:DataType="viewmodel:RegisterOptionsViewModel"
              Title="RegisterOptionsPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout Spacing="20">
         <Label 
             Text="Register"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <Button Text="Register as FarmHand"/>
-        <Button Text="Register as Farmer"/>
+        <Button Text="Register as FarmHand"
+                Command="{Binding RegisterAsUserCommand}"/>
+        <Button Text="Register as Farmer"
+                Command="{Binding RegisterAsFarmerCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

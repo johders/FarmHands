@@ -35,6 +35,9 @@ namespace Mde.Project.Core.Entities
         [FirestoreProperty]
         public string ImageUrl { get; set; }
 
+        [FirestoreProperty]
+        public string OwnerId { get; set; }
+
         //public IEnumerable<Product> Products { get; set; }
 
         //public ICollection<FavoriteFarm> FavoriteFarms { get; set; }

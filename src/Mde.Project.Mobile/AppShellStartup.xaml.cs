@@ -9,6 +9,8 @@ namespace Mde.Project.Mobile
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(RegisterOptionsPage), typeof(RegisterOptionsPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         }
     }
 }

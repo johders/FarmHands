@@ -45,6 +45,7 @@ namespace Mde.Project.Mobile
 
             builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
             builder.Services.AddSingleton<FirebaseAuthService>();
+            builder.Services.AddSingleton<IAccountService, AccountService>();
 
             builder.Services.AddTransient<IFarmService, FarmService>();
             builder.Services.AddTransient<IProductService, ProductService>();
@@ -75,6 +76,8 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerSettingsViewModel>();
 
 			builder.Services.AddTransient<LoginViewModel>();
+			builder.Services.AddTransient<RegisterViewModel>();
+			builder.Services.AddTransient<RegisterOptionsViewModel>();
 
 			return builder;
         }
@@ -96,6 +99,8 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerSettingsPage>();
 
 			builder.Services.AddTransient<LoginPage>();
+			builder.Services.AddTransient<RegisterPage>();
+			builder.Services.AddTransient<RegisterOptionsPage>();
 
 			return builder;
         }

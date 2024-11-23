@@ -442,23 +442,6 @@ namespace Mde.Project.Core.Data
 			return offers;
 		}
 
-		public static IEnumerable<ApplicationUser> SeedUsers()
-		{
-			IEnumerable<ApplicationUser> users = new List<ApplicationUser>
-			{
-				new ApplicationUser
-				{
-					Id = Guid.Parse("30000000-0000-0000-0000-000000000001"),
-					Name = "Jefke Delaplace",
-					UserName = "JDTester",
-					Password = "password",
-					FavoriteFarms = new List<FavoriteFarm>(),
-					FavoriteProducts = new List<FavoriteProduct>(),
-				}
-			};
-
-			return users;
-		}
 
 		public static IEnumerable<FavoriteFarm> SeedFavoriteFarms()
         {

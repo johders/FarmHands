@@ -1,19 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Services.Firestore;
+using Mde.Project.Core.Services;
+using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Login;
 using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class LoginViewModel : ObservableObject
+    public class LoginViewModel : ObservableObject
 	{
 		private string username;
-
-        private readonly FirebaseAuthService _authService;
-
-        public LoginViewModel(FirebaseAuthService authService)
+        private readonly IAccountService _accountService;
+        public LoginViewModel(IAccountService accountService)
         {
-            _authService = authService;
+            _accountService = accountService;
         }
 
         public string Username
@@ -58,10 +57,11 @@ namespace Mde.Project.Mobile.ViewModels
 
             try
             {
-                var userCredential = await _authService.LoginUserAsync(email, password);
-                await Shell.Current.DisplayAlert("Success", "Login successful!", "OK");
+                var userCredential = await _accountService.LoginUserAsync(email, password);
+                //await Shell.Current.DisplayAlert("Success", "Login successful!", "OK");
+                var token = (await _accountService.GetAuthTokenAsync()).Data;
 
-                SecureStorage.Default.SetAsync("auth_token", await _authService.GetAuthTokenAsync());
+                await SecureStorage.Default.SetAsync("auth_token", token);
 
                 Application.Current.MainPage = new AppShellUser();
             }
@@ -70,6 +70,7 @@ namespace Mde.Project.Mobile.ViewModels
                 await Shell.Current.DisplayAlert("Error", $"Login failed: {ex.Message}", "OK");
             }
 
+            //get role from token and redirect
         });
 
         public ICommand RegisterCommand => new Command(async () =>

@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
 using Firebase.Auth.Providers;
+using FirebaseAdmin.Auth;
 
 namespace Mde.Project.Core.Services.Firestore
 {
@@ -22,13 +23,13 @@ namespace Mde.Project.Core.Services.Firestore
             _authClient = new FirebaseAuthClient(config);
         }
 
-        public async Task<Firebase.Auth.UserCredential> RegisterUserAsync(string email, string password)
+        public async Task<UserCredential> RegisterUserAsync(string email, string password)
         {
             var userCredential = await _authClient.CreateUserWithEmailAndPasswordAsync(email, password);
             return userCredential;
         }
 
-        public async Task<Firebase.Auth.UserCredential> LoginUserAsync(string email, string password)
+        public async Task<UserCredential> LoginUserAsync(string email, string password)
         {
             var userCredential = await _authClient.SignInWithEmailAndPasswordAsync(email, password);
             return userCredential;
@@ -43,6 +44,8 @@ namespace Mde.Project.Core.Services.Firestore
             }
 
             var token = await user.GetIdTokenAsync();
+
+            //await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(uid, claims);
 
             return token;
         }

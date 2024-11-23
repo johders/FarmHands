@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Services.Firestore;
+using Mde.Project.Mobile.Pages.Login;
 using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
@@ -69,6 +70,11 @@ namespace Mde.Project.Mobile.ViewModels
                 await Shell.Current.DisplayAlert("Error", $"Login failed: {ex.Message}", "OK");
             }
 
+        });
+
+        public ICommand RegisterCommand => new Command(async () =>
+        {
+            await Shell.Current.GoToAsync(nameof(RegisterOptionsPage), true);
         });
 	}
 }

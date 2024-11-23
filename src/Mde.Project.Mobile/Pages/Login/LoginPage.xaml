@@ -75,7 +75,8 @@
                     BackgroundColor="Transparent"
                     TextColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                     FontAttributes="Bold"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Center"
+                    Command="{Binding RegisterCommand}"/>
         </VerticalStackLayout>
     </VerticalStackLayout>
     </Grid>

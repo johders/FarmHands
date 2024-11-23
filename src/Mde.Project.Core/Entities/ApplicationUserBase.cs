@@ -1,10 +1,25 @@
-﻿namespace Mde.Project.Core.Entities
+﻿using Google.Cloud.Firestore;
+using Mde.Project.Core.Data.Firestore;
+using Mde.Project.Core.Enums;
+
+namespace Mde.Project.Core.Entities
 {
-	public class ApplicationUserBase
+    [FirestoreData]
+    public class ApplicationUserBase
 	{
-		public Guid Id { get; set; }
-		public string Name { get; set; }
-		public string UserName { get; set; }
-		public string Password { get; set; }
-	}
+        public ApplicationUserBase() { }
+
+        [FirestoreDocumentId]
+        public string UID { get; set; }
+
+        [FirestoreProperty]
+        public string Email { get; set; }
+
+        [FirestoreProperty]
+        public string Name { get; set; }
+
+        [FirestoreProperty(ConverterType = typeof(EnumConverter<UserRole>))]
+        public UserRole Role { get; set; }
+    }
 }
+

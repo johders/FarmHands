@@ -10,5 +10,6 @@ namespace Mde.Project.Core.Services.Interfaces
         Task<BaseResultModel> AssignRoleAsync(string uid, UserRole role);
         Task<ResultModel<UserCredential>> LoginUserAsync(string email, string password);
         Task<ResultModel<string>> GetAuthTokenAsync();
+        Task<ResultModel<UserRole>> GetRoleFromTokenAsync(string token);
     }
 }

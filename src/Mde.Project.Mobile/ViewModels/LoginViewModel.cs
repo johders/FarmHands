@@ -39,38 +39,37 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand LoginCommand => new Command(async () =>
 		{
-            //if (Username == "test@farm.com" && Password == "password")
-            //{
-            //	Application.Current.MainPage = new AppShellFarmer();
-            //}
-            //else if (Username == "test@user.com" && Password == "password")
-            //{
-            //	Application.Current.MainPage = new AppShellUser();
-            //}
-            //else
-            //{
-            //	UnSuccessful = true;
-            //}
-
             var email = Username;
             var password = Password;
+            
+            var loginResult = await _accountService.LoginUserAsync(email, password);
 
-            try
+            if (!loginResult.IsSuccess)
             {
-                var userCredential = await _accountService.LoginUserAsync(email, password);
-                //await Shell.Current.DisplayAlert("Success", "Login successful!", "OK");
-                var token = (await _accountService.GetAuthTokenAsync()).Data;
-
-                await SecureStorage.Default.SetAsync("auth_token", token);
-
-                Application.Current.MainPage = new AppShellUser();
-            }
-            catch (Exception ex)
-            {
-                await Shell.Current.DisplayAlert("Error", $"Login failed: {ex.Message}", "OK");
+                await Shell.Current.DisplayAlert("Error", $"Login failed: {string.Join(", ", loginResult.Errors)}", "OK");
             }
 
-            //get role from token and redirect
+            var tokenResult = await _accountService.GetAuthTokenAsync();
+
+            if (!tokenResult.IsSuccess)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Login failed: {string.Join(", ", tokenResult.Errors)}", "OK");
+            }
+
+            var token = tokenResult.Data;
+
+            await SecureStorage.Default.SetAsync("auth_token", token);
+
+            var roleResult = await _accountService.GetRoleFromTokenAsync(token);
+            
+            if (!roleResult.IsSuccess)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Login failed: {string.Join(", ", roleResult.Errors)}", "OK");
+            }
+
+            var role = roleResult.Data;
+
+            Application.Current.MainPage = role == Core.Enums.UserRole.User ? new AppShellUser() : role == Core.Enums.UserRole.Farmer ? new AppShellFarmer() : new AppShellStartup();           
         });
 
         public ICommand RegisterCommand => new Command(async () =>

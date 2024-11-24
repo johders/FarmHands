@@ -90,6 +90,33 @@ namespace Mde.Project.Core.Services
             }
         }
 
+        public async Task<ResultModel<UserRole>> GetRoleFromTokenAsync(string token)
+        {
+            var result = new ResultModel<UserRole>();
+            try
+            {
+                var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(token);
+
+                if (decodedToken.Claims.TryGetValue("role", out var roleClaim))
+                {
+                    if (Enum.TryParse(typeof(UserRole), roleClaim.ToString(), out var role))
+                    {
+                        result.Data = (UserRole)role;
+                        return result;
+                    }
+                }
+
+                result.Errors.Add("Error getting role from token");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(ex.Message);
+                Console.WriteLine($"Error retrieving role from token: {ex.Message}");
+                return result;
+            }
+        }
+
         public async Task<ResultModel<string>> GetAuthTokenAsync()
         {
             var result = new ResultModel<string>();

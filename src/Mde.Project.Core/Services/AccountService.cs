@@ -128,8 +128,31 @@ namespace Mde.Project.Core.Services
                 {
                     result.Errors.Add(error);
                 }
+
+                return result;
             }
+
             result.Data = tokenResult.Data;
+            return result;
+        }
+
+        public async Task<ResultModel<UserRole>> GetRoleFromTokenAsync(string token)
+        {
+            var result = new ResultModel<UserRole>();
+
+            var roleResult = await _authService.GetRoleFromTokenAsync(token);
+
+            if (!roleResult.IsSuccess)
+            {
+                foreach (var error in roleResult.Errors)
+                {
+                    result.Errors.Add(error);
+                }
+
+                return result;
+            }
+        
+            result.Data = roleResult.Data;
             return result;
         }
     }

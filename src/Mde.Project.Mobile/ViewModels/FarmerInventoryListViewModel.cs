@@ -13,14 +13,15 @@ namespace Mde.Project.Mobile.ViewModels
 	public class FarmerInventoryListViewModel : ObservableObject
 	{
 		private readonly IOfferService _offerService;
+		private readonly IFarmerService _farmerService;
 
-		public FarmerInventoryListViewModel(IOfferService offerService)
-		{
-			_offerService = offerService;
+        public FarmerInventoryListViewModel(IOfferService offerService, IFarmerService farmerService)
+        {
+            _offerService = offerService;
+            _farmerService = farmerService;
+        }
 
-		}
-
-		private ObservableCollection<Offer> offers;
+        private ObservableCollection<Offer> offers;
 		public ObservableCollection<Offer> Offers
 		{
 			get { return offers; }
@@ -32,7 +33,16 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshOffersListCommand => new Command(async () =>
 		{
-			var result = await _offerService.GetAllAsync();
+            var uid = await SecureStorage.GetAsync("userId");
+            var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+
+            if (!farmerResult.IsSuccess)
+            {
+                await Shell.Current.DisplayAlert("Oops", $"Unable to load offers at this time, try again later: {string.Join(", ", farmerResult.Errors)}", "OK");
+                return;
+            }
+
+            var result = await _offerService.GetAllOffersByFarmIdAsync(farmerResult.Data);
 			var offers = result.Data;
 			Offers = new ObservableCollection<Offer>(offers);
 		});

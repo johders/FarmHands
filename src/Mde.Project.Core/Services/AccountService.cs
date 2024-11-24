@@ -1,6 +1,4 @@
-﻿using Firebase.Auth;
-using Google.Api.Gax.Grpc;
-using Google.Cloud.Firestore;
+﻿using Google.Cloud.Firestore;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
@@ -42,8 +40,8 @@ namespace Mde.Project.Core.Services
 
                 if (role == UserRole.Farmer && farmName is not null)
                 {
-                    var farm = new Farm { Name = farmName, OwnerId = uid };
-                    var farmDoc = await _firestoreDb.Collection("Farms").AddAsync(farm);
+                    var farm = new Farm { Id = Guid.NewGuid().ToString(), Name = farmName, OwnerId = uid };
+                    await _firestoreDb.Collection("Farms").Document(farm.Id).SetAsync(farm);
 
                     var farmer = new Farmer
                     {
@@ -51,7 +49,7 @@ namespace Mde.Project.Core.Services
                         Name = name,
                         Role = role,
                         Email = email,
-                        FarmId = farmDoc.Id,
+                        FarmId = farm.Id,
                     };
                     await _firestoreDb.Collection("Users").Document(uid).SetAsync(farmer);
                     result.Data = uid;
@@ -134,16 +132,5 @@ namespace Mde.Project.Core.Services
             return _authService.Logout();
         }
 
-        public async Task SaveUserIdToLocalStorageAsync(string uid)
-        {
-            //try
-            //{
-            //    SecureStorage.SetAsync("userId", uid);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"Failed to save UID: {ex.Message}");
-            //}
-        }
     }
 }

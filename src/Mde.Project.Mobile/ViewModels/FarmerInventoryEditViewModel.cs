@@ -15,16 +15,18 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IProductService _productService;
 		private readonly IOfferService _offerService;
 		private readonly IFarmService _farmService;
+		private readonly IFarmerService _farmerService;
 
-        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService)
-		{
-			_productService = productService;
-			_offerService = offerService;
-			_farmService = farmService;
+        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, IFarmerService farmerService)
+        {
+            _productService = productService;
+            _offerService = offerService;
+            _farmService = farmService;
 
-			LoadUnitOptions();
-			Products = new ObservableCollection<Product>();
-		}
+            LoadUnitOptions();
+            Products = new ObservableCollection<Product>();
+            _farmerService = farmerService;
+        }
 
         public async Task InitializeAsync()
         {
@@ -196,7 +198,16 @@ namespace Mde.Project.Mobile.ViewModels
 			{
                 var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
 
-                var farmResult = await _farmService.GetByIdAsync("10000000-0000-0000-0000-000000000007");
+				var uid = await SecureStorage.GetAsync("userId");
+				var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+
+				if (!farmerResult.IsSuccess)
+				{
+                    await Shell.Current.DisplayAlert("Oops", $"Unable to create offer at this time, try again later: {string.Join(", ", farmerResult.Errors)}", "OK");
+					return;
+                }
+
+                var farmResult = await _farmService.GetByIdAsync(farmerResult.Data);
 
 				OfferEditRequestModel offer = new OfferEditRequestModel();
 

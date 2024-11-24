@@ -52,6 +52,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IOfferService, OfferService>();
             builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductService>();
+            builder.Services.AddSingleton<IFarmerService, FarmerService>();
 
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
 

@@ -43,6 +43,7 @@ namespace Mde.Project.Core.Services
 
                 var newOffer = new Offer
                 {
+                    Id = Guid.NewGuid().ToString(),
                     ProductId = createModel.Product.Id,
                     FarmId = createModel.Farm.Id,
                     Variant = createModel.Variant,
@@ -55,7 +56,8 @@ namespace Mde.Project.Core.Services
                 };
 
                 var offerCollection = _firestoreDb.Collection("Offers");
-                await offerCollection.AddAsync(newOffer);
+                //await offerCollection.AddAsync(newOffer);
+                await offerCollection.Document(newOffer.Id).SetAsync(newOffer);
             }
             catch (Exception ex)
             {

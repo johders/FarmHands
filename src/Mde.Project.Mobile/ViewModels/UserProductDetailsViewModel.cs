@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -8,19 +7,19 @@ using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	[QueryProperty(nameof(SelectedProduct), nameof(SelectedProduct))]
+    [QueryProperty(nameof(SelectedProduct), nameof(SelectedProduct))]
     public class UserProductDetailsViewModel : ObservableObject
     {
 		private readonly IOfferService _offerService;
 		private readonly IFavoriteProductService _favoriteProductsService;
 
-		public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService)
-		{
-			_offerService = offerService;
-			_favoriteProductsService = favoriteProductsService;
-		}
+        public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService)
+        {
+            _offerService = offerService;
+            _favoriteProductsService = favoriteProductsService;
+        }
 
-		private Product selectedProduct;
+        private Product selectedProduct;
 		public Product SelectedProduct
         {
 			get { return selectedProduct; }
@@ -56,22 +55,26 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			if (SelectedProduct != null)
 			{
-				var result = await _favoriteProductsService.IsFavoritedAsync(SelectedProduct.Id);
+                var uid = await SecureStorage.GetAsync("userId");
+				var result = await _favoriteProductsService.IsUserFavoritedAsync(uid, SelectedProduct.Id);
 				IsFavorite = result.IsSuccess;
 			}
 		});
 
 		public ICommand ToggleFavoriteCommand => new Command(async () =>
 		{
-			if (IsFavorite)
+            var uid = await SecureStorage.GetAsync("userId");
+
+            if (IsFavorite)
 			{
-				await _favoriteProductsService.DeleteAsync(SelectedProduct.Id);
-			}
-			else
+                await _favoriteProductsService.DeleteAsync(uid, SelectedProduct.Id);
+            }
+            else
 			{
-				await _favoriteProductsService.CreateAsync(SelectedProduct.Id);
-			}
-			IsFavorite = !IsFavorite;
+                await _favoriteProductsService.CreateAsync(uid, SelectedProduct.Id);
+
+            }
+            IsFavorite = !IsFavorite;
 		});
 
 		private async Task LoadOffersForSelectedProduct()

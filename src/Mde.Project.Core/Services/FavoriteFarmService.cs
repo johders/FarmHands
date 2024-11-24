@@ -2,8 +2,9 @@
 using Mde.Project.Core.Constants;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Models;
 
-namespace Mde.Project.Core.Services.Models
+namespace Mde.Project.Core.Services
 {
     public class FavoriteFarmService : IFavoriteFarmService
     {
@@ -54,7 +55,7 @@ namespace Mde.Project.Core.Services.Models
             }
         }
 
-        public async Task<BaseResultModel> CreateByUserAsync(string uid, string farmId)
+        public async Task<BaseResultModel> CreateAsync(string uid, string farmId)
         {
             var result = new BaseResultModel();
 
@@ -97,34 +98,11 @@ namespace Mde.Project.Core.Services.Models
 
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.Errors.Add(string.Format(FirestoreMessage.CreateError, $"favorite farm: {farmId}", ex.Message));
                 return result;
             }
-        }
-
-        public List<FavoriteFarm> UserFavoriteFarms => throw new NotImplementedException();
-
-        public Task<BaseResultModel> CreateAsync(string farmId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> DeleteAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<FavoriteFarm> GetAll()
-        {
-            //not favorable in firebase
-            throw new NotImplementedException();
-        }
-
-        public async Task<ResultModel<IEnumerable<Farm>>> GetAllFavoriteFarmsAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BaseResultModel> IsUserFavoritedAsync(string uid, string farmId)
@@ -160,7 +138,7 @@ namespace Mde.Project.Core.Services.Models
                     result.Errors.Add("Farm not in favorites");
                     return result;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -169,7 +147,7 @@ namespace Mde.Project.Core.Services.Models
             }
         }
 
-        public async Task<BaseResultModel> DeleteByUserAsync(string uid, string farmId)
+        public async Task<BaseResultModel> DeleteAsync(string uid, string farmId)
         {
             var result = new BaseResultModel();
 
@@ -217,9 +195,5 @@ namespace Mde.Project.Core.Services.Models
             }
         }
 
-        public Task<BaseResultModel> IsFavoritedAsync(string farmId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

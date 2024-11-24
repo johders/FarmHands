@@ -2,10 +2,8 @@
 using Firebase.Auth.Providers;
 using FirebaseAdmin.Auth;
 using Mde.Project.Core.Enums;
-using Mde.Project.Core.Services.Firestore;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
-using System.Data;
 
 namespace Mde.Project.Core.Services
 {

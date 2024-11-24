@@ -5,12 +5,9 @@ namespace Mde.Project.Core.Services.Interfaces
 {
 	public interface IFavoriteProductService
 	{
-		List<FavoriteProduct> UserFavoriteProducts { get; }
-		Task<ResultModel<IEnumerable<FavoriteProduct>>> GetAllAsync();
-		Task<ResultModel<IEnumerable<Product>>> GetAllFavoriteProductsAsync();
-		Task<BaseResultModel> IsFavoritedAsync(string id);
-		Task<BaseResultModel> CreateAsync(string id);
-		Task<BaseResultModel> DeleteAsync(string id);
-		Task<IQueryable<FavoriteProduct>> GetAll();
-	}
+        Task<BaseResultModel> IsUserFavoritedAsync(string uid, string productId);
+        Task<ResultModel<IEnumerable<Product>>> GetAllFavoriteProductsByUserAsync(string uid);
+        Task<BaseResultModel> CreateAsync(string uid, string productId);
+        Task<BaseResultModel> DeleteAsync(string uid, string productId);
+    }
 }

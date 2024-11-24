@@ -12,12 +12,12 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IProductService _productService;
 
         public UserFavoriteProductsViewModel(IFavoriteProductService favoriteProductService, IProductService productService)
-		{
-			_favoriteProductService = favoriteProductService;
-			_productService = productService;
-		}
+        {
+            _favoriteProductService = favoriteProductService;
+            _productService = productService;
+        }
 
-		private ObservableCollection<ProductViewModel> favoriteProducts;
+        private ObservableCollection<ProductViewModel> favoriteProducts;
 		public ObservableCollection<ProductViewModel> FavoriteProducts
 		{
 			get { return favoriteProducts; }
@@ -29,7 +29,9 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshFavoriteProductsListCommand => new Command(async () =>
 		{
-			var result = await _favoriteProductService.GetAllFavoriteProductsAsync();
+            var uid = await SecureStorage.GetAsync("userId");
+            var result = await _favoriteProductService.GetAllFavoriteProductsByUserAsync(uid);
+
 			var favoriteProducts = result.Data.Select(fp => new ProductViewModel(fp, _productService)).ToList();
 
             await Task.WhenAll(favoriteProducts.Select(vm => vm.LoadOfferCountAsync()));

@@ -67,12 +67,12 @@ namespace Mde.Project.Mobile.ViewModels
 			if (IsFavorite)
 			{
                 var uid = await SecureStorage.GetAsync("userId");
-                await _favoriteFarmService.DeleteByUserAsync(uid, SelectedFarm.Id);
+                await _favoriteFarmService.DeleteAsync(uid, SelectedFarm.Id);
             }
 			else
 			{
                 var uid = await SecureStorage.GetAsync("userId");
-                await _favoriteFarmService.CreateByUserAsync(uid, SelectedFarm.Id);
+                await _favoriteFarmService.CreateAsync(uid, SelectedFarm.Id);
             }
 			IsFavorite = !IsFavorite;
 		});

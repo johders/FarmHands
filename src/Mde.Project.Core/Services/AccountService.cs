@@ -84,76 +84,27 @@ namespace Mde.Project.Core.Services
 
         public async Task<BaseResultModel> AssignRoleAsync(string uid, UserRole role)
         {
-            var result = new BaseResultModel();
-
-            var assignRoleResult = await _authService.AddUserRoleToToken(uid, role);
-
-            if (!assignRoleResult.IsSuccess)
-            {
-                foreach (var error in assignRoleResult.Errors)
-                {
-                    result.Errors.Add(error);
-                }
-            }
-
-            return result;
+            return await _authService.AddUserRoleToToken(uid, role);
         }
 
         public async Task<ResultModel<UserCredential>> LoginUserAsync(string email, string password)
         {
-            var result = new ResultModel<UserCredential>();
-
-            var loginResult = await _authService.LoginUserAsync(email, password);
-
-            if (!loginResult.IsSuccess)
-            {
-                foreach (var error in loginResult.Errors)
-                {
-                    result.Errors.Add(error);
-                }
-            }
-
-            return result;
+            return await _authService.LoginUserAsync(email, password);
         }
 
         public async Task<ResultModel<string>> GetAuthTokenAsync()
         {
-            var result = new ResultModel<string>();
-
-            var tokenResult = await _authService.GetAuthTokenAsync();
-
-            if (!tokenResult.IsSuccess)
-            {
-                foreach (var error in tokenResult.Errors)
-                {
-                    result.Errors.Add(error);
-                }
-
-                return result;
-            }
-
-            result.Data = tokenResult.Data;
-            return result;
+            return await _authService.GetAuthTokenAsync();
         }
 
         public async Task<ResultModel<UserRole>> GetRoleFromTokenAsync(string token)
         {
-            var result = new ResultModel<UserRole>();
+            return await _authService.GetRoleFromTokenAsync(token);
+        }
 
-            var roleResult = await _authService.GetRoleFromTokenAsync(token);
-
-            if (!roleResult.IsSuccess)
-            {
-                foreach (var error in roleResult.Errors)
-                {
-                    result.Errors.Add(error);
-                }
-
-                return result;
-            }
-        
-            result.Data = roleResult.Data;
-            return result;
+        public BaseResultModel Logout()
+        {
+            return _authService.Logout();
         }
     }
 }

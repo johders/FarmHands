@@ -5,6 +5,7 @@ using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Firestore;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
+using System.Data;
 
 namespace Mde.Project.Core.Services
 {
@@ -42,6 +43,7 @@ namespace Mde.Project.Core.Services
             catch (Exception ex)
             {
                 result.Errors.Add(ex.Message);
+                Console.WriteLine($"Account register failure: {ex.Message}");
                 return result;
             }
 
@@ -61,6 +63,7 @@ namespace Mde.Project.Core.Services
             catch (Exception ex)
             {
                 result.Errors.Add(ex.Message);
+                Console.WriteLine($"Login failure: {ex.Message}");
                 return result;
             }
             
@@ -107,6 +110,8 @@ namespace Mde.Project.Core.Services
                 }
 
                 result.Errors.Add("Error getting role from token");
+                Console.WriteLine($"Error retrieving role from token: ROLE not found");
+
                 return result;
             }
             catch (Exception ex)
@@ -142,9 +147,22 @@ namespace Mde.Project.Core.Services
            
         }
 
-        public void Logout()
+        public BaseResultModel Logout()
         {
-            _authClient.SignOut();
+            var result = new BaseResultModel();
+
+            try
+            {
+                _authClient.SignOut();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Logout Error: {ex.Message}");
+                result.Errors.Add(ex.Message);
+                return result;
+            }
+
+            return result;
         }
     }
 }

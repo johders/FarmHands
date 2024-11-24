@@ -11,5 +11,6 @@ namespace Mde.Project.Core.Services.Interfaces
         Task<ResultModel<UserCredential>> LoginUserAsync(string email, string password);
         Task<ResultModel<string>> GetAuthTokenAsync();
         Task<ResultModel<UserRole>> GetRoleFromTokenAsync(string token);
+        BaseResultModel Logout();
     }
 }

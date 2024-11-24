@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -13,12 +12,12 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IFarmService _farmService;
 
         public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService)
-		{
-			_favoriteFarmService = favoriteFarmService;
-			_farmService = farmService;
-		}
+        {
+            _favoriteFarmService = favoriteFarmService;
+            _farmService = farmService;
+        }
 
-		private ObservableCollection<FarmViewModel> favoriteFarms;
+        private ObservableCollection<FarmViewModel> favoriteFarms;
 		public ObservableCollection<FarmViewModel> FavoriteFarms
 		{
 			get { return favoriteFarms; }
@@ -30,7 +29,8 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshFavoriteFarmsListCommand => new Command(async () =>
 		{
-			var result = await _favoriteFarmService.GetAllFavoriteFarmsAsync();
+			var uid = await SecureStorage.GetAsync("userId");
+            var result = await _favoriteFarmService.GetAllFavoriteFarmsByUserAsync(uid);
 			var favoriteFarms = result.Data.Select(ff => new FarmViewModel(ff, _farmService));
 
 			FavoriteFarms = new ObservableCollection<FarmViewModel>(favoriteFarms);

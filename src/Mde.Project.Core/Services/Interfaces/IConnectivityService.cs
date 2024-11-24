@@ -1,7 +1,9 @@
-﻿namespace Mde.Project.Core.Services.Interfaces
+﻿using Mde.Project.Core.Services.Models;
+
+namespace Mde.Project.Core.Services.Interfaces
 {
     public interface IConnectivityService
     {
-        bool IsConnected();
+        BaseResultModel IsConnected();
     }
 }

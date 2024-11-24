@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -57,7 +56,8 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			if (SelectedFarm != null)
 			{
-				var result = await _favoriteFarmService.IsFavoritedAsync(SelectedFarm.Id);
+                var uid = await SecureStorage.GetAsync("userId");
+                var result = await _favoriteFarmService.IsUserFavoritedAsync(uid, SelectedFarm.Id);
 				IsFavorite = result.IsSuccess;
 			}
 		});
@@ -66,12 +66,14 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			if (IsFavorite)
 			{
-				await _favoriteFarmService.DeleteAsync(SelectedFarm.Id);
-			}
+                var uid = await SecureStorage.GetAsync("userId");
+                await _favoriteFarmService.DeleteByUserAsync(uid, SelectedFarm.Id);
+            }
 			else
 			{
-				await _favoriteFarmService.CreateAsync(SelectedFarm.Id);
-			}
+                var uid = await SecureStorage.GetAsync("userId");
+                await _favoriteFarmService.CreateByUserAsync(uid, SelectedFarm.Id);
+            }
 			IsFavorite = !IsFavorite;
 		});
 

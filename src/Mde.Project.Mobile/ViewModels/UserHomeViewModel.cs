@@ -12,13 +12,10 @@ namespace Mde.Project.Mobile.ViewModels
         private readonly IFarmService _farmService;
         private readonly IProductService _productService;
 
-        private readonly IConnectivityService _connectivityService;
-
-        public UserHomeViewModel(IFarmService farmService, IProductService productService, IConnectivityService connectivityService)
+        public UserHomeViewModel(IFarmService farmService, IProductService productService)
         {
             _farmService = farmService;
             _productService = productService;
-            _connectivityService = connectivityService;
         }
 
         private ObservableCollection<Farm> farms;
@@ -43,13 +40,6 @@ namespace Mde.Project.Mobile.ViewModels
 
         public ICommand RefreshFarmListCommand => new Command(async () =>
         {
-            //if (!_connectivityService.IsConnected())
-            //{
-            //    await Shell.Current.DisplayAlert("No Internet", "Unable to load products. Please check your connection.", "OK");
-            //    return;
-            //}
-
-
             var result = await _farmService.GetAllAsync();
 
             var farms = result.Data;

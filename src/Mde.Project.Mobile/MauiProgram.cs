@@ -2,6 +2,7 @@
 using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Firestore;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Models;
 using Mde.Project.Mobile.Pages.Farmer;
 using Mde.Project.Mobile.Pages.Login;
 using Mde.Project.Mobile.Pages.User;
@@ -51,7 +52,8 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<IProductService, ProductService>();
             builder.Services.AddSingleton<IOfferService, OfferService>();
 
-            builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();
+            builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmService>();
+            //builder.Services.AddSingleton<FavoriteFarmService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
 

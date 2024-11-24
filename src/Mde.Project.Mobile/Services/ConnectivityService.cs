@@ -1,4 +1,5 @@
 ﻿using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Models;
 
 namespace Mde.Project.Mobile.Services
 {
@@ -11,9 +12,17 @@ namespace Mde.Project.Mobile.Services
             _connectivity = connectivity;
         }
 
-        public bool IsConnected()
+        public BaseResultModel IsConnected()
         {
-            return _connectivity.NetworkAccess == NetworkAccess.Internet;
+            var result = new BaseResultModel();
+
+            if( _connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                result.Errors.Add("You don't seem to be connected to the internet, Please check your connection and try again.");
+                return result;
+            }
+
+            return result;
         }
     }
 }

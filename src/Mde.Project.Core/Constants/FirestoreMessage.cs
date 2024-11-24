@@ -3,6 +3,7 @@
     public static class FirestoreMessage
     {
         public const string FarmNotFound = "Farm not found!";
+        public const string UserNotFound = "User not found!";
         public const string ProductNotFound = "Product not found!";
         public const string OfferNotFound = "Offer not found!";
 

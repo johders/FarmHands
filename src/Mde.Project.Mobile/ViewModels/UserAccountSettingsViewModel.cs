@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Services.Interfaces;
-using Mde.Project.Core.Services.Models;
 using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class UserAccountSettingsViewModel : ObservableObject
+    public class UserAccountSettingsViewModel : ObservableObject
 	{
 		private readonly IAccountService _accountService;
         public UserAccountSettingsViewModel(IAccountService accountService)

@@ -149,7 +149,6 @@ namespace Mde.Project.Mobile.ViewModels
             await ToastHelper.ShowToastAsync($"Thank you for registering! You can now sign in");
 
             await Shell.Current.GoToAsync(nameof(LoginPage), true);
-            //App.Current.MainPage = Role == UserRole.Farmer ? new AppShellFarmer() : new AppShellUser();
         });
 
     }

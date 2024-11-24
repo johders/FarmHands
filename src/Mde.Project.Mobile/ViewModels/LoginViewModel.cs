@@ -9,9 +9,11 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private string username;
         private readonly IAccountService _accountService;
-        public LoginViewModel(IAccountService accountService)
+        private readonly IConnectivityService _connectivityService;
+        public LoginViewModel(IAccountService accountService, IConnectivityService connectivityService)
         {
             _accountService = accountService;
+            _connectivityService = connectivityService;
         }
 
         public string Username
@@ -48,6 +50,9 @@ namespace Mde.Project.Mobile.ViewModels
                 await Shell.Current.DisplayAlert("Error", $"Login failed: {string.Join(", ", loginResult.Errors)}", "OK");
             }
 
+            var uid = loginResult.Data;
+            await SecureStorage.Default.SetAsync("userId", uid);
+
             var tokenResult = await _accountService.GetAuthTokenAsync();
 
             if (!tokenResult.IsSuccess)
@@ -57,7 +62,7 @@ namespace Mde.Project.Mobile.ViewModels
 
             var token = tokenResult.Data;
 
-            await SecureStorage.Default.SetAsync("auth_token", token);
+            await SecureStorage.Default.SetAsync("authToken", token);
 
             var roleResult = await _accountService.GetRoleFromTokenAsync(token);
             
@@ -75,5 +80,26 @@ namespace Mde.Project.Mobile.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(RegisterOptionsPage), true);
         });
-	}
+
+        //public ICommand CheckConnectionCommand => new Command(async () =>
+        //{
+        //    var connectionResult = _connectivityService.IsConnected();
+
+        //    if (!connectionResult.IsSuccess)
+        //    {
+        //        await Shell.Current.DisplayAlert("No connectivity!", $"{connectionResult.Errors}", "OK");
+        //        return;
+        //    }
+        //});
+
+        public async Task CheckConnectionAsync()
+        {
+            var connectionResult = _connectivityService.IsConnected();
+
+            if (!connectionResult.IsSuccess)
+            {
+                await Shell.Current.DisplayAlert("No connectivity!", $"{string.Join(", ", connectionResult.Errors)}", "OK");
+            }
+        }
+    }
 }

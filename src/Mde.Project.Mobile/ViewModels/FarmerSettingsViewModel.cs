@@ -10,10 +10,12 @@ namespace Mde.Project.Mobile.ViewModels
     public class FarmerSettingsViewModel : ObservableObject
 	{
 		private readonly IFarmService _farmService;
+		private readonly IAccountService _accountService;
 		private Farm farm;
-        public FarmerSettingsViewModel(IFarmService farmService)
+        public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService)
         {
-            _farmService = farmService;          
+            _farmService = farmService;
+            _accountService = accountService;
         }
 
         public async Task InitializeAsync()
@@ -111,7 +113,15 @@ namespace Mde.Project.Mobile.ViewModels
 
 			if (isConfirmed)
 			{
-				Application.Current.MainPage = new AppShellStartup();
+                var logoutResult = _accountService.Logout();
+
+                if (!logoutResult.IsSuccess)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Oops", "Signout issue. Please try again later", "OK");
+                    return;
+                }
+
+                Application.Current.MainPage = new AppShellStartup();
 			}
 		});
 

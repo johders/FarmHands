@@ -1,4 +1,5 @@
 ﻿using Firebase.Auth;
+using Google.Api.Gax.Grpc;
 using Google.Cloud.Firestore;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
@@ -87,9 +88,35 @@ namespace Mde.Project.Core.Services
             return await _authService.AddUserRoleToToken(uid, role);
         }
 
-        public async Task<ResultModel<UserCredential>> LoginUserAsync(string email, string password)
+        public async Task<ResultModel<string>> LoginUserAsync(string email, string password)
         {
-            return await _authService.LoginUserAsync(email, password);
+            var result = new ResultModel<string>();
+
+            try
+            {
+                var loginResult = await _authService.LoginUserAsync(email, password);
+
+                if (!loginResult.IsSuccess)
+                {
+                    foreach (var error in loginResult.Errors)
+                    {
+                        result.Errors.Add(error);
+                    }
+                    return result;
+                }
+
+                var auth = loginResult.Data;
+                string uid = auth.User.Uid;
+
+                result.Data = uid;
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(ex.Message);
+                return result;
+            }
         }
 
         public async Task<ResultModel<string>> GetAuthTokenAsync()
@@ -105,6 +132,18 @@ namespace Mde.Project.Core.Services
         public BaseResultModel Logout()
         {
             return _authService.Logout();
+        }
+
+        public async Task SaveUserIdToLocalStorageAsync(string uid)
+        {
+            //try
+            //{
+            //    SecureStorage.SetAsync("userId", uid);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Failed to save UID: {ex.Message}");
+            //}
         }
     }
 }

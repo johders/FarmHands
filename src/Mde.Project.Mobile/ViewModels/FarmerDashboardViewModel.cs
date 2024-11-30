@@ -46,7 +46,6 @@ namespace Mde.Project.Mobile.ViewModels
                     await Shell.Current.DisplayAlert("Oops", $"Something went wrong: {string.Join(", ", farmIdResult.Errors)}", "OK");
                     return;
 				}
-                //var result = await _offerService.GetAllAsync();
                 var result = await _offerService.GetAllOffersByFarmIdAsync(farmIdResult.Data);
 
 				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer));

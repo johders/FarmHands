@@ -48,6 +48,7 @@ namespace Mde.Project.Mobile.ViewModels
             if (!loginResult.IsSuccess)
             {
                 await Shell.Current.DisplayAlert("Error", $"Login failed: {string.Join(", ", loginResult.Errors)}", "OK");
+                return;
             }
 
             var uid = loginResult.Data;
@@ -58,6 +59,7 @@ namespace Mde.Project.Mobile.ViewModels
             if (!tokenResult.IsSuccess)
             {
                 await Shell.Current.DisplayAlert("Error", $"Login failed: {string.Join(", ", tokenResult.Errors)}", "OK");
+                return;
             }
 
             var token = tokenResult.Data;
@@ -69,6 +71,7 @@ namespace Mde.Project.Mobile.ViewModels
             if (!roleResult.IsSuccess)
             {
                 await Shell.Current.DisplayAlert("Error", $"Login failed: {string.Join(", ", roleResult.Errors)}", "OK");
+                return;
             }
 
             var role = roleResult.Data;
@@ -80,17 +83,6 @@ namespace Mde.Project.Mobile.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(RegisterOptionsPage), true);
         });
-
-        //public ICommand CheckConnectionCommand => new Command(async () =>
-        //{
-        //    var connectionResult = _connectivityService.IsConnected();
-
-        //    if (!connectionResult.IsSuccess)
-        //    {
-        //        await Shell.Current.DisplayAlert("No connectivity!", $"{connectionResult.Errors}", "OK");
-        //        return;
-        //    }
-        //});
 
         public async Task CheckConnectionAsync()
         {

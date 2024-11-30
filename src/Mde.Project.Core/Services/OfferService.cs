@@ -56,7 +56,6 @@ namespace Mde.Project.Core.Services
                 };
 
                 var offerCollection = _firestoreDb.Collection("Offers");
-                //await offerCollection.AddAsync(newOffer);
                 await offerCollection.Document(newOffer.Id).SetAsync(newOffer);
             }
             catch (Exception ex)

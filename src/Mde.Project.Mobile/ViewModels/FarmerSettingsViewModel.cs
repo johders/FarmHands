@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
@@ -11,11 +12,13 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IFarmService _farmService;
 		private readonly IAccountService _accountService;
-		private Farm farm;
-        public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService)
+        private readonly IFarmerService _farmerService;
+        private Farm farm;
+        public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService, IFarmerService farmerService)
         {
             _farmService = farmService;
             _accountService = accountService;
+            _farmerService = farmerService;
         }
 
         public async Task InitializeAsync()
@@ -34,7 +37,10 @@ namespace Mde.Project.Mobile.ViewModels
 
 		private async Task GetMockFarm()
 		{
-			var result = await _farmService.GetByIdAsync("10000000-0000-0000-0000-000000000007");
+            var uid = await SecureStorage.GetAsync("userId");
+            var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+
+            var result = await _farmService.GetByIdAsync(farmerResult.Data);
 			
 			if (result.IsSuccess)
 			{

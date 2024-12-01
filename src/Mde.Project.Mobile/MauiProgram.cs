@@ -43,6 +43,7 @@ namespace Mde.Project.Mobile
         private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+            builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
             builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
 
             builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();

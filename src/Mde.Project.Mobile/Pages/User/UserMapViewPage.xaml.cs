@@ -13,7 +13,8 @@ public partial class UserMapViewPage : ContentPage
     protected override void OnAppearing()
     {
         UserMapViewModel viewModel = BindingContext as UserMapViewModel;
-        viewModel.RefreshFarmListCommand?.Execute(null);
+        viewModel.RefreshFarmMarkersCommand?.Execute(null);
+        viewModel.GetUserLocationCommand?.Execute(null);
         base.OnAppearing();
     }
 }

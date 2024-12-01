@@ -6,50 +6,13 @@
              x:DataType="viewmodel:UserMapViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserMapViewPage"
              Title="Map">
-    <!--<VerticalStackLayout>
-        <Label 
-            Text="Here's your map"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>-->
-
-    <!--ShapesSource="https://cdn.syncfusion.com/maps/map-data/world-map.json"-->
-
-    <!--<map:SfMaps>
-        <map:SfMaps.Layer>
-            <map:MapShapeLayer ShapesSource="https://cdn.syncfusion.com/maps/map-data/world-map.json"></map:MapShapeLayer>
-        </map:SfMaps.Layer>
-    </map:SfMaps>-->
-
-    <!--<map:MapMarker.Template>
-        <DataTemplate>
-            <Grid>
-                <Image Source="pin.png" WidthRequest="30" HeightRequest="30" />
-                <Label Text="{Binding Name}" FontSize="12" TextColor="Black" HorizontalTextAlignment="Center"/>
-            </Grid>
-        </DataTemplate>
-    </map:MapMarker.Template>-->
-
-    <!--<map:MapTileLayer.Markers>
-        <map:MapMarker Latitude="{Binding Latitude}" Longitude="{Binding Longitude}" >
-
-        </map:MapMarker>
-    </map:MapTileLayer.Markers>-->
-
-    <!--<map:MapTileLayer.Markers>
-        <map:MapMarkerCollection >
-
-        </map:MapMarkerCollection>
-    </map:MapTileLayer.Markers>-->
 
     <map:SfMaps>
         <map:SfMaps.Layer>
             <map:MapTileLayer UrlTemplate="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                               Markers="{Binding Markers}">
                 <map:MapTileLayer.Center>
-                    <map:MapLatLng Latitude = "51.2689"
-                                 Longitude="3.0136">
-                    </map:MapLatLng>
+                    <Binding Path="CenterLocation" />
                 </map:MapTileLayer.Center>
                 <map:MapTileLayer.ZoomPanBehavior>
                     <map:MapZoomPanBehavior ZoomLevel = "13" />

@@ -72,6 +72,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserOfferDetailsViewModel>();
             builder.Services.AddTransient<UserAccountSettingsViewModel>();
             builder.Services.AddTransient<UserPreferencesViewModel>();
+            builder.Services.AddTransient<UserMapViewModel>();
 
             builder.Services.AddTransient<FarmerDashboardViewModel>();
             builder.Services.AddTransient<FarmerInventoryListViewModel>();
@@ -95,6 +96,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserOfferDetailPage>();
             builder.Services.AddTransient<UserAccountSettingsPage>();
             builder.Services.AddTransient<UserPreferenceSettingsPage>();
+            builder.Services.AddTransient<UserMapViewPage>();
 
             builder.Services.AddTransient<FarmerDashboardPage>();
             builder.Services.AddTransient<FarmerInventoryListPage>();

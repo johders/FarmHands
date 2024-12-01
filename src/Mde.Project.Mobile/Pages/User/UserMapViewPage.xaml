@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:UserMapViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserMapViewPage"
              Title="Map">
     <!--<VerticalStackLayout>
@@ -11,9 +13,49 @@
             HorizontalOptions="Center" />
     </VerticalStackLayout>-->
 
-    <map:SfMaps>
+    <!--ShapesSource="https://cdn.syncfusion.com/maps/map-data/world-map.json"-->
+
+    <!--<map:SfMaps>
         <map:SfMaps.Layer>
             <map:MapShapeLayer ShapesSource="https://cdn.syncfusion.com/maps/map-data/world-map.json"></map:MapShapeLayer>
         </map:SfMaps.Layer>
+    </map:SfMaps>-->
+
+    <!--<map:MapMarker.Template>
+        <DataTemplate>
+            <Grid>
+                <Image Source="pin.png" WidthRequest="30" HeightRequest="30" />
+                <Label Text="{Binding Name}" FontSize="12" TextColor="Black" HorizontalTextAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </map:MapMarker.Template>-->
+
+    <!--<map:MapTileLayer.Markers>
+        <map:MapMarker Latitude="{Binding Latitude}" Longitude="{Binding Longitude}" >
+
+        </map:MapMarker>
+    </map:MapTileLayer.Markers>-->
+
+    <!--<map:MapTileLayer.Markers>
+        <map:MapMarkerCollection >
+
+        </map:MapMarkerCollection>
+    </map:MapTileLayer.Markers>-->
+
+    <map:SfMaps>
+        <map:SfMaps.Layer>
+            <map:MapTileLayer UrlTemplate="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                              Markers="{Binding Markers}">
+                <map:MapTileLayer.Center>
+                    <map:MapLatLng Latitude = "51.2689"
+                                 Longitude="3.0136">
+                    </map:MapLatLng>
+                </map:MapTileLayer.Center>
+                <map:MapTileLayer.ZoomPanBehavior>
+                    <map:MapZoomPanBehavior ZoomLevel = "13" />
+                </map:MapTileLayer.ZoomPanBehavior>
+            </map:MapTileLayer>
+        </map:SfMaps.Layer>
     </map:SfMaps>
+    
 </ContentPage>

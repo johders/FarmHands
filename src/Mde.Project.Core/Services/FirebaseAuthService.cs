@@ -2,11 +2,12 @@
 using Firebase.Auth.Providers;
 using FirebaseAdmin.Auth;
 using Mde.Project.Core.Enums;
+using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 
 namespace Mde.Project.Core.Services
 {
-    public class FirebaseAuthService
+    public class FirebaseAuthService : IFirebaseAuthService
     {
         private const string ApiKey = "AIzaSyBCzGRxyK9-JbKZrMP8nS_8TwRTS3y1dSY";
         private readonly FirebaseAuthClient _authClient;
@@ -106,7 +107,7 @@ namespace Mde.Project.Core.Services
                 }
 
                 Console.WriteLine($"Login failure: {authEx.Message}");
-                
+
             }
             catch (Exception ex)
             {
@@ -186,13 +187,13 @@ namespace Mde.Project.Core.Services
 
                 return result;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error setting custom claims: {ex.Message}");
                 result.Errors.Add(ex.Message);
                 return result;
             }
-           
+
         }
 
         public BaseResultModel Logout()

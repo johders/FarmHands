@@ -8,10 +8,10 @@ namespace Mde.Project.Core.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly FirebaseAuthService _authService;
+        private readonly IFirebaseAuthService _authService;
         private readonly FirestoreDb _firestoreDb;
 
-        public AccountService(FirebaseAuthService authService, IFirestoreContext firestoreDb)
+        public AccountService(IFirebaseAuthService authService, IFirestoreContext firestoreDb)
         {
             _authService = authService;
             _firestoreDb = firestoreDb.GetFireStoreDb();

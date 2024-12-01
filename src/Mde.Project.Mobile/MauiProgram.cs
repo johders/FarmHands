@@ -44,7 +44,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
 
             builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
-            builder.Services.AddSingleton<FirebaseAuthService>();
+            builder.Services.AddSingleton<IFirebaseAuthService, FirebaseAuthService>();
             builder.Services.AddSingleton<IAccountService, AccountService>();
 
             builder.Services.AddTransient<IFarmService, FarmService>();

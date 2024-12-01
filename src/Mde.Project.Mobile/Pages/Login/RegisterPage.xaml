@@ -7,9 +7,9 @@
              HideSoftInputOnTapped="True"
              Title="Register">
     <ScrollView>
-        <Grid>
+        <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <VerticalStackLayout Margin="8,20,8,0" Spacing="20" 
+            <VerticalStackLayout Margin="8,20,8,20" Spacing="20" 
                                  MinimumWidthRequest="{OnPlatform WinUI=500, Default=0}">
 
                 <VerticalStackLayout>

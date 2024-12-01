@@ -9,4 +9,11 @@ public partial class FarmerSettingsPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    protected override async void OnAppearing()
+    {
+        FarmerSettingsViewModel viewModel = BindingContext as FarmerSettingsViewModel;
+        await viewModel.InitializeAsync();
+        base.OnAppearing();
+    }
 }

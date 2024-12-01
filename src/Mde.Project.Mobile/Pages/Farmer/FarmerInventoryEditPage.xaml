@@ -64,7 +64,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
-                    <Image Source="{Binding SelectedOffer.OfferImageUrl}" 
+                    <Image Source="{Binding ImageUrl}" 
                            Aspect="AspectFill"/>
 
                 </Border>
@@ -85,7 +85,8 @@
                                          HeightRequest="60"
                                          BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                          Padding="10"
-                                         CornerRadius="30"/>
+                                         CornerRadius="30"
+                                         Command="{Binding SelectImageCommand}"/>
                             <Label Text="From gallery"
                                    Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>
@@ -95,7 +96,8 @@
                                          HeightRequest="60"
                                          BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                          Padding="10"
-                                         CornerRadius="30"/>
+                                         CornerRadius="30"
+                                         Command="{Binding TakePictureCommand}"/>
                             <Label Text="Take picture"
                                    Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>

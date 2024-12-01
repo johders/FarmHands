@@ -6,14 +6,12 @@ namespace Mde.Project.Core.Services.Interfaces
 {
     public interface IOfferService
     {
-        Task<ResultModel<Offer>> GetByIdAsync(Guid id);
-        Task<ResultModel<Offer>> GetAllAsync();
-        Task<ResultModel<Offer>> GetAllOffersByFarmIdAsync(Guid farmId);
-        Task<ResultModel<Offer>> GetAllOffersByProductIdAsync(Guid productId);
+        Task<ResultModel<IEnumerable<Offer>>> GetAllAsync();
+        Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByFarmIdAsync(string farmId);
+        Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByProductIdAsync(string productId);
         Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel);
         Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel);
-        Task<BaseResultModel> DeleteAsync(Guid id);
+        Task<BaseResultModel> DeleteAsync(string id);
         IQueryable<Offer> GetAll();
-        Task<BaseResultModel> SaveChangesAsync();
     }
 }

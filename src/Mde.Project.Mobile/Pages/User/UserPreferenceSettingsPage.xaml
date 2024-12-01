@@ -79,7 +79,7 @@
                     </Button.Shadow>
                 </Button>
 
-                <Button Text="Farmer View"
+                <!--<Button Text="Farmer View"
                         CornerRadius="25"
                         WidthRequest="300"
                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
@@ -91,7 +91,7 @@
                                 Radius="50"
                                 Opacity=".8"/>
                     </Button.Shadow>
-                </Button>
+                </Button>-->
 
             </VerticalStackLayout>
         </Grid>

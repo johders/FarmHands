@@ -2,7 +2,6 @@
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
-using Mde.Project.Core.Services.Models.RequestModels;
 using Pri.Pe1.Hsp.Core.Services.Helpers;
 
 namespace Mde.Project.Core.Services
@@ -19,20 +18,10 @@ namespace Mde.Project.Core.Services
         private readonly List<Offer> _offers;
         private readonly List<Product> _products = new(Seeder.SeedProducts());
 
-        public async Task<int> GetOfferCountAsync(Guid productId)
+        public async Task<int> GetOfferCountAsync(string productId)
         {
             var result = await _offerService.GetAllOffersByProductIdAsync(productId);
             return result.Data.Count();
-        }
-
-        public Task<BaseResultModel> CreateAsync(ProductCreateRequestModel createModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public IQueryable<Product> GetAll()
@@ -40,16 +29,15 @@ namespace Mde.Project.Core.Services
             return _products.AsQueryable();
         }
 
-        public async Task<ResultModel<Product>> GetAllAsync()
+        public async Task<ResultModel<IEnumerable<Product>>> GetAllAsync()
         {
-            return await Task.FromResult(new ResultModel<Product>
+            return await Task.FromResult(new ResultModel<IEnumerable<Product>>
             {
-                IsSuccess = true,
-                Data = GetAll().ToList()
+                Data = GetAll()
             });
         }
 
-        public async Task<ResultModel<Product>> GetByIdAsync(Guid id)
+        public async Task<ResultModel<Product>> GetByIdAsync(string id)
         {
             var product = GetAll().FirstOrDefault(p => p.Id == id);
 
@@ -60,19 +48,9 @@ namespace Mde.Project.Core.Services
 
 			return await Task.FromResult(new ResultModel<Product>
 			{
-				IsSuccess = true,
-				Data = new List<Product> { product }
+				Data = product
 			});
 		}
 
-        public Task<BaseResultModel> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> UpdateAsync(ProductUpdateRequestModel updateModel)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

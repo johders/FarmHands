@@ -17,37 +17,26 @@ namespace Mde.Project.Core.Services
 		}
 		private readonly List<Farm> _farms = new(Seeder.SeedFarms());
 
-		public async Task<int> GetOfferCountAsync(Guid farmId)
+		public async Task<int> GetOfferCountAsync(string farmId)
 		{
 			var result = await _offerService.GetAllOffersByFarmIdAsync(farmId);
 			return result.Data.Count();
 		}
-
-		public Task<BaseResultModel> CreateAsync(FarmCreateRequestModel createModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
         public IQueryable<Farm> GetAll()
         {
             return _farms.AsQueryable();
         }
 
-        public async Task<ResultModel<Farm>> GetAllAsync()
+        public async Task<ResultModel<IEnumerable<Farm>>> GetAllAsync()
         {
-            return await Task.FromResult(new ResultModel<Farm>
+            return await Task.FromResult(new ResultModel<IEnumerable<Farm>>
             {
-                IsSuccess = true,
-                Data = GetAll().ToList()
+                Data = GetAll()
             });
         }
 
-        public async Task<ResultModel<Farm>> GetByIdAsync(Guid id)
+        public async Task<ResultModel<Farm>> GetByIdAsync(string id)
         {
             var farm = GetAll().FirstOrDefault(f => f.Id == id);
 
@@ -58,14 +47,8 @@ namespace Mde.Project.Core.Services
 
             return await Task.FromResult(new ResultModel<Farm>
             {
-                IsSuccess = true,
-                Data = new List<Farm> { farm }
+                Data = farm
             });
-        }
-
-        public Task<BaseResultModel> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BaseResultModel> UpdateAsync(FarmUpdateRequestModel updateModel)
@@ -83,10 +66,7 @@ namespace Mde.Project.Core.Services
             farm.Longitude = updateModel.Longitude;
             farm.ImageUrl = updateModel.ImageUrl;
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
     }
 }

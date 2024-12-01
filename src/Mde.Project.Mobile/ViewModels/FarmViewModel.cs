@@ -14,10 +14,12 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			_farm = farm;
 			_farmService = farmService;
-			_ = LoadOfferCountAsync();
-		}
+            //_ = LoadOfferCountAsync();
 
-		public Guid Id => _farm.Id;
+            _ = Task.Run(() => LoadOfferCountAsync());
+        }
+
+		public string Id => _farm.Id;
 		public string Name => _farm.Name;
 		public string ImageUrl => _farm.ImageUrl;
 		public int? OfferCount

@@ -1,26 +1,45 @@
-﻿namespace Mde.Project.Core.Entities
+﻿using Google.Cloud.Firestore;
+
+namespace Mde.Project.Core.Entities
 {
-	public class Farm
+    [FirestoreData]
+    public class Farm
 	{
-		public Farm(Guid id, string name, string description, double latitude, double longitude, IEnumerable<Product> products, string imageUrl)
+		public Farm() { }
+        public Farm(string id, string name, string description, double latitude, double longitude, IEnumerable<Product> products, string imageUrl)
 		{
 			Id = id;
 			Name = name;
 			Description = description;
 			Latitude = latitude;
 			Longitude = longitude;
-			Products = products;
+			//Products = products;
 			ImageUrl = imageUrl;
 		}
 
-		public Guid Id { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
+        [FirestoreDocumentId]
+        public string Id { get; set; }
+
+        [FirestoreProperty]
+        public string Name { get; set; }
+
+        [FirestoreProperty]
+        public string Description { get; set; }
+
+        [FirestoreProperty]
         public double Latitude { get; set; }
+
+        [FirestoreProperty]
         public double Longitude { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+
+        [FirestoreProperty]
         public string ImageUrl { get; set; }
 
-        public ICollection<FavoriteFarm> FavoriteFarms { get; set; }
+        [FirestoreProperty]
+        public string OwnerId { get; set; }
+
+        //public IEnumerable<Product> Products { get; set; }
+
+        //public ICollection<FavoriteFarm> FavoriteFarms { get; set; }
     }
 }

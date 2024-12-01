@@ -8,10 +8,18 @@ Farmers can easily update and manage their inventory, effectively showcasing the
 
 ## Extra info
 
+###   Firestore credentials
+
+These are automatically loaded into the app through the object located in:
+Mde.Project.Core > Data > Firestore > FsCredentials.cs
+
 ###   Farmer login  
    username: test@farm.com  
-   password: password  
+   password: Test123?  
 
 ###   User login  
    username: test@user.com  
-   password: password
+   password: Test123?
+
+###   Firebase console login 
+   on request

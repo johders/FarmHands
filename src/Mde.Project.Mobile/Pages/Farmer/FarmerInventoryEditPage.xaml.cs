@@ -9,4 +9,11 @@ public partial class FarmerInventoryEditPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    protected override async void OnAppearing()
+    {
+        FarmerInventoryEditViewModel viewModel = BindingContext as FarmerInventoryEditViewModel;
+        viewModel.InitializeAsync();
+        base.OnAppearing();
+    }
 }

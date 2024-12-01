@@ -6,13 +6,21 @@ namespace Mde.Project.Mobile.Converters
 	{
 		public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 		{
-			int offerCount = (int)value;
-			string singular = "offer";
-			string plural = "offers";
+            if (value == null)
+            {
+                return "No offers";
+            }
 
-			return offerCount == 1 ? $"{offerCount} {singular}" : $"{offerCount} {plural}";
+			if (value is int offerCount)
+			{
+                string singular = "offer";
+                string plural = "offers";
 
-		}
+                return offerCount == 1 ? $"{offerCount} {singular}" : $"{offerCount} {plural}";
+            }
+
+            throw new InvalidOperationException("Value must be an integer");
+        }
 
 		public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
 		{

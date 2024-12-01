@@ -1,16 +1,87 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              x:Class="Mde.Project.Mobile.Pages.Login.RegisterPage"
+             x:DataType="viewmodel:RegisterViewModel"
+             HideSoftInputOnTapped="True"
              Title="Register">
-    <VerticalStackLayout>
-        <Label 
-            Text="Register"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
-        <Button Text="Register as FarmHand"/>
-        <Button Text="Register as Farmer"/> 
+        <Grid Style="{StaticResource MaxWidthGrid}">
 
-    </VerticalStackLayout>
+            <VerticalStackLayout Margin="0,0,0,0" Spacing="20"
+                                 HorizontalOptions="Center" 
+                                 VerticalOptions="Center" 
+                                 MinimumWidthRequest="{OnPlatform Android=320, WinUI=500}">
+
+                <VerticalStackLayout>
+                    <Label Text="Name"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter your Name"
+                           Text="{Binding Name}"/>
+                    <Label Text="{Binding NameError}"
+                           Style="{StaticResource SmallLabel}"
+                           TextColor="{StaticResource BurgondyRed}"
+                           IsVisible="{Binding IsNameValid, Converter={StaticResource InverseBooleanConverter}}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Email"
+                       Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter your email"
+                           Keyboard="Email"
+                           Text="{Binding Email}"/>
+                    <Label Text="{Binding EmailError}"
+                           Style="{StaticResource SmallLabel}"
+                           TextColor="{StaticResource BurgondyRed}"
+                           IsVisible="{Binding IsEmailValid, Converter={StaticResource InverseBooleanConverter}}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout IsVisible="{Binding CanShowFarmName}">
+                    <Label Text="Farm name"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter name of your farm"
+                           Text="{Binding FarmName}"/>
+                    <Label Text="{Binding FarmNameError}"
+                           Style="{StaticResource SmallLabel}"
+                           TextColor="{StaticResource BurgondyRed}"
+                           IsVisible="{Binding IsFarmNameValid, Converter={StaticResource InverseBooleanConverter}}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Password"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Enter Password"
+                           Text="{Binding Password}"
+                           IsPassword="True"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Repeat Password"
+                           Style="{StaticResource SmallLabel}"/>
+                    <Entry Placeholder="Repeat Password"
+                           Text="{Binding RepeatPassword}"
+                           IsPassword="True"/>
+                </VerticalStackLayout>
+
+                <Label Text="{Binding PasswordError}"
+                       Style="{StaticResource SmallLabel}"
+                       TextColor="{StaticResource BurgondyRed}"
+                       IsVisible="{Binding IsPasswordValid, Converter={StaticResource InverseBooleanConverter}}" />
+
+                <Button Text="Register"
+                        Command="{Binding RegisterCommand}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                        TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}">
+                    <Button.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                Offset="10,10"
+                                Radius="50"
+                                Opacity=".8"/>
+                    </Button.Shadow>
+                </Button>
+
+            </VerticalStackLayout>
+        </Grid>
+
 </ContentPage>

@@ -4,7 +4,7 @@
     {
         public Guid UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-        public Guid ProductId { get; set; }
+        public string ProductId { get; set; }
         public Product Product { get; set; }
         public DateTime FavoritedOn { get; set; }
     }

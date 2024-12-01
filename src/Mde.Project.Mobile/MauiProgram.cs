@@ -1,11 +1,14 @@
 ﻿using CommunityToolkit.Maui;
 using Mde.Project.Core.Services;
+using Mde.Project.Core.Services.Firestore;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
 using Mde.Project.Mobile.Pages.Login;
 using Mde.Project.Mobile.Pages.User;
+using Mde.Project.Mobile.Services;
 using Mde.Project.Mobile.ViewModels;
 using Microsoft.Extensions.Logging;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace Mde.Project.Mobile
 {
@@ -16,6 +19,7 @@ namespace Mde.Project.Mobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureSyncfusionCore()
                 .UseMauiCommunityToolkit()
 				.ConfigureFonts(fonts =>
                 {
@@ -26,6 +30,7 @@ namespace Mde.Project.Mobile
                 .RegisterViewModels()
                 .RegisterViews();
 
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -33,13 +38,25 @@ namespace Mde.Project.Mobile
             return builder.Build();
         }
 
+
+
         private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<IFarmService, FarmMockService>();
-            builder.Services.AddTransient<IProductService, ProductMockService>();
-            builder.Services.AddSingleton<IOfferService, OfferMockService>();
-            builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmMockService>();
-            builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductMockService>();
+            builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+            builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
+            builder.Services.AddSingleton<IConnectivityService, ConnectivityService>();
+
+            builder.Services.AddSingleton<IFirestoreContext, FirestoreContext>();
+            builder.Services.AddSingleton<IFirebaseAuthService, FirebaseAuthService>();
+            builder.Services.AddSingleton<IAccountService, AccountService>();
+
+            builder.Services.AddTransient<IFarmService, FarmService>();
+            builder.Services.AddTransient<IProductService, ProductService>();
+            builder.Services.AddSingleton<IOfferService, OfferService>();
+            builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmService>();
+            builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductService>();
+            builder.Services.AddSingleton<IFarmerService, FarmerService>();
+
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
 
             return builder;
@@ -56,6 +73,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserOfferDetailsViewModel>();
             builder.Services.AddTransient<UserAccountSettingsViewModel>();
             builder.Services.AddTransient<UserPreferencesViewModel>();
+            builder.Services.AddTransient<UserMapViewModel>();
 
             builder.Services.AddTransient<FarmerDashboardViewModel>();
             builder.Services.AddTransient<FarmerInventoryListViewModel>();
@@ -63,6 +81,8 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerSettingsViewModel>();
 
 			builder.Services.AddTransient<LoginViewModel>();
+			builder.Services.AddTransient<RegisterViewModel>();
+			builder.Services.AddTransient<RegisterOptionsViewModel>();
 
 			return builder;
         }
@@ -77,6 +97,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<UserOfferDetailPage>();
             builder.Services.AddTransient<UserAccountSettingsPage>();
             builder.Services.AddTransient<UserPreferenceSettingsPage>();
+            builder.Services.AddTransient<UserMapViewPage>();
 
             builder.Services.AddTransient<FarmerDashboardPage>();
             builder.Services.AddTransient<FarmerInventoryListPage>();
@@ -84,6 +105,8 @@ namespace Mde.Project.Mobile
             builder.Services.AddTransient<FarmerSettingsPage>();
 
 			builder.Services.AddTransient<LoginPage>();
+			builder.Services.AddTransient<RegisterPage>();
+			builder.Services.AddTransient<RegisterOptionsPage>();
 
 			return builder;
         }

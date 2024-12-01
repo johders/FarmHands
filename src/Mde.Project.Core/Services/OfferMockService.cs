@@ -25,13 +25,10 @@ namespace Mde.Project.Core.Services
 
             _offers.Add(offer);
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
 
-        public async Task<BaseResultModel> DeleteAsync(Guid id)
+        public async Task<BaseResultModel> DeleteAsync(string id)
         {
             var offer = _offers.FirstOrDefault(o => o.Id == id);
 
@@ -42,10 +39,7 @@ namespace Mde.Project.Core.Services
 
             _offers.Remove(offer);
 
-			return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
 
         public IQueryable<Offer> GetAll()
@@ -53,41 +47,28 @@ namespace Mde.Project.Core.Services
             return _offers.AsQueryable();
         }
 
-        public async Task<ResultModel<Offer>> GetAllAsync()
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllAsync()
         {
-            return await Task.FromResult(new ResultModel<Offer>
+            return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
-                IsSuccess = true,
-                Data = GetAll().ToList()
+                Data = GetAll()
             });
         }
 
-        public async Task<ResultModel<Offer>> GetAllOffersByFarmIdAsync(Guid farmId)
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByFarmIdAsync(string farmId)
         {
-            return await Task.FromResult(new ResultModel<Offer>
+            return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
-                IsSuccess = true,
-                Data = GetAll().Where(o => o.Farm.Id == farmId).ToList()
+                Data = GetAll().Where(o => o.Farm.Id == farmId)
             });
         }
 
-        public async Task<ResultModel<Offer>> GetAllOffersByProductIdAsync(Guid productId)
+        public async Task<ResultModel<IEnumerable<Offer>>> GetAllOffersByProductIdAsync(string productId)
         {
-            return await Task.FromResult(new ResultModel<Offer>
+            return await Task.FromResult(new ResultModel<IEnumerable<Offer>>
             {
-                IsSuccess = true,
-                Data = GetAll().Where(o => o.Product.Id == productId).ToList()
+                Data = GetAll().Where(o => o.Product.Id == productId)
             });
-        }
-
-        public Task<ResultModel<Offer>> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BaseResultModel> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel)
@@ -107,10 +88,7 @@ namespace Mde.Project.Core.Services
             offer.Farm = updateModel.Farm;
             offer.IsOrganic = updateModel.IsOrganic;
 
-            return await Task.FromResult(new BaseResultModel
-			{
-				IsSuccess = true
-			});
+            return await Task.FromResult(new BaseResultModel());
 		}
     }
 }

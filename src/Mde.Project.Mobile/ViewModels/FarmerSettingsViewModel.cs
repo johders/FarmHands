@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
@@ -7,37 +8,43 @@ using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class FarmerSettingsViewModel : ObservableObject
+    public class FarmerSettingsViewModel : ObservableObject
 	{
 		private readonly IFarmService _farmService;
-		private Farm farm;
-		public FarmerSettingsViewModel(IFarmService farmService)
-		{
-			_farmService = farmService;
-			Initialize();
+		private readonly IAccountService _accountService;
+        private readonly IFarmerService _farmerService;
+        private Farm farm;
+        public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService, IFarmerService farmerService)
+        {
+            _farmService = farmService;
+            _accountService = accountService;
+            _farmerService = farmerService;
+        }
 
-			if(farm is not null)
-			{
-				Name = farm.Name;
-				Description = farm.Description;
-				Latitude = farm.Latitude;
-				Longitude = farm.Longitude;
-				ImageUrl = farm.ImageUrl;
-			}
-		}
-
-		private async void Initialize()
+        public async Task InitializeAsync()
 		{
 			await GetMockFarm();
-		}
+
+            if (farm is not null)
+            {
+                Name = farm.Name;
+                Description = farm.Description;
+                Latitude = farm.Latitude;
+                Longitude = farm.Longitude;
+                ImageUrl = farm.ImageUrl;
+            }
+        }
 
 		private async Task GetMockFarm()
 		{
-			var result = await _farmService.GetByIdAsync(Guid.Parse("10000000-0000-0000-0000-000000000007"));
+            var uid = await SecureStorage.GetAsync("userId");
+            var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+
+            var result = await _farmService.GetByIdAsync(farmerResult.Data);
 			
 			if (result.IsSuccess)
 			{
-				farm = result.Data.First();
+				farm = result.Data;
 			}		
 		}
 
@@ -89,9 +96,9 @@ namespace Mde.Project.Mobile.ViewModels
 				ImageUrl = ImageUrl
 			};
 
-			var result = await _farmService.UpdateAsync(updateModel);
+            var result = await _farmService.UpdateAsync(updateModel);
 
-			if (result.IsSuccess)
+            if (result.IsSuccess)
 			{
 				await ToastHelper.ShowToastAsync($"Changes successfully saved");
 			}
@@ -112,7 +119,15 @@ namespace Mde.Project.Mobile.ViewModels
 
 			if (isConfirmed)
 			{
-				Application.Current.MainPage = new AppShellStartup();
+                var logoutResult = _accountService.Logout();
+
+                if (!logoutResult.IsSuccess)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Oops", "Signout issue. Please try again later", "OK");
+                    return;
+                }
+
+                Application.Current.MainPage = new AppShellStartup();
 			}
 		});
 

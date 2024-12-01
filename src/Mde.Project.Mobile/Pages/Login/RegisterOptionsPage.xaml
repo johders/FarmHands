@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mde.Project.Mobile.Pages.Login.RegisterOptionsPage"
+             xmlns:viewmodel ="clr-namespace:Mde.Project.Mobile.ViewModels"
+             x:DataType="viewmodel:RegisterOptionsViewModel"
+             Title="Register">
+
+    <Grid Style="{StaticResource MaxWidthGrid}">
+
+        <Image Source="fhbg.webp"
+               Aspect="AspectFill"
+               Opacity="0.5" />
+        
+        <VerticalStackLayout Spacing="30" VerticalOptions="Center" HorizontalOptions="Center">
+
+            <Border BackgroundColor="{StaticResource TileBackgroundColor}"
+                    Stroke="{StaticResource AccentColor}"
+                    StrokeThickness="3"
+                    StrokeShape="RoundRectangle 20,20,20,20"
+                    Padding="10">
+                
+                <Button Text="Register as FarmHand"
+                        FontSize="20"
+                        TextColor="{StaticResource TileBackgroundColor}"
+                        BackgroundColor="{StaticResource AccentColor}"
+                        Command="{Binding RegisterAsUserCommand}"
+                        CornerRadius="20"
+                        Padding="10" />
+            </Border>
+
+            <Border BackgroundColor="{StaticResource TileBackgroundColor}"
+                    Stroke="{StaticResource AccentColor}"
+                    StrokeThickness="3"
+                    StrokeShape="RoundRectangle 20,20,20,20"
+                    Padding="10">
+                
+                <Button Text="Register as Farmer"
+                        FontSize="20"
+                        TextColor="{StaticResource TileBackgroundColor}"
+                        BackgroundColor="{StaticResource AccentColor}"
+                        Command="{Binding RegisterAsFarmerCommand}"
+                        CornerRadius="20"
+                        Padding="10" />
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

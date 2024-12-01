@@ -8,6 +8,7 @@ using Mde.Project.Mobile.Pages.User;
 using Mde.Project.Mobile.Services;
 using Mde.Project.Mobile.ViewModels;
 using Microsoft.Extensions.Logging;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace Mde.Project.Mobile
 {
@@ -18,6 +19,7 @@ namespace Mde.Project.Mobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureSyncfusionCore()
                 .UseMauiCommunityToolkit()
 				.ConfigureFonts(fonts =>
                 {

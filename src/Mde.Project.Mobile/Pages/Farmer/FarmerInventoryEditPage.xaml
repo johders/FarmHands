@@ -64,7 +64,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
-                    <Image Source="{Binding SelectedOffer.OfferImageUrl}" 
+                    <Image Source="{Binding ImageUrl}" 
                            Aspect="AspectFill"/>
 
                 </Border>

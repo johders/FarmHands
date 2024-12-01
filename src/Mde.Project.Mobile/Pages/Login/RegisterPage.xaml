@@ -17,6 +17,10 @@
                            Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter your Name"
                            Text="{Binding Name}"/>
+                    <Label Text="{Binding NameError}"
+                           Style="{StaticResource SmallLabel}"
+                           TextColor="{StaticResource BurgondyRed}"
+                           IsVisible="{Binding IsNameValid, Converter={StaticResource InverseBooleanConverter}}" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
@@ -25,6 +29,10 @@
                     <Entry Placeholder="Enter your email"
                            Keyboard="Email"
                            Text="{Binding Email}"/>
+                    <Label Text="{Binding EmailError}"
+                           Style="{StaticResource SmallLabel}"
+                           TextColor="{StaticResource BurgondyRed}"
+                           IsVisible="{Binding IsEmailValid, Converter={StaticResource InverseBooleanConverter}}" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout IsVisible="{Binding CanShowFarmName}">
@@ -32,6 +40,10 @@
                            Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter name of your farm"
                            Text="{Binding FarmName}"/>
+                    <Label Text="{Binding FarmNameError}"
+                           Style="{StaticResource SmallLabel}"
+                           TextColor="{StaticResource BurgondyRed}"
+                           IsVisible="{Binding IsFarmNameValid, Converter={StaticResource InverseBooleanConverter}}" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
@@ -52,12 +64,11 @@
 
                 <Label Text="{Binding PasswordError}"
                        Style="{StaticResource SmallLabel}"
-                       TextColor="Red"
+                       TextColor="{StaticResource BurgondyRed}"
                        IsVisible="{Binding IsPasswordValid, Converter={StaticResource InverseBooleanConverter}}" />
 
                 <Button Text="Register"
                         Command="{Binding RegisterCommand}"
-                        IsEnabled="{Binding IsPasswordValid}"
                         BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                         TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}">
                     <Button.Shadow>

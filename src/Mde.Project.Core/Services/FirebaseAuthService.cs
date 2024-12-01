@@ -35,12 +35,38 @@ namespace Mde.Project.Core.Services
                 result.Data = userCredential;
                 return result;
             }
+            catch (Firebase.Auth.FirebaseAuthException authEx)
+            {
+                switch (authEx.Reason)
+                {
+                    case AuthErrorReason.EmailExists:
+                        result.Errors.Add("This email is already in use.");
+                        break;
+                    case AuthErrorReason.InvalidEmailAddress:
+                        result.Errors.Add("Please enter a valid email address.");
+                        break;
+                    case AuthErrorReason.WeakPassword:
+                        result.Errors.Add("Your password is too weak. Please use a stronger password.");
+                        break;
+                    case AuthErrorReason.MissingEmail:
+                        result.Errors.Add("Email address is required.");
+                        break;
+                    case AuthErrorReason.MissingPassword:
+                        result.Errors.Add("Password is required.");
+                        break;
+                    default:
+                        result.Errors.Add("An unexpected error occurred. Please try again.");
+                        break;
+                }
+                Console.WriteLine($"Registration failure: {authEx.Message}");
+            }
             catch (Exception ex)
             {
-                result.Errors.Add(ex.Message);
-                Console.WriteLine($"Account register failure: {ex.Message}");
-                return result;
+                result.Errors.Add("An unexpected error occurred. Please try again.");
+                Console.WriteLine($"Registration failure: {ex.Message}");
             }
+
+            return result;
 
         }
 

@@ -2,7 +2,6 @@
 using Firebase.Auth.Providers;
 using FirebaseAdmin.Auth;
 using Mde.Project.Core.Enums;
-using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 
 namespace Mde.Project.Core.Services
@@ -11,9 +10,8 @@ namespace Mde.Project.Core.Services
     {
         private const string ApiKey = "AIzaSyBCzGRxyK9-JbKZrMP8nS_8TwRTS3y1dSY";
         private readonly FirebaseAuthClient _authClient;
-        private readonly IFirestoreContext _firestoreContext;
 
-        public FirebaseAuthService(IFirestoreContext firestoreContext)
+        public FirebaseAuthService()
         {
             var config = new FirebaseAuthConfig
             {
@@ -25,7 +23,6 @@ namespace Mde.Project.Core.Services
             };
 
             _authClient = new FirebaseAuthClient(config);
-            _firestoreContext = firestoreContext;
         }
 
         public async Task<ResultModel<UserCredential>> RegisterUserAsync(string email, string password)
@@ -58,13 +55,40 @@ namespace Mde.Project.Core.Services
                 result.Data = userCredential;
                 return result;
             }
+            catch (Firebase.Auth.FirebaseAuthException authEx)
+            {
+                switch (authEx.Reason)
+                {
+                    case AuthErrorReason.InvalidEmailAddress:
+                        result.Errors.Add("Please enter a valid email address.");
+                        break;
+                    case AuthErrorReason.MissingEmail:
+                        result.Errors.Add("Please enter a valid email address.");
+                        break;
+                    case AuthErrorReason.WrongPassword:
+                        result.Errors.Add("Incorrect password. Please try again.");
+                        break;
+                    case AuthErrorReason.UserNotFound:
+                        result.Errors.Add("No account found with this email.");
+                        break;
+                    case AuthErrorReason.TooManyAttemptsTryLater:
+                        result.Errors.Add("Too many attempts. Please try again later.");
+                        break;
+                    default:
+                        result.Errors.Add("An error occurred. Please check your credentials and try again.");
+                        break;
+                }
+
+                Console.WriteLine($"Login failure: {authEx.Message}");
+                
+            }
             catch (Exception ex)
             {
-                result.Errors.Add(ex.Message);
+                result.Errors.Add("An unexpected error occurred. Please try again.");
                 Console.WriteLine($"Login failure: {ex.Message}");
-                return result;
             }
-            
+
+            return result;
         }
 
         public async Task<BaseResultModel> AddUserRoleToToken(string uid, UserRole role)

@@ -9,18 +9,18 @@
     <Grid Style="{StaticResource MaxWidthGrid}">
 
         <Image Source="fhbg.webp"
-            Aspect="AspectFill"
-            Opacity="0.5" />
-        <VerticalStackLayout Spacing="30" VerticalOptions="Center" HorizontalOptions="Center"
-                         >
+               Aspect="AspectFill"
+               Opacity="0.5" />
+        
+        <VerticalStackLayout Spacing="30" VerticalOptions="Center" HorizontalOptions="Center">
 
             <Border BackgroundColor="{StaticResource TileBackgroundColor}"
-                        Stroke="{StaticResource AccentColor}"
-                        StrokeThickness="3"
-                        StrokeShape="RoundRectangle 20,20,20,20"
-                        Padding="10">
-                <Button 
-                        Text="Register as FarmHand"
+                    Stroke="{StaticResource AccentColor}"
+                    StrokeThickness="3"
+                    StrokeShape="RoundRectangle 20,20,20,20"
+                    Padding="10">
+                
+                <Button Text="Register as FarmHand"
                         FontSize="20"
                         TextColor="{StaticResource TileBackgroundColor}"
                         BackgroundColor="{StaticResource AccentColor}"
@@ -30,12 +30,12 @@
             </Border>
 
             <Border BackgroundColor="{StaticResource TileBackgroundColor}"
-                        Stroke="{StaticResource AccentColor}"
-                        StrokeThickness="3"
-                        StrokeShape="RoundRectangle 20,20,20,20"
-                        Padding="10">
-                <Button 
-                        Text="Register as Farmer"
+                    Stroke="{StaticResource AccentColor}"
+                    StrokeThickness="3"
+                    StrokeShape="RoundRectangle 20,20,20,20"
+                    Padding="10">
+                
+                <Button Text="Register as Farmer"
                         FontSize="20"
                         TextColor="{StaticResource TileBackgroundColor}"
                         BackgroundColor="{StaticResource AccentColor}"

@@ -20,7 +20,13 @@
                     <Picker Title="Select product"
                             ItemsSource="{Binding Products, Mode=TwoWay}"
                             SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                            ItemDisplayBinding="{Binding Name}"/>
+                            ItemDisplayBinding="{Binding Name}"
+                            IsVisible="{Binding SelectedProduct, Converter={StaticResource IsNullToVisibilityConverter}}" />
+                    
+                    <Label Text="{Binding SelectedProduct.Name}"
+                           Style="{StaticResource SmallLabel}"
+                           FontSize="Medium"
+                           IsVisible="{Binding SelectedProduct, Converter={StaticResource IsNotNullToVisibilityConverter}}" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>

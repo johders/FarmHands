@@ -128,6 +128,12 @@ namespace Mde.Project.Mobile.ViewModels
 
 			updateModel.ProfileComplete = IsProfileComplete(updateModel);
 
+			if (!updateModel.ProfileComplete)
+			{
+                await Application.Current.MainPage
+				.DisplayAlert("Profile incomplete", "Please note that your farm will only be visible when your profile is complete.", "OK");
+            }
+
             var result = await _farmService.UpdateAsync(updateModel);
 
             if (result.IsSuccess)
@@ -138,9 +144,6 @@ namespace Mde.Project.Mobile.ViewModels
 			{
 				await Application.Current.MainPage.DisplayAlert("Error", "Failed to update farm details.", "OK");
 			}
-
-            await Shell.Current.GoToAsync(nameof(FarmerDashboardPage), true);
-
         });
 
 		public ICommand SwitchToUserViewCommand => new Command(() =>

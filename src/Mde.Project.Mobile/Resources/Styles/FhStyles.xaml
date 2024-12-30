@@ -12,6 +12,7 @@
     <converters:IsNullToVisibilityConverter x:Key="IsNullToVisibilityConverter"/>
     <converters:IsNotNullToVisibilityConverter x:Key="IsNotNullToVisibilityConverter"/>
     <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
+    <converters:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
 
     <Style TargetType="Grid" x:Key="MaxWidthGrid">
         <Setter Property="HorizontalOptions" Value="Center" />

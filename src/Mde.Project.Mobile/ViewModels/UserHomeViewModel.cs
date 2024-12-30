@@ -42,7 +42,7 @@ namespace Mde.Project.Mobile.ViewModels
         {
             var result = await _farmService.GetAllAsync();
 
-            var farms = result.Data;
+            var farms = result.Data.Where(f => f.ProfileComplete);
             Farms = new ObservableCollection<Farm>(farms);
         });
 

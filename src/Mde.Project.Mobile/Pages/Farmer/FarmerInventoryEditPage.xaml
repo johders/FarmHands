@@ -26,6 +26,7 @@
                     <Label Text="{Binding SelectedProduct.Name}"
                            Style="{StaticResource SmallLabel}"
                            FontSize="Medium"
+                           TextColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
                            IsVisible="{Binding SelectedProduct, Converter={StaticResource IsNotNullToVisibilityConverter}}" />
                 </VerticalStackLayout>
 
@@ -64,7 +65,7 @@
                     <Label Text="Price per unit"
                            Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter price"
-                       Text="{Binding Price}"
+                       Text="{Binding Price, Converter={StaticResource DecimalToStringConverter}}"
                        Keyboard="Numeric"/>
                 </VerticalStackLayout>
 

@@ -39,7 +39,7 @@ namespace Mde.Project.Core.Entities
         public string OwnerId { get; set; }
 
         [FirestoreProperty]
-        public bool ProifileComplete { get; set; }
+        public bool ProfileComplete { get; set; }
 
         //public IEnumerable<Product> Products { get; set; }
 

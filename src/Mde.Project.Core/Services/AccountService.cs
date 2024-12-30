@@ -40,7 +40,7 @@ namespace Mde.Project.Core.Services
 
                 if (role == UserRole.Farmer && farmName is not null)
                 {
-                    var farm = new Farm { Id = Guid.NewGuid().ToString(), Name = farmName, OwnerId = uid };
+                    var farm = new Farm { Id = Guid.NewGuid().ToString(), Name = farmName, OwnerId = uid, ProfileComplete = false };
                     await _firestoreDb.Collection("Farms").Document(farm.Id).SetAsync(farm);
 
                     var farmer = new Farmer

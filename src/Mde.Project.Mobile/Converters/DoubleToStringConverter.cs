@@ -2,16 +2,20 @@
 
 namespace Mde.Project.Mobile.Converters
 {
-    public class IsNotNullToVisibilityConverter : IValueConverter
+    public class DoubleToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null;
+            return value?.ToString() ?? string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (double.TryParse(value as string, out double result))
+            {
+                return result;
+            }
+            return 0;
         }
     }
 }

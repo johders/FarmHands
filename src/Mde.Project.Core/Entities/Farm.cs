@@ -38,6 +38,9 @@ namespace Mde.Project.Core.Entities
         [FirestoreProperty]
         public string OwnerId { get; set; }
 
+        [FirestoreProperty]
+        public bool ProifileComplete { get; set; }
+
         //public IEnumerable<Product> Products { get; set; }
 
         //public ICollection<FavoriteFarm> FavoriteFarms { get; set; }

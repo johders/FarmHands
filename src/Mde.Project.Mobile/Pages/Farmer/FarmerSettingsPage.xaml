@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:FarmerSettingsViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerSettingsPage"
              HideSoftInputOnTapped="True"
@@ -15,17 +16,25 @@
                     <Label Text="Name"
                        Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter product name"
-                       Text="{Binding Name}"/>
+                       Text="{Binding Name}">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="nameValidator"
+                                Flags="ValidateOnAttaching, ValidateOnValueChanged"
+                                MinimumLength="1"
+                                IsValid="{Binding IsNameValid, Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
                     <Label Text="Location"
                        Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter latitude" 
-                       Text="{Binding Latitude}" 
+                       Text="{Binding Latitude, Converter={StaticResource DoubleToStringConverter}}" 
                        Keyboard="Numeric"/>
                     <Entry Placeholder="Enter longitude" 
-                       Text="{Binding Longitude}" 
+                       Text="{Binding Longitude, Converter={StaticResource DoubleToStringConverter}}" 
                        Keyboard="Numeric"/>
                 </VerticalStackLayout>
 
@@ -37,8 +46,22 @@
                         Text="{Binding Description}"/>
                 </VerticalStackLayout>
 
-                <Label Text="Image"
-                       Style="{StaticResource SmallLabel}"/>
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
+                    <Label Text="Image" 
+                           Style="{StaticResource SmallLabel}" 
+                           Grid.Column="0" VerticalOptions="Center" />
+
+                    <Button Text="Replace" 
+                            Grid.Column="1" 
+                            BackgroundColor="{StaticResource AccentColor}" 
+                            TextColor="White" 
+                            HorizontalOptions="End" 
+                            Command="{Binding ReplaceImageCommand}" 
+                            IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}" 
+                            Padding="10,0" 
+                            FontSize="Small"
+                            CornerRadius="25"/>
+                </Grid>
 
                 <Border WidthRequest="300" 
                         HeightRequest="200" 

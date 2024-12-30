@@ -28,7 +28,14 @@ namespace Mde.Project.Mobile.ViewModels
 			}
 		}
 
-		private bool isAvailable;
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
+        private bool isAvailable;
 		public bool IsAvailable
 		{
 			get { return isAvailable; }
@@ -38,7 +45,9 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand RefreshOffersListCommand =>
 			new Command(async () =>
 			{
-				var uid = await SecureStorage.GetAsync("userId");
+                IsLoading = true;
+
+                var uid = await SecureStorage.GetAsync("userId");
 				var farmIdResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
 
 				if (!farmIdResult.IsSuccess)
@@ -50,7 +59,9 @@ namespace Mde.Project.Mobile.ViewModels
 
 				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer));
 				Offers = new ObservableCollection<OfferViewModel>(offerViewModels);
-			});
+
+                IsLoading = false;
+            });
 
 		public ICommand GoToInventoryManagerCommand => new Command(async () =>
 		{

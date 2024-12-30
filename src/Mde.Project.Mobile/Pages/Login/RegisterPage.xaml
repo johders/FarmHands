@@ -7,6 +7,7 @@
              HideSoftInputOnTapped="True"
              Title="Register">
 
+    <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">
 
             <VerticalStackLayout Margin="0,0,0,0" Spacing="20"
@@ -83,5 +84,5 @@
 
             </VerticalStackLayout>
         </Grid>
-
+    </ScrollView>
 </ContentPage>

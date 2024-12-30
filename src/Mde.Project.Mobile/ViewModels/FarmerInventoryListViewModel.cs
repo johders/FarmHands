@@ -31,8 +31,17 @@ namespace Mde.Project.Mobile.ViewModels
 			}
 		}
 
-		public ICommand RefreshOffersListCommand => new Command(async () =>
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
+        public ICommand RefreshOffersListCommand => new Command(async () =>
 		{
+            IsLoading = true;
+
             var uid = await SecureStorage.GetAsync("userId");
             var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
 
@@ -45,7 +54,9 @@ namespace Mde.Project.Mobile.ViewModels
             var result = await _offerService.GetAllOffersByFarmIdAsync(farmerResult.Data);
 			var offers = result.Data;
 			Offers = new ObservableCollection<Offer>(offers);
-		});
+
+            IsLoading = false;
+        });
 
 		public ICommand AddOfferCommand => new Command(async () =>
 		{

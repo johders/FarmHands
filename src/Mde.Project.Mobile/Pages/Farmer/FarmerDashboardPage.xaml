@@ -7,68 +7,99 @@
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerDashboardPage"
              Title="Dashboard">
     <Grid>
-        <ScrollView>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
             <Grid Style="{StaticResource MaxWidthGrid}">
 
                 <VerticalStackLayout Margin="8,8,8,80">
-                    <CollectionView ItemsSource="{Binding Offers}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewmodel:OfferViewModel">
-                                <VerticalStackLayout>
-                                    <Border Padding="5"
+                    <Grid>
+                        <VerticalStackLayout IsVisible="{Binding Offers.Count, Converter={StaticResource ZeroToVisibilityConverter}}">
+
+                            <Border StrokeShape="RoundRectangle 20"
+                                    Margin="0,30,0,0"
+                                    WidthRequest="200" 
+                                    HeightRequest="200" 
+                                    HorizontalOptions="Center">
+                                <Image Source="empty_placeholder.webp"
+                                       Aspect="AspectFill" />
+                            </Border>
+                            <Label Text="Your inventory is empty. Add offers using the button below!"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               Style="{StaticResource LargeLabel}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout IsVisible="{Binding Offers.Count, Converter={StaticResource NonZeroToVisibilityConverter}}">
+                            <CollectionView ItemsSource="{Binding Offers}">
+                                <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewmodel:OfferViewModel">
+                                    <VerticalStackLayout>
+                                        <Border Padding="5"
                                             StrokeShape="{RoundRectangle CornerRadius=5}"
                                             BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
-                                        <Grid ColumnDefinitions="*, Auto">
-                                            <VerticalStackLayout Spacing="5" Padding="8">
-                                                <HorizontalStackLayout Spacing="10">
-                                                    <Label Text="{Binding VariantName}"
+                                            <Grid ColumnDefinitions="*, Auto">
+                                                <VerticalStackLayout Spacing="5" Padding="8">
+                                                    <HorizontalStackLayout Spacing="10">
+                                                        <Label Text="{Binding VariantName}"
                                                            Style="{StaticResource SmallLabel}"
                                                            TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                                    <Label Text="{Binding ProductName}"
+                                                        <Label Text="{Binding ProductName}"
                                                            Style="{StaticResource SmallLabel}"
                                                            FontSize="13"
                                                            VerticalOptions="Center"
                                                            TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                                </HorizontalStackLayout>
-                                                <FlexLayout JustifyContent="SpaceBetween"
+                                                    </HorizontalStackLayout>
+                                                    <FlexLayout JustifyContent="SpaceBetween"
                                                             AlignItems="Center">
-                                                    <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
+                                                        <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
                                                            Style="{StaticResource LabelText}"
                                                            TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                                    <Switch Style="{StaticResource FarmSwitch}"
+                                                        <Switch Style="{StaticResource FarmSwitch}"
                                                             IsToggled="{Binding IsAvailable}"/>
-                                                </FlexLayout>
-                                                <Label Style="{StaticResource LabelText}"
+                                                    </FlexLayout>
+                                                    <Label Style="{StaticResource LabelText}"
                                                        TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}">
-                                                    <Label.Text>
-                                                        <MultiBinding StringFormat="Price: {0:C2}/{1}">
-                                                            <Binding Path="Price"/>
-                                                            <Binding Path="Unit"/>
-                                                        </MultiBinding>
-                                                    </Label.Text>
-                                                </Label>
-                                            </VerticalStackLayout>
-                                            <Border  Grid.Column="1"
+                                                        <Label.Text>
+                                                            <MultiBinding StringFormat="Price: {0:C2}/{1}">
+                                                                <Binding Path="Price"/>
+                                                                <Binding Path="Unit"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
+                                                </VerticalStackLayout>
+                                                <Border  Grid.Column="1"
                                                      WidthRequest="120"
                                                      HeightRequest="70"
                                                      StrokeShape="{RoundRectangle CornerRadius=8}">
-                                                <Image Source="{Binding OfferImageUrl}"
+                                                    <Image Source="{Binding OfferImageUrl}"
                                                        Aspect="AspectFill"/>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
 
-                                </VerticalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        </VerticalStackLayout>
+                    </Grid>
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>
+
+        <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="Black"
+              Opacity="0.5"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                       Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+        </Grid>
+
         <Button Text="Update Inventory"
                 TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
                 HorizontalOptions="Center"

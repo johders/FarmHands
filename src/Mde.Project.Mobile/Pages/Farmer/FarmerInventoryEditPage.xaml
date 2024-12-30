@@ -70,8 +70,22 @@
                             SelectedItem="{Binding SelectedUnit}"/>
                 </VerticalStackLayout>
 
-                <Label Text="Image"
-                       Style="{StaticResource SmallLabel}"/>
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
+                    <Label Text="Image" 
+                           Style="{StaticResource SmallLabel}" 
+                           Grid.Column="0" VerticalOptions="Center" />
+
+                    <Button Text="Replace" 
+                            Grid.Column="1" 
+                            BackgroundColor="{StaticResource AccentColor}" 
+                            TextColor="White" 
+                            HorizontalOptions="End" 
+                            Command="{Binding ReplaceImageCommand}" 
+                            IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}" 
+                            Padding="10,0" 
+                            FontSize="Small"
+                            CornerRadius="25"/>
+                </Grid>
 
                 <Border WidthRequest="300" 
                         HeightRequest="200" 

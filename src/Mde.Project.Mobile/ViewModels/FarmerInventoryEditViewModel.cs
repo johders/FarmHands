@@ -206,7 +206,16 @@ namespace Mde.Project.Mobile.ViewModels
             }
         });
 
-		public ICommand SaveCommand =>
+        public ICommand ReplaceImageCommand => new Command(async () =>
+        {
+            var confirm = await Shell.Current.DisplayAlert("Replace Image", "Are you sure you want to replace the image?", "Yes", "No");
+            if (confirm)
+            {
+                ImageUrl = null;
+            }
+        });
+
+        public ICommand SaveCommand =>
 			new Command(async () =>
 			{
 

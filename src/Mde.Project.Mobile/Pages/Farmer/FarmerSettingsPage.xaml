@@ -10,7 +10,8 @@
     <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <VerticalStackLayout Margin="8,0" Spacing="20">
+            <VerticalStackLayout Margin="8,0" Spacing="20"
+                                 MinimumWidthRequest="{OnPlatform WinUI=500, Default=400}">
 
                 <VerticalStackLayout>
                     <Label Text="Name"
@@ -92,7 +93,8 @@
                                          HeightRequest="60"
                                          BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                          Padding="10"
-                                         CornerRadius="30"/>
+                                         CornerRadius="30"
+                                         Command="{Binding SelectImageCommand}"/>
                             <Label Text="From gallery"
                                    Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>
@@ -102,7 +104,8 @@
                                      HeightRequest="60"
                                      BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                      Padding="10"
-                                     CornerRadius="30"/>
+                                     CornerRadius="30"
+                                     Command="{Binding TakePictureCommand}"/>
                             <Label Text="Take picture"
                                    Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>
@@ -124,21 +127,7 @@
                                 Opacity=".8"/>
                     </Button.Shadow>
                 </Button>
-
-                <!--<Button Text="Customer View"
-                        CornerRadius="25"
-                        WidthRequest="300"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
-                        Command="{Binding SwitchToUserViewCommand}">
-                    <Button.Shadow>
-                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                                Offset="10,10"
-                                Radius="50"
-                                Opacity=".8"/>
-                    </Button.Shadow>
-                </Button>-->
-
+                
                 <Button Text="Sign out"
                         CornerRadius="25"
                         WidthRequest="200"

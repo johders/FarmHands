@@ -99,7 +99,57 @@ namespace Mde.Project.Mobile.ViewModels
 			}
 		});
 
-		private bool IsProfileComplete(FarmUpdateRequestModel farmModel)
+        public ICommand SelectImageCommand => new Command(async () =>
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync();
+
+                if (result is not null)
+                {
+                    var stream = await result.OpenReadAsync();
+                    var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
+
+                    using (var fileStream = File.Create(filePath))
+                    {
+                        await stream.CopyToAsync(fileStream);
+                    }
+
+                    ImageUrl = filePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", "Unable to open file, try again later", "OK");
+            }
+
+        });
+
+        public ICommand TakePictureCommand => new Command(async () =>
+        {
+            try
+            {
+                var result = await MediaPicker.CapturePhotoAsync();
+
+                if (result is not null)
+                {
+                    var stream = await result.OpenReadAsync();
+                    var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
+                    using (var fileStream = File.Create(filePath))
+                    {
+                        await stream.CopyToAsync(fileStream);
+                    }
+                    ImageUrl = filePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                var result = ex.Message;
+                await Shell.Current.DisplayAlert("Error", $"Unable to take photo at this time, try again later: {ex.Message}", "OK");
+            }
+        });
+
+        private bool IsProfileComplete(FarmUpdateRequestModel farmModel)
 		{
 			if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(ImageUrl) || Latitude == 0 || Longitude == 0)
 				return false;

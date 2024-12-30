@@ -105,15 +105,28 @@ namespace Mde.Project.Mobile.ViewModels
 			set { SetProperty(ref variant, value); }
 		}
 
+        private bool isVariantValid;
+        public bool IsVariantValid
+        {
+            get { return isVariantValid; }
+            set { SetProperty(ref isVariantValid, value); }
+        }
 
-		private string description;
+        private string description;
 		public string Description
 		{
 			get { return description; }
 			set { SetProperty(ref description, value); }
 		}
 
-		private Unit selectedUnit;
+        private bool isDescriptionValid;
+        public bool IsDescriptionValid
+        {
+            get { return isDescriptionValid; }
+            set { SetProperty(ref isDescriptionValid, value); }
+        }
+
+        private Unit selectedUnit;
 		public Unit SelectedUnit
 		{
 			get { return selectedUnit; }
@@ -127,7 +140,7 @@ namespace Mde.Project.Mobile.ViewModels
 			set { SetProperty(ref price, value); }
 		}
 
-		private string imageUrl;
+        private string imageUrl;
 		public string ImageUrl
 		{
 			get { return imageUrl; }
@@ -196,7 +209,20 @@ namespace Mde.Project.Mobile.ViewModels
 		public ICommand SaveCommand =>
 			new Command(async () =>
 			{
-                var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
+
+                if (!IsVariantValid)
+                {
+                    await Shell.Current.DisplayAlert("Validation Error", "Please enter the product variant.", "OK");
+                    return;
+                }
+
+                if (!IsDescriptionValid)
+                {
+                    await Shell.Current.DisplayAlert("Validation Error", "Please enter the product description.", "OK");
+                    return;
+                }
+
+				var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
 
 				var uid = await SecureStorage.GetAsync("userId");
 				var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);

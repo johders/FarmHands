@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:enums="clr-namespace:Mde.Project.Core.Enums;assembly=Mde.Project.Core"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:FarmerInventoryEditViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryEditPage"
              HideSoftInputOnTapped="True"          
@@ -26,7 +27,15 @@
                     <Label Text="Variant"
                            Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter variant"
-                           Text="{Binding Variant}"/>
+                           Text="{Binding Variant}">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="variantValidator"
+                                Flags="ValidateOnAttaching, ValidateOnValueChanged"
+                                MinimumLength="1"
+                                IsValid="{Binding IsVariantValid, Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
@@ -34,7 +43,15 @@
                            Style="{StaticResource SmallLabel}"/>
                     <Editor Placeholder="Enter your description here..."
                             AutoSize="TextChanges"
-                            Text="{Binding Description}"/>
+                            Text="{Binding Description}">
+                        <Editor.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="descriptionBehaviour"
+                                Flags="ValidateOnAttaching, ValidateOnValueChanged"
+                                MinimumLength="1"
+                                IsValid="{Binding IsDescriptionValid, Mode=TwoWay}"/>
+                        </Editor.Behaviors>
+                    </Editor>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>

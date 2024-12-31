@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
@@ -83,8 +84,17 @@ namespace Mde.Project.Mobile.ViewModels
 			bool isConfirmed = await ShowDeleteConfirmationAsync(offer.Product.Name);
 			BaseResultModel result = new();
 
-			if (isConfirmed)
-				result = await _offerService.DeleteAsync(offer.Id);
+            var token = await SecureStorage.Default.GetAsync("authToken");
+            var roleString = await SecureStorage.Default.GetAsync("userRole");
+
+            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleString) || !Enum.TryParse(roleString, out UserRole role))
+            {
+                await Shell.Current.DisplayAlert("Error", "User authentication information is missing or invalid.", "OK");
+                return;
+            }
+
+            if (isConfirmed)
+				result = await _offerService.DeleteAsync(offer.Id, role);
 
 			if (result.IsSuccess)
 			{

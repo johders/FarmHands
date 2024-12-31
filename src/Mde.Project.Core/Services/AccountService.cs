@@ -106,6 +106,8 @@ namespace Mde.Project.Core.Services
                 var auth = loginResult.Data;
                 string uid = auth.User.Uid;
 
+                var testResult = _authService.GetTokenExpirationTime((_authService.GetAuthTokenAsync()).Result.Data);
+
                 result.Data = uid;
 
                 return result;
@@ -115,6 +117,11 @@ namespace Mde.Project.Core.Services
                 result.Errors.Add(ex.Message);
                 return result;
             }
+        }
+
+        public async Task<ResultModel<DateTime>> GetTokenExpirationDateTimeAsync(string token)
+        {
+            return await Task.FromResult(_authService.GetTokenExpirationTime(token));
         }
 
         public async Task<ResultModel<string>> GetAuthTokenAsync()

@@ -1,6 +1,7 @@
 ﻿using Google.Cloud.Firestore;
 using Mde.Project.Core.Constants;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Core.Services.Models.RequestModels;
@@ -14,19 +15,28 @@ namespace Mde.Project.Core.Services
         private readonly IProductService _productService;
         private readonly IFarmService _farmService;
 
-        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, IProductService productService)
+        private readonly IAccountService _accountService;
+
+        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, IProductService productService, IAccountService accountService)
         {
             _firestoreDb = firestoreDb.GetFireStoreDb();
             _farmService = farmService;
             _productService = productService;
+            _accountService = accountService;
         }
 
-        public async Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel)
+        public async Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel, UserRole role)
         {
             var result = new BaseResultModel();
 
             try
             {
+                if (role != UserRole.Farmer)
+                {
+                    result.Errors.Add(FirestoreMessage.ForbiddenError);
+                    return result;
+                }
+
                 var farmResult = await _farmService.GetByIdAsync(createModel.Farm.Id);
                 if (!farmResult.IsSuccess || farmResult.Data is null)
                 {
@@ -67,12 +77,18 @@ namespace Mde.Project.Core.Services
 
         }
 
-        public async Task<BaseResultModel> DeleteAsync(string id)
+        public async Task<BaseResultModel> DeleteAsync(string id, UserRole role)
         {
             var result = new BaseResultModel();
 
             try
             {
+                if (role != UserRole.Farmer)
+                {
+                    result.Errors.Add(FirestoreMessage.ForbiddenError);
+                    return result;
+                }
+
                 var offerDoc = _firestoreDb.Collection("Offers").Document(id);
                 var snapshot = await offerDoc.GetSnapshotAsync();
                 if (!snapshot.Exists)
@@ -239,12 +255,19 @@ namespace Mde.Project.Core.Services
             return result;
         }
 
-        public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel)
+        public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel, UserRole role)
         {
             var result = new BaseResultModel();
 
             try
             {
+
+                if (role != UserRole.Farmer)
+                {
+                    result.Errors.Add(FirestoreMessage.ForbiddenError);
+                    return result;
+                }
+
                 var offerDoc = _firestoreDb.Collection("Offers").Document(updateModel.Id);
                 var snapshot = await offerDoc.GetSnapshotAsync();
 

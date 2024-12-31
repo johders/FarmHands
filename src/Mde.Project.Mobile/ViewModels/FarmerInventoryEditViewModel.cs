@@ -244,7 +244,16 @@ namespace Mde.Project.Mobile.ViewModels
 
                 var farmResult = await _farmService.GetByIdAsync(farmerResult.Data);
 
-				OfferEditRequestModel offer = new OfferEditRequestModel();
+                var token = await SecureStorage.Default.GetAsync("authToken");
+                var roleString = await SecureStorage.Default.GetAsync("userRole");
+
+                if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleString) || !Enum.TryParse(roleString, out UserRole role))
+                {
+                    await Shell.Current.DisplayAlert("Error", "User authentication information is missing or invalid.", "OK");
+                    return;
+                }
+
+                OfferEditRequestModel offer = new OfferEditRequestModel();
 
 				offer.Price = Price;
 				offer.Variant = Variant;
@@ -258,8 +267,7 @@ namespace Mde.Project.Mobile.ViewModels
 				{
 					offer.Id = Guid.NewGuid().ToString();
 
-
-                    var createResult = await _offerService.CreateAsync(offer);
+                    var createResult = await _offerService.CreateAsync(offer, role);
 
 
                     if (createResult.IsSuccess)
@@ -270,7 +278,7 @@ namespace Mde.Project.Mobile.ViewModels
 				else
 				{
 					offer.Id = SelectedOffer.Id;
-                    var updateResult = await _offerService.UpdateAsync(offer);
+                    var updateResult = await _offerService.UpdateAsync(offer, role);
 
 					if (updateResult.IsSuccess)
 					{

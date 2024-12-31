@@ -70,6 +70,9 @@ namespace Mde.Project.Mobile.ViewModels
 
             var token = tokenResult.Data;
 
+            //Checking expiration
+            var expiresOn = await _accountService.GetTokenExpirationDateTimeAsync(token);
+
             await SecureStorage.Default.SetAsync("authToken", token);
 
             var roleResult = await _accountService.GetRoleFromTokenAsync(token);
@@ -81,6 +84,7 @@ namespace Mde.Project.Mobile.ViewModels
             }
 
             var role = roleResult.Data;
+            await SecureStorage.Default.SetAsync("userRole", role.ToString());
 
             Application.Current.MainPage = role == Core.Enums.UserRole.User ? new AppShellUser() : role == Core.Enums.UserRole.Farmer ? new AppShellFarmer() : new AppShellStartup();           
         });

@@ -44,6 +44,7 @@ namespace Mde.Project.Mobile.ViewModels
         public string OfferImageUrl => _offer.OfferImageUrl;
         public string Description => _offer.Description;
         public string ProductId => _offer.ProductId;
+        public Product Product => _offer.Product;
         public string FarmId => _offer.FarmId;
         public ImageSource ImageSource { get; private set; }
         public decimal Price => _offer.Price;

@@ -49,8 +49,8 @@ namespace Mde.Project.Mobile.ViewModels
 			set { SetProperty(ref pageTitle, value); }
 		}
 
-		private Offer selectedOffer;
-		public Offer SelectedOffer
+		private OfferViewModel selectedOffer;
+		public OfferViewModel SelectedOffer
 		{
 			get { return selectedOffer; }
 			set 
@@ -61,7 +61,7 @@ namespace Mde.Project.Mobile.ViewModels
 				{
 					PageTitle = "Edit offer";
 					SelectedProduct = selectedOffer.Product;
-					Variant = selectedOffer.Variant;
+					Variant = selectedOffer.VariantName;
 					Description = selectedOffer.Description;
 					Price = selectedOffer.Price;
 					SelectedUnit = selectedOffer.Unit;

@@ -15,15 +15,17 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IOfferService _offerService;
 		private readonly IFarmerService _farmerService;
+		private readonly IImageConversionService _imageConversionService;
 
-        public FarmerInventoryListViewModel(IOfferService offerService, IFarmerService farmerService)
+        public FarmerInventoryListViewModel(IOfferService offerService, IFarmerService farmerService, IImageConversionService imageConversionService)
         {
             _offerService = offerService;
             _farmerService = farmerService;
+            _imageConversionService = imageConversionService;
         }
 
-        private ObservableCollection<Offer> offers;
-		public ObservableCollection<Offer> Offers
+        private ObservableCollection<OfferViewModel> offers;
+		public ObservableCollection<OfferViewModel> Offers
 		{
 			get { return offers; }
 			set
@@ -53,8 +55,8 @@ namespace Mde.Project.Mobile.ViewModels
             }
 
             var result = await _offerService.GetAllOffersByFarmIdAsync(farmerResult.Data);
-			var offers = result.Data;
-			Offers = new ObservableCollection<Offer>(offers);
+			var offers = result.Data.Select(o => new OfferViewModel(o, _imageConversionService));
+			Offers = new ObservableCollection<OfferViewModel>(offers);
 
             IsLoading = false;
         });
@@ -69,7 +71,7 @@ namespace Mde.Project.Mobile.ViewModels
 			await Shell.Current.GoToAsync(nameof(FarmerInventoryEditPage), true, navigationParameter);
 		});
 
-		public ICommand EditOfferCommand => new Command<Offer>(async (offer) =>
+		public ICommand EditOfferCommand => new Command<OfferViewModel>(async (offer) =>
 		{
 			var navigationParameter = new Dictionary<string, object>
 			{
@@ -79,7 +81,7 @@ namespace Mde.Project.Mobile.ViewModels
 			await Shell.Current.GoToAsync(nameof(FarmerInventoryEditPage), true, navigationParameter);
 		});
 
-		public ICommand DeleteOfferCommand => new Command<Offer>(async (offer) =>
+		public ICommand DeleteOfferCommand => new Command<OfferViewModel>(async (offer) =>
 		{
 			bool isConfirmed = await ShowDeleteConfirmationAsync(offer.Product.Name);
 			BaseResultModel result = new();

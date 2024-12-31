@@ -50,7 +50,7 @@
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Offer">
+                                    <DataTemplate x:DataType="viewmodel:OfferViewModel">
                                     <VerticalStackLayout>
                                         <SwipeView x:Name="MobileSwipeView"
                                            IsVisible="{OnPlatform WinUI=False, Default=True}"
@@ -67,11 +67,11 @@
                                             BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
                                                 <Grid ColumnDefinitions="*, Auto, Auto">
                                                     <HorizontalStackLayout Spacing="10">
-                                                        <Label Text="{Binding Variant}"
+                                                        <Label Text="{Binding VariantName}"
                                                        Style="{StaticResource SmallLabel}"
                                                        TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                        VerticalOptions="Center"/>
-                                                        <Label Text="{Binding Product.Name}"
+                                                        <Label Text="{Binding ProductName}"
                                                        Style="{StaticResource SmallLabel}"
                                                        FontSize="13"
                                                        TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
@@ -94,11 +94,11 @@
                                               BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
 
                                             <HorizontalStackLayout Spacing="10">
-                                                <Label Text="{Binding Variant}"
+                                                <Label Text="{Binding VariantName}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                VerticalOptions="Center"/>
-                                                <Label Text="{Binding Product.Name}"
+                                                <Label Text="{Binding ProductName}"
                                                Style="{StaticResource SmallLabel}"
                                                FontSize="13"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"

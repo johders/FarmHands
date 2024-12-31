@@ -29,7 +29,7 @@
                     </Image>
                 </FlexLayout>
 
-                <Image Source="{Binding SelectedFarm.ImageUrl}"
+                <Image Source="{Binding SelectedFarm.ImageSource}"
                        Aspect="AspectFill"/>
 
                 <Label Text="Our harvest"

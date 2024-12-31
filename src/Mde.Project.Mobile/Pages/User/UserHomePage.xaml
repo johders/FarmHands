@@ -25,14 +25,14 @@
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Farm">
+                        <DataTemplate x:DataType="viewmodels:FarmViewModel">
                             <Border Style="{StaticResource TileBorder}">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
                                 </Border.GestureRecognizers>
                                 <Grid RowDefinitions="4*, 2*" Margin="0">
-                                    <Image Source="{Binding ImageUrl}"
+                                    <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
                                     <VerticalStackLayout Grid.Row="1" Padding="10">
                                         <Label Text="{Binding Name}"

@@ -38,7 +38,7 @@
                                                  WidthRequest="120"
                                                  HeightRequest="70"
                                                  StrokeShape="{RoundRectangle CornerRadius=8}">
-                                            <Image Source="{Binding ImageUrl}"
+                                            <Image Source="{Binding ImageSource}"
                                                    Aspect="AspectFill"/>
                                         </Border>
                                     </Grid>

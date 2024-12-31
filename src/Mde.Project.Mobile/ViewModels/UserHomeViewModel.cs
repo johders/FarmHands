@@ -18,8 +18,8 @@ namespace Mde.Project.Mobile.ViewModels
             _productService = productService;
         }
 
-        private ObservableCollection<Farm> farms;
-        public ObservableCollection<Farm> Farms
+        private ObservableCollection<FarmViewModel> farms;
+        public ObservableCollection<FarmViewModel> Farms
         {
             get { return farms; }
             set
@@ -42,8 +42,9 @@ namespace Mde.Project.Mobile.ViewModels
         {
             var result = await _farmService.GetAllAsync();
 
-            var farms = result.Data.Where(f => f.ProfileComplete);
-            Farms = new ObservableCollection<Farm>(farms);
+            var farms = result.Data.Where(f => f.ProfileComplete).Select(farm => new FarmViewModel(farm, _farmService));
+
+            Farms = new ObservableCollection<FarmViewModel>(farms);
         });
 
         public ICommand RefreshProductListCommand => new Command(async () =>
@@ -61,7 +62,7 @@ namespace Mde.Project.Mobile.ViewModels
                 .OrderByDescending(p => p.OfferCount));
         });
 
-        public ICommand ViewFarmDetailsCommand => new Command<Farm>(async (farm) =>
+        public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farm) =>
         {
             var navigationParameter = new Dictionary<string, object>()
             {

@@ -14,15 +14,19 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			_farm = farm;
 			_farmService = farmService;
-            //_ = LoadOfferCountAsync();
-
+            if (farm.ImageUrl.Contains("data:image"))
+            {
+                ImageSource = ConvertToImageSource(farm.ImageUrl);
+            }
             _ = Task.Run(() => LoadOfferCountAsync());
         }
 
 		public string Id => _farm.Id;
 		public string Name => _farm.Name;
 		public string ImageUrl => _farm.ImageUrl;
-		public int? OfferCount
+		public string Description => _farm.Description;
+        public ImageSource ImageSource {  get; private set; }
+        public int? OfferCount
 		{
 			get => _offerCount;
 			private set => SetProperty(ref _offerCount, value);
@@ -31,5 +35,25 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			OfferCount = await _farmService.GetOfferCountAsync(_farm.Id);
 		}
-	}
+
+        private ImageSource ConvertToImageSource(string base64String)
+        {
+            if (string.IsNullOrEmpty(base64String))
+                return null;
+
+            try
+            {
+                var base64Data = base64String.Contains(",")
+                    ? base64String.Substring(base64String.IndexOf(",") + 1)
+                    : base64String;
+
+                byte[] imageBytes = Convert.FromBase64String(base64Data);
+                return ImageSource.FromStream(() => new MemoryStream(imageBytes));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+    }
 }

@@ -19,8 +19,8 @@ namespace Mde.Project.Mobile.ViewModels
             _favoriteFarmService = favoriteFarmService;
         }
 
-        private Farm selectedFarm;
-        public Farm SelectedFarm
+        private FarmViewModel selectedFarm;
+        public FarmViewModel SelectedFarm
         {
             get { return selectedFarm; }
             set 

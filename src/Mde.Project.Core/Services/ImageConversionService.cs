@@ -25,5 +25,14 @@ namespace Mde.Project.Core.Services
             var byteArray = ConvertBase64ToByteArray(base64String);
             return byteArray != null ? new MemoryStream(byteArray) : null;
         }
+
+        public string ConvertStreamToBase64(Stream imageStream)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                imageStream.CopyTo(memoryStream);
+                return Convert.ToBase64String(memoryStream.ToArray());
+            }
+        }
     }
 }

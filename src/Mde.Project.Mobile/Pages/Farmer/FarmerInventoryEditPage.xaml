@@ -102,7 +102,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
-                    <Image Source="{Binding ImageUrl}" 
+                    <Image Source="{Binding ImageSource}" 
                            Aspect="AspectFill"/>
 
                 </Border>
@@ -111,7 +111,7 @@
                         HeightRequest="200"
                         StrokeThickness="3"
                         Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
+                        IsVisible="{Binding ImageSource, Converter={StaticResource NoImageToVisibilityConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>

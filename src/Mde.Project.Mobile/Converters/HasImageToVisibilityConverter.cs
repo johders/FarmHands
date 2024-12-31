@@ -6,9 +6,17 @@ namespace Mde.Project.Mobile.Converters
 	{
 		public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 		{
-			bool hasImage = !String.IsNullOrEmpty((string)value);
-			return hasImage;
-		}
+            if (value is string stringValue)
+            {
+                return !string.IsNullOrEmpty(stringValue);
+            }
+            else if (value is ImageSource imageSource)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
 		public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
 		{

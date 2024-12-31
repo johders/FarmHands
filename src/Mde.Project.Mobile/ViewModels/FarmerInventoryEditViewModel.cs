@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
+using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
@@ -10,22 +11,24 @@ using System.Windows.Input;
 namespace Mde.Project.Mobile.ViewModels
 {
     [QueryProperty(nameof(SelectedOffer), nameof(SelectedOffer))]
-	public class FarmerInventoryEditViewModel : ObservableObject
-	{
-		private readonly IProductService _productService;
-		private readonly IOfferService _offerService;
-		private readonly IFarmService _farmService;
-		private readonly IFarmerService _farmerService;
+    public class FarmerInventoryEditViewModel : ObservableObject
+    {
+        private readonly IProductService _productService;
+        private readonly IOfferService _offerService;
+        private readonly IFarmService _farmService;
+        private readonly IFarmerService _farmerService;
+        private readonly IImageConversionService _imageConversionService;
+        private MemoryStream _imageStream;
 
-        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, IFarmerService farmerService)
+        public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, IFarmerService farmerService, IImageConversionService imageConversionService)
         {
             _productService = productService;
             _offerService = offerService;
             _farmService = farmService;
-
             LoadUnitOptions();
             Products = new ObservableCollection<Product>();
             _farmerService = farmerService;
+            _imageConversionService = imageConversionService;
         }
 
         public async Task InitializeAsync()
@@ -42,68 +45,68 @@ namespace Mde.Project.Mobile.ViewModels
 
         public ObservableCollection<Unit> UnitOptions { get; set; } = [];
 
-		private string pageTitle;
-		public string PageTitle
-		{
-			get { return pageTitle; }
-			set { SetProperty(ref pageTitle, value); }
-		}
+        private string pageTitle;
+        public string PageTitle
+        {
+            get { return pageTitle; }
+            set { SetProperty(ref pageTitle, value); }
+        }
 
-		private OfferViewModel selectedOffer;
-		public OfferViewModel SelectedOffer
-		{
-			get { return selectedOffer; }
-			set 
-			{
-				SetProperty(ref selectedOffer, value);
+        private OfferViewModel selectedOffer;
+        public OfferViewModel SelectedOffer
+        {
+            get { return selectedOffer; }
+            set
+            {
+                SetProperty(ref selectedOffer, value);
 
-				if (selectedOffer is not null)
-				{
-					PageTitle = "Edit offer";
-					SelectedProduct = selectedOffer.Product;
-					Variant = selectedOffer.VariantName;
-					Description = selectedOffer.Description;
-					Price = selectedOffer.Price;
-					SelectedUnit = selectedOffer.Unit;
-					ImageUrl = selectedOffer.OfferImageUrl;
-				}
-				else
-				{
-					PageTitle = "Create new offer";
-					Variant = default;
-					SelectedProduct = default;
-					Description = default;
-					Price = default;
-					SelectedUnit = default;
-					ImageUrl = default;
-				}
-			}
-		}
+                if (selectedOffer is not null)
+                {
+                    PageTitle = "Edit offer";
+                    SelectedProduct = selectedOffer.Product;
+                    Variant = selectedOffer.VariantName;
+                    Description = selectedOffer.Description;
+                    Price = selectedOffer.Price;
+                    SelectedUnit = selectedOffer.Unit;
+                    ImageUrl = selectedOffer.OfferImageUrl;
+                }
+                else
+                {
+                    PageTitle = "Create new offer";
+                    Variant = default;
+                    SelectedProduct = default;
+                    Description = default;
+                    Price = default;
+                    SelectedUnit = default;
+                    ImageUrl = default;
+                }
+            }
+        }
 
 
-		private ObservableCollection<Product> products;
-		public ObservableCollection<Product> Products
-		{
-			get { return products; }
-			set 
-			{
-				SetProperty(ref products, value); 
-			}
-		}
+        private ObservableCollection<Product> products;
+        public ObservableCollection<Product> Products
+        {
+            get { return products; }
+            set
+            {
+                SetProperty(ref products, value);
+            }
+        }
 
-		private Product selectedProduct;
-		public Product SelectedProduct
-		{
-			get { return selectedProduct; }
-			set { SetProperty(ref selectedProduct, value); }
-		}
+        private Product selectedProduct;
+        public Product SelectedProduct
+        {
+            get { return selectedProduct; }
+            set { SetProperty(ref selectedProduct, value); }
+        }
 
-		private string variant;
-		public string Variant
-		{
-			get { return variant; }
-			set { SetProperty(ref variant, value); }
-		}
+        private string variant;
+        public string Variant
+        {
+            get { return variant; }
+            set { SetProperty(ref variant, value); }
+        }
 
         private bool isVariantValid;
         public bool IsVariantValid
@@ -113,11 +116,11 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private string description;
-		public string Description
-		{
-			get { return description; }
-			set { SetProperty(ref description, value); }
-		}
+        public string Description
+        {
+            get { return description; }
+            set { SetProperty(ref description, value); }
+        }
 
         private bool isDescriptionValid;
         public bool IsDescriptionValid
@@ -127,81 +130,110 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private Unit selectedUnit;
-		public Unit SelectedUnit
-		{
-			get { return selectedUnit; }
-			set { SetProperty(ref selectedUnit, value); }
-		}
+        public Unit SelectedUnit
+        {
+            get { return selectedUnit; }
+            set { SetProperty(ref selectedUnit, value); }
+        }
 
-		private decimal price;
-		public decimal Price
-		{
-			get { return price; }
-			set { SetProperty(ref price, value); }
-		}
+        private decimal price;
+        public decimal Price
+        {
+            get { return price; }
+            set { SetProperty(ref price, value); }
+        }
 
         private string imageUrl;
-		public string ImageUrl
-		{
-			get { return imageUrl; }
-			set { SetProperty(ref imageUrl, value); }
-		}
-
-		private void LoadUnitOptions()
-		{
-			var units = Enum.GetValues(typeof(Unit)).Cast<Unit>();
-            foreach (var unit in units)
+        public string ImageUrl
+        {
+            get { return imageUrl; }
+            set
             {
-				UnitOptions.Add(unit);
+                if (SetProperty(ref imageUrl, value))
+                {
+                    if (!string.IsNullOrEmpty(value) && value.Contains("data:image"))
+                    {
+                        UpdateImageSource(value);
+                    }
+                    else
+                    {
+                        ImageSource = null;
+                    }
+                }
+                
             }
         }
 
-		public ICommand SelectImageCommand => new Command(async () =>
-		{
-			try
-			{
-				var result = await MediaPicker.PickPhotoAsync();
+        private ImageSource _imageSource;
+        public ImageSource ImageSource
+        {
+            get { return _imageSource; }
+            private set { SetProperty(ref _imageSource, value); }
+        }
 
-				if (result is not null)
-				{
-					var stream = await result.OpenReadAsync();
-					var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
+        private void UpdateImageSource(string imageUrl)
+        {
+            using var imageStream = _imageConversionService.ConvertBase64ToStream(imageUrl);
 
-					using (var fileStream = File.Create(filePath))
-					{
-						await stream.CopyToAsync(fileStream);
-					}
+            if (imageStream != null)
+            {
+                _imageStream = new MemoryStream();
+                imageStream.CopyTo(_imageStream);
+                _imageStream.Position = 0;
 
-					ImageUrl = filePath;
-				}
-			}
-			catch (Exception ex)
-			{
-				await Shell.Current.DisplayAlert("Error", "Unable to open file, try again later", "OK");
-			}
+                ImageSource = ImageSource.FromStream(() =>
+                {
+                    var streamClone = new MemoryStream(_imageStream.ToArray());
+                    return streamClone;
+                });
+            }
+        }
 
-		});
+        private void LoadUnitOptions()
+        {
+            var units = Enum.GetValues(typeof(Unit)).Cast<Unit>();
+            foreach (var unit in units)
+            {
+                UnitOptions.Add(unit);
+            }
+        }
 
-		public ICommand TakePictureCommand => new Command(async () =>
-		{
-			try
-			{
-				var result = await MediaPicker.CapturePhotoAsync();
+        public ICommand SelectImageCommand => new Command(async () =>
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync();
 
-				if (result is not null)
-				{
-					var stream = await result.OpenReadAsync();
-					var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
-					using (var fileStream = File.Create(filePath))
-					{
-						await stream.CopyToAsync(fileStream);
-					}
-					ImageUrl = filePath;
-				}
-			}
-			catch (Exception ex)
-			{
-				var result = ex.Message;
+                if (result is not null)
+                {
+                    using var stream = await result.OpenReadAsync();
+                    var base64Image = _imageConversionService.ConvertStreamToBase64(stream);
+                    ImageUrl = $"data:image/jpeg;base64,{base64Image}";
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", "Unable to open file, try again later", "OK");
+            }
+
+        });
+
+        public ICommand TakePictureCommand => new Command(async () =>
+        {
+            try
+            {
+                var result = await MediaPicker.CapturePhotoAsync();
+
+                if (result is not null)
+                {
+                    using var stream = await result.OpenReadAsync();
+                    var base64Image = _imageConversionService.ConvertStreamToBase64(stream);
+                    ImageUrl = $"data:image/jpeg;base64,{base64Image}";
+                }
+            }
+            catch (Exception ex)
+            {
+                var result = ex.Message;
                 await Shell.Current.DisplayAlert("Error", $"Unable to take photo at this time, try again later: {ex.Message}", "OK");
             }
         });
@@ -216,8 +248,8 @@ namespace Mde.Project.Mobile.ViewModels
         });
 
         public ICommand SaveCommand =>
-			new Command(async () =>
-			{
+            new Command(async () =>
+            {
 
                 if (!IsVariantValid)
                 {
@@ -231,15 +263,15 @@ namespace Mde.Project.Mobile.ViewModels
                     return;
                 }
 
-				var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
+                var productResult = await _productService.GetByIdAsync(SelectedProduct.Id);
 
-				var uid = await SecureStorage.GetAsync("userId");
-				var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+                var uid = await SecureStorage.GetAsync("userId");
+                var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
 
-				if (!farmerResult.IsSuccess)
-				{
+                if (!farmerResult.IsSuccess)
+                {
                     await Shell.Current.DisplayAlert("Oops", $"Unable to create offer at this time, try again later: {string.Join(", ", farmerResult.Errors)}", "OK");
-					return;
+                    return;
                 }
 
                 var farmResult = await _farmService.GetByIdAsync(farmerResult.Data);
@@ -255,39 +287,39 @@ namespace Mde.Project.Mobile.ViewModels
 
                 OfferEditRequestModel offer = new OfferEditRequestModel();
 
-				offer.Price = Price;
-				offer.Variant = Variant;
-				offer.Description = Description;
-				offer.Unit = SelectedUnit;
-				offer.Product = productResult.Data;
-				offer.Farm = farmResult.Data;
-				offer.OfferImageUrl = ImageUrl ?? productResult.Data.ImageUrl;
+                offer.Price = Price;
+                offer.Variant = Variant;
+                offer.Description = Description;
+                offer.Unit = SelectedUnit;
+                offer.Product = productResult.Data;
+                offer.Farm = farmResult.Data;
+                offer.OfferImageUrl = ImageUrl ?? productResult.Data.ImageUrl;
 
-				if(SelectedOffer is null)
-				{
-					offer.Id = Guid.NewGuid().ToString();
+                if (SelectedOffer is null)
+                {
+                    offer.Id = Guid.NewGuid().ToString();
 
                     var createResult = await _offerService.CreateAsync(offer, role);
 
 
                     if (createResult.IsSuccess)
-					{
-						await ToastHelper.ShowToastAsync($"New offer created for {offer.Product.Name}!");
-					}
-				}
-				else
-				{
-					offer.Id = SelectedOffer.Id;
+                    {
+                        await ToastHelper.ShowToastAsync($"New offer created for {offer.Product.Name}!");
+                    }
+                }
+                else
+                {
+                    offer.Id = SelectedOffer.Id;
                     var updateResult = await _offerService.UpdateAsync(offer, role);
 
-					if (updateResult.IsSuccess)
-					{
-						await ToastHelper.ShowToastAsync($"Offer for {offer.Product.Name} updated!");
-					}
-				}
+                    if (updateResult.IsSuccess)
+                    {
+                        await ToastHelper.ShowToastAsync($"Offer for {offer.Product.Name} updated!");
+                    }
+                }
 
-				await Shell.Current.GoToAsync("..", true);
+                await Shell.Current.GoToAsync("..", true);
 
-			});
-	}
+            });
+    }
 }

@@ -3,25 +3,27 @@ using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
-using Mde.Project.Mobile.Pages.Farmer;
 using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class FarmerSettingsViewModel : ObservableObject
+    public class FarmerSettingsViewModel : ObservableObject
 	{
 		private readonly IFarmService _farmService;
 		private readonly IAccountService _accountService;
 		private readonly IFarmerService _farmerService;
-		private Farm farm;
-		public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService, IFarmerService farmerService)
-		{
-			_farmService = farmService;
-			_accountService = accountService;
-			_farmerService = farmerService;
-		}
+        private readonly IImageConversionService _imageConversionService;
+        private MemoryStream _imageStream;
+        private Farm farm;
+        public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService, IFarmerService farmerService, IImageConversionService imageConversionService)
+        {
+            _farmService = farmService;
+            _accountService = accountService;
+            _farmerService = farmerService;
+            _imageConversionService = imageConversionService;
+        }
 
-		public async Task InitializeAsync()
+        public async Task InitializeAsync()
 		{
 			await GetUserFarm();
 
@@ -83,14 +85,52 @@ namespace Mde.Project.Mobile.ViewModels
 			set => SetProperty(ref longitude, value);
 		}
 
-		private string _imageUrl;
-		public string ImageUrl
-		{
-			get => _imageUrl;
-			set => SetProperty(ref _imageUrl, value);
-		}
+        private string imageUrl;
+        public string ImageUrl
+        {
+            get { return imageUrl; }
+            set
+            {
+                if (SetProperty(ref imageUrl, value))
+                {
+                    if (!string.IsNullOrEmpty(value) && value.Contains("data:image"))
+                    {
+                        UpdateImageSource(value);
+                    }
+                    else
+                    {
+                        ImageSource = null;
+                    }
+                }
+            }
+        }
 
-		public ICommand ReplaceImageCommand => new Command(async () =>
+        private ImageSource _imageSource;
+        public ImageSource ImageSource
+        {
+            get { return _imageSource; }
+            private set { SetProperty(ref _imageSource, value); }
+        }
+
+        private void UpdateImageSource(string imageUrl)
+        {
+            using var imageStream = _imageConversionService.ConvertBase64ToStream(imageUrl);
+
+            if (imageStream != null)
+            {
+                _imageStream = new MemoryStream();
+                imageStream.CopyTo(_imageStream);
+                _imageStream.Position = 0;
+
+                ImageSource = ImageSource.FromStream(() =>
+                {
+                    var streamClone = new MemoryStream(_imageStream.ToArray());
+                    return streamClone;
+                });
+            }
+        }
+
+        public ICommand ReplaceImageCommand => new Command(async () =>
 		{
 			var confirm = await Shell.Current.DisplayAlert("Replace Image", "Are you sure you want to replace the image?", "Yes", "No");
 			if (confirm)
@@ -107,15 +147,9 @@ namespace Mde.Project.Mobile.ViewModels
 
                 if (result is not null)
                 {
-                    var stream = await result.OpenReadAsync();
-                    var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
-
-                    using (var fileStream = File.Create(filePath))
-                    {
-                        await stream.CopyToAsync(fileStream);
-                    }
-
-                    ImageUrl = filePath;
+                    using var stream = await result.OpenReadAsync();
+                    var base64Image = _imageConversionService.ConvertStreamToBase64(stream);
+                    ImageUrl = $"data:image/jpeg;base64,{base64Image}";
                 }
             }
             catch (Exception ex)
@@ -133,13 +167,9 @@ namespace Mde.Project.Mobile.ViewModels
 
                 if (result is not null)
                 {
-                    var stream = await result.OpenReadAsync();
-                    var filePath = Path.Combine(FileSystem.AppDataDirectory, result.FileName);
-                    using (var fileStream = File.Create(filePath))
-                    {
-                        await stream.CopyToAsync(fileStream);
-                    }
-                    ImageUrl = filePath;
+                    using var stream = await result.OpenReadAsync();
+                    var base64Image = _imageConversionService.ConvertStreamToBase64(stream);
+                    ImageUrl = $"data:image/jpeg;base64,{base64Image}";
                 }
             }
             catch (Exception ex)

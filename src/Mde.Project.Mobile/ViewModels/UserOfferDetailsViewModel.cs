@@ -19,8 +19,8 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
 
-		private Offer selectedOffer;
-		public Offer SelectedOffer
+		private OfferViewModel selectedOffer;
+		public OfferViewModel SelectedOffer
 		{
 			get { return selectedOffer; }
 			set

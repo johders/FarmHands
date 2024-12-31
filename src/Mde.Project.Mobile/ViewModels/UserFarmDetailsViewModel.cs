@@ -12,11 +12,13 @@ namespace Mde.Project.Mobile.ViewModels
     {
         private readonly IOfferService _offerService;
         private readonly IFavoriteFarmService _favoriteFarmService;
+        private readonly IImageConversionService _imageConversionService;
 
-        public UserFarmDetailsViewModel(IOfferService offerService, IFavoriteFarmService favoriteFarmService)
+        public UserFarmDetailsViewModel(IOfferService offerService, IFavoriteFarmService favoriteFarmService, IImageConversionService imageConversionService)
         {
             _offerService = offerService;
             _favoriteFarmService = favoriteFarmService;
+            _imageConversionService = imageConversionService;
         }
 
         private FarmViewModel selectedFarm;
@@ -32,8 +34,8 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-        private ObservableCollection<Offer> offers;
-        public ObservableCollection<Offer> Offers
+        private ObservableCollection<OfferViewModel> offers;
+        public ObservableCollection<OfferViewModel> Offers
         {
             get { return offers; }
             set
@@ -83,11 +85,14 @@ namespace Mde.Project.Mobile.ViewModels
 			{
 				var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
 				var offers = result.Data;
-				Offers = new ObservableCollection<Offer>(offers);
+
+                var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService));
+
+				Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
 			}
 		}
 
-		public ICommand ViewOfferDetailsCommand => new Command<Offer>(async (offer) =>
+		public ICommand ViewOfferDetailsCommand => new Command<OfferViewModel>(async (offer) =>
 		{
 
 			var navigationParameter = new Dictionary<string, object>()

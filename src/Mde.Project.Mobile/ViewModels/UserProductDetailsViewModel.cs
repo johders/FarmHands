@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -12,11 +11,13 @@ namespace Mde.Project.Mobile.ViewModels
     {
 		private readonly IOfferService _offerService;
 		private readonly IFavoriteProductService _favoriteProductsService;
+		private readonly IImageConversionService _imageConversionService;
 
-        public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService)
+        public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService, IImageConversionService imageConversionService)
         {
             _offerService = offerService;
             _favoriteProductsService = favoriteProductsService;
+            _imageConversionService = imageConversionService;
         }
 
         private ProductViewModel selectedProduct;
@@ -32,8 +33,8 @@ namespace Mde.Project.Mobile.ViewModels
 			}
 		}
 
-        private ObservableCollection<Offer> offers;
-        public ObservableCollection<Offer> Offers
+        private ObservableCollection<OfferViewModel> offers;
+        public ObservableCollection<OfferViewModel> Offers
         {
             get { return offers; }
             set
@@ -83,11 +84,12 @@ namespace Mde.Project.Mobile.ViewModels
             {
                 var result = await _offerService.GetAllOffersByProductIdAsync(SelectedProduct.Id);
                 var offers = result.Data;
-                Offers = new ObservableCollection<Offer>(offers);
+                var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService));
+                Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
             }
 		}
 
-		public ICommand ViewOfferDetailsCommand => new Command<Offer>(async (offer) =>
+		public ICommand ViewOfferDetailsCommand => new Command<OfferViewModel>(async (offer) =>
 		{
 
 			var navigationParameter = new Dictionary<string, object>()

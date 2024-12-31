@@ -40,20 +40,20 @@
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Offer">
+                        <DataTemplate x:DataType="viewmodel:OfferViewModel">
                             <Border Style="{StaticResource TileBorder}">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewOfferDetailsCommand}"/>
                                 </Border.GestureRecognizers>
                                 <Grid RowDefinitions="4*, 2*" Margin="0">
-                                    <Image Source="{Binding OfferImageUrl}"
+                                    <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
                                     <VerticalStackLayout Grid.Row="1" Padding="10">
-                                        <Label Text="{Binding Variant}"
+                                        <Label Text="{Binding VariantName}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                        <Label Text="{Binding Farm.Name}"
+                                        <Label Text="{Binding FarmName}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                     </VerticalStackLayout>

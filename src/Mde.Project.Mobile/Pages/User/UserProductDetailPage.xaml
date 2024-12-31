@@ -29,7 +29,7 @@
                     </Image>
                 </FlexLayout>
 
-                <Image Source="{Binding SelectedProduct.ImageUrl}"
+                <Image Source="{Binding SelectedProduct.ImageSource}"
                        Aspect="AspectFill"/>
 
                 <Label Text="Current offers"

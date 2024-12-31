@@ -19,8 +19,8 @@ namespace Mde.Project.Mobile.ViewModels
             _favoriteProductsService = favoriteProductsService;
         }
 
-        private Product selectedProduct;
-		public Product SelectedProduct
+        private ProductViewModel selectedProduct;
+		public ProductViewModel SelectedProduct
         {
 			get { return selectedProduct; }
 			set

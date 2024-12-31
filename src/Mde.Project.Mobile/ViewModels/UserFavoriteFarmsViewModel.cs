@@ -10,11 +10,13 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IFavoriteFarmService _favoriteFarmService;
 		private readonly IFarmService _farmService;
+		private readonly IImageConversionService _imageConversionService;
 
-        public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService)
+        public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService, IImageConversionService imageConversionService)
         {
             _favoriteFarmService = favoriteFarmService;
             _farmService = farmService;
+            _imageConversionService = imageConversionService;
         }
 
         private ObservableCollection<FarmViewModel> favoriteFarms;
@@ -31,7 +33,7 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			var uid = await SecureStorage.GetAsync("userId");
             var result = await _favoriteFarmService.GetAllFavoriteFarmsByUserAsync(uid);
-			var favoriteFarms = result.Data.Select(ff => new FarmViewModel(ff, _farmService));
+			var favoriteFarms = result.Data.Select(ff => new FarmViewModel(ff, _farmService, _imageConversionService));
 
 			FavoriteFarms = new ObservableCollection<FarmViewModel>(favoriteFarms);
 		});

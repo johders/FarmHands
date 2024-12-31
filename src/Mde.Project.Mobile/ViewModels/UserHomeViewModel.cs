@@ -11,11 +11,13 @@ namespace Mde.Project.Mobile.ViewModels
     {
         private readonly IFarmService _farmService;
         private readonly IProductService _productService;
+        private readonly IImageConversionService _imageConversionService;
 
-        public UserHomeViewModel(IFarmService farmService, IProductService productService)
+        public UserHomeViewModel(IFarmService farmService, IProductService productService, IImageConversionService imageConversionService)
         {
             _farmService = farmService;
             _productService = productService;
+            _imageConversionService = imageConversionService;
         }
 
         private ObservableCollection<FarmViewModel> farms;
@@ -42,7 +44,7 @@ namespace Mde.Project.Mobile.ViewModels
         {
             var result = await _farmService.GetAllAsync();
 
-            var farms = result.Data.Where(f => f.ProfileComplete).Select(farm => new FarmViewModel(farm, _farmService));
+            var farms = result.Data.Where(f => f.ProfileComplete).Select(farm => new FarmViewModel(farm, _farmService, _imageConversionService));
 
             Farms = new ObservableCollection<FarmViewModel>(farms);
         });

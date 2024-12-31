@@ -4,24 +4,41 @@ using Mde.Project.Core.Services.Interfaces;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class FarmViewModel : ObservableObject
+    public class FarmViewModel : ObservableObject
 	{
 		private readonly Farm _farm;
 		private readonly IFarmService _farmService;
-		private int? _offerCount;
+        private readonly IImageConversionService _imageConversionService;
+        private MemoryStream _imageStream;
+        private int? _offerCount;
 
-		public FarmViewModel(Farm farm, IFarmService farmService)
-		{
-			_farm = farm;
-			_farmService = farmService;
+        public FarmViewModel(Farm farm, IFarmService farmService, IImageConversionService imageConversionService)
+        {
+            _farm = farm;
+            _farmService = farmService;
+            _imageConversionService = imageConversionService;
+
             if (farm.ImageUrl.Contains("data:image"))
             {
-                ImageSource = ConvertToImageSource(farm.ImageUrl);
+                using var imageStream = _imageConversionService.ConvertBase64ToStream(farm.ImageUrl);
+
+                if (imageStream != null)
+                {
+                    _imageStream = new MemoryStream();
+                    imageStream.CopyTo(_imageStream);
+                    _imageStream.Position = 0;
+
+                    ImageSource = ImageSource.FromStream(() =>
+                    {
+                        var streamClone = new MemoryStream(_imageStream.ToArray());
+                        return streamClone;
+                    });
+                }
             }
             _ = Task.Run(() => LoadOfferCountAsync());
         }
 
-		public string Id => _farm.Id;
+        public string Id => _farm.Id;
 		public string Name => _farm.Name;
 		public string ImageUrl => _farm.ImageUrl;
 		public string Description => _farm.Description;
@@ -36,24 +53,9 @@ namespace Mde.Project.Mobile.ViewModels
 			OfferCount = await _farmService.GetOfferCountAsync(_farm.Id);
 		}
 
-        private ImageSource ConvertToImageSource(string base64String)
+        public void Dispose()
         {
-            if (string.IsNullOrEmpty(base64String))
-                return null;
-
-            try
-            {
-                var base64Data = base64String.Contains(",")
-                    ? base64String.Substring(base64String.IndexOf(",") + 1)
-                    : base64String;
-
-                byte[] imageBytes = Convert.FromBase64String(base64Data);
-                return ImageSource.FromStream(() => new MemoryStream(imageBytes));
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            _imageStream?.Dispose();
         }
     }
 }

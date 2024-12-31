@@ -57,6 +57,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductService>();
             builder.Services.AddSingleton<IFarmerService, FarmerService>();
 
+            builder.Services.AddSingleton<IImageConversionService, ImageConversionService>();
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
 
             return builder;

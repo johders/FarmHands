@@ -40,6 +40,12 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand LoginCommand => new Command(async () =>
 		{
+            if (!_connectivityService.IsConnected().IsSuccess)
+            {
+                await Shell.Current.DisplayAlert("No Connectivity", "Please check your internet connection and try again.", "OK");
+                return;
+            }
+
             var email = Username;
             var password = Password;
             

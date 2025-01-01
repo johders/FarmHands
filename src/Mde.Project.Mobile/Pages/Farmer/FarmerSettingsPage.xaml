@@ -7,8 +7,9 @@
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerSettingsPage"
              HideSoftInputOnTapped="True"
              Title="Settings">
-    <ScrollView>
-        <Grid Style="{StaticResource MaxWidthGrid}">
+    <Grid>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+            <Grid Style="{StaticResource MaxWidthGrid}">
 
             <VerticalStackLayout Margin="8,0" Spacing="20"
                                  MinimumWidthRequest="{OnPlatform WinUI=500, Default=400}">
@@ -146,4 +147,16 @@
             </VerticalStackLayout>
         </Grid>
     </ScrollView>
+
+    <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="Black"
+              Opacity="0.5"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                       Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+    </Grid>
+    </Grid>
 </ContentPage>

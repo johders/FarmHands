@@ -9,79 +9,93 @@
              Title="Home"
              HideSoftInputOnTapped="True">
 
-    <ScrollView>
-        <Grid Style="{StaticResource MaxWidthGrid}">
-            <VerticalStackLayout Spacing="10" Margin="8,8,8,50">
+    <Grid>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+            <Grid Style="{StaticResource MaxWidthGrid}">
+                <VerticalStackLayout Spacing="10" Margin="8,8,8,50">
 
-                <SearchBar Placeholder="Search by farm, product, location,.."
+                    <SearchBar Placeholder="Search by farm, product, location,.."
                            Keyboard="Default"
                            Margin="5,15,30,15"/>
 
-                <Label Text="Farms near me"
+                    <Label Text="Farms near me"
                        Style="{StaticResource LargeLabel}"/>
 
-                <CollectionView ItemsSource="{Binding Farms}" Margin="0,0,0,15">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodels:FarmViewModel">
-                            <Border Style="{StaticResource TileBorder}">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                    <CollectionView ItemsSource="{Binding Farms}" Margin="0,0,0,15">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodels:FarmViewModel">
+                                <Border Style="{StaticResource TileBorder}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
-                                </Border.GestureRecognizers>
-                                <Grid RowDefinitions="4*, 2*" Margin="0">
-                                    <Image Source="{Binding ImageSource}"
+                                    </Border.GestureRecognizers>
+                                    <Grid RowDefinitions="4*, 2*" Margin="0">
+                                        <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
-                                    <VerticalStackLayout Grid.Row="1" Padding="10">
-                                        <Label Text="{Binding Name}"
+                                        <VerticalStackLayout Grid.Row="1" Padding="10">
+                                            <Label Text="{Binding Name}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                LineBreakMode="TailTruncation"/>
-                                        <Label Text="{Binding Description}"
+                                            <Label Text="{Binding Description}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                <Label Text="Currently in season"
+                    <Label Text="Currently in season"
                        Style="{StaticResource LargeLabel}"/>
 
-                <CollectionView ItemsSource="{Binding Products}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodels:ProductViewModel">
-                            <Border Style="{StaticResource TileBorder}">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                    <CollectionView ItemsSource="{Binding Products}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodels:ProductViewModel">
+                                <Border Style="{StaticResource TileBorder}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
-                                </Border.GestureRecognizers>
-                                <Grid RowDefinitions="4*, 2*" Margin="0">
-                                    <Image Source="{Binding ImageSource}"
+                                    </Border.GestureRecognizers>
+                                    <Grid RowDefinitions="4*, 2*" Margin="0">
+                                        <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
-                                    <VerticalStackLayout Grid.Row="1" Padding="10">
-                                        <Label Text="{Binding Name}"
+                                        <VerticalStackLayout Grid.Row="1" Padding="10">
+                                            <Label Text="{Binding Name}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                LineBreakMode="TailTruncation"/>
-                                        <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
+                                            <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="Black"
+              Opacity="0.5"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                           Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
         </Grid>
-    </ScrollView>
+        
+    </Grid>
 </ContentPage>

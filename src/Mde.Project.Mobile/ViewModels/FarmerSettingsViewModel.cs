@@ -25,7 +25,9 @@ namespace Mde.Project.Mobile.ViewModels
 
         public async Task InitializeAsync()
 		{
-			await GetUserFarm();
+            IsLoading = true;
+
+            await GetUserFarm();
 
 			if (farm is not null)
 			{
@@ -35,7 +37,9 @@ namespace Mde.Project.Mobile.ViewModels
 				Longitude = farm.Longitude;
 				ImageUrl = farm.ImageUrl;
 			}
-		}
+
+            IsLoading = false;
+        }
 
 		private async Task GetUserFarm()
 		{
@@ -84,6 +88,13 @@ namespace Mde.Project.Mobile.ViewModels
 			get => longitude;
 			set => SetProperty(ref longitude, value);
 		}
+
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
 
         private string imageUrl;
         public string ImageUrl

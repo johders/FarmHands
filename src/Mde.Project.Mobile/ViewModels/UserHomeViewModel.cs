@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
@@ -18,6 +19,39 @@ namespace Mde.Project.Mobile.ViewModels
             _farmService = farmService;
             _productService = productService;
             _imageConversionService = imageConversionService;
+        }
+
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get => isLoading;
+            private set => SetProperty(ref isLoading, value);
+        }
+
+        private bool isLoadingFarms;
+        public bool IsLoadingFarms
+        {
+            get => isLoadingFarms;
+            set
+            {
+                SetProperty(ref isLoadingFarms, value);
+                UpdateIsLoading();
+            }
+        }
+
+        private bool isLoadingProducts;
+        public bool IsLoadingProducts
+        {
+            get => isLoadingProducts;
+            set
+            {
+                SetProperty(ref isLoadingProducts, value);
+                UpdateIsLoading();
+            }
+        }
+        private void UpdateIsLoading()
+        {
+            IsLoading = IsLoadingFarms && IsLoadingProducts;
         }
 
         private ObservableCollection<FarmViewModel> farms;
@@ -42,15 +76,18 @@ namespace Mde.Project.Mobile.ViewModels
 
         public ICommand RefreshFarmListCommand => new Command(async () =>
         {
+            IsLoadingFarms = true;
             var result = await _farmService.GetAllAsync();
 
             var farms = result.Data.Where(f => f.ProfileComplete).Select(farm => new FarmViewModel(farm, _farmService, _imageConversionService));
 
             Farms = new ObservableCollection<FarmViewModel>(farms);
+            IsLoadingFarms = false;
         });
 
         public ICommand RefreshProductListCommand => new Command(async () =>
         {
+            IsLoadingProducts = true;
             var result = await _productService.GetAllAsync();
 
             var productViewModels = result.Data
@@ -62,6 +99,7 @@ namespace Mde.Project.Mobile.ViewModels
             Products = new ObservableCollection<ProductViewModel>(productViewModels
                 .Where(p => p.OfferCount > 0)
                 .OrderByDescending(p => p.OfferCount));
+            IsLoadingProducts = false;
         });
 
         public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farm) =>

@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using AndroidX.Core.App;
 using Firebase.Messaging;
 using Mde.Project.Mobile.Constants;
 
@@ -21,6 +22,28 @@ namespace Mde.Project.Mobile.Platforms.Android.Services
                 Preferences.Remove(AppConstants.DeviceToken);
             }
             Preferences.Set(AppConstants.DeviceToken, token);
+        }
+
+        public override void OnMessageReceived(RemoteMessage message)
+        {
+            base.OnMessageReceived(message);
+
+            var notification = message.GetNotification();
+
+            SendNotification(notification.Body, notification.Title, message.Data);
+        }
+
+        private void SendNotification(string messagebody, string title, IDictionary<string, string> data)
+        {
+            var notificationBuilder = new NotificationCompat.Builder(this, MainActivity.Channel_ID)
+                .SetContentTitle(title)
+                .SetSmallIcon(Resource.Mipmap.appicon)
+                .SetContentText(messagebody)
+                .SetChannelId(MainActivity.Channel_ID)
+                .SetPriority(2);
+
+            var notificationManager = NotificationManagerCompat.From(this);
+            notificationManager.Notify(MainActivity.NotificationId, notificationBuilder.Build());
         }
     }
 }

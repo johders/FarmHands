@@ -5,6 +5,6 @@ namespace Mde.Project.Core.Services.Interfaces
 {
     public interface IOpenStreetService
     {
-        Task<ResultModel<OpenStreetResult>> GetCoordinatesFromAddressAsync(string address);
+        Task<ResultModel<List<OpenStreetResult>>> GetCoordinatesFromAddressAsync(string address);
     }
 }

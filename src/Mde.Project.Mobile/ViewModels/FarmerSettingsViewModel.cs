@@ -33,6 +33,27 @@ namespace Mde.Project.Mobile.ViewModels
             set => SetProperty(ref addressInput, value);
         }
 
+        private List<OpenStreetResult> searchResults;
+        public List<OpenStreetResult> SearchResults
+        {
+            get => searchResults;
+            set => SetProperty(ref searchResults, value);
+        }
+
+        private OpenStreetResult selectedAddress;
+        public OpenStreetResult SelectedAddress
+        {
+            get => selectedAddress;
+            set
+            {
+                if (SetProperty(ref selectedAddress, value))
+                {
+                    Latitude = selectedAddress?.Latitude ?? 0;
+                    Longitude = selectedAddress?.Longitude ?? 0;
+                }
+            }
+        }
+
         public ICommand SearchAddressCommand => new Command<string>(async (address) =>
         {
             if (string.IsNullOrWhiteSpace(address))
@@ -50,16 +71,15 @@ namespace Mde.Project.Mobile.ViewModels
 
             var result = await _openStreetService.GetCoordinatesFromAddressAsync(address);
 
-            if (result.IsSuccess)
+            if (result.IsSuccess && result.Data != null)
             {
-                Latitude = result.Data.Latitude;
-                Longitude = result.Data.Longitude;
-                await Application.Current.MainPage.DisplayAlert("Success", "Coordinates updated successfully.", "OK");
+                SearchResults = result.Data;
             }
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Unable to find coordinates for the provided address.", "OK");
             }
+
 
             IsLoading = false;
         }
@@ -94,6 +114,18 @@ namespace Mde.Project.Mobile.ViewModels
                 farm = result.Data;
             }
         }
+
+        private bool isReplaceClicked;
+        public bool IsReplaceClicked
+        {
+            get => isReplaceClicked;
+            set => SetProperty(ref isReplaceClicked, value);
+        }
+
+        public ICommand ReplaceAddressCommand => new Command(() =>
+        {
+            IsReplaceClicked = true;
+        });
 
         private string name;
         public string Name

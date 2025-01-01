@@ -29,14 +29,11 @@
                     </Entry>
                 </VerticalStackLayout>
 
-                    <VerticalStackLayout>
+                    <VerticalStackLayout IsVisible="{Binding IsReplaceClicked}">
                         <Label Text="Address Search"
                                Style="{StaticResource SmallLabel}"/>
                         <Entry Placeholder="Enter your street, number and zipcode" 
                                Text="{Binding AddressInput}" />
-                        <!--<Button Text="Search Address" 
-                                Command="{Binding SearchAddressCommand}" 
-                                CommandParameter="{Binding AddressInput}" />-->
                         <Button Text="Search"
                                 CornerRadius="25"
                                 WidthRequest="100"
@@ -52,7 +49,33 @@
                                         Opacity=".8"/>
                             </Button.Shadow>
                         </Button>
+
+                        <VerticalStackLayout  IsVisible="{Binding SearchResults, Converter={StaticResource IsNotNullToVisibilityConverter}}" >
+                            <Label Text="Select address"
+                                   Style="{StaticResource SmallLabel}"/>
+                            <Picker ItemsSource="{Binding SearchResults}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding SelectedAddress}"/>
+                        </VerticalStackLayout>
+
                     </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10" IsVisible="{Binding IsReplaceClicked, Converter={StaticResource InverseBooleanConverter}}">
+                        <Label Text="Select address"
+                               Style="{StaticResource SmallLabel}"
+                               Grid.Column="0" VerticalOptions="Center" />
+
+                        <Button Text="Replace" 
+                                Grid.Column="1" 
+                                BackgroundColor="{StaticResource AccentColor}" 
+                                TextColor="White" 
+                                HorizontalOptions="End" 
+                                Command="{Binding ReplaceAddressCommand}" 
+                                IsVisible="True" 
+                                Padding="10,0" 
+                                FontSize="Small"
+                                CornerRadius="25"/>
+                    </Grid>
 
                     <VerticalStackLayout>
                     <Label Text="Location"
@@ -73,7 +96,7 @@
                         Text="{Binding Description}"/>
                 </VerticalStackLayout>
 
-                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10" >
                     <Label Text="Image" 
                            Style="{StaticResource SmallLabel}" 
                            Grid.Column="0" VerticalOptions="Center" />

@@ -61,7 +61,7 @@
                     </VerticalStackLayout>
 
                     <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10" IsVisible="{Binding IsReplaceClicked, Converter={StaticResource InverseBooleanConverter}}">
-                        <Label Text="Select address"
+                        <Label Text="Address"
                                Style="{StaticResource SmallLabel}"
                                Grid.Column="0" VerticalOptions="Center" />
 
@@ -80,12 +80,8 @@
                     <VerticalStackLayout>
                     <Label Text="Location"
                        Style="{StaticResource SmallLabel}"/>
-                    <Entry Placeholder="Enter latitude" 
-                       Text="{Binding Latitude, Converter={StaticResource DoubleToStringConverter}}" 
-                       Keyboard="Numeric"/>
-                    <Entry Placeholder="Enter longitude" 
-                       Text="{Binding Longitude, Converter={StaticResource DoubleToStringConverter}}" 
-                       Keyboard="Numeric"/>
+                    <Label Text="{Binding Latitude, Converter={StaticResource DoubleToStringConverter}}"/>
+                        <Label Text="{Binding Longitude, Converter={StaticResource DoubleToStringConverter}}"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>

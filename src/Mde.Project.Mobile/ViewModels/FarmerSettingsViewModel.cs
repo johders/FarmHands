@@ -80,7 +80,6 @@ namespace Mde.Project.Mobile.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", "Unable to find coordinates for the provided address.", "OK");
             }
 
-
             IsLoading = false;
         }
 
@@ -303,6 +302,7 @@ namespace Mde.Project.Mobile.ViewModels
             if (result.IsSuccess)
             {
                 await ToastHelper.ShowToastAsync($"Changes successfully saved");
+                IsReplaceClicked = false;
             }
             else
             {

@@ -29,8 +29,17 @@ namespace Mde.Project.Mobile.ViewModels
 			}
 		}
 
-		public ICommand RefreshFavoriteProductsListCommand => new Command(async () =>
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
+        public ICommand RefreshFavoriteProductsListCommand => new Command(async () =>
 		{
+            IsLoading = true;
+
             var uid = await SecureStorage.GetAsync("userId");
             var result = await _favoriteProductService.GetAllFavoriteProductsByUserAsync(uid);
 
@@ -39,7 +48,8 @@ namespace Mde.Project.Mobile.ViewModels
             await Task.WhenAll(favoriteProducts.Select(vm => vm.LoadOfferCountAsync()));
 
             FavoriteProducts = new ObservableCollection<ProductViewModel>(favoriteProducts);
-		});
+            IsLoading = false;
+        });
 
 		public ICommand ViewProductDetailsCommand => new Command<ProductViewModel>(async (productViewModel) =>
 		{

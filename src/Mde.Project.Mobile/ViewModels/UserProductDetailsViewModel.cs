@@ -33,6 +33,13 @@ namespace Mde.Project.Mobile.ViewModels
 			}
 		}
 
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
         private ObservableCollection<OfferViewModel> offers;
         public ObservableCollection<OfferViewModel> Offers
         {
@@ -80,14 +87,18 @@ namespace Mde.Project.Mobile.ViewModels
 
 		private async Task LoadOffersForSelectedProduct()
 		{
-            if(SelectedProduct is not null)
+            IsLoading = true;
+
+            if (SelectedProduct is not null)
             {
                 var result = await _offerService.GetAllOffersByProductIdAsync(SelectedProduct.Id);
                 var offers = result.Data;
                 var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService));
                 Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
             }
-		}
+
+            IsLoading = false;
+        }
 
 		public ICommand ViewOfferDetailsCommand => new Command<OfferViewModel>(async (offer) =>
 		{

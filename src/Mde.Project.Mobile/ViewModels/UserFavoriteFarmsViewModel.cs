@@ -19,6 +19,13 @@ namespace Mde.Project.Mobile.ViewModels
             _imageConversionService = imageConversionService;
         }
 
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
         private ObservableCollection<FarmViewModel> favoriteFarms;
 		public ObservableCollection<FarmViewModel> FavoriteFarms
 		{
@@ -31,12 +38,16 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshFavoriteFarmsListCommand => new Command(async () =>
 		{
-			var uid = await SecureStorage.GetAsync("userId");
+            IsLoading = true;
+
+            var uid = await SecureStorage.GetAsync("userId");
             var result = await _favoriteFarmService.GetAllFavoriteFarmsByUserAsync(uid);
 			var favoriteFarms = result.Data.Select(ff => new FarmViewModel(ff, _farmService, _imageConversionService));
 
 			FavoriteFarms = new ObservableCollection<FarmViewModel>(favoriteFarms);
-		});
+
+            IsLoading = false;
+        });
 
 		public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farmViewModel) =>
 		{

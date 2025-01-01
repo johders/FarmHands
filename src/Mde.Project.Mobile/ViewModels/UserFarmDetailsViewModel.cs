@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -32,6 +31,13 @@ namespace Mde.Project.Mobile.ViewModels
                     _ = LoadOffersForSelectedFarmAsync();
                 }
             }
+        }
+
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
         }
 
         private ObservableCollection<OfferViewModel> offers;
@@ -81,6 +87,8 @@ namespace Mde.Project.Mobile.ViewModels
 
 		private async Task LoadOffersForSelectedFarmAsync()
 		{
+            IsLoading = true;
+
 			if (SelectedFarm is not null)
 			{
 				var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
@@ -90,6 +98,8 @@ namespace Mde.Project.Mobile.ViewModels
 
 				Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
 			}
+
+            IsLoading = false;
 		}
 
 		public ICommand ViewOfferDetailsCommand => new Command<OfferViewModel>(async (offer) =>

@@ -7,66 +7,80 @@
              x:Class="Mde.Project.Mobile.Pages.User.UserProductDetailPage"
              x:DataType="viewmodel:UserProductDetailsViewModel"
              Title="{Binding SelectedProduct.Name}">
-    <ScrollView>
-        <Grid Style="{StaticResource MaxWidthGrid}">
+    <Grid>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+            <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
-                <FlexLayout JustifyContent="SpaceBetween"
+                <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
+                    <FlexLayout JustifyContent="SpaceBetween"
                             AlignItems="Center"
                             Margin="0,20">
-                    <Label Text="{Binding SelectedProduct.Name}"
+                        <Label Text="{Binding SelectedProduct.Name}"
                            Style="{StaticResource LargeLabel}"
                            Margin="0"/>
 
-                    <Image Source="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartImageConverter}}"
+                        <Image Source="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartImageConverter}}"
                            WidthRequest="40"
                            HeightRequest="40">
 
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
-                        </Image.GestureRecognizers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
+                            </Image.GestureRecognizers>
 
-                    </Image>
-                </FlexLayout>
+                        </Image>
+                    </FlexLayout>
 
-                <Image Source="{Binding SelectedProduct.ImageSource}"
+                    <Image Source="{Binding SelectedProduct.ImageSource}"
                        Aspect="AspectFill"/>
 
-                <Label Text="Current offers"
+                    <Label Text="Current offers"
                        Style="{StaticResource SmallLabel}"/>
 
-                <CollectionView ItemsSource="{Binding Offers}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodel:OfferViewModel">
-                            <Border Style="{StaticResource TileBorder}">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                    <CollectionView ItemsSource="{Binding Offers}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodel:OfferViewModel">
+                                <Border Style="{StaticResource TileBorder}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewOfferDetailsCommand}"/>
-                                </Border.GestureRecognizers>
-                                <Grid RowDefinitions="4*, 2*" Margin="0">
-                                    <Image Source="{Binding ImageSource}"
+                                    </Border.GestureRecognizers>
+                                    <Grid RowDefinitions="4*, 2*" Margin="0">
+                                        <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
-                                    <VerticalStackLayout Grid.Row="1" Padding="10">
-                                        <Label Text="{Binding VariantName}"
+                                        <VerticalStackLayout Grid.Row="1" Padding="10">
+                                            <Label Text="{Binding VariantName}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                        <Label Text="{Binding FarmName}"
+                                            <Label Text="{Binding FarmName}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                <Label Text="Recipe inspiration from the web"
+                    <Label Text="Recipe inspiration from the web"
                        Style="{StaticResource SmallLabel}"/>
 
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="Black"
+              Opacity="0.5"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+               Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
         </Grid>
-    </ScrollView>
+
+    </Grid>
 </ContentPage>

@@ -7,47 +7,61 @@
              x:Class="Mde.Project.Mobile.Pages.User.UserFavoriteProductsPage"
              x:Name="page"
              Title="Favorite products">
-    <ScrollView>
-        <Grid Style="{StaticResource MaxWidthGrid}">
-            <VerticalStackLayout Margin="8">
-                <CollectionView ItemsSource="{Binding FavoriteProducts}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodel:ProductViewModel">
-                            <VerticalStackLayout>
-                                <Border Padding="5"
+    <Grid>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+            <Grid Style="{StaticResource MaxWidthGrid}">
+                <VerticalStackLayout Margin="8">
+                    <CollectionView ItemsSource="{Binding FavoriteProducts}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodel:ProductViewModel">
+                                <VerticalStackLayout>
+                                    <Border Padding="5"
                                         StrokeShape="{RoundRectangle CornerRadius=5}"
                                         BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer CommandParameter="{Binding .}"
                                                               Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
-                                    </Border.GestureRecognizers>
-                                    <Grid ColumnDefinitions="*, Auto">
-                                        <VerticalStackLayout Spacing="5" Padding="8">
-                                            <Label Text="{Binding Name}"
+                                        </Border.GestureRecognizers>
+                                        <Grid ColumnDefinitions="*, Auto">
+                                            <VerticalStackLayout Spacing="5" Padding="8">
+                                                <Label Text="{Binding Name}"
                                                    Style="{StaticResource SmallLabel}"
                                                    TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                            <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
+                                                <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
                                                    Style="{StaticResource LabelText}"
                                                    TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                    LineBreakMode="WordWrap"/>
-                                        </VerticalStackLayout>
-                                        <Border  Grid.Column="1"
+                                            </VerticalStackLayout>
+                                            <Border  Grid.Column="1"
                                                  WidthRequest="120"
                                                  HeightRequest="70"
                                                  StrokeShape="{RoundRectangle CornerRadius=8}">
-                                            <Image Source="{Binding ImageSource}"
+                                                <Image Source="{Binding ImageSource}"
                                                    Aspect="AspectFill"/>
-                                        </Border>
-                                    </Grid>
-                                </Border>
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="Black"
+              Opacity="0.5"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
         </Grid>
-    </ScrollView>
+
+    </Grid>
 </ContentPage>

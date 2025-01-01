@@ -8,58 +8,99 @@ using System.Windows.Input;
 namespace Mde.Project.Mobile.ViewModels
 {
     public class FarmerSettingsViewModel : ObservableObject
-	{
-		private readonly IFarmService _farmService;
-		private readonly IAccountService _accountService;
-		private readonly IFarmerService _farmerService;
+    {
+        private readonly IFarmService _farmService;
+        private readonly IAccountService _accountService;
+        private readonly IFarmerService _farmerService;
         private readonly IImageConversionService _imageConversionService;
+        private readonly IOpenStreetService _openStreetService;
         private MemoryStream _imageStream;
         private Farm farm;
-        public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService, IFarmerService farmerService, IImageConversionService imageConversionService)
+        public FarmerSettingsViewModel(IFarmService farmService, IAccountService accountService, IFarmerService farmerService,
+            IImageConversionService imageConversionService, IOpenStreetService openStreetService)
         {
             _farmService = farmService;
             _accountService = accountService;
             _farmerService = farmerService;
             _imageConversionService = imageConversionService;
+            _openStreetService = openStreetService;
         }
 
-        public async Task InitializeAsync()
-		{
+        private string addressInput;
+        public string AddressInput
+        {
+            get => addressInput;
+            set => SetProperty(ref addressInput, value);
+        }
+
+        public ICommand SearchAddressCommand => new Command<string>(async (address) =>
+        {
+            if (string.IsNullOrWhiteSpace(address))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Please enter a valid address.", "OK");
+                return;
+            }
+
+            await GetCoordinatesFromAddressAsync(address);
+        });
+
+        public async Task GetCoordinatesFromAddressAsync(string address)
+        {
             IsLoading = true;
 
-            await GetUserFarm();
+            var result = await _openStreetService.GetCoordinatesFromAddressAsync(address);
 
-			if (farm is not null)
-			{
-				Name = farm.Name;
-				Description = farm.Description;
-				Latitude = farm.Latitude;
-				Longitude = farm.Longitude;
-				ImageUrl = farm.ImageUrl;
-			}
+            if (result.IsSuccess)
+            {
+                Latitude = result.Data.Lat;
+                Longitude = result.Data.Lon;
+                await Application.Current.MainPage.DisplayAlert("Success", "Coordinates updated successfully.", "OK");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Unable to find coordinates for the provided address.", "OK");
+            }
 
             IsLoading = false;
         }
 
-		private async Task GetUserFarm()
-		{
-			var uid = await SecureStorage.GetAsync("userId");
-			var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+        public async Task InitializeAsync()
+        {
+            IsLoading = true;
 
-			var result = await _farmService.GetByIdAsync(farmerResult.Data);
+            await GetUserFarm();
 
-			if (result.IsSuccess)
-			{
-				farm = result.Data;
-			}
-		}
+            if (farm is not null)
+            {
+                Name = farm.Name;
+                Description = farm.Description;
+                Latitude = farm.Latitude;
+                Longitude = farm.Longitude;
+                ImageUrl = farm.ImageUrl;
+            }
 
-		private string name;
-		public string Name
-		{
-			get => name;
-			set => SetProperty(ref name, value);
-		}
+            IsLoading = false;
+        }
+
+        private async Task GetUserFarm()
+        {
+            var uid = await SecureStorage.GetAsync("userId");
+            var farmerResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+
+            var result = await _farmService.GetByIdAsync(farmerResult.Data);
+
+            if (result.IsSuccess)
+            {
+                farm = result.Data;
+            }
+        }
+
+        private string name;
+        public string Name
+        {
+            get => name;
+            set => SetProperty(ref name, value);
+        }
 
         private bool isNameValid;
         public bool IsNameValid
@@ -69,25 +110,25 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private string description;
-		public string Description
-		{
-			get => description;
-			set => SetProperty(ref description, value);
-		}
+        public string Description
+        {
+            get => description;
+            set => SetProperty(ref description, value);
+        }
 
-		private double latitude;
-		public double Latitude
-		{
-			get => latitude;
-			set => SetProperty(ref latitude, value);
-		}
+        private double latitude;
+        public double Latitude
+        {
+            get => latitude;
+            set => SetProperty(ref latitude, value);
+        }
 
-		private double longitude;
-		public double Longitude
-		{
-			get => longitude;
-			set => SetProperty(ref longitude, value);
-		}
+        private double longitude;
+        public double Longitude
+        {
+            get => longitude;
+            set => SetProperty(ref longitude, value);
+        }
 
         private bool isLoading;
         public bool IsLoading
@@ -142,13 +183,13 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         public ICommand ReplaceImageCommand => new Command(async () =>
-		{
-			var confirm = await Shell.Current.DisplayAlert("Replace Image", "Are you sure you want to replace the image?", "Yes", "No");
-			if (confirm)
-			{
-				ImageUrl = null;
-			}
-		});
+        {
+            var confirm = await Shell.Current.DisplayAlert("Replace Image", "Are you sure you want to replace the image?", "Yes", "No");
+            if (confirm)
+            {
+                ImageUrl = null;
+            }
+        });
 
         public ICommand SelectImageCommand => new Command(async () =>
         {
@@ -191,15 +232,15 @@ namespace Mde.Project.Mobile.ViewModels
         });
 
         private bool IsProfileComplete(FarmUpdateRequestModel farmModel)
-		{
-			if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(ImageUrl) || Latitude == 0 || Longitude == 0)
-				return false;
+        {
+            if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(ImageUrl) || Latitude == 0 || Longitude == 0)
+                return false;
 
-			return true;
-		}
+            return true;
+        }
 
         public ICommand SaveCommand => new Command(async () =>
-		{
+        {
 
             if (!IsNameValid)
             {
@@ -208,46 +249,46 @@ namespace Mde.Project.Mobile.ViewModels
             }
 
             var updateModel = new FarmUpdateRequestModel
-			{
-				Id = farm.Id,
-				Name = Name,
-				Description = Description,
-				Latitude = Latitude,
-				Longitude = Longitude,
-				ImageUrl = ImageUrl
-			};
+            {
+                Id = farm.Id,
+                Name = Name,
+                Description = Description,
+                Latitude = Latitude,
+                Longitude = Longitude,
+                ImageUrl = ImageUrl
+            };
 
-			updateModel.ProfileComplete = IsProfileComplete(updateModel);
+            updateModel.ProfileComplete = IsProfileComplete(updateModel);
 
-			if (!updateModel.ProfileComplete)
-			{
+            if (!updateModel.ProfileComplete)
+            {
                 await Application.Current.MainPage
-				.DisplayAlert("Profile incomplete", "Please note that your farm will only be visible when your profile is complete.", "OK");
+                .DisplayAlert("Profile incomplete", "Please note that your farm will only be visible when your profile is complete.", "OK");
             }
 
             var result = await _farmService.UpdateAsync(updateModel);
 
             if (result.IsSuccess)
-			{
-				await ToastHelper.ShowToastAsync($"Changes successfully saved");
-			}
-			else
-			{
-				await Application.Current.MainPage.DisplayAlert("Error", "Failed to update farm details.", "OK");
-			}
+            {
+                await ToastHelper.ShowToastAsync($"Changes successfully saved");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Failed to update farm details.", "OK");
+            }
         });
 
-		public ICommand SwitchToUserViewCommand => new Command(() =>
-		{
-			App.Current.MainPage = new AppShellUser();
-		});
+        public ICommand SwitchToUserViewCommand => new Command(() =>
+        {
+            App.Current.MainPage = new AppShellUser();
+        });
 
-		public ICommand LogOutCommand => new Command(async () =>
-		{
-			bool isConfirmed = await ShowLogoutConfirmationAsync();
+        public ICommand LogOutCommand => new Command(async () =>
+        {
+            bool isConfirmed = await ShowLogoutConfirmationAsync();
 
-			if (isConfirmed)
-			{
+            if (isConfirmed)
+            {
                 var logoutResult = _accountService.Logout();
 
                 if (!logoutResult.IsSuccess)
@@ -257,12 +298,12 @@ namespace Mde.Project.Mobile.ViewModels
                 }
 
                 Application.Current.MainPage = new AppShellStartup();
-			}
-		});
+            }
+        });
 
-		public async Task<bool> ShowLogoutConfirmationAsync()
-		{
-			return await Application.Current.MainPage.DisplayAlert("Confirm signout", "Are you sure you want to sign out?", "Yes", "No");
-		}
-	}
+        public async Task<bool> ShowLogoutConfirmationAsync()
+        {
+            return await Application.Current.MainPage.DisplayAlert("Confirm signout", "Are you sure you want to sign out?", "Yes", "No");
+        }
+    }
 }

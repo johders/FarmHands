@@ -29,7 +29,17 @@
                     </Entry>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Entry Placeholder="Enter your address" 
+                               Text="{Binding AddressInput}" />
+                        <Button Text="Search Address" 
+                                Command="{Binding SearchAddressCommand}" 
+                                CommandParameter="{Binding AddressInput}" />
+                        <Label Text="Latitude: {Binding Latitude}" />
+                        <Label Text="Longitude: {Binding Longitude}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
                     <Label Text="Location"
                        Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter latitude" 

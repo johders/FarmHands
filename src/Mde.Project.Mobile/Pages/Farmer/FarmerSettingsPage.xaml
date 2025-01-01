@@ -30,13 +30,28 @@
                 </VerticalStackLayout>
 
                     <VerticalStackLayout>
-                        <Entry Placeholder="Enter your address" 
+                        <Label Text="Address Search"
+                               Style="{StaticResource SmallLabel}"/>
+                        <Entry Placeholder="Enter your street, number and zipcode" 
                                Text="{Binding AddressInput}" />
-                        <Button Text="Search Address" 
+                        <!--<Button Text="Search Address" 
                                 Command="{Binding SearchAddressCommand}" 
-                                CommandParameter="{Binding AddressInput}" />
-                        <Label Text="Latitude: {Binding Latitude}" />
-                        <Label Text="Longitude: {Binding Longitude}" />
+                                CommandParameter="{Binding AddressInput}" />-->
+                        <Button Text="Search"
+                                CornerRadius="25"
+                                WidthRequest="100"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                                Margin="20"
+                                Command="{Binding SearchAddressCommand}"
+                                CommandParameter="{Binding AddressInput}">
+                            <Button.Shadow>
+                                <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                        Offset="10,10"
+                                        Radius="50"
+                                        Opacity=".8"/>
+                            </Button.Shadow>
+                        </Button>
                     </VerticalStackLayout>
 
                     <VerticalStackLayout>

@@ -29,8 +29,6 @@ namespace Mde.Project.Mobile
                 .RegisterServices()
                 .RegisterViewModels()
                 .RegisterViews();
-
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -59,6 +57,11 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
 
             builder.Services.AddSingleton<IImageConversionService, ImageConversionService>();
+            builder.Services.AddHttpClient("OpenStreet", client =>
+            {
+                client.BaseAddress = new Uri("https://nominatim.openstreetmap.org/");
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("com.farmhands.mde.project.mobile (info@howest.be)");
+            });
             builder.Services.AddSingleton<IOpenStreetService, OpenStreetService>();
 
             return builder;

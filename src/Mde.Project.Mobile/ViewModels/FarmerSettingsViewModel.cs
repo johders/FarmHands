@@ -52,8 +52,8 @@ namespace Mde.Project.Mobile.ViewModels
 
             if (result.IsSuccess)
             {
-                Latitude = result.Data.Lat;
-                Longitude = result.Data.Lon;
+                Latitude = result.Data.Latitude;
+                Longitude = result.Data.Longitude;
                 await Application.Current.MainPage.DisplayAlert("Success", "Coordinates updated successfully.", "OK");
             }
             else

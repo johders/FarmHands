@@ -8,9 +8,9 @@ namespace Mde.Project.Core.Services
     public class OpenStreetService : IOpenStreetService
     {
         private readonly HttpClient _httpClient;
-        public OpenStreetService(HttpClient httpClient)
+        public OpenStreetService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("OpenStreet");
         }
         public async Task<ResultModel<OpenStreetResult>> GetCoordinatesFromAddressAsync(string address)
         {
@@ -18,8 +18,8 @@ namespace Mde.Project.Core.Services
 
             try
             {
-                var url = $"https://nominatim.openstreetmap.org/search?format=json&q={Uri.EscapeDataString(address)}";
-                var response = await _httpClient.GetAsync(url);
+                var relativeUrl = $"search?format=json&q={Uri.EscapeDataString(address)}";
+                var response = await _httpClient.GetAsync(relativeUrl);
 
                 if (!response.IsSuccessStatusCode)
                 {

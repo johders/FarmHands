@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Models;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -12,12 +13,14 @@ namespace Mde.Project.Mobile.ViewModels
 		private readonly IOfferService _offerService;
 		private readonly IFavoriteProductService _favoriteProductsService;
 		private readonly IImageConversionService _imageConversionService;
+        private readonly IMealDbService _mealDbService;
 
-        public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService, IImageConversionService imageConversionService)
+        public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService, IImageConversionService imageConversionService, IMealDbService mealDbService)
         {
             _offerService = offerService;
             _favoriteProductsService = favoriteProductsService;
             _imageConversionService = imageConversionService;
+            _mealDbService = mealDbService;
         }
 
         private ProductViewModel selectedProduct;
@@ -28,10 +31,19 @@ namespace Mde.Project.Mobile.ViewModels
 			{
 				if(SetProperty(ref selectedProduct, value))
                 {
-                    _ = LoadOffersForSelectedProduct();
+                    //_ = LoadOffersForSelectedProduct();
+                    //_ = LoadRecipesForSelectedProduct();
+                    _ = LoadDataForSelectedProduct();
                 }
 			}
 		}
+
+        private ObservableCollection<Meal> recipes;
+        public ObservableCollection<Meal> Recipes
+        {
+            get => recipes;
+            set => SetProperty(ref recipes, value);
+        }
 
         private bool isLoading;
         public bool IsLoading
@@ -87,8 +99,6 @@ namespace Mde.Project.Mobile.ViewModels
 
 		private async Task LoadOffersForSelectedProduct()
 		{
-            IsLoading = true;
-
             if (SelectedProduct is not null)
             {
                 var result = await _offerService.GetAllOffersByProductIdAsync(SelectedProduct.Id);
@@ -96,11 +106,40 @@ namespace Mde.Project.Mobile.ViewModels
                 var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService));
                 Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
             }
+        }
+
+        private async Task LoadRecipesForSelectedProduct()
+        {
+            if (SelectedProduct is not null)
+            {
+                var result = await _mealDbService.GetMealsByIngredientAsync(SelectedProduct.Name);
+                if (result.Data != null && result.Data.Count > 0)
+                {
+                    Recipes = new ObservableCollection<Meal>(result.Data);
+                }
+                else
+                {
+                    Recipes = new ObservableCollection<Meal>();
+                }
+            }
+        }
+
+        private async Task LoadDataForSelectedProduct()
+        {
+            IsLoading = true;
+
+            if (SelectedProduct is not null)
+            {
+                var offersTask = LoadOffersForSelectedProduct();
+                var recipesTask = LoadRecipesForSelectedProduct();
+
+                await Task.WhenAll(offersTask, recipesTask);
+            }
 
             IsLoading = false;
         }
 
-		public ICommand ViewOfferDetailsCommand => new Command<OfferViewModel>(async (offer) =>
+        public ICommand ViewOfferDetailsCommand => new Command<OfferViewModel>(async (offer) =>
 		{
 
 			var navigationParameter = new Dictionary<string, object>()
@@ -110,5 +149,20 @@ namespace Mde.Project.Mobile.ViewModels
 
 			await Shell.Current.GoToAsync(nameof(UserOfferDetailPage), true, navigationParameter);
 		});
-	}
+
+        public ICommand OpenRecipeCommand => new Command<Meal>(async (meal) =>
+        {
+            if (meal != null && !string.IsNullOrEmpty(meal.RecipePageUrl))
+            {
+                try
+                {
+                    await Browser.OpenAsync(meal.RecipePageUrl, BrowserLaunchMode.SystemPreferred);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to open URL: {ex.Message}");
+                }
+            }
+        });
+    }
 }

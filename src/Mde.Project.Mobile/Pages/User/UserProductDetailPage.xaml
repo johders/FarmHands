@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
              xmlns:model="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core"
+             xmlns:coremodels="clr-namespace:Mde.Project.Core.Services.Models;assembly=Mde.Project.Core"
              x:Name="page"
              x:Class="Mde.Project.Mobile.Pages.User.UserProductDetailPage"
              x:DataType="viewmodel:UserProductDetailsViewModel"
@@ -66,6 +67,32 @@
 
                     <Label Text="Recipe inspiration from the web"
                        Style="{StaticResource SmallLabel}"/>
+
+                    <CollectionView ItemsSource="{Binding Recipes}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="coremodels:Meal">
+                                <Border Style="{StaticResource TileBorder}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                      Command="{Binding Source={x:Reference page}, Path=BindingContext.OpenRecipeCommand}"/>
+                                    </Border.GestureRecognizers>
+                                    <Grid RowDefinitions="4*, 2*" Margin="0">
+                                        <Image Source="{Binding ImageString}"
+                                                Aspect="AspectFill"/>
+                                        <VerticalStackLayout Grid.Row="1" Padding="10">
+                                            <Label Text="{Binding Name}"
+                                                   Style="{StaticResource SmallLabel}"
+                                                   TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                                   LineBreakMode="TailTruncation"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
                 </VerticalStackLayout>
             </Grid>

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Mobile.Constants;
 using Mde.Project.Mobile.Pages.Login;
 using System.Windows.Input;
 
@@ -69,6 +70,17 @@ namespace Mde.Project.Mobile.ViewModels
             }
 
             var token = tokenResult.Data;
+
+            var deviceToken = Preferences.Get(AppConstants.DeviceToken, string.Empty);
+            if (!string.IsNullOrWhiteSpace(deviceToken))
+            {
+                var deviceTokenResult = await _accountService.AddDeviceTokenToUserProfileAsync(uid, deviceToken);
+
+                if (!deviceTokenResult.IsSuccess)
+                {
+                    await Shell.Current.DisplayAlert("Error", $"Failed to update device token: {string.Join(", ", deviceTokenResult.Errors)}", "OK");
+                }
+            }
 
             //Checking expiration
             var expiresOn = await _accountService.GetTokenExpirationDateTimeAsync(token);

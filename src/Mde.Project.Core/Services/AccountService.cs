@@ -119,6 +119,35 @@ namespace Mde.Project.Core.Services
             }
         }
 
+        public async Task<BaseResultModel> AddDeviceTokenToUserProfileAsync(string uid, string deviceToken)
+        {
+            var result = new BaseResultModel();
+
+            try
+            {
+                var userDoc = _firestoreDb.Collection("Users").Document(uid);
+
+                var snapshot = await userDoc.GetSnapshotAsync();
+                if (!snapshot.Exists)
+                {
+                    result.Errors.Add("User not found.");
+                    return result;
+                }
+
+                await userDoc.UpdateAsync(new Dictionary<string, object>
+                {
+                    { "DeviceToken", deviceToken }
+                });
+
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add($"Error adding device token: {ex.Message}");
+            }
+
+            return result;
+        }
+
         public async Task<ResultModel<DateTime>> GetTokenExpirationDateTimeAsync(string token)
         {
             return await Task.FromResult(_authService.GetTokenExpirationTime(token));

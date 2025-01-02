@@ -20,6 +20,9 @@ namespace Mde.Project.Core.Entities
 
         [FirestoreProperty(ConverterType = typeof(EnumConverter<UserRole>))]
         public UserRole Role { get; set; }
+
+        [FirestoreProperty]
+        public string? DeviceToken { get; set; }
     }
 }
 

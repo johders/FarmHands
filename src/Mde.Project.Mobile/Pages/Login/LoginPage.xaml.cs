@@ -29,6 +29,7 @@ public partial class LoginPage : ContentPage
         await viewModel.CheckConnectionAsync();
 
         //NOTIFICATIONTEST
+        
         var pushNotificationRequest = new PushNotificationRequest
         {
             Message = new MessageBody
@@ -47,7 +48,7 @@ public partial class LoginPage : ContentPage
         using (var client = new HttpClient())
         {
             client.DefaultRequestHeaders.Authorization = 
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "ya29.a0ARW5m75beUZlphl_hlydGy8fhFPweir5IlW2G1hz3n6JIFEAEtawaonr31Fj7iEnzHQI25ZTlQQ07CT14CVCO69nk0Gsj8WilQvvfk_IOByFIia7pDY-lWEKE6Yuls1Mkn6P8qAGIMn-Wv1_SlkKi46IyoKu-dqikNdmlcc7aCgYKAdYSARMSFQHGX2MijYQff5ruN8_xqrIfbRFUXw0175");
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "ya29.a0ARW5m76mgGX8Q3zWcUrSYIie0xy05T7TKcZKdhav5bs8B6ggCg08LNp8145tZ653zh79RALKSi5sS9nnQgUX2pr_SfSjNP_TN4EOUcTz5xOmquq63ICGXlNXRbYxzYXQcSNSdCs5xFl5UfptZioUQMtkW2-LKiEmEffnUiURaCgYKAVsSARMSFQHGX2MiHZx4T1SVFIqas98UNT70RA0175");
 
             string serializeRequest = JsonSerializer.Serialize(pushNotificationRequest);
             var response = await client.PostAsync(url, new StringContent(serializeRequest, Encoding.UTF8, "application/json"));

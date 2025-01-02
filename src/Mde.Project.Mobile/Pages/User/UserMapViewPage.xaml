@@ -20,18 +20,41 @@
                 <map:MapTileLayer.MarkerTemplate>
                     <DataTemplate x:DataType="helpers:CustomMapMarker">
                         <Grid>
-                            <Frame BackgroundColor="White"
-                                   CornerRadius="5"
-                                   Padding="5"
-                                   HasShadow="True">
-                                <StackLayout>
-                                    <Label Text="{Binding Farm.Name}" FontSize="10" TextColor="Black" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMarkerTapped" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                            
+                            <Grid x:Name="iconGrid" IsVisible="{Binding IsExpanded, Converter={StaticResource InverseBooleanConverter}}">
+                                <Image Source="sprout.png" 
+                                   WidthRequest="50" 
+                                   HeightRequest="50" />
+                            </Grid>
+
+                            <Border x:Name="markerBorder"
+                                    Style="{StaticResource TileBorder}"
+                                    Padding="5"
+                                    VerticalOptions="Center"
+                                    WidthRequest="150"
+                                    HeightRequest="80"
+                                    IsVisible="{Binding IsExpanded}">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Farm.Name}" 
+                                           FontSize="10" 
+                                           TextColor="Black" 
+                                           Style="{StaticResource SmallLabel}"
+                                           HorizontalOptions="Center"/>
+
                                     <Button Text="Details"
-                                    FontSize="10"
-                                    Command="{Binding Source={x:Reference page}, Path=BindingContext.ShowFarmDetailsCommand}"
-                                    CommandParameter="{Binding Farm}" />
-                                </StackLayout>
-                            </Frame>
+                                            CornerRadius="25"
+                                            Margin="0,5,0,0"
+                                            BackgroundColor="{StaticResource AccentColorDark}"
+                                            TextColor="White"
+                                            Command="{Binding Source={x:Reference page}, Path=BindingContext.ShowFarmDetailsCommand}"
+                                            CommandParameter="{Binding Farm}"
+                                            IsVisible="{Binding IsExpanded}">
+                                    </Button>
+                                </VerticalStackLayout>
+                            </Border>
                         </Grid>
                     </DataTemplate>
                 </map:MapTileLayer.MarkerTemplate>

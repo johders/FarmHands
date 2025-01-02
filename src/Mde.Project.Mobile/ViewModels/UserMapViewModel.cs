@@ -100,5 +100,13 @@ namespace Mde.Project.Mobile.ViewModels
             await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);
         });
 
+        public ICommand ToggleExpansionCommand => new Command<CustomMapMarker>((marker) =>
+        {
+            if (marker != null)
+            {
+                marker.IsExpanded = !marker.IsExpanded;
+            }
+        });
+
     }
 }

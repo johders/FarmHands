@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core" 
+             xmlns:helpers="clr-namespace:Mde.Project.Mobile.Helpers"
              x:DataType="viewmodel:UserMapViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserMapViewPage"
+             x:Name="page"
              Title="Map">
 
     <map:SfMaps>
@@ -14,6 +17,24 @@
                 <map:MapTileLayer.Center>
                     <Binding Path="CenterLocation" />
                 </map:MapTileLayer.Center>
+                <map:MapTileLayer.MarkerTemplate>
+                    <DataTemplate x:DataType="helpers:CustomMapMarker">
+                        <Grid>
+                            <Frame BackgroundColor="White"
+                                   CornerRadius="5"
+                                   Padding="5"
+                                   HasShadow="True">
+                                <StackLayout>
+                                    <Label Text="{Binding Farm.Name}" FontSize="10" TextColor="Black" />
+                                    <Button Text="Details"
+                                    FontSize="10"
+                                    Command="{Binding Source={x:Reference page}, Path=BindingContext.ShowFarmDetailsCommand}"
+                                    CommandParameter="{Binding Farm}" />
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </map:MapTileLayer.MarkerTemplate>
                 <map:MapTileLayer.ZoomPanBehavior>
                     <map:MapZoomPanBehavior ZoomLevel = "13" />
                 </map:MapTileLayer.ZoomPanBehavior>

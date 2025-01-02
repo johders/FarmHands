@@ -51,18 +51,9 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farmViewModel) =>
 		{
-			var result = await _farmService.GetByIdAsync(farmViewModel.Id);
-			var farm = result.Data;
-
-			if (!result.IsSuccess)
-			{
-				Shell.Current.DisplayAlert("Oops", $"{String.Join(", ", result.Errors)}", "OK");
-				return;
-			}
-
 			var navigationParameter = new Dictionary<string, object>()
 			{
-				{ nameof(UserFarmDetailsViewModel.SelectedFarm), farm }
+				{ nameof(UserFarmDetailsViewModel.SelectedFarm), farmViewModel }
 			};
 
 			await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);

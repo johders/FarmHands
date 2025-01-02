@@ -60,6 +60,7 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IImageConversionService, ImageConversionService>();
             builder.Services.AddSingleton<IOpenStreetService, OpenStreetService>();
             builder.Services.AddTransient<IMealDbService, MealDbService>();
+            builder.Services.AddSingleton<IPushNotificationService, PushNotificationService>();
 
             builder.Services.AddHttpClient(AppConstants.AddressClientName, client =>
             {

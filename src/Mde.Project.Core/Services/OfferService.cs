@@ -16,13 +16,30 @@ namespace Mde.Project.Core.Services
         private readonly IFarmService _farmService;
 
         private readonly IAccountService _accountService;
+        private readonly IPushNotificationService _notificationService;
 
-        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, IProductService productService, IAccountService accountService)
+
+        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, IProductService productService, IAccountService accountService, IPushNotificationService notificationService)
         {
             _firestoreDb = firestoreDb.GetFireStoreDb();
             _farmService = farmService;
             _productService = productService;
             _accountService = accountService;
+            _notificationService = notificationService;
+        }
+
+        private async void NotifyUsersAboutNewOffer(Offer newOffer)
+        {
+            if (!string.IsNullOrEmpty(newOffer.ProductId))
+            {
+                var productResult = await _firestoreDb.Collection("Products").Document(newOffer.ProductId).GetSnapshotAsync();
+                var productName = productResult.Exists ? productResult.GetValue<string>("Name") : "a product";
+
+                await _notificationService.NotifyUsersAsync(
+                    newOffer.ProductId,
+                    $"Check out a new offer for {productName}!"
+                );
+            }
         }
 
         public async Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel, UserRole role)
@@ -67,6 +84,8 @@ namespace Mde.Project.Core.Services
 
                 var offerCollection = _firestoreDb.Collection("Offers");
                 await offerCollection.Document(newOffer.Id).SetAsync(newOffer);
+
+                NotifyUsersAboutNewOffer(newOffer);
             }
             catch (Exception ex)
             {

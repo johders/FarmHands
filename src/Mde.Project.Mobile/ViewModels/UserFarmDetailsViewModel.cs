@@ -94,7 +94,7 @@ namespace Mde.Project.Mobile.ViewModels
 				var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
 				var offers = result.Data.Where(o => o.IsAvailable); ;
 
-                var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService));
+                var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService, _offerService));
 
 				Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
 			}

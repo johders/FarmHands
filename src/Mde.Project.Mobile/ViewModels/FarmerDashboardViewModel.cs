@@ -37,13 +37,6 @@ namespace Mde.Project.Mobile.ViewModels
             set { SetProperty(ref isLoading, value); }
         }
 
-        private bool isAvailable;
-		public bool IsAvailable
-		{
-			get { return isAvailable; }
-			set { SetProperty(ref isAvailable, value); }
-		}
-
 		public ICommand RefreshOffersListCommand =>
 			new Command(async () =>
 			{
@@ -59,7 +52,7 @@ namespace Mde.Project.Mobile.ViewModels
 				}
                 var result = await _offerService.GetAllOffersByFarmIdAsync(farmIdResult.Data);
 
-				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer, _imageConversionService));
+				var offerViewModels = result.Data.Select(offer => new OfferViewModel(offer, _imageConversionService, _offerService));
 				Offers = new ObservableCollection<OfferViewModel>(offerViewModels);
 
                 IsLoading = false;

@@ -2,23 +2,26 @@
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Models.RequestModels;
+using Mde.Project.Mobile.Helpers;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class OfferViewModel : ObservableObject
-	{
-		private readonly Offer _offer;
-		private bool _isAvailable;
+    public class OfferViewModel : ObservableObject
+    {
+        private readonly Offer _offer;
+        private bool _isAvailable;
         private readonly IImageConversionService _imageConversionService;
         private MemoryStream _imageStream;
+        private readonly IOfferService _offerService;
 
-        public OfferViewModel(Offer offer, IImageConversionService imageConversionService)
+        public OfferViewModel(Offer offer, IImageConversionService imageConversionService, IOfferService offerService)
         {
             _offer = offer;
             _isAvailable = offer.IsAvailable;
             _imageConversionService = imageConversionService;
 
-			if (offer.OfferImageUrl.Contains("data:image"))
+            if (offer.OfferImageUrl.Contains("data:image"))
             {
                 using var imageStream = _imageConversionService.ConvertBase64ToStream(offer.OfferImageUrl);
 
@@ -35,12 +38,14 @@ namespace Mde.Project.Mobile.ViewModels
                     });
                 }
             }
+
+            _offerService = offerService;
         }
         public string Id => _offer.Id;
         public string ProductName => _offer.Product.Name;
-		public string VariantName => _offer.Variant;
-		public string FarmName => _offer.Farm.Name;
-		public Farm Farm => _offer.Farm;
+        public string VariantName => _offer.Variant;
+        public string FarmName => _offer.Farm.Name;
+        public Farm Farm => _offer.Farm;
         public string OfferImageUrl => _offer.OfferImageUrl;
         public string Description => _offer.Description;
         public string ProductId => _offer.ProductId;
@@ -48,19 +53,43 @@ namespace Mde.Project.Mobile.ViewModels
         public string FarmId => _offer.FarmId;
         public ImageSource ImageSource { get; private set; }
         public decimal Price => _offer.Price;
-		public Unit Unit => _offer.Unit;
+        public Unit Unit => _offer.Unit;
 
-		public bool IsAvailable
-		{
-			get => _offer.IsAvailable;
-			set
-			{
-				if (SetProperty(ref _isAvailable, value))
-				{
-					_offer.IsAvailable = value;
-					OnPropertyChanged(nameof(IsAvailable));
-				}
-			}
-		}
-	}
+        public bool IsAvailable
+        {
+            get => _offer.IsAvailable;
+            set
+            {
+                if (SetProperty(ref _isAvailable, value))
+                {
+                    _offer.IsAvailable = value;
+                    OnPropertyChanged(nameof(IsAvailable));
+                    _ = UpdateAvailabilityAsync(value);
+                }
+            }
+        }
+
+        private async Task UpdateAvailabilityAsync(bool newValue)
+        {
+            var updateModel = new OfferEditRequestModel
+            {
+                Id = _offer.Id,
+                IsAvailable = newValue,
+                Farm = _offer.Farm,
+                Product = _offer.Product
+            };
+
+            var result = await _offerService.UpdateAsync(updateModel, UserRole.Farmer);
+
+            if (!result.IsSuccess)
+            {
+                await Shell.Current.DisplayAlert("Update Failed",
+                    "Could not update the availability status. Please try again.", "OK");
+                _isAvailable = !newValue;
+                OnPropertyChanged(nameof(IsAvailable));
+                return;
+            }
+            await ToastHelper.ShowToastAsync($"Offer availability for {updateModel.Product.Name} updated!");
+        }
+    }
 }

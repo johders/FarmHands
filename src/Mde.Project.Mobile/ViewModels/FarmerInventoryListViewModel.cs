@@ -55,7 +55,7 @@ namespace Mde.Project.Mobile.ViewModels
             }
 
             var result = await _offerService.GetAllOffersByFarmIdAsync(farmerResult.Data);
-			var offers = result.Data.Select(o => new OfferViewModel(o, _imageConversionService));
+			var offers = result.Data.Select(o => new OfferViewModel(o, _imageConversionService, _offerService));
 			Offers = new ObservableCollection<OfferViewModel>(offers);
 
             IsLoading = false;

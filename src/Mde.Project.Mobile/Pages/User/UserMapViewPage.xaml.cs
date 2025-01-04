@@ -1,4 +1,3 @@
-using Mde.Project.Mobile.Helpers;
 using Mde.Project.Mobile.ViewModels;
 
 namespace Mde.Project.Mobile.Pages.User;
@@ -18,11 +17,4 @@ public partial class UserMapViewPage : ContentPage
         viewModel.GetUserLocationCommand?.Execute(null);
         base.OnAppearing();
     }
-
-    private async void OnMarkerTapped(object sender, EventArgs e)
-    {
-        var marker = (CustomMapMarker)((TappedEventArgs)e).Parameter;
-            marker.IsExpanded = !marker.IsExpanded;
-    }
-
 }

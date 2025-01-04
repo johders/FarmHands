@@ -21,7 +21,8 @@
                     <DataTemplate x:DataType="helpers:CustomMapMarker">
                         <Grid>
                             <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnMarkerTapped" CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference page}, Path=BindingContext.ToggleExpansionCommand}" 
+                                                      CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
                             
                             <Grid x:Name="iconGrid" IsVisible="{Binding IsExpanded, Converter={StaticResource InverseBooleanConverter}}">

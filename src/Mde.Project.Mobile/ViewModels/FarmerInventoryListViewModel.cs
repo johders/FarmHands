@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Entities;
 using Mde.Project.Core.Enums;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Mobile.Helpers;
@@ -11,7 +9,7 @@ using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class FarmerInventoryListViewModel : ObservableObject
+    public class FarmerInventoryListViewModel : ObservableObject
 	{
 		private readonly IOfferService _offerService;
 		private readonly IFarmerService _farmerService;

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mde.Project.Mobile", "Mde.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mde.Project.Core", "Mde.Project.Core\Mde.Project.Core.csproj", "{0278C819-D35F-4368-BB37-FC4F64DE2F04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mde.Project.Tests", "Mde.Project.Tests\Mde.Project.Tests.csproj", "{66AF4DE4-E005-4311-BBA0-6481F49B912D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{0278C819-D35F-4368-BB37-FC4F64DE2F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0278C819-D35F-4368-BB37-FC4F64DE2F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0278C819-D35F-4368-BB37-FC4F64DE2F04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66AF4DE4-E005-4311-BBA0-6481F49B912D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AF4DE4-E005-4311-BBA0-6481F49B912D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AF4DE4-E005-4311-BBA0-6481F49B912D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AF4DE4-E005-4311-BBA0-6481F49B912D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

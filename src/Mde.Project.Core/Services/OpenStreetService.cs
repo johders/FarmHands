@@ -32,7 +32,10 @@ namespace Mde.Project.Core.Services
                 if (results?.Count > 0)
                 {
                     result.Data = results;
-                    return result;
+                }
+                else
+                {
+                    result.Errors.Add("No locations found for address input.");
                 }
             }
             catch (Exception ex)

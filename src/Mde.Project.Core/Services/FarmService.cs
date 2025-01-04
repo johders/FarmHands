@@ -1,7 +1,9 @@
 ﻿using Google.Cloud.Firestore;
 using Mde.Project.Core.Constants;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services.Firestore;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Interfaces.Wrappers;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Core.Services.Models.RequestModels;
 
@@ -9,11 +11,12 @@ namespace Mde.Project.Core.Services
 {
     public class FarmService : IFarmService
     {
-        private readonly FirestoreDb _firestoreDb;
-
+        //private readonly FirestoreDb _firestoreDb;
+        private readonly IFirestoreDbWrapper _firestoreDb;
         public FarmService(IFirestoreContext firestoreDb)
         {
-            _firestoreDb = firestoreDb.GetFireStoreDb();
+            //_firestoreDb = firestoreDb.GetFireStoreDb();
+            _firestoreDb = firestoreDb.GetFirestoreDbWrapper();
         }
 
         public async Task<ResultModel<IEnumerable<Farm>>> GetAllAsync()

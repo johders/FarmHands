@@ -1,23 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
+using Mde.Project.Mobile.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class FarmerDashboardViewModel : ObservableObject
+    public class FarmerDashboardViewModel : ObservableObject
     {
         private readonly IOfferService _offerService;
 		private readonly IFarmerService _farmerService;
 		private readonly IImageConversionService _imageConversionService;
+        private readonly ISecureStorageService _secureStorageService;
 
-        public FarmerDashboardViewModel(IOfferService offerService, IFarmerService farmerService, IImageConversionService imageConversionService)
+        public FarmerDashboardViewModel(IOfferService offerService, IFarmerService farmerService, IImageConversionService imageConversionService, ISecureStorageService secureStorageService)
         {
             _offerService = offerService;
             _farmerService = farmerService;
             _imageConversionService = imageConversionService;
+            _secureStorageService = secureStorageService;
         }
 
         private ObservableCollection<OfferViewModel> offers;
@@ -42,8 +44,8 @@ namespace Mde.Project.Mobile.ViewModels
 			{
                 IsLoading = true;
 
-                var uid = await SecureStorage.GetAsync("userId");
-				var farmIdResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
+                var uid = await _secureStorageService.GetAsync("userId");
+                var farmIdResult = await _farmerService.GetFarmIdByFarmerAsync(uid);
 
 				if (!farmIdResult.IsSuccess)
 				{
@@ -62,5 +64,7 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			await Shell.Current.GoToAsync(nameof(FarmerInventoryListPage), true);
 		});
+
+
 	}
 }

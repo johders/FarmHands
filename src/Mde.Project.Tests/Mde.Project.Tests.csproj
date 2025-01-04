@@ -18,7 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mde.Project.Core\Mde.Project.Core.csproj" />
+    <ProjectReference Include="..\Mde.Project.Mobile\Mde.Project.Mobile.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

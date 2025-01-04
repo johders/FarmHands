@@ -1,6 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;

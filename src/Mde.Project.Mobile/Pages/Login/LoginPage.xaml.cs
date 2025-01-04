@@ -1,8 +1,4 @@
-using Mde.Project.Mobile.Constants;
-using Mde.Project.Mobile.Models;
 using Mde.Project.Mobile.ViewModels;
-using System.Text;
-using System.Text.Json;
 
 namespace Mde.Project.Mobile.Pages.Login;
 

@@ -77,7 +77,9 @@ namespace Mde.Project.Core.Services
             try
             {
                 var offerCollection = _firestoreDb.Collection("Offers");
-                var query = offerCollection.WhereEqualTo("FarmId", farmId);
+                var query = offerCollection
+                    .WhereEqualTo("FarmId", farmId)
+                    .WhereEqualTo("IsAvailable", true);
                 var snapshot = await query.GetSnapshotAsync();
                 int offerCount = snapshot.Documents.Count;
                 return offerCount;

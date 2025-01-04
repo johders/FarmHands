@@ -31,8 +31,6 @@ namespace Mde.Project.Mobile.ViewModels
 			{
 				if(SetProperty(ref selectedProduct, value))
                 {
-                    //_ = LoadOffersForSelectedProduct();
-                    //_ = LoadRecipesForSelectedProduct();
                     _ = LoadDataForSelectedProduct();
                 }
 			}
@@ -102,7 +100,7 @@ namespace Mde.Project.Mobile.ViewModels
             if (SelectedProduct is not null)
             {
                 var result = await _offerService.GetAllOffersByProductIdAsync(SelectedProduct.Id);
-                var offers = result.Data;
+                var offers = result.Data.Where(o => o.IsAvailable);
                 var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService));
                 Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
             }

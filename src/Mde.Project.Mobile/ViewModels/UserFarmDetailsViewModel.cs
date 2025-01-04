@@ -92,7 +92,7 @@ namespace Mde.Project.Mobile.ViewModels
 			if (SelectedFarm is not null)
 			{
 				var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
-				var offers = result.Data;
+				var offers = result.Data.Where(o => o.IsAvailable); ;
 
                 var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService));
 

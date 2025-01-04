@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Mobile.Helpers;
+using Mde.Project.Mobile.Pages.User;
 using Syncfusion.Maui.Maps;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -11,12 +13,14 @@ namespace Mde.Project.Mobile.ViewModels
     {
         private readonly IFarmService _farmService;
         private readonly IGeolocation _geolocation;
+        private readonly IImageConversionService _imageConversionService;
         public ObservableCollection<Farm> Farms { get; set; } = new();
 
-        public UserMapViewModel(IFarmService farmService, IGeolocation geolocation)
+        public UserMapViewModel(IFarmService farmService, IGeolocation geolocation, IImageConversionService imageConversionService)
         {
             _farmService = farmService;
             _geolocation = geolocation;
+            _imageConversionService = imageConversionService;
         }
 
         private MapMarkerCollection markers = new();
@@ -51,12 +55,6 @@ namespace Mde.Project.Mobile.ViewModels
                 if (location != null)
                 {
                     CenterLocation = new MapLatLng(location.Latitude, location.Longitude);
-
-                    //Markers.Add(new MapMarker
-                    //{
-                    //    Latitude = location.Latitude,
-                    //    Longitude = location.Longitude
-                    //});
                 }
             }
             catch (Exception ex)
@@ -80,14 +78,33 @@ namespace Mde.Project.Mobile.ViewModels
                 {
                     Farms.Add(farm);
 
-                    Markers.Add(new MapMarker
+                    Markers.Add(new CustomMapMarker
                     {
                         Latitude = farm.Latitude,
                         Longitude = farm.Longitude,
-
-                        //Content = new Label { Text = farm.Name, FontSize = 10, TextColor = Colors.Black }
+                        Farm = farm
                     });
                 }
+            }
+        });
+
+        public ICommand ShowFarmDetailsCommand => new Command<Farm>(async (farm) =>
+        {
+            var farmViewModel = new FarmViewModel(farm, _farmService, _imageConversionService);
+
+            var navigationParameter = new Dictionary<string, object>()
+            {
+                { nameof(UserFarmDetailsViewModel.SelectedFarm), farmViewModel }
+            };
+
+            await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);
+        });
+
+        public ICommand ToggleExpansionCommand => new Command<CustomMapMarker>((marker) =>
+        {
+            if (marker != null)
+            {
+                marker.IsExpanded = !marker.IsExpanded;
             }
         });
 

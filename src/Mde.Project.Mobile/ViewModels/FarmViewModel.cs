@@ -40,6 +40,8 @@ namespace Mde.Project.Mobile.ViewModels
 
         public string Id => _farm.Id;
 		public string Name => _farm.Name;
+		public double Latitude => _farm.Latitude;
+		public double Longitude => _farm.Longitude;
 		public string ImageUrl => _farm.ImageUrl;
 		public string Description => _farm.Description;
         public ImageSource ImageSource {  get; private set; }

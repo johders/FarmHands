@@ -4,11 +4,11 @@ namespace Mde.Project.Mobile.Pages.User;
 
 public partial class UserMapViewPage : ContentPage
 {
-	public UserMapViewPage(UserMapViewModel viewModel)
-	{
-		InitializeComponent();
-		BindingContext = viewModel;
-	}
+    public UserMapViewPage(UserMapViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
 
     protected override void OnAppearing()
     {

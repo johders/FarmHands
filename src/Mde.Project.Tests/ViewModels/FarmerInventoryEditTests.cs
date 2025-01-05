@@ -2,7 +2,6 @@
 using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
-using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.ViewModels;
 using Moq;
 

@@ -11,7 +11,7 @@ namespace Mde.Project.Mobile.Converters
 			
 			bool isAvailable = (bool)value;
 
-			string convertedString = isAvailable ? "Avablable" : "Unavailable";
+			string convertedString = isAvailable ? "Available" : "Unavailable";
 
 			return convertedString;
 		}

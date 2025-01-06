@@ -53,9 +53,9 @@
                                                     </HorizontalStackLayout>
                                                     <FlexLayout JustifyContent="SpaceBetween"
                                                             AlignItems="Center">
-                                                        <Label Text="{Binding IsAvailable}"
-                                                           Style="{StaticResource LabelText}"
-                                                           TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
+                                                        <Label Text="{Binding IsAvailable, Converter={StaticResource BoolToAvailabitilyStringConverter}}"
+                                                                       Style="{StaticResource LabelText}"
+                                                                       TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
                                                         <Switch Style="{StaticResource FarmSwitch}"
                                                             IsToggled="{Binding IsAvailable}"/>
                                                     </FlexLayout>

@@ -13,8 +13,7 @@ public partial class UserHomePage : ContentPage
     protected override void OnAppearing()
     {
 		UserHomeViewModel viewModel = BindingContext as UserHomeViewModel;
-		viewModel.RefreshFarmListCommand?.Execute(null);
-		viewModel.RefreshProductListCommand?.Execute(null);
-		base.OnAppearing();
+		viewModel.LoadDataCommand?.Execute(null);
+        base.OnAppearing();
     }
 }

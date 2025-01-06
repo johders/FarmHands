@@ -19,11 +19,89 @@ namespace Mde.Project.Mobile.ViewModels
             _imageConversionService = imageConversionService;
         }
 
+
+        // Full data lists
+        private ObservableCollection<FarmViewModel> allFarms;
+        private ObservableCollection<ProductViewModel> allProducts;
+
+        // Filtered lists bound to UI
+        private ObservableCollection<FarmViewModel> filteredFarms;
+        public ObservableCollection<FarmViewModel> FilteredFarms
+        {
+            get => filteredFarms;
+            set => SetProperty(ref filteredFarms, value);
+        }
+
+        private ObservableCollection<ProductViewModel> filteredProducts;
+        public ObservableCollection<ProductViewModel> FilteredProducts
+        {
+            get => filteredProducts;
+            set => SetProperty(ref filteredProducts, value);
+        }
+
+        // Search query property
+        private string searchQuery;
+        public string SearchQuery
+        {
+            get => searchQuery;
+            set
+            {
+                if (SetProperty(ref searchQuery, value))
+                {
+                    PerformSearch();
+                }
+            }
+        }
+
+        public ICommand LoadDataCommand => new Command(async () =>
+        {
+            IsLoading = true;
+            var farmResult = await _farmService.GetAllAsync();
+            var farmViewModels = farmResult.Data
+                .Where(f => f.ProfileComplete)
+                .Select(farm => new FarmViewModel(farm, _farmService, _imageConversionService));
+
+            allFarms = new ObservableCollection<FarmViewModel>(farmViewModels);
+            FilteredFarms = new ObservableCollection<FarmViewModel>(allFarms);
+
+            var productResult = await _productService.GetAllAsync();
+            var productViewModels = productResult.Data
+                .Select(product => new ProductViewModel(product, _productService, _imageConversionService))
+                .ToList();
+
+            await Task.WhenAll(productViewModels.Select(vm => vm.LoadOfferCountAsync()));
+
+            allProducts = new ObservableCollection<ProductViewModel>(productViewModels
+                .Where(p => p.OfferCount > 0)
+                .OrderByDescending(p => p.OfferCount));
+            FilteredProducts = new ObservableCollection<ProductViewModel>(allProducts);
+            IsLoading = false;
+        });
+
+        private void PerformSearch()
+        {
+            if (string.IsNullOrWhiteSpace(SearchQuery))
+            {
+                FilteredFarms = new ObservableCollection<FarmViewModel>(allFarms);
+                FilteredProducts = new ObservableCollection<ProductViewModel>(allProducts);
+                return;
+            }
+
+            var query = SearchQuery.ToLower();
+
+            FilteredFarms = new ObservableCollection<FarmViewModel>(allFarms
+                .Where(farm => farm.Name.ToLower().Contains(query) ||
+                               farm.Description.ToLower().Contains(query)));
+
+            FilteredProducts = new ObservableCollection<ProductViewModel>(allProducts
+                .Where(product => product.Name.ToLower().Contains(query)));
+        }
+
         private bool isLoading;
         public bool IsLoading
         {
             get => isLoading;
-            private set => SetProperty(ref isLoading, value);
+            set => SetProperty(ref isLoading, value);
         }
 
         private bool isLoadingFarms;

@@ -12,16 +12,18 @@
     <Grid>
         <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
             <Grid Style="{StaticResource MaxWidthGrid}">
-                <VerticalStackLayout Spacing="10" Margin="8,8,8,50">
+                <VerticalStackLayout Spacing="10" Margin="8,8,8,50"
+                                     MinimumWidthRequest="{OnPlatform WinUI=800, Default=400}">
 
-                    <SearchBar Placeholder="Search by farm, product, location,.."
-                           Keyboard="Default"
-                           Margin="5,15,30,15"/>
+                    <SearchBar Placeholder="Search by farm, product,.."
+                               Keyboard="Default"
+                               Margin="5,15,30,15"
+                               Text="{Binding SearchQuery}"/>
 
                     <Label Text="Farms near me"
-                       Style="{StaticResource LargeLabel}"/>
+                           Style="{StaticResource LargeLabel}"/>
 
-                    <CollectionView ItemsSource="{Binding Farms}" Margin="0,0,0,15">
+                    <CollectionView ItemsSource="{Binding FilteredFarms}" Margin="0,0,0,15">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
@@ -53,7 +55,7 @@
                     <Label Text="Currently in season"
                        Style="{StaticResource LargeLabel}"/>
 
-                    <CollectionView ItemsSource="{Binding Products}">
+                    <CollectionView ItemsSource="{Binding FilteredProducts}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>

@@ -23,66 +23,86 @@
                     <Label Text="Farms near me"
                            Style="{StaticResource LargeLabel}"/>
 
-                    <CollectionView ItemsSource="{Binding FilteredFarms}" Margin="0,0,0,15">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewmodels:FarmViewModel">
-                                <Border Style="{StaticResource TileBorder}">
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                    <VerticalStackLayout>
+
+                        <Label Text="No results found"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                               IsVisible="{Binding FilteredFarms.Count, Converter={StaticResource ZeroToVisibilityConverter}}" />
+
+                        <CollectionView ItemsSource="{Binding FilteredFarms}" Margin="0,0,0,15"
+                                        IsVisible="{Binding FilteredFarms.Count, Converter={StaticResource NonZeroToVisibilityConverter}}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewmodels:FarmViewModel">
+                                    <Border Style="{StaticResource TileBorder}">
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewFarmDetailsCommand}"/>
-                                    </Border.GestureRecognizers>
-                                    <Grid RowDefinitions="4*, 2*" Margin="0">
-                                        <Image Source="{Binding ImageSource}"
+                                        </Border.GestureRecognizers>
+                                        <Grid RowDefinitions="4*, 2*" Margin="0">
+                                            <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
-                                        <VerticalStackLayout Grid.Row="1" Padding="10">
-                                            <Label Text="{Binding Name}"
+                                            <VerticalStackLayout Grid.Row="1" Padding="10">
+                                                <Label Text="{Binding Name}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                LineBreakMode="TailTruncation"/>
-                                            <Label Text="{Binding Description}"
+                                                <Label Text="{Binding Description}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                        </VerticalStackLayout>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
 
                     <Label Text="Currently in season"
                        Style="{StaticResource LargeLabel}"/>
 
-                    <CollectionView ItemsSource="{Binding FilteredProducts}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewmodels:ProductViewModel">
-                                <Border Style="{StaticResource TileBorder}">
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                    <VerticalStackLayout>
+                        <Label Text="No results found"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                               IsVisible="{Binding FilteredProducts.Count, Converter={StaticResource ZeroToVisibilityConverter}}" />
+                        <CollectionView ItemsSource="{Binding FilteredProducts}"
+                                        IsVisible="{Binding FilteredProducts.Count, Converter={StaticResource NonZeroToVisibilityConverter}}" >
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewmodels:ProductViewModel">
+                                    <Border Style="{StaticResource TileBorder}">
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewProductDetailsCommand}"/>
-                                    </Border.GestureRecognizers>
-                                    <Grid RowDefinitions="4*, 2*" Margin="0">
-                                        <Image Source="{Binding ImageSource}"
+                                        </Border.GestureRecognizers>
+                                        <Grid RowDefinitions="4*, 2*" Margin="0">
+                                            <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
-                                        <VerticalStackLayout Grid.Row="1" Padding="10">
-                                            <Label Text="{Binding Name}"
+                                            <VerticalStackLayout Grid.Row="1" Padding="10">
+                                                <Label Text="{Binding Name}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                LineBreakMode="TailTruncation"/>
-                                            <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
+                                                <Label Text="{Binding OfferCount, Converter={StaticResource OfferCountToStringConverter}}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                        </VerticalStackLayout>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
 
                 </VerticalStackLayout>
             </Grid>

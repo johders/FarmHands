@@ -44,6 +44,7 @@ namespace Mde.Project.Mobile.ViewModels
 		public double Longitude => _farm.Longitude;
 		public string ImageUrl => _farm.ImageUrl;
 		public string Description => _farm.Description;
+		public string AddresString => _farm.AddressString;
         public ImageSource ImageSource {  get; private set; }
         public int? OfferCount
 		{

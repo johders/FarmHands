@@ -65,6 +65,21 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Visit us"
+                                   Style="{StaticResource SmallLabel}"/>
+                            <Label Text="{Binding SelectedFarm.AddresString}"
+                                   Style="{StaticResource LabelText}"/>
+                        </VerticalStackLayout>
+                        
+                        <Button Grid.Column="1"
+                                Text="Directions"
+                                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                                Command="{Binding OpenInMapsCommand}"/>
+                    </Grid>
+                    
                     <Label Text="Our story"
                        Style="{StaticResource SmallLabel}"/>
                     <Label Text="{Binding SelectedFarm.Description}"

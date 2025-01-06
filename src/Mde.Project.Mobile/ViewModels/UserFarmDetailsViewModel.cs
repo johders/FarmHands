@@ -112,5 +112,39 @@ namespace Mde.Project.Mobile.ViewModels
 
 			await Shell.Current.GoToAsync(nameof(UserOfferDetailPage), true, navigationParameter);
 		});
-	}
+
+        public ICommand OpenInMapsCommand => new Command(async () =>
+        {
+            if (SelectedFarm != null)
+            {
+                var latitude = SelectedFarm.Latitude;
+                var longitude = SelectedFarm.Longitude;
+
+                var latString = latitude.ToString().Replace(",", ".");
+                var lonString = longitude.ToString().Replace(",", ".");
+                var url = $"https://www.google.com/maps/dir/?api=1&destination={latString},{lonString}";
+
+                try
+                {
+                    if (DeviceInfo.Platform == DevicePlatform.Android)
+                    {
+                        var mapUrl = $"google.navigation:q={latitude},{longitude}";
+                        await Launcher.OpenAsync(new Uri(mapUrl));
+                    }
+                    else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                    {
+                        await Launcher.OpenAsync(new Uri(url));
+                    }
+                    else
+                    {
+                        await Launcher.OpenAsync(new Uri(url));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Unable to open Google Maps.", "OK");
+                }
+            }
+        });
+    }
 }

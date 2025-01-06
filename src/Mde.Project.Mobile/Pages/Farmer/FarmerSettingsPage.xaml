@@ -34,7 +34,9 @@
                                Style="{StaticResource SmallLabel}"/>
                         <Entry Placeholder="Enter your street, number and zipcode" 
                                Text="{Binding AddressInput}" />
-                        <Button Text="Search"
+
+                        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                            <Button Text="Search"
                                 CornerRadius="25"
                                 WidthRequest="100"
                                 BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
@@ -42,13 +44,28 @@
                                 Margin="20"
                                 Command="{Binding SearchAddressCommand}"
                                 CommandParameter="{Binding AddressInput}">
-                            <Button.Shadow>
-                                <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                <Button.Shadow>
+                                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                                         Offset="10,10"
                                         Radius="50"
                                         Opacity=".8"/>
-                            </Button.Shadow>
-                        </Button>
+                                </Button.Shadow>
+                            </Button>
+                            <Button Text="Cancel"
+                                    CornerRadius="25"
+                                    WidthRequest="100"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource BurgondyRed}, Dark={StaticResource BurgondyRed}}"
+                                    TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                                    Margin="20"
+                                    Command="{Binding CancelReplaceCommand}">
+                                <Button.Shadow>
+                                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                            Offset="10,10"
+                                            Radius="50"
+                                            Opacity=".8"/>
+                                </Button.Shadow>
+                            </Button>
+                        </HorizontalStackLayout>
 
                         <VerticalStackLayout  IsVisible="{Binding SearchResults, Converter={StaticResource IsNotNullToVisibilityConverter}}" >
                             <Label Text="Select address"
@@ -61,9 +78,14 @@
                     </VerticalStackLayout>
 
                     <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10" IsVisible="{Binding IsReplaceClicked, Converter={StaticResource InverseBooleanConverter}}">
-                        <Label Text="Address"
+                        <VerticalStackLayout>
+                            <Label Text="Address"
                                Style="{StaticResource SmallLabel}"
                                Grid.Column="0" VerticalOptions="Center" />
+                            <Label Text="{Binding AddressString}"
+                                   Style="{StaticResource LabelText}"
+                                   Grid.Column="0" VerticalOptions="Center" />
+                        </VerticalStackLayout>
 
                         <Button Text="Replace" 
                                 Grid.Column="1" 
@@ -77,12 +99,12 @@
                                 CornerRadius="25"/>
                     </Grid>
 
-                    <VerticalStackLayout>
+                    <!--<VerticalStackLayout>
                     <Label Text="Location"
                        Style="{StaticResource SmallLabel}"/>
                     <Label Text="{Binding Latitude, Converter={StaticResource DoubleToStringConverter}}"/>
                         <Label Text="{Binding Longitude, Converter={StaticResource DoubleToStringConverter}}"/>
-                </VerticalStackLayout>
+                    </VerticalStackLayout>-->
 
                 <VerticalStackLayout>
                     <Label Text="Your story"

@@ -117,7 +117,8 @@ namespace Mde.Project.Core.Services
                     { "Latitude", updateModel.Latitude },
                     { "Longitude", updateModel.Longitude },
                     { "ImageUrl", updateModel.ImageUrl },
-                    { "ProfileComplete", updateModel.ProfileComplete }
+                    { "ProfileComplete", updateModel.ProfileComplete },
+                    { "AddressString", updateModel.AddressString }
                 };
 
                 await farmDoc.UpdateAsync(updateFields);

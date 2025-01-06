@@ -40,18 +40,27 @@ namespace Mde.Project.Mobile.ViewModels
             set => SetProperty(ref searchResults, value);
         }
 
+        private bool isPickerInitialized = false;
+        
         private OpenStreetResult selectedAddress;
         public OpenStreetResult SelectedAddress
         {
             get => selectedAddress;
             set
             {
-                if (SetProperty(ref selectedAddress, value))
+                if (SetProperty(ref selectedAddress, value) && isPickerInitialized)
                 {
                     Latitude = selectedAddress?.Latitude ?? 0;
                     Longitude = selectedAddress?.Longitude ?? 0;
+                    UpdateAddressString();
                 }
             }
+        }
+
+        private void UpdateAddressString()
+        {
+            AddressString = SelectedAddress?.Name;
+            IsReplaceClicked = false;
         }
 
         public ICommand SearchAddressCommand => new Command<string>(async (address) =>
@@ -73,7 +82,9 @@ namespace Mde.Project.Mobile.ViewModels
 
             if (result.IsSuccess && result.Data != null)
             {
+                isPickerInitialized = false;
                 SearchResults = result.Data;
+                isPickerInitialized = true;
             }
             else
             {
@@ -96,6 +107,7 @@ namespace Mde.Project.Mobile.ViewModels
                 Latitude = farm.Latitude;
                 Longitude = farm.Longitude;
                 ImageUrl = farm.ImageUrl;
+                AddressString = farm.AddressString;
             }
 
             IsLoading = false;
@@ -145,6 +157,13 @@ namespace Mde.Project.Mobile.ViewModels
         {
             get => description;
             set => SetProperty(ref description, value);
+        }
+
+        private string addressString;
+        public string AddressString
+        {
+            get => addressString;
+            set => SetProperty(ref addressString, value);
         }
 
         private double latitude;
@@ -286,7 +305,8 @@ namespace Mde.Project.Mobile.ViewModels
                 Description = Description,
                 Latitude = Latitude,
                 Longitude = Longitude,
-                ImageUrl = ImageUrl
+                ImageUrl = ImageUrl,
+                AddressString = AddressString
             };
 
             updateModel.ProfileComplete = IsProfileComplete(updateModel);
@@ -313,6 +333,11 @@ namespace Mde.Project.Mobile.ViewModels
         public ICommand SwitchToUserViewCommand => new Command(() =>
         {
             App.Current.MainPage = new AppShellUser();
+        });
+
+        public ICommand CancelReplaceCommand => new Command(() =>
+        {
+            IsReplaceClicked = false;
         });
 
         public ICommand LogOutCommand => new Command(async () =>

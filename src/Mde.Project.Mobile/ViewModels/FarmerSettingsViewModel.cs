@@ -67,7 +67,7 @@ namespace Mde.Project.Mobile.ViewModels
         {
             if (string.IsNullOrWhiteSpace(address))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Please enter a valid address.", "OK");
+                await Shell.Current.DisplayAlert("Error", "Please enter a valid address.", "OK");
                 return;
             }
 
@@ -88,7 +88,7 @@ namespace Mde.Project.Mobile.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Unable to find coordinates for the provided address.", "OK");
+                await Shell.Current.DisplayAlert("Error", "Unable to find coordinates for the provided address.", "OK");
             }
 
             IsLoading = false;
@@ -313,7 +313,7 @@ namespace Mde.Project.Mobile.ViewModels
 
             if (!updateModel.ProfileComplete)
             {
-                await Application.Current.MainPage
+                await Shell.Current
                 .DisplayAlert("Profile incomplete", "Please note that your farm will only be visible when your profile is complete.", "OK");
             }
 
@@ -326,7 +326,7 @@ namespace Mde.Project.Mobile.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Failed to update farm details.", "OK");
+                await Shell.Current.DisplayAlert("Error", "Failed to update farm details.", "OK");
             }
         });
 
@@ -350,7 +350,7 @@ namespace Mde.Project.Mobile.ViewModels
 
                 if (!logoutResult.IsSuccess)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Oops", "Signout issue. Please try again later", "OK");
+                    await Shell.Current.DisplayAlert("Oops", "Signout issue. Please try again later", "OK");
                     return;
                 }
 
@@ -360,7 +360,7 @@ namespace Mde.Project.Mobile.ViewModels
 
         public async Task<bool> ShowLogoutConfirmationAsync()
         {
-            return await Application.Current.MainPage.DisplayAlert("Confirm signout", "Are you sure you want to sign out?", "Yes", "No");
+            return await Shell.Current.DisplayAlert("Confirm signout", "Are you sure you want to sign out?", "Yes", "No");
         }
     }
 }

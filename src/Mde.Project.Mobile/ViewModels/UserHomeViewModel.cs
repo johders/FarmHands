@@ -12,19 +12,17 @@ namespace Mde.Project.Mobile.ViewModels
         private readonly IProductService _productService;
         private readonly IImageConversionService _imageConversionService;
 
-        public UserHomeViewModel(IFarmService farmService, IProductService productService, IImageConversionService imageConversionService)
+        public UserHomeViewModel(IFarmService farmService, IProductService productService, 
+            IImageConversionService imageConversionService)
         {
             _farmService = farmService;
             _productService = productService;
             _imageConversionService = imageConversionService;
         }
 
-
-        // Full data lists
         private ObservableCollection<FarmViewModel> allFarms;
         private ObservableCollection<ProductViewModel> allProducts;
 
-        // Filtered lists bound to UI
         private ObservableCollection<FarmViewModel> filteredFarms;
         public ObservableCollection<FarmViewModel> FilteredFarms
         {
@@ -39,7 +37,6 @@ namespace Mde.Project.Mobile.ViewModels
             set => SetProperty(ref filteredProducts, value);
         }
 
-        // Search query property
         private string searchQuery;
         public string SearchQuery
         {
@@ -89,12 +86,16 @@ namespace Mde.Project.Mobile.ViewModels
 
             var query = SearchQuery.ToLower();
 
-            FilteredFarms = new ObservableCollection<FarmViewModel>(allFarms
-                .Where(farm => farm.Name.ToLower().Contains(query) ||
-                               farm.Description.ToLower().Contains(query)));
+            FilteredFarms = new ObservableCollection<FarmViewModel>(
+                allFarms.Where(farm =>
+                    farm.Name.ToLower().Contains(query) ||
+                    farm.Description.ToLower().Contains(query) ||
+                    farm.AddresString.ToLower().Contains(query)));
 
-            FilteredProducts = new ObservableCollection<ProductViewModel>(allProducts
-                .Where(product => product.Name.ToLower().Contains(query)));
+            FilteredProducts = new ObservableCollection<ProductViewModel>(
+                allProducts.Where(product => 
+                product.Name.ToLower().Contains(query) ||
+                product.Description.ToLower().Contains(query)));
         }
 
         private bool isLoading;

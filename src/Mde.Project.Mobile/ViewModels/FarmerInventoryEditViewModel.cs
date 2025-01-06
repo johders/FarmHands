@@ -19,6 +19,7 @@ namespace Mde.Project.Mobile.ViewModels
         private readonly IFarmerService _farmerService;
         private readonly IImageConversionService _imageConversionService;
         private MemoryStream _imageStream;
+        private bool isAvailable;
 
         public FarmerInventoryEditViewModel(IProductService productService, IOfferService offerService, IFarmService farmService, IFarmerService farmerService, IImageConversionService imageConversionService)
         {
@@ -69,6 +70,8 @@ namespace Mde.Project.Mobile.ViewModels
                     Price = selectedOffer.Price;
                     SelectedUnit = selectedOffer.Unit;
                     ImageUrl = selectedOffer.OfferImageUrl;
+                    isAvailable = selectedOffer.IsAvailable;
+                    
                 }
                 else
                 {
@@ -79,10 +82,10 @@ namespace Mde.Project.Mobile.ViewModels
                     Price = default;
                     SelectedUnit = default;
                     ImageUrl = default;
+                    isAvailable = true;
                 }
             }
         }
-
 
         private ObservableCollection<Product> products;
         public ObservableCollection<Product> Products
@@ -338,6 +341,7 @@ namespace Mde.Project.Mobile.ViewModels
                 offer.Unit = SelectedUnit;
                 offer.Product = productResult.Data;
                 offer.Farm = farmResult.Data;
+                offer.IsAvailable = isAvailable;
                 offer.OfferImageUrl = ImageUrl ?? productResult.Data.ImageUrl;
 
                 if (SelectedOffer is null)

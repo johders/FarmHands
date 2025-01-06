@@ -5,6 +5,7 @@ using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models.RequestModels;
 using Mde.Project.Mobile.Helpers;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
 
 namespace Mde.Project.Mobile.ViewModels
@@ -139,7 +140,52 @@ namespace Mde.Project.Mobile.ViewModels
         public decimal Price
         {
             get { return price; }
-            set { SetProperty(ref price, value); }
+            set
+            {
+                if (SetProperty(ref price, value))
+                {
+                    if (!isEditing)
+                    {
+                        PriceInput = price.ToString("N2", CultureInfo.InvariantCulture);
+                    }
+                }
+            }
+        }
+
+        private string priceInput;
+        public string PriceInput
+        {
+            get => priceInput;
+            set
+            {
+                if (SetProperty(ref priceInput, value) && !isEditing)
+                {
+                    if (decimal.TryParse(priceInput, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var parsedValue))
+                    {
+                        Price = parsedValue;
+                    }
+                }
+            }
+        }
+
+        private bool isEditing;
+        public void StartEditing()
+        {
+            isEditing = true;
+        }
+
+        public void StopEditing()
+        {
+            isEditing = false;
+
+            if (decimal.TryParse(PriceInput, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var parsedValue))
+            {
+                Price = parsedValue;
+            }
+            else
+            {
+                PriceInput = Price.ToString("N2", CultureInfo.InvariantCulture);
+            }
         }
 
         private string imageUrl;

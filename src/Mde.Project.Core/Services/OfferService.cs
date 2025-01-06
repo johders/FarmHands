@@ -313,6 +313,9 @@ namespace Mde.Project.Core.Services
                 if (updateModel.Price != 0)
                     offerToUpdate.Price = updateModel.Price;
 
+                if (updateModel.Unit != offerToUpdate.Unit)
+                    offerToUpdate.Unit = updateModel.Unit;
+
                 if (!string.IsNullOrEmpty(updateModel.OfferImageUrl))
                     offerToUpdate.OfferImageUrl = updateModel.OfferImageUrl;
 

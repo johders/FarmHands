@@ -87,11 +87,16 @@
                                             </Border>
                                         </SwipeView>
 
-                                        <Grid x:Name="WindowsGrid" 
-                                              IsVisible="{OnPlatform WinUI=True, Default=False}"
-                                              Padding="5"
-                                              ColumnDefinitions="*, Auto, Auto"
-                                              BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                            <Border x:Name="WindowsGridBorder"
+                                                    IsVisible="{OnPlatform WinUI=True, Default=False}"
+                                                    StrokeThickness="0"
+                                                    Stroke="{AppThemeBinding Light={StaticResource TileBorderColor}, Dark={StaticResource TileBorderColorDark}}"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
+                                                    StrokeDashArray="1"
+                                                    StrokeShape="{RoundRectangle CornerRadius=5}"
+                                                    Padding="5">
+                                                <Grid x:Name="WindowsGrid" 
+                                              ColumnDefinitions="*, Auto, Auto">
 
                                             <HorizontalStackLayout Spacing="10">
                                                 <Label Text="{Binding VariantName}"
@@ -120,7 +125,8 @@
                                             Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
                                             CommandParameter="{Binding .}"/>
                                         </Grid>
-                                    </VerticalStackLayout>
+                                            </Border>
+                                        </VerticalStackLayout>
 
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>

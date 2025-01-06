@@ -93,8 +93,9 @@ namespace Mde.Project.Mobile.ViewModels
                 return;
             }
 
-            if (isConfirmed)
+			if (isConfirmed)
 				result = await _offerService.DeleteAsync(offer.Id, role);
+			else return;
 
 			if (result.IsSuccess)
 			{

@@ -1,6 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Entities;
-using Mde.Project.Core.Services;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.Farmer;
 using Mde.Project.Mobile.Services.Interfaces;

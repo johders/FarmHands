@@ -41,7 +41,8 @@ namespace Mde.Project.Mobile.ViewModels
         {
             try
             {
-                var location = await _geolocation.GetLastKnownLocationAsync();
+                //var location = await _geolocation.GetLastKnownLocationAsync();
+                var location = await _geolocation.GetLocationAsync();
 
                 if (location == null)
                 {

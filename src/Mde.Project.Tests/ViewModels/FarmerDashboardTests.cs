@@ -12,6 +12,7 @@ namespace Mde.Project.Tests.ViewModels
         private readonly Mock<IOfferService> _mockOfferService;
         private readonly Mock<IFarmerService> _mockFarmerService;
         private readonly Mock<IImageConversionService> _mockImageConversionService;
+        private readonly Mock<IFarmService> _farmService;
         private readonly FakeSecureStorageService _fakeSecureStorageService;
         private readonly FarmerDashboardViewModel _viewModel;
 
@@ -20,14 +21,17 @@ namespace Mde.Project.Tests.ViewModels
             _mockOfferService = new Mock<IOfferService>();
             _mockFarmerService = new Mock<IFarmerService>();
             _mockImageConversionService = new Mock<IImageConversionService>();
+            _farmService = new Mock<IFarmService>();
             _fakeSecureStorageService = new FakeSecureStorageService();
 
             _viewModel = new FarmerDashboardViewModel(
                 _mockOfferService.Object,
                 _mockFarmerService.Object,
                 _mockImageConversionService.Object,
-                _fakeSecureStorageService
+                _fakeSecureStorageService,
+                _farmService.Object
             );
+            
         }
 
         [Fact]

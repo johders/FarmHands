@@ -1,7 +1,4 @@
-﻿using Google.Api;
-using Mde.Project.Core.Services;
-using Mde.Project.Core.Services.Interfaces;
-using Moq;
+﻿using Mde.Project.Core.Services;
 
 namespace Mde.Project.Tests.Services
 {

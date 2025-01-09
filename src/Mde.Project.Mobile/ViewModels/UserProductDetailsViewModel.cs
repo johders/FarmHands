@@ -10,9 +10,9 @@ namespace Mde.Project.Mobile.ViewModels
     [QueryProperty(nameof(SelectedProduct), nameof(SelectedProduct))]
     public class UserProductDetailsViewModel : ObservableObject
     {
-		private readonly IOfferService _offerService;
-		private readonly IFavoriteProductService _favoriteProductsService;
-		private readonly IImageConversionService _imageConversionService;
+        private readonly IOfferService _offerService;
+        private readonly IFavoriteProductService _favoriteProductsService;
+        private readonly IImageConversionService _imageConversionService;
         private readonly IMealDbService _mealDbService;
 
         public UserProductDetailsViewModel(IOfferService offerService, IFavoriteProductService favoriteProductsService, IImageConversionService imageConversionService, IMealDbService mealDbService)
@@ -24,17 +24,31 @@ namespace Mde.Project.Mobile.ViewModels
         }
 
         private ProductViewModel selectedProduct;
-		public ProductViewModel SelectedProduct
+        public ProductViewModel SelectedProduct
         {
-			get { return selectedProduct; }
-			set
-			{
-				if(SetProperty(ref selectedProduct, value))
+            get { return selectedProduct; }
+            set
+            {
+                if (SetProperty(ref selectedProduct, value))
                 {
                     _ = LoadDataForSelectedProduct();
                 }
-			}
-		}
+            }
+        }
+
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set => SetProperty(ref _isRefreshing, value);
+        }
+
+        public ICommand RefreshCommand => new Command(async () => 
+        {
+            IsRefreshing = true;
+            await LoadDataForSelectedProduct();
+            IsRefreshing = false;
+        });
 
         private ObservableCollection<Meal> recipes;
         public ObservableCollection<Meal> Recipes

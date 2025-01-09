@@ -97,7 +97,6 @@
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>
-
         <Grid IsVisible="{Binding IsLoading}"
               BackgroundColor="Black"
               Opacity="0.5"

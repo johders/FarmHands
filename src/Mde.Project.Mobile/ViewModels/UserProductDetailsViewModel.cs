@@ -34,21 +34,7 @@ namespace Mde.Project.Mobile.ViewModels
                     _ = LoadDataForSelectedProduct();
                 }
             }
-        }
-
-        private bool _isRefreshing;
-        public bool IsRefreshing
-        {
-            get => _isRefreshing;
-            set => SetProperty(ref _isRefreshing, value);
-        }
-
-        public ICommand RefreshCommand => new Command(async () => 
-        {
-            IsRefreshing = true;
-            await LoadDataForSelectedProduct();
-            IsRefreshing = false;
-        });
+        } 
 
         private ObservableCollection<Meal> recipes;
         public ObservableCollection<Meal> Recipes

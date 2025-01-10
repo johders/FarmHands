@@ -4,11 +4,11 @@ namespace Mde.Project.Mobile.Pages.Login;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage(LoginViewModel viewModel)
+    public LoginPage(LoginViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-	}
+    }
 
     protected override async void OnAppearing()
     {

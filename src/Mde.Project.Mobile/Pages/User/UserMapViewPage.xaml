@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:models="clr-namespace:Mde.Project.Core.Entities;assembly=Mde.Project.Core" 
+             xmlns:helpers="clr-namespace:Mde.Project.Mobile.Helpers"
              x:DataType="viewmodel:UserMapViewModel"
              x:Class="Mde.Project.Mobile.Pages.User.UserMapViewPage"
+             x:Name="page"
              Title="Map">
 
     <map:SfMaps>
@@ -14,6 +17,48 @@
                 <map:MapTileLayer.Center>
                     <Binding Path="CenterLocation" />
                 </map:MapTileLayer.Center>
+                <map:MapTileLayer.MarkerTemplate>
+                    <DataTemplate x:DataType="helpers:CustomMapMarker">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference page}, Path=BindingContext.ToggleExpansionCommand}" 
+                                                      CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                            
+                            <Grid x:Name="iconGrid" IsVisible="{Binding IsExpanded, Converter={StaticResource InverseBooleanConverter}}">
+                                <Image Source="sprout.png" 
+                                   WidthRequest="50" 
+                                   HeightRequest="50" />
+                            </Grid>
+
+                            <Border x:Name="markerBorder"
+                                    Style="{StaticResource TileBorder}"
+                                    Padding="5"
+                                    VerticalOptions="Center"
+                                    WidthRequest="150"
+                                    HeightRequest="80"
+                                    IsVisible="{Binding IsExpanded}">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Farm.Name}" 
+                                           FontSize="10" 
+                                           TextColor="Black" 
+                                           Style="{StaticResource SmallLabel}"
+                                           HorizontalOptions="Center"/>
+
+                                    <Button Text="Details"
+                                            CornerRadius="25"
+                                            Margin="0,5,0,0"
+                                            BackgroundColor="{StaticResource AccentColorDark}"
+                                            TextColor="White"
+                                            Command="{Binding Source={x:Reference page}, Path=BindingContext.ShowFarmDetailsCommand}"
+                                            CommandParameter="{Binding Farm}"
+                                            IsVisible="{Binding IsExpanded}">
+                                    </Button>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </map:MapTileLayer.MarkerTemplate>
                 <map:MapTileLayer.ZoomPanBehavior>
                     <map:MapZoomPanBehavior ZoomLevel = "13" />
                 </map:MapTileLayer.ZoomPanBehavior>

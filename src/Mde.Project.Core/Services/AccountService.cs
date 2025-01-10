@@ -40,7 +40,7 @@ namespace Mde.Project.Core.Services
 
                 if (role == UserRole.Farmer && farmName is not null)
                 {
-                    var farm = new Farm { Id = Guid.NewGuid().ToString(), Name = farmName, OwnerId = uid };
+                    var farm = new Farm { Id = Guid.NewGuid().ToString(), Name = farmName, OwnerId = uid, ProfileComplete = false };
                     await _firestoreDb.Collection("Farms").Document(farm.Id).SetAsync(farm);
 
                     var farmer = new Farmer
@@ -106,6 +106,8 @@ namespace Mde.Project.Core.Services
                 var auth = loginResult.Data;
                 string uid = auth.User.Uid;
 
+                var testResult = _authService.GetTokenExpirationTime((_authService.GetAuthTokenAsync()).Result.Data);
+
                 result.Data = uid;
 
                 return result;
@@ -115,6 +117,40 @@ namespace Mde.Project.Core.Services
                 result.Errors.Add(ex.Message);
                 return result;
             }
+        }
+
+        public async Task<BaseResultModel> AddDeviceTokenToUserProfileAsync(string uid, string deviceToken)
+        {
+            var result = new BaseResultModel();
+
+            try
+            {
+                var userDoc = _firestoreDb.Collection("Users").Document(uid);
+
+                var snapshot = await userDoc.GetSnapshotAsync();
+                if (!snapshot.Exists)
+                {
+                    result.Errors.Add("User not found.");
+                    return result;
+                }
+
+                await userDoc.UpdateAsync(new Dictionary<string, object>
+                {
+                    { "DeviceToken", deviceToken }
+                });
+
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add($"Error adding device token: {ex.Message}");
+            }
+
+            return result;
+        }
+
+        public async Task<ResultModel<DateTime>> GetTokenExpirationDateTimeAsync(string token)
+        {
+            return await Task.FromResult(_authService.GetTokenExpirationTime(token));
         }
 
         public async Task<ResultModel<string>> GetAuthTokenAsync()

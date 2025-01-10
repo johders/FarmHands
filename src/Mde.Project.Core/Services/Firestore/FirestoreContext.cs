@@ -4,6 +4,7 @@ using Google.Cloud.Firestore;
 using Google.Cloud.Firestore.V1;
 using Mde.Project.Core.Data.Firestore;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Interfaces.Wrappers;
 using System.Text.Json;
 
 namespace Mde.Project.Core.Services.Firestore
@@ -45,5 +46,10 @@ namespace Mde.Project.Core.Services.Firestore
         }
 
         public FirestoreDb GetFireStoreDb() => _firestoreDb;
+
+        public IFirestoreDbWrapper GetFirestoreDbWrapper()
+        {
+            return new FirestoreDbWrapper(_firestoreDb);
+        }
     }
 }

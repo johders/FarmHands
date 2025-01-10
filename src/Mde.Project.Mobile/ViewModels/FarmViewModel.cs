@@ -4,25 +4,49 @@ using Mde.Project.Core.Services.Interfaces;
 
 namespace Mde.Project.Mobile.ViewModels
 {
-	public class FarmViewModel : ObservableObject
+    public class FarmViewModel : ObservableObject
 	{
 		private readonly Farm _farm;
 		private readonly IFarmService _farmService;
-		private int? _offerCount;
+        private readonly IImageConversionService _imageConversionService;
+        private MemoryStream _imageStream;
+        private int? _offerCount;
 
-		public FarmViewModel(Farm farm, IFarmService farmService)
-		{
-			_farm = farm;
-			_farmService = farmService;
-            //_ = LoadOfferCountAsync();
+        public FarmViewModel(Farm farm, IFarmService farmService, IImageConversionService imageConversionService)
+        {
+            _farm = farm;
+            _farmService = farmService;
+            _imageConversionService = imageConversionService;
 
+            if (farm.ImageUrl.Contains("data:image"))
+            {
+                using var imageStream = _imageConversionService.ConvertBase64ToStream(farm.ImageUrl);
+
+                if (imageStream != null)
+                {
+                    _imageStream = new MemoryStream();
+                    imageStream.CopyTo(_imageStream);
+                    _imageStream.Position = 0;
+
+                    ImageSource = ImageSource.FromStream(() =>
+                    {
+                        var streamClone = new MemoryStream(_imageStream.ToArray());
+                        return streamClone;
+                    });
+                }
+            }
             _ = Task.Run(() => LoadOfferCountAsync());
         }
 
-		public string Id => _farm.Id;
+        public string Id => _farm.Id;
 		public string Name => _farm.Name;
+		public double Latitude => _farm.Latitude;
+		public double Longitude => _farm.Longitude;
 		public string ImageUrl => _farm.ImageUrl;
-		public int? OfferCount
+		public string Description => _farm.Description;
+		public string AddresString => _farm.AddressString;
+        public ImageSource ImageSource {  get; private set; }
+        public int? OfferCount
 		{
 			get => _offerCount;
 			private set => SetProperty(ref _offerCount, value);
@@ -31,5 +55,10 @@ namespace Mde.Project.Mobile.ViewModels
 		{
 			OfferCount = await _farmService.GetOfferCountAsync(_farm.Id);
 		}
-	}
+
+        public void Dispose()
+        {
+            _imageStream?.Dispose();
+        }
+    }
 }

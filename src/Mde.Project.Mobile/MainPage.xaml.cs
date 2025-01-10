@@ -1,4 +1,6 @@
-﻿namespace Mde.Project.Mobile
+﻿using Mde.Project.Mobile.Constants;
+
+namespace Mde.Project.Mobile
 {
     public partial class MainPage : ContentPage
     {

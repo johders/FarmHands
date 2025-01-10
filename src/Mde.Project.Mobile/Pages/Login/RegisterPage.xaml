@@ -7,12 +7,11 @@
              HideSoftInputOnTapped="True"
              Title="Register">
 
+    <ScrollView>
         <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <VerticalStackLayout Margin="0,0,0,0" Spacing="20"
-                                 HorizontalOptions="Center" 
-                                 VerticalOptions="Center" 
-                                 MinimumWidthRequest="{OnPlatform Android=320, WinUI=500}">
+            <VerticalStackLayout Margin="8,20,8,0" Spacing="20"
+                                 MinimumWidthRequest="{OnPlatform WinUI=500, Default=400}">
 
                 <VerticalStackLayout>
                     <Label Text="Name"
@@ -83,5 +82,5 @@
 
             </VerticalStackLayout>
         </Grid>
-
+    </ScrollView>
 </ContentPage>

@@ -8,69 +8,97 @@
              x:DataType="viewmodel:UserFarmDetailsViewModel"
              Title="Farm details">
 
-    <ScrollView>
-        <Grid Style="{StaticResource MaxWidthGrid}">
-            <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
-                <FlexLayout JustifyContent="SpaceBetween"
+    <Grid>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+            <Grid Style="{StaticResource MaxWidthGrid}">
+                <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
+                    <FlexLayout JustifyContent="SpaceBetween"
                             AlignItems="Center"
                             Margin="0,20">
-                    <Label Text="{Binding SelectedFarm.Name}"
+                        <Label Text="{Binding SelectedFarm.Name}"
                             Style="{StaticResource LargeLabel}"
                             Margin="0"/>
 
-                    <Image Source="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartImageConverter}}"
+                        <Image Source="{Binding IsFavorite, Converter={StaticResource FavoriteToHeartImageConverter}}"
                            WidthRequest="40"
                            HeightRequest="40">
 
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
-                        </Image.GestureRecognizers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand}"/>
+                            </Image.GestureRecognizers>
 
-                    </Image>
-                </FlexLayout>
+                        </Image>
+                    </FlexLayout>
 
-                <Image Source="{Binding SelectedFarm.ImageUrl}"
+                    <Image Source="{Binding SelectedFarm.ImageSource}"
                        Aspect="AspectFill"/>
 
-                <Label Text="Our harvest"
+                    <Label Text="Our harvest"
                        Style="{StaticResource SmallLabel}"/>
 
-                <CollectionView ItemsSource="{Binding Offers}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Offer">
-                            <Border Style="{StaticResource TileBorder}">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                    <CollectionView ItemsSource="{Binding Offers}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewmodel:OfferViewModel">
+                                <Border Style="{StaticResource TileBorder}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
                                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ViewOfferDetailsCommand}"/>
-                                </Border.GestureRecognizers>
-                                <Grid RowDefinitions="4*, 2*" Margin="0">
-                                    <Image Source="{Binding OfferImageUrl}"
+                                    </Border.GestureRecognizers>
+                                    <Grid RowDefinitions="4*, 2*" Margin="0">
+                                        <Image Source="{Binding ImageSource}"
                                            Aspect="AspectFill"/>
-                                    <VerticalStackLayout Grid.Row="1" Padding="10">
-                                        <Label Text="{Binding Variant}"
+                                        <VerticalStackLayout Grid.Row="1" Padding="10">
+                                            <Label Text="{Binding VariantName}"
                                                Style="{StaticResource SmallLabel}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                LineBreakMode="TailTruncation"/>
-                                        <Label Text="{Binding Farm.Name}"
+                                            <Label Text="{Binding FarmName}"
                                                Style="{StaticResource LabelText}"
                                                TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"/>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                <Label Text="Our story"
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Visit us"
+                                   Style="{StaticResource SmallLabel}"/>
+                            <Label Text="{Binding SelectedFarm.AddresString}"
+                                   Style="{StaticResource LabelText}"/>
+                        </VerticalStackLayout>
+                        
+                        <Button Grid.Column="1"
+                                Text="Directions"
+                                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                                Command="{Binding OpenInMapsCommand}"/>
+                    </Grid>
+                    
+                    <Label Text="Our story"
                        Style="{StaticResource SmallLabel}"/>
-                <Label Text="{Binding SelectedFarm.Description}"
+                    <Label Text="{Binding SelectedFarm.Description}"
                        Style="{StaticResource LabelText}"
                        LineBreakMode="WordWrap"/>
 
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsLoading}"
+          BackgroundColor="Black"
+          Opacity="0.5"
+          VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                   Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center" />
         </Grid>
-    </ScrollView>
+    </Grid>
 </ContentPage>

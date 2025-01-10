@@ -1,7 +1,9 @@
 ﻿using Google.Cloud.Firestore;
 using Mde.Project.Core.Constants;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Services.Firestore;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Core.Services.Interfaces.Wrappers;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Core.Services.Models.RequestModels;
 
@@ -9,11 +11,12 @@ namespace Mde.Project.Core.Services
 {
     public class FarmService : IFarmService
     {
-        private readonly FirestoreDb _firestoreDb;
-
+        //private readonly FirestoreDb _firestoreDb;
+        private readonly IFirestoreDbWrapper _firestoreDb;
         public FarmService(IFirestoreContext firestoreDb)
         {
-            _firestoreDb = firestoreDb.GetFireStoreDb();
+            //_firestoreDb = firestoreDb.GetFireStoreDb();
+            _firestoreDb = firestoreDb.GetFirestoreDbWrapper();
         }
 
         public async Task<ResultModel<IEnumerable<Farm>>> GetAllAsync()
@@ -77,7 +80,9 @@ namespace Mde.Project.Core.Services
             try
             {
                 var offerCollection = _firestoreDb.Collection("Offers");
-                var query = offerCollection.WhereEqualTo("FarmId", farmId);
+                var query = offerCollection
+                    .WhereEqualTo("FarmId", farmId)
+                    .WhereEqualTo("IsAvailable", true);
                 var snapshot = await query.GetSnapshotAsync();
                 int offerCount = snapshot.Documents.Count;
                 return offerCount;
@@ -111,7 +116,9 @@ namespace Mde.Project.Core.Services
                     { "Description", updateModel.Description },
                     { "Latitude", updateModel.Latitude },
                     { "Longitude", updateModel.Longitude },
-                    { "ImageUrl", updateModel.ImageUrl }
+                    { "ImageUrl", updateModel.ImageUrl },
+                    { "ProfileComplete", updateModel.ProfileComplete },
+                    { "AddressString", updateModel.AddressString }
                 };
 
                 await farmDoc.UpdateAsync(updateFields);

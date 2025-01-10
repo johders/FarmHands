@@ -10,6 +10,7 @@ namespace Mde.Project.Mobile
 
             Routing.RegisterRoute(nameof(FarmerInventoryEditPage), typeof(FarmerInventoryEditPage));
             Routing.RegisterRoute(nameof(FarmerInventoryListPage), typeof(FarmerInventoryListPage));
+            Routing.RegisterRoute(nameof(FarmerDashboardPage), typeof(FarmerDashboardPage));
         }
     }
 }

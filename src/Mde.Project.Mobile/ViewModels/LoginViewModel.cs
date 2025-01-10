@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Mde.Project.Core.Services.Interfaces;
+using Mde.Project.Mobile.Constants;
 using Mde.Project.Mobile.Pages.Login;
 using System.Windows.Input;
 
@@ -40,6 +41,13 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand LoginCommand => new Command(async () =>
 		{
+
+            if (!_connectivityService.IsConnected().IsSuccess)
+            {
+                await Shell.Current.DisplayAlert("No Connectivity", "Please check your internet connection and try again.", "OK");
+                return;
+            }
+
             var email = Username;
             var password = Password;
             
@@ -64,6 +72,20 @@ namespace Mde.Project.Mobile.ViewModels
 
             var token = tokenResult.Data;
 
+            var deviceToken = Preferences.Get(AppConstants.DeviceToken, string.Empty);
+            if (!string.IsNullOrWhiteSpace(deviceToken))
+            {
+                var deviceTokenResult = await _accountService.AddDeviceTokenToUserProfileAsync(uid, deviceToken);
+
+                if (!deviceTokenResult.IsSuccess)
+                {
+                    await Shell.Current.DisplayAlert("Error", $"Failed to update device token: {string.Join(", ", deviceTokenResult.Errors)}", "OK");
+                }
+            }
+
+            //Checking expiration
+            var expiresOn = await _accountService.GetTokenExpirationDateTimeAsync(token);
+
             await SecureStorage.Default.SetAsync("authToken", token);
 
             var roleResult = await _accountService.GetRoleFromTokenAsync(token);
@@ -75,6 +97,7 @@ namespace Mde.Project.Mobile.ViewModels
             }
 
             var role = roleResult.Data;
+            await SecureStorage.Default.SetAsync("userRole", role.ToString());
 
             Application.Current.MainPage = role == Core.Enums.UserRole.User ? new AppShellUser() : role == Core.Enums.UserRole.Farmer ? new AppShellFarmer() : new AppShellStartup();           
         });

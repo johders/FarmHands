@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:enums="clr-namespace:Mde.Project.Core.Enums;assembly=Mde.Project.Core"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:FarmerInventoryEditViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryEditPage"
              HideSoftInputOnTapped="True"          
@@ -11,7 +12,7 @@
         <Grid Style="{StaticResource MaxWidthGrid}">
 
             <VerticalStackLayout Margin="8,20,8,0" Spacing="20" 
-                                 MinimumWidthRequest="{OnPlatform WinUI=500, Default=0}">
+                                 MinimumWidthRequest="{OnPlatform WinUI=500, Default=400}">
 
                 <VerticalStackLayout>
                     <Label Text="Product"
@@ -19,14 +20,29 @@
                     <Picker Title="Select product"
                             ItemsSource="{Binding Products, Mode=TwoWay}"
                             SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                            ItemDisplayBinding="{Binding Name}"/>
+                            ItemDisplayBinding="{Binding Name}"
+                            IsVisible="{Binding SelectedProduct, Converter={StaticResource IsNullToVisibilityConverter}}" />
+                    
+                    <Label Text="{Binding SelectedProduct.Name}"
+                           Style="{StaticResource SmallLabel}"
+                           FontSize="Medium"
+                           TextColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                           IsVisible="{Binding SelectedProduct, Converter={StaticResource IsNotNullToVisibilityConverter}}" />
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
                     <Label Text="Variant"
                            Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter variant"
-                           Text="{Binding Variant}"/>
+                           Text="{Binding Variant}">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="variantValidator"
+                                Flags="ValidateOnAttaching, ValidateOnValueChanged"
+                                MinimumLength="1"
+                                IsValid="{Binding IsVariantValid, Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
@@ -34,15 +50,25 @@
                            Style="{StaticResource SmallLabel}"/>
                     <Editor Placeholder="Enter your description here..."
                             AutoSize="TextChanges"
-                            Text="{Binding Description}"/>
+                            Text="{Binding Description}">
+                        <Editor.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="descriptionBehaviour"
+                                Flags="ValidateOnAttaching, ValidateOnValueChanged"
+                                MinimumLength="1"
+                                IsValid="{Binding IsDescriptionValid, Mode=TwoWay}"/>
+                        </Editor.Behaviors>
+                    </Editor>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
                     <Label Text="Price per unit"
                            Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter price"
-                       Text="{Binding Price}"
-                       Keyboard="Numeric"/>
+                           Text="{Binding PriceInput}"
+                           Keyboard="Numeric"
+                           Focused="Entry_Focused"
+                           Unfocused="Entry_Unfocused"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
@@ -53,8 +79,22 @@
                             SelectedItem="{Binding SelectedUnit}"/>
                 </VerticalStackLayout>
 
-                <Label Text="Image"
-                       Style="{StaticResource SmallLabel}"/>
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
+                    <Label Text="Image" 
+                           Style="{StaticResource SmallLabel}" 
+                           Grid.Column="0" VerticalOptions="Center" />
+
+                    <Button Text="Replace" 
+                            Grid.Column="1" 
+                            BackgroundColor="{StaticResource AccentColor}" 
+                            TextColor="White" 
+                            HorizontalOptions="End" 
+                            Command="{Binding ReplaceImageCommand}" 
+                            IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}" 
+                            Padding="10,0" 
+                            FontSize="Small"
+                            CornerRadius="25"/>
+                </Grid>
 
                 <Border WidthRequest="300" 
                         HeightRequest="200" 
@@ -64,7 +104,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
-                    <Image Source="{Binding ImageUrl}" 
+                    <Image Source="{Binding ImageSource}" 
                            Aspect="AspectFill"/>
 
                 </Border>
@@ -73,7 +113,7 @@
                         HeightRequest="200"
                         StrokeThickness="3"
                         Stroke="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        IsVisible="{Binding ImageUrl, Converter={StaticResource NoImageToVisibilityConverter}}">
+                        IsVisible="{Binding ImageSource, Converter={StaticResource NoImageToVisibilityConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>

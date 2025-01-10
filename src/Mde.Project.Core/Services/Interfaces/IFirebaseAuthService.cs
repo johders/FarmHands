@@ -12,5 +12,7 @@ namespace Mde.Project.Core.Services.Interfaces
         Task<ResultModel<UserCredential>> LoginUserAsync(string email, string password);
         BaseResultModel Logout();
         Task<ResultModel<UserCredential>> RegisterUserAsync(string email, string password);
+        Task<ResultModel<string>> RefreshTokenAsync();
+        ResultModel<DateTime> GetTokenExpirationTime(string token);
     }
 }

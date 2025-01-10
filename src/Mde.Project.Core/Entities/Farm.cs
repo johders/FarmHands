@@ -13,7 +13,6 @@ namespace Mde.Project.Core.Entities
 			Description = description;
 			Latitude = latitude;
 			Longitude = longitude;
-			//Products = products;
 			ImageUrl = imageUrl;
 		}
 
@@ -36,10 +35,12 @@ namespace Mde.Project.Core.Entities
         public string ImageUrl { get; set; }
 
         [FirestoreProperty]
+        public string AddressString { get; set; }
+
+        [FirestoreProperty]
         public string OwnerId { get; set; }
 
-        //public IEnumerable<Product> Products { get; set; }
-
-        //public ICollection<FavoriteFarm> FavoriteFarms { get; set; }
+        [FirestoreProperty]
+        public bool ProfileComplete { get; set; }
     }
 }

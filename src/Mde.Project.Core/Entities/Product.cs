@@ -3,7 +3,7 @@
 namespace Mde.Project.Core.Entities
 {
     [FirestoreData]
-    public class Product : IEquatable<Product>
+    public class Product
 	{
         public Product() { }
         public Product(string id, string name, string description, string imageUrl)
@@ -12,12 +12,6 @@ namespace Mde.Project.Core.Entities
 			Name = name;
 			Description = description;
 			ImageUrl = imageUrl;
-		}
-
-		public bool Equals(Product? other)
-		{
-			if (other == null) return false;
-			return (this.Name.Equals(other.Name));
 		}
 
         [FirestoreDocumentId]
@@ -31,7 +25,6 @@ namespace Mde.Project.Core.Entities
 
         [FirestoreProperty]
         public string ImageUrl { get; set; }
-        //public ICollection<FavoriteProduct> FavoriteProducts { get; set; }
 
     }
 }

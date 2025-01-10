@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395521573515",
+    "project_id": "farmhands-431df",
+    "storage_bucket": "farmhands-431df.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395521573515:android:6d629597e7afe65b6b0a8e",
+        "android_client_info": {
+          "package_name": "com.companyname.mde.project.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMurkKUfJoAn2J0TCPLPTpHd2LVaZKp4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

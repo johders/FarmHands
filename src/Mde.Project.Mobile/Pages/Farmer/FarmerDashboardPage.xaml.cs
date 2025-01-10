@@ -13,6 +13,7 @@ public partial class FarmerDashboardPage : ContentPage
 	protected override void OnAppearing()
 	{
 		FarmerDashboardViewModel viewModel = BindingContext as FarmerDashboardViewModel;
+		viewModel.CheckIfUserProfileComplete?.Execute(null);
 		viewModel.RefreshOffersListCommand?.Execute(null);
 		base.OnAppearing();
 	}

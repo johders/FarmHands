@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Mde.Project.Core.Entities;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Mobile.Pages.User;
 using System.Collections.ObjectModel;
@@ -12,15 +11,17 @@ namespace Mde.Project.Mobile.ViewModels
     {
         private readonly IOfferService _offerService;
         private readonly IFavoriteFarmService _favoriteFarmService;
+        private readonly IImageConversionService _imageConversionService;
 
-        public UserFarmDetailsViewModel(IOfferService offerService, IFavoriteFarmService favoriteFarmService)
+        public UserFarmDetailsViewModel(IOfferService offerService, IFavoriteFarmService favoriteFarmService, IImageConversionService imageConversionService)
         {
             _offerService = offerService;
             _favoriteFarmService = favoriteFarmService;
+            _imageConversionService = imageConversionService;
         }
 
-        private Farm selectedFarm;
-        public Farm SelectedFarm
+        private FarmViewModel selectedFarm;
+        public FarmViewModel SelectedFarm
         {
             get { return selectedFarm; }
             set 
@@ -32,8 +33,15 @@ namespace Mde.Project.Mobile.ViewModels
             }
         }
 
-        private ObservableCollection<Offer> offers;
-        public ObservableCollection<Offer> Offers
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
+        private ObservableCollection<OfferViewModel> offers;
+        public ObservableCollection<OfferViewModel> Offers
         {
             get { return offers; }
             set
@@ -79,15 +87,22 @@ namespace Mde.Project.Mobile.ViewModels
 
 		private async Task LoadOffersForSelectedFarmAsync()
 		{
+            IsLoading = true;
+
 			if (SelectedFarm is not null)
 			{
 				var result = await _offerService.GetAllOffersByFarmIdAsync(SelectedFarm.Id);
-				var offers = result.Data;
-				Offers = new ObservableCollection<Offer>(offers);
+				var offers = result.Data.Where(o => o.IsAvailable); ;
+
+                var offersViewModels = offers.Select(o => new OfferViewModel(o, _imageConversionService, _offerService));
+
+				Offers = new ObservableCollection<OfferViewModel>(offersViewModels);
 			}
+
+            IsLoading = false;
 		}
 
-		public ICommand ViewOfferDetailsCommand => new Command<Offer>(async (offer) =>
+		public ICommand ViewOfferDetailsCommand => new Command<OfferViewModel>(async (offer) =>
 		{
 
 			var navigationParameter = new Dictionary<string, object>()
@@ -97,5 +112,39 @@ namespace Mde.Project.Mobile.ViewModels
 
 			await Shell.Current.GoToAsync(nameof(UserOfferDetailPage), true, navigationParameter);
 		});
-	}
+
+        public ICommand OpenInMapsCommand => new Command(async () =>
+        {
+            if (SelectedFarm != null)
+            {
+                var latitude = SelectedFarm.Latitude;
+                var longitude = SelectedFarm.Longitude;
+
+                var latString = latitude.ToString().Replace(",", ".");
+                var lonString = longitude.ToString().Replace(",", ".");
+                var url = $"https://www.google.com/maps/dir/?api=1&destination={latString},{lonString}";
+
+                try
+                {
+                    if (DeviceInfo.Platform == DevicePlatform.Android)
+                    {
+                        var mapUrl = $"google.navigation:q={latitude},{longitude}";
+                        await Launcher.OpenAsync(new Uri(mapUrl));
+                    }
+                    else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                    {
+                        await Launcher.OpenAsync(new Uri(url));
+                    }
+                    else
+                    {
+                        await Launcher.OpenAsync(new Uri(url));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Unable to open Google Maps.", "OK");
+                }
+            }
+        });
+    }
 }

@@ -13,5 +13,8 @@
         public const string CreateError = "Error creating {0}: {1}";
         public const string DeleteError = "Error deleting {0}: {1}";
 
+        public const string UnauthorizedError = "Unauthorized access. Please log in";
+        public const string ForbiddenError = "Access denied. Only farmers can perform this action";
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Google.Cloud.Firestore;
 using Mde.Project.Core.Constants;
 using Mde.Project.Core.Entities;
+using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
 using Mde.Project.Core.Services.Models.RequestModels;
@@ -14,19 +15,45 @@ namespace Mde.Project.Core.Services
         private readonly IProductService _productService;
         private readonly IFarmService _farmService;
 
-        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, IProductService productService)
+        private readonly IAccountService _accountService;
+        private readonly IPushNotificationService _notificationService;
+
+
+        public OfferService(IFirestoreContext firestoreDb, IFarmService farmService, IProductService productService, IAccountService accountService, IPushNotificationService notificationService)
         {
             _firestoreDb = firestoreDb.GetFireStoreDb();
             _farmService = farmService;
             _productService = productService;
+            _accountService = accountService;
+            _notificationService = notificationService;
         }
 
-        public async Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel)
+        private async void NotifyUsersAboutNewOffer(Offer newOffer)
+        {
+            if (!string.IsNullOrEmpty(newOffer.ProductId))
+            {
+                var productResult = await _firestoreDb.Collection("Products").Document(newOffer.ProductId).GetSnapshotAsync();
+                var productName = productResult.Exists ? productResult.GetValue<string>("Name") : "a product";
+
+                await _notificationService.NotifyUsersAsync(
+                    newOffer.ProductId,
+                    $"Check out a new offer for {productName}!"
+                );
+            }
+        }
+
+        public async Task<BaseResultModel> CreateAsync(OfferEditRequestModel createModel, UserRole role)
         {
             var result = new BaseResultModel();
 
             try
             {
+                if (role != UserRole.Farmer)
+                {
+                    result.Errors.Add(FirestoreMessage.ForbiddenError);
+                    return result;
+                }
+
                 var farmResult = await _farmService.GetByIdAsync(createModel.Farm.Id);
                 if (!farmResult.IsSuccess || farmResult.Data is null)
                 {
@@ -57,6 +84,8 @@ namespace Mde.Project.Core.Services
 
                 var offerCollection = _firestoreDb.Collection("Offers");
                 await offerCollection.Document(newOffer.Id).SetAsync(newOffer);
+
+                NotifyUsersAboutNewOffer(newOffer);
             }
             catch (Exception ex)
             {
@@ -67,12 +96,18 @@ namespace Mde.Project.Core.Services
 
         }
 
-        public async Task<BaseResultModel> DeleteAsync(string id)
+        public async Task<BaseResultModel> DeleteAsync(string id, UserRole role)
         {
             var result = new BaseResultModel();
 
             try
             {
+                if (role != UserRole.Farmer)
+                {
+                    result.Errors.Add(FirestoreMessage.ForbiddenError);
+                    return result;
+                }
+
                 var offerDoc = _firestoreDb.Collection("Offers").Document(id);
                 var snapshot = await offerDoc.GetSnapshotAsync();
                 if (!snapshot.Exists)
@@ -239,12 +274,19 @@ namespace Mde.Project.Core.Services
             return result;
         }
 
-        public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel)
+        public async Task<BaseResultModel> UpdateAsync(OfferEditRequestModel updateModel, UserRole role)
         {
             var result = new BaseResultModel();
 
             try
             {
+
+                if (role != UserRole.Farmer)
+                {
+                    result.Errors.Add(FirestoreMessage.ForbiddenError);
+                    return result;
+                }
+
                 var offerDoc = _firestoreDb.Collection("Offers").Document(updateModel.Id);
                 var snapshot = await offerDoc.GetSnapshotAsync();
 
@@ -270,6 +312,9 @@ namespace Mde.Project.Core.Services
 
                 if (updateModel.Price != 0)
                     offerToUpdate.Price = updateModel.Price;
+
+                if (updateModel.Unit != offerToUpdate.Unit)
+                    offerToUpdate.Unit = updateModel.Unit;
 
                 if (!string.IsNullOrEmpty(updateModel.OfferImageUrl))
                     offerToUpdate.OfferImageUrl = updateModel.OfferImageUrl;

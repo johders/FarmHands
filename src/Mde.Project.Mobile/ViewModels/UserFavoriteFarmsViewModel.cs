@@ -10,11 +10,20 @@ namespace Mde.Project.Mobile.ViewModels
 	{
 		private readonly IFavoriteFarmService _favoriteFarmService;
 		private readonly IFarmService _farmService;
+		private readonly IImageConversionService _imageConversionService;
 
-        public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService)
+        public UserFavoriteFarmsViewModel(IFavoriteFarmService favoriteFarmService, IFarmService farmService, IImageConversionService imageConversionService)
         {
             _favoriteFarmService = favoriteFarmService;
             _farmService = farmService;
+            _imageConversionService = imageConversionService;
+        }
+
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
         }
 
         private ObservableCollection<FarmViewModel> favoriteFarms;
@@ -29,27 +38,22 @@ namespace Mde.Project.Mobile.ViewModels
 
 		public ICommand RefreshFavoriteFarmsListCommand => new Command(async () =>
 		{
-			var uid = await SecureStorage.GetAsync("userId");
+            IsLoading = true;
+
+            var uid = await SecureStorage.GetAsync("userId");
             var result = await _favoriteFarmService.GetAllFavoriteFarmsByUserAsync(uid);
-			var favoriteFarms = result.Data.Select(ff => new FarmViewModel(ff, _farmService));
+			var favoriteFarms = result.Data.Select(ff => new FarmViewModel(ff, _farmService, _imageConversionService));
 
 			FavoriteFarms = new ObservableCollection<FarmViewModel>(favoriteFarms);
-		});
+
+            IsLoading = false;
+        });
 
 		public ICommand ViewFarmDetailsCommand => new Command<FarmViewModel>(async (farmViewModel) =>
 		{
-			var result = await _farmService.GetByIdAsync(farmViewModel.Id);
-			var farm = result.Data;
-
-			if (!result.IsSuccess)
-			{
-				Shell.Current.DisplayAlert("Oops", $"{String.Join(", ", result.Errors)}", "OK");
-				return;
-			}
-
 			var navigationParameter = new Dictionary<string, object>()
 			{
-				{ nameof(UserFarmDetailsViewModel.SelectedFarm), farm }
+				{ nameof(UserFarmDetailsViewModel.SelectedFarm), farmViewModel }
 			};
 
 			await Shell.Current.GoToAsync(nameof(UserFarmDetailPage), true, navigationParameter);

@@ -2,32 +2,109 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:Mde.Project.Mobile.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:FarmerSettingsViewModel"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerSettingsPage"
              HideSoftInputOnTapped="True"
              Title="Settings">
-    <ScrollView>
-        <Grid Style="{StaticResource MaxWidthGrid}">
+    <Grid>
+        <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+            <Grid Style="{StaticResource MaxWidthGrid}">
 
-            <VerticalStackLayout Margin="8,0" Spacing="20">
+            <VerticalStackLayout Margin="8,0" Spacing="20"
+                                 MinimumWidthRequest="{OnPlatform WinUI=500, Default=400}">
 
                 <VerticalStackLayout>
                     <Label Text="Name"
                        Style="{StaticResource SmallLabel}"/>
                     <Entry Placeholder="Enter product name"
-                       Text="{Binding Name}"/>
+                       Text="{Binding Name}">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="nameValidator"
+                                Flags="ValidateOnAttaching, ValidateOnValueChanged"
+                                MinimumLength="1"
+                                IsValid="{Binding IsNameValid, Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout>
+                    <VerticalStackLayout IsVisible="{Binding IsReplaceClicked}">
+                        <Label Text="Address Search"
+                               Style="{StaticResource SmallLabel}"/>
+                        <Entry Placeholder="Enter your street, number and zipcode" 
+                               Text="{Binding AddressInput}" />
+
+                        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                            <Button Text="Search"
+                                CornerRadius="25"
+                                WidthRequest="100"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource TileBackgroundColor}}"
+                                TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                                Margin="20"
+                                Command="{Binding SearchAddressCommand}"
+                                CommandParameter="{Binding AddressInput}">
+                                <Button.Shadow>
+                                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                        Offset="10,10"
+                                        Radius="50"
+                                        Opacity=".8"/>
+                                </Button.Shadow>
+                            </Button>
+                            <Button Text="Cancel"
+                                    CornerRadius="25"
+                                    WidthRequest="100"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource BurgondyRed}, Dark={StaticResource BurgondyRed}}"
+                                    TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource Charcoal}}"
+                                    Margin="20"
+                                    Command="{Binding CancelReplaceCommand}">
+                                <Button.Shadow>
+                                    <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                                            Offset="10,10"
+                                            Radius="50"
+                                            Opacity=".8"/>
+                                </Button.Shadow>
+                            </Button>
+                        </HorizontalStackLayout>
+
+                        <VerticalStackLayout  IsVisible="{Binding SearchResults, Converter={StaticResource IsNotNullToVisibilityConverter}}" >
+                            <Label Text="Select address"
+                                   Style="{StaticResource SmallLabel}"/>
+                            <Picker ItemsSource="{Binding SearchResults}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding SelectedAddress}"/>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10" IsVisible="{Binding IsReplaceClicked, Converter={StaticResource InverseBooleanConverter}}">
+                        <VerticalStackLayout>
+                            <Label Text="Address"
+                               Style="{StaticResource SmallLabel}"
+                               Grid.Column="0" VerticalOptions="Center" />
+                            <Label Text="{Binding AddressString}"
+                                   Style="{StaticResource LabelText}"
+                                   Grid.Column="0" VerticalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <Button Text="Replace" 
+                                Grid.Column="1" 
+                                BackgroundColor="{StaticResource AccentColor}" 
+                                TextColor="White" 
+                                HorizontalOptions="End" 
+                                Command="{Binding ReplaceAddressCommand}" 
+                                IsVisible="True" 
+                                Padding="10,0" 
+                                FontSize="Small"
+                                CornerRadius="25"/>
+                    </Grid>
+
+                    <!--<VerticalStackLayout>
                     <Label Text="Location"
                        Style="{StaticResource SmallLabel}"/>
-                    <Entry Placeholder="Enter latitude" 
-                       Text="{Binding Latitude}" 
-                       Keyboard="Numeric"/>
-                    <Entry Placeholder="Enter longitude" 
-                       Text="{Binding Longitude}" 
-                       Keyboard="Numeric"/>
-                </VerticalStackLayout>
+                    <Label Text="{Binding Latitude, Converter={StaticResource DoubleToStringConverter}}"/>
+                        <Label Text="{Binding Longitude, Converter={StaticResource DoubleToStringConverter}}"/>
+                    </VerticalStackLayout>-->
 
                 <VerticalStackLayout>
                     <Label Text="Your story"
@@ -37,8 +114,22 @@
                         Text="{Binding Description}"/>
                 </VerticalStackLayout>
 
-                <Label Text="Image"
-                       Style="{StaticResource SmallLabel}"/>
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10" >
+                    <Label Text="Image" 
+                           Style="{StaticResource SmallLabel}" 
+                           Grid.Column="0" VerticalOptions="Center" />
+
+                    <Button Text="Replace" 
+                            Grid.Column="1" 
+                            BackgroundColor="{StaticResource AccentColor}" 
+                            TextColor="White" 
+                            HorizontalOptions="End" 
+                            Command="{Binding ReplaceImageCommand}" 
+                            IsVisible="{Binding ImageUrl, Converter={StaticResource HasImageToVisibilityConverter}}" 
+                            Padding="10,0" 
+                            FontSize="Small"
+                            CornerRadius="25"/>
+                </Grid>
 
                 <Border WidthRequest="300" 
                         HeightRequest="200" 
@@ -48,7 +139,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="10"/>
                     </Border.StrokeShape>
-                    <Image Source="{Binding ImageUrl}" 
+                    <Image Source="{Binding ImageSource}" 
                            Aspect="AspectFill"/>
 
                 </Border>
@@ -69,7 +160,8 @@
                                          HeightRequest="60"
                                          BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                          Padding="10"
-                                         CornerRadius="30"/>
+                                         CornerRadius="30"
+                                         Command="{Binding SelectImageCommand}"/>
                             <Label Text="From gallery"
                                    Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>
@@ -79,7 +171,8 @@
                                      HeightRequest="60"
                                      BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
                                      Padding="10"
-                                     CornerRadius="30"/>
+                                     CornerRadius="30"
+                                     Command="{Binding TakePictureCommand}"/>
                             <Label Text="Take picture"
                                    Style="{StaticResource LabelText}"/>
                         </VerticalStackLayout>
@@ -101,21 +194,7 @@
                                 Opacity=".8"/>
                     </Button.Shadow>
                 </Button>
-
-                <!--<Button Text="Customer View"
-                        CornerRadius="25"
-                        WidthRequest="300"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}"
-                        TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource SecondaryBackgroundColorDark}}"
-                        Command="{Binding SwitchToUserViewCommand}">
-                    <Button.Shadow>
-                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
-                                Offset="10,10"
-                                Radius="50"
-                                Opacity=".8"/>
-                    </Button.Shadow>
-                </Button>-->
-
+                
                 <Button Text="Sign out"
                         CornerRadius="25"
                         WidthRequest="200"
@@ -134,4 +213,16 @@
             </VerticalStackLayout>
         </Grid>
     </ScrollView>
+
+    <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="Black"
+              Opacity="0.5"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                       Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+    </Grid>
+    </Grid>
 </ContentPage>

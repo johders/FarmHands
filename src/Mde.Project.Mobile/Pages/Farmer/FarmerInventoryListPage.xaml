@@ -8,110 +8,145 @@
              x:Name="page"
              x:Class="Mde.Project.Mobile.Pages.Farmer.FarmerInventoryListPage"
              Title="Inventory Manager">
-    <ScrollView>
-        <Grid MaximumWidthRequest="{OnPlatform WinUI=500}">
 
-            <VerticalStackLayout Margin="8">
-                <Button Text="Add new"
+    <Grid>
+        <Grid>
+            <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+                <Grid MaximumWidthRequest="{OnPlatform WinUI=500}">
+
+                    <VerticalStackLayout Margin="8">
+                        <Button Text="Add new"
                         BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                         HorizontalOptions="Center"
                         WidthRequest="200"
                         CornerRadius="25"
                         Margin="10,20"
                         Command="{Binding AddOfferCommand}">
-                    <Button.Shadow>
-                        <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                            <Button.Shadow>
+                                <Shadow Brush="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                         Offset="10,10"
                         Radius="50"
                         Opacity=".8"/>
-                    </Button.Shadow>
-                </Button>
-                <CollectionView ItemsSource="{Binding Offers}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Offer">
-                            <VerticalStackLayout>
-                                <SwipeView x:Name="MobileSwipeView"
+                            </Button.Shadow>
+                        </Button>
+
+                        <Grid>
+                            <VerticalStackLayout IsVisible="{Binding Offers.Count, Converter={StaticResource ZeroToVisibilityConverter}}">
+                                <Border StrokeShape="RoundRectangle 20"
+                                        Margin="0,30,0,0"
+                                        WidthRequest="200" 
+                                        HeightRequest="200" 
+                                        HorizontalOptions="Center">
+                                    <Image Source="empty_placeholder.webp"
+                                           Aspect="AspectFill" />
+                                </Border>
+                                <Label Text="Your inventory is empty. Add offers using the button above!"
+                                       HorizontalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Style="{StaticResource LargeLabel}" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout IsVisible="{Binding Offers.Count, Converter={StaticResource NonZeroToVisibilityConverter}}">
+
+                                <CollectionView ItemsSource="{Binding Offers}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="viewmodel:OfferViewModel">
+                                            <VerticalStackLayout>
+                                                <SwipeView x:Name="MobileSwipeView"
                                            IsVisible="{OnPlatform WinUI=False, Default=True}"
                                            android:SwipeView.SwipeTransitionMode="Drag">
-                                    <SwipeView.RightItems>
-                                        <SwipeItem Text="Delete"
-                                                   BackgroundColor="DarkRed"
-                                                   IconImageSource="bin.png"
-                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
-                                                   CommandParameter="{Binding .}"/>
-                                    </SwipeView.RightItems>
-                                    <Border Padding="5"
+                                                    <SwipeView.RightItems>
+                                                        <SwipeItem Text="Delete"
+                                                                   BackgroundColor="DarkRed"
+                                                                   IconImageSource="bin.png"
+                                                                   Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
+                                                                   CommandParameter="{Binding .}"/>
+                                                    </SwipeView.RightItems>
+                                                    <Border Padding="5"
                                             StrokeShape="{RoundRectangle CornerRadius=5}"
                                             BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
-                                        <Grid ColumnDefinitions="*, Auto, Auto">
-                                            <HorizontalStackLayout Spacing="10">
-                                                <Label Text="{Binding Variant}"
+                                                        <Grid ColumnDefinitions="*, Auto, Auto">
+                                                            <HorizontalStackLayout Spacing="10">
+                                                                <Label Text="{Binding VariantName}"
                                                        Style="{StaticResource SmallLabel}"
                                                        TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                        VerticalOptions="Center"/>
-                                                <Label Text="{Binding Product.Name}"
+                                                                <Label Text="{Binding Product.Name}"
                                                        Style="{StaticResource SmallLabel}"
                                                        FontSize="13"
                                                        TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
                                                        VerticalOptions="Center"/>
-                                            </HorizontalStackLayout>
-                                            <Button Grid.Column="1"
+                                                            </HorizontalStackLayout>
+                                                            <Button Grid.Column="1"
                                                     Text="Edit"
                                                     TextColor="{AppThemeBinding Light={StaticResource SecondaryBackgroundColor}, Dark={StaticResource PrimaryTextColorDark}}"
                                                     BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
                                                     Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
                                                     CommandParameter="{Binding .}"/>
-                                        </Grid>
-                                    </Border>
-                                </SwipeView>
+                                                        </Grid>
+                                                    </Border>
+                                                </SwipeView>
 
-                                <Grid x:Name="WindowsGrid" 
-                                      IsVisible="{OnPlatform WinUI=True, Default=False}"
-                                      Padding="5"
-                                      ColumnDefinitions="*, Auto, Auto"
-                                      BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                                <Border StrokeShape="{RoundRectangle CornerRadius=5}"
+                                                        IsVisible="{OnPlatform WinUI=True, Default=False}"
+                                                        BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
+                                                <Grid x:Name="WindowsGrid" 
+                                                      Padding="5"
+                                                      ColumnDefinitions="*, Auto, Auto"
+                                                      BackgroundColor="{AppThemeBinding Light={StaticResource TileBackgroundColor}, Dark={StaticResource TileBackgroundColorDark}}">
 
-                                    <HorizontalStackLayout Spacing="10">
-                                        <Label Text="{Binding Variant}"
-                                               Style="{StaticResource SmallLabel}"
-                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
-                                               VerticalOptions="Center"/>
-                                        <Label Text="{Binding Product.Name}"
-                                               Style="{StaticResource SmallLabel}"
-                                               FontSize="13"
-                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
-                                               VerticalOptions="Center"/>
-                                    </HorizontalStackLayout>
-                                    
-                                    <!--<Label Text="{Binding Product.Name}"
-                                           Style="{StaticResource SmallLabel}"
-                                           TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
-                                           VerticalOptions="Center"/>-->
+                                                    <HorizontalStackLayout Spacing="10">
+                                                        <Label Text="{Binding VariantName}"
+                                                               Style="{StaticResource SmallLabel}"
+                                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                                               VerticalOptions="Center"/>
+                                                        <Label Text="{Binding Product.Name}"
+                                                               Style="{StaticResource SmallLabel}"
+                                                               FontSize="13"
+                                                               TextColor="{AppThemeBinding Dark={StaticResource Charcoal}}"
+                                                               VerticalOptions="Center"/>
+                                                    </HorizontalStackLayout>
 
-                                    <Button Grid.Column="1"
-                                            Text="Delete"
-                                            BackgroundColor="DarkRed"
-                                            TextColor="White"
-                                            Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Margin="0,0,10,0"/>
+                                                    <Button Grid.Column="1"
+                                                            Text="Delete"
+                                                            BackgroundColor="DarkRed"
+                                                            TextColor="White"
+                                                            Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteOfferCommand}"
+                                                            CommandParameter="{Binding .}"
+                                                            Margin="0,0,10,0"/>
 
-                                    <Button Grid.Column="2"
+                                                    <Button Grid.Column="2"
                                             Text="Edit"
                                             TextColor="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
                                             BackgroundColor="{AppThemeBinding Light={StaticResource AccentColor}, Dark={StaticResource AccentColorDark}}"
                                             Command="{Binding Source={x:Reference page}, Path=BindingContext.EditOfferCommand}"
                                             CommandParameter="{Binding .}"/>
-                                </Grid>
-                            </VerticalStackLayout>
+                                                </Grid>
+                                                </Border>
+                                            </VerticalStackLayout>
 
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Grid>
+            </ScrollView>
         </Grid>
-    </ScrollView>
+
+        <Grid IsVisible="{Binding IsLoading}"
+              BackgroundColor="Black"
+              Opacity="0.5"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               Color="{AppThemeBinding Light={StaticResource PrimaryTextColor}, Dark={StaticResource PrimaryTextColorDark}}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+        </Grid>
+    </Grid>
 </ContentPage>

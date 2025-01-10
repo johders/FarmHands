@@ -9,6 +9,8 @@ using Mde.Project.Mobile.Services;
 using Mde.Project.Mobile.ViewModels;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
+using Mde.Project.Mobile.Constants;
+using Mde.Project.Mobile.Services.Interfaces;
 
 namespace Mde.Project.Mobile
 {
@@ -29,8 +31,6 @@ namespace Mde.Project.Mobile
                 .RegisterServices()
                 .RegisterViewModels()
                 .RegisterViews();
-
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -56,8 +56,25 @@ namespace Mde.Project.Mobile
             builder.Services.AddSingleton<IFavoriteFarmService, FavoriteFarmService>();
             builder.Services.AddSingleton<IFavoriteProductService, FavoriteProductService>();
             builder.Services.AddSingleton<IFarmerService, FarmerService>();
-
             builder.Services.AddSingleton<IUserPreferencesService, UserPreferencesMockService>();
+
+            builder.Services.AddSingleton<IImageConversionService, ImageConversionService>();
+            builder.Services.AddSingleton<IOpenStreetService, OpenStreetService>();
+            builder.Services.AddTransient<IMealDbService, MealDbService>();
+            builder.Services.AddSingleton<IPushNotificationService, PushNotificationService>();
+            builder.Services.AddSingleton<ISecureStorageService, SecureStorageService>();
+
+            builder.Services.AddHttpClient(AppConstants.AddressClientName, client =>
+            {
+                client.BaseAddress = new Uri(AppConstants.StreetApiUrl);
+                client.DefaultRequestHeaders.UserAgent.ParseAdd(AppConstants.UserAgentHeader);
+            });
+
+            builder.Services.AddHttpClient(AppConstants.MealClientName, client =>
+            {
+                client.BaseAddress = new Uri(AppConstants.MealApiUrl);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
 
             return builder;
         }

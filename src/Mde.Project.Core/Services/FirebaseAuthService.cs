@@ -4,6 +4,7 @@ using FirebaseAdmin.Auth;
 using Mde.Project.Core.Enums;
 using Mde.Project.Core.Services.Interfaces;
 using Mde.Project.Core.Services.Models;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Mde.Project.Core.Services
 {
@@ -196,6 +197,52 @@ namespace Mde.Project.Core.Services
 
         }
 
+        public ResultModel<DateTime> GetTokenExpirationTime(string token)
+        {
+            var result = new ResultModel<DateTime>();
+
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            var expClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "exp");
+
+            if (expClaim != null && long.TryParse(expClaim.Value, out var expUnix))
+            {
+                result.Data = DateTimeOffset.FromUnixTimeSeconds(expUnix).LocalDateTime;
+            }
+            else
+            {
+                result.Errors.Add("Expiration claim not found in token.");
+            }
+
+            return result;
+        }
+
+        public async Task<ResultModel<string>> RefreshTokenAsync()
+        {
+            var result = new ResultModel<string>();
+            try
+            {
+                var user = _authClient.User;
+                if (user == null)
+                {
+                    result.Errors.Add("No signed-in user found to refresh token.");
+                    return result;
+                }
+
+                var refreshedToken = await user.GetIdTokenAsync(forceRefresh: true);
+                result.Data = refreshedToken;
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add($"Error refreshing token: {ex.Message}");
+                Console.WriteLine($"Error refreshing token: {ex.Message}");
+                return result;
+            }
+        }
+
         public BaseResultModel Logout()
         {
             var result = new BaseResultModel();
@@ -213,5 +260,7 @@ namespace Mde.Project.Core.Services
 
             return result;
         }
+
+
     }
 }

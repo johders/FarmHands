@@ -16,4 +16,16 @@ public partial class FarmerInventoryEditPage : ContentPage
         viewModel.InitializeAsync();
         base.OnAppearing();
     }
+
+    private void Entry_Focused(object sender, FocusEventArgs e)
+    {
+        var viewModel = BindingContext as FarmerInventoryEditViewModel;
+        viewModel?.StartEditing();
+    }
+
+    private void Entry_Unfocused(object sender, FocusEventArgs e)
+    {
+        var viewModel = BindingContext as FarmerInventoryEditViewModel;
+        viewModel?.StopEditing();
+    }
 }

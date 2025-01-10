@@ -10,12 +10,12 @@
 
             <VerticalStackLayout Spacing="20" Margin="8,8,8,50">
                 
-                    <Label Text="{Binding SelectedOffer.Variant}"
+                    <Label Text="{Binding SelectedOffer.VariantName}"
                            Style="{StaticResource LargeLabel}"
                            Margin="0"/>
 
 
-                    <Image Source="{Binding SelectedOffer.OfferImageUrl}"
+                    <Image Source="{Binding SelectedOffer.ImageSource}"
                            MaximumHeightRequest="{OnPlatform WinUI=500, Default=300}"
                            Aspect="AspectFill"/>
 
@@ -25,7 +25,7 @@
                 <VerticalStackLayout>
                     <Label Text="Cultivated by"
                            Style="{StaticResource SmallLabel}"/>
-                    <Label Text="{Binding SelectedOffer.Farm.Name}"
+                    <Label Text="{Binding SelectedOffer.FarmName}"
                            Style="{StaticResource LabelText}"
                            LineBreakMode="WordWrap"/>
                 </VerticalStackLayout>

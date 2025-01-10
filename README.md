@@ -23,3 +23,15 @@ Mde.Project.Core > Data > Firestore > FsCredentials.cs
 
 ###   Firebase console login 
    on request
+
+###   MealDb API
+
+   no credentials required
+
+###   OpenStreetMaps Nominatim API
+
+   no credentials required
+
+### SyncFusion
+
+   license loaded upon startup in App.xaml.cs file
